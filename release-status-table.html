@@ -1,0 +1,206 @@
+<!--
+  Таблица статуса релизов для импорта в Confluence.
+  Способы импорта:
+    1) Confluence Cloud: на странице → /table → "Insert table" → вставить CSV через "Paste from spreadsheet"
+       (или использовать стороннее приложение "CSV Macro for Confluence").
+    2) Confluence DC/Server: макрос "Table from CSV" (приложение Table Filter and Charts)
+       или вставить этот HTML через редактор "View source" (older editor) / Storage Format.
+    3) Универсально: открыть этот .html в браузере → Ctrl+A / Ctrl+C → вставить в таблицу Confluence.
+
+  Цветовая легенда статусов:
+    Released / PASS   → зелёный
+    In QA / IN PROGRESS → жёлтый
+    Planning / PLANNED → серый
+    Blocker / FAIL / No-Go → красный
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Release Status Dashboard</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #172B4D; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .meta { color: #5E6C84; margin-bottom: 16px; font-size: 13px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  th, td { border: 1px solid #DFE1E6; padding: 6px 8px; vertical-align: top; text-align: left; }
+  thead th { background: #F4F5F7; position: sticky; top: 0; }
+  tbody tr:nth-child(even) { background: #FAFBFC; }
+  .st { display: inline-block; padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 11px; }
+  .ok   { background: #E3FCEF; color: #006644; }
+  .warn { background: #FFF0B3; color: #974F0C; }
+  .bad  { background: #FFEBE6; color: #BF2600; }
+  .neu  { background: #DFE1E6; color: #42526E; }
+  .section { margin-top: 28px; }
+</style>
+</head>
+<body>
+
+<h1>Release Status Dashboard</h1>
+<div class="meta">
+  Источник истины по релизам. Обновляется QA после каждого milestone (code freeze, smoke, regression, go/no-go, post-release).
+  Обновление — не реже 1 раза в день в активной фазе релиза.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Release</th>
+      <th>Версия</th>
+      <th>Релиз-менеджер</th>
+      <th>QA Lead</th>
+      <th>Code freeze</th>
+      <th>План. релиз</th>
+      <th>Факт. релиз</th>
+      <th>Окружение</th>
+      <th>Статус</th>
+      <th>Scope</th>
+      <th>Jira-фильтр</th>
+      <th>Задач<br/>в scope</th>
+      <th>Готово<br/>к QA</th>
+      <th>В тести-<br/>ровании</th>
+      <th>Протес-<br/>тировано</th>
+      <th>Reopen</th>
+      <th>Blk</th>
+      <th>Crt</th>
+      <th>Maj</th>
+      <th>Min</th>
+      <th>Авто-<br/>покр. %</th>
+      <th>Smoke</th>
+      <th>Regression</th>
+      <th>НФТ: нагрузочное</th>
+      <th>НФТ: стресс</th>
+      <th>НФТ: security</th>
+      <th>НФТ: отказо-<br/>устойчивость</th>
+      <th>Feature flags</th>
+      <th>Миграции БД</th>
+      <th>Rollback</th>
+      <th>Monitoring</th>
+      <th>SLO затронутые</th>
+      <th>Риски</th>
+      <th>Go/No-Go</th>
+      <th>Sign-off QA</th>
+      <th>Sign-off PO</th>
+      <th>Sign-off SRE</th>
+      <th>Ссылки</th>
+      <th>Комментарий</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>R-2026.04</td>
+      <td>1.42.0</td>
+      <td>@release.manager</td>
+      <td>@qa.lead</td>
+      <td>2026-04-18</td>
+      <td>2026-04-22</td>
+      <td>2026-04-22</td>
+      <td>prod</td>
+      <td><span class="st ok">Released</span></td>
+      <td>Новый онбординг, биллинг v2, API rate-limit</td>
+      <td>PROJ-FIX=R-2026.04</td>
+      <td>47</td><td>47</td><td>0</td><td>47</td><td>3</td>
+      <td>0</td><td>0</td><td>2</td><td>5</td>
+      <td>78</td>
+      <td><span class="st ok">PASS</span></td>
+      <td><span class="st ok">PASS</span></td>
+      <td><span class="st ok">PASS (p95 320ms, 1500 RPS)</span></td>
+      <td><span class="st ok">PASS</span></td>
+      <td><span class="st ok">PASS (0 high)</span></td>
+      <td><span class="st neu">N/A</span></td>
+      <td>billing_v2=on</td>
+      <td>yes (idempotent)</td>
+      <td>документирован</td>
+      <td><a href="#">Grafana</a></td>
+      <td>latency-api, checkout-success</td>
+      <td>Пик на BF — отдельный мониторинг</td>
+      <td><span class="st ok">GO</span></td>
+      <td>@qa.lead 04-21</td>
+      <td>@po 04-21</td>
+      <td>@sre 04-22</td>
+      <td><a href="#">TP</a> / <a href="#">TR</a> / <a href="#">Runbook</a></td>
+      <td>Релиз прошёл штатно, 0 инцидентов</td>
+    </tr>
+    <tr>
+      <td>R-2026.05</td>
+      <td>1.43.0</td>
+      <td>@release.manager</td>
+      <td>@qa.lead</td>
+      <td>2026-05-13</td>
+      <td>2026-05-16</td>
+      <td>—</td>
+      <td>stage</td>
+      <td><span class="st warn">In QA</span></td>
+      <td>Поиск v3, новая навигация, интеграция с провайдером X</td>
+      <td>PROJ-FIX=R-2026.05</td>
+      <td>62</td><td>40</td><td>15</td><td>25</td><td>4</td>
+      <td><span class="st bad">1</span></td><td>2</td><td>6</td><td>9</td>
+      <td>65</td>
+      <td><span class="st ok">PASS</span></td>
+      <td><span class="st warn">IN PROGRESS</span></td>
+      <td><span class="st warn">PLANNED 05-14</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td>search_v3=off</td>
+      <td>нет</td>
+      <td>частично</td>
+      <td><a href="#">Grafana</a></td>
+      <td>search-latency, nav-error-rate</td>
+      <td>Провайдер X не подтвердил SLA</td>
+      <td><span class="st warn">TBD</span></td>
+      <td>pending</td>
+      <td>pending</td>
+      <td>pending</td>
+      <td><a href="#">TP</a></td>
+      <td>1 Blocker на авторизации — фикс до 05-13</td>
+    </tr>
+    <tr>
+      <td>R-2026.06</td>
+      <td>1.44.0</td>
+      <td>@release.manager</td>
+      <td>@qa.lead</td>
+      <td>2026-06-10</td>
+      <td>2026-06-13</td>
+      <td>—</td>
+      <td>dev</td>
+      <td><span class="st neu">Planning</span></td>
+      <td>Личный кабинет v2, push-уведомления, экспорт отчётов</td>
+      <td>PROJ-FIX=R-2026.06</td>
+      <td>51</td><td>0</td><td>0</td><td>0</td><td>0</td>
+      <td>0</td><td>0</td><td>0</td><td>0</td>
+      <td>0</td>
+      <td><span class="st neu">N/A</span></td>
+      <td><span class="st neu">N/A</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td><span class="st warn">PLANNED</span></td>
+      <td>cabinet_v2=off</td>
+      <td>yes</td>
+      <td>в работе</td>
+      <td>TBD</td>
+      <td>cabinet-ttfb, push-delivery-rate</td>
+      <td>Нет результатов НФТ по push — нужен PoC</td>
+      <td><span class="st neu">TBD</span></td>
+      <td>pending</td>
+      <td>pending</td>
+      <td>pending</td>
+      <td><a href="#">TP draft</a></td>
+      <td>Скоуп зафиксирован, в работе Test Plan</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="section">
+  <h2>Легенда статусов</h2>
+  <p>
+    <span class="st ok">Released / PASS / GO</span>
+    <span class="st warn">In QA / IN PROGRESS / PLANNED / TBD</span>
+    <span class="st bad">Blocker / FAIL / No-Go</span>
+    <span class="st neu">Planning / N/A</span>
+  </p>
+</div>
+
+</body>
+</html>
