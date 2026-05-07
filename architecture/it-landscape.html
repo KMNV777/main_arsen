@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>ИТ-ландшафт АО НК «КазМунайГаз» — архитектурная схема</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #ffffff;
+    --muted: #475569;
+    --accent: #1d4ed8;
+    --accent-2: #0ea5e9;
+    --warn: #b91c1c;
+    --ok: #15803d;
+    --soft: #f1f5f9;
+    --border: #cbd5e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Roboto", Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: #fff;
+    padding: 28px 32px 24px;
+    border-bottom: 4px solid var(--accent-2);
+  }
+  header h1 { margin: 0 0 4px; font-size: 24px; letter-spacing: 0.2px; }
+  header .sub { color: #cbd5e1; font-size: 14px; }
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: #0b1220; color: #cbd5e1;
+    padding: 10px 16px;
+    display: flex; flex-wrap: wrap; gap: 6px 12px;
+    border-bottom: 1px solid #1f2937;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  nav a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+  }
+  nav a:hover { background: #1e293b; border-color: #334155; color: #e0f2fe; }
+  main { max-width: 1380px; margin: 0 auto; padding: 24px 16px 80px; }
+  section.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px 26px;
+    margin: 22px 0;
+    box-shadow: 0 4px 16px rgba(15,23,42,0.06);
+  }
+  section.card h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--soft);
+    padding-bottom: 8px;
+  }
+  section.card .desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .mermaid {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+    overflow-x: auto;
+  }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 14px;
+    font-size: 12px; color: #334155;
+    margin: 12px 0 4px;
+  }
+  .legend span {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px; border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+  }
+  .legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .green { background: #16a34a; }
+  .yellow { background: #eab308; }
+  .red { background: #dc2626; }
+  .blue { background: #2563eb; }
+  .purple { background: #9333ea; }
+  .orange { background: #ea580c; }
+  table.summary {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    margin-top: 8px;
+  }
+  table.summary th, table.summary td {
+    border: 1px solid #e2e8f0;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.summary th { background: var(--soft); font-weight: 600; }
+  table.summary tr:nth-child(even) td { background: #fafbfd; }
+  .pill {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .pill.prod { color: #166534; border-color: #86efac; background: #dcfce7; }
+  .pill.test { color: #854d0e; border-color: #fde68a; background: #fef9c3; }
+  .pill.out  { color: #991b1b; border-color: #fecaca; background: #fee2e2; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 12px 0; }
+  .kpi {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .kpi .v { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .kpi .l { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .risk { background: #fff1f2; border-left: 4px solid #f43f5e; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: 13px; }
+  footer { color: var(--muted); font-size: 12px; text-align: center; padding: 24px; }
+  details { margin: 8px 0; }
+  details summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.mermaid) {
+      window.mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true },
+        themeVariables: {
+          fontFamily: 'inherit',
+          fontSize: '13px'
+        }
+      });
+    }
+  });
+</script>
+</head>
+<body>
+<header>
+  <h1>ИТ-ландшафт АО НК «КазМунайГаз»</h1>
+  <div class="sub">Архитектурная схема • Источник: реестр ИС ДПППС/КМГИ + реестр ОИБ/ДКБ от 04.2026 + перечень потоков данных</div>
+</header>
+<nav>
+  <a href="#overview">1. Общий ландшафт</a>
+  <a href="#domains">2. Бизнес-домены</a>
+  <a href="#integrations">3. Интеграции</a>
+  <a href="#infrastructure">4. Инфраструктура</a>
+  <a href="#data">5. Данные</a>
+  <a href="#risks">6. Риски и техдолг</a>
+</nav>
+
+<main>
+
+<section class="card">
+  <h2>Сводные показатели ландшафта</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v">20+</div><div class="l">информационных систем</div></div>
+    <div class="kpi"><div class="v">2 947</div><div class="l">пользователей ABAI (8 ДЗО + КЦ)</div></div>
+    <div class="kpi"><div class="v">48</div><div class="l">ДЗО + ДОТОС в ИСОТ (HSE)</div></div>
+    <div class="kpi"><div class="v">43</div><div class="l">ДЗО в Compliance Control</div></div>
+    <div class="kpi"><div class="v">44+</div><div class="l">потоков данных в реестре</div></div>
+    <div class="kpi"><div class="v">2</div><div class="l">облачных VDC (Koshy + Aqqol)</div></div>
+    <div class="kpi"><div class="v">3</div><div class="l">ИС в стадии вывода/отключения</div></div>
+    <div class="kpi"><div class="v">17</div><div class="l">«модулей» ABAI на единой БД</div></div>
+  </div>
+  <div class="legend">
+    <span><span class="dot green"></span> PROD</span>
+    <span><span class="dot yellow"></span> TEST / Внедрение</span>
+    <span><span class="dot red"></span> ВЫВОД / ОТКЛЮЧЕНА</span>
+    <span>🛡️ ЭЦП (НУЦ РК)</span>
+    <span>🏛️ ГОС-интеграция</span>
+    <span>⚠️ Технический долг / риск</span>
+  </div>
+</section>
+
+<section class="card" id="overview">
+  <h2>1. Общий ИТ-ландшафт</h2>
+  <div class="desc">Слои: пользователи → внешние сервисы (гос/коммерч) → внутренние источники → бизнес-системы → интеграционный слой → данные → инфраструктура.</div>
+  <div class="mermaid">
+flowchart TB
+    classDef users fill:#E3F2FD,stroke:#1976D2,color:#0D47A1
+    classDef gov fill:#FFF3E0,stroke:#E65100,color:#BF360C
+    classDef ext fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef prod fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef test fill:#FFFDE7,stroke:#F9A825,color:#F57F17
+    classDef out  fill:#FFEBEE,stroke:#C62828,color:#B71C1C
+    classDef infra fill:#ECEFF1,stroke:#455A64,color:#263238
+
+    subgraph U["👥 Пользователи и потребители"]
+      direction LR
+      U1["КЦ КМГ + 8 ДЗО Upstream<br/>(2 947 польз. ABAI)"]:::users
+      U2["48 ДЗО + ДОТОС<br/>HSE / ИСОТ"]:::users
+      U3["43 ДЗО<br/>Compliance"]:::users
+      U4["СД, Правление,<br/>Корп. секретариат"]:::users
+      U5["HR / ДУЧР /<br/>кандидаты"]:::users
+      U6["PMO, Финансы, Legal,<br/>Закупки, УДО, PR"]:::users
+      U7["Внешние пользователи<br/>(сайты)"]:::users
+    end
+
+    subgraph EXT["🌐 Внешние интеграции"]
+      direction TB
+      subgraph GOV["🏛️ Гос-сервисы"]
+        G1["ЕСЭДО"]:::gov
+        G2["НУЦ РК TSP/OCSP"]:::gov
+        G3["data.egov.kz"]:::gov
+        G4["ГБД ЮЛ / ГБД ФЛ"]:::gov
+        G5["nationalbank.kz"]:::gov
+      end
+      subgraph COM["💼 Коммерческие"]
+        C1["Commodities-API"]:::ext
+        C2["Kompra"]:::ext
+        C3["HikVision (откл.)"]:::ext
+        C4["Qsamruk.kz"]:::ext
+      end
+    end
+
+    subgraph SRC["🏭 Внутренние источники"]
+      direction LR
+      S1["SAP S/4HANA<br/>(АНПЗ, КМГ, Price)"]:::src
+      S2["1С<br/>(ПНХЗ, ПКОП, Финансы/HR)"]:::src
+      S3["MES Honeywell<br/>(АНПЗ, ПНХЗ)"]:::src
+      S4["QlikSense<br/>(Кумколь)"]:::src
+      S5["SCADA-серверы ДЗО"]:::src
+      S6["ИШ, КХД, KMG DATA"]:::src
+      S7["ИСЭЗ"]:::src
+      S8["Active Directory КМГ"]:::src
+      S9["SMTP"]:::src
+    end
+
+    subgraph APP["🧩 Прикладной слой"]
+      direction TB
+      subgraph UPS["⛽ Upstream"]
+        A1["🟢 ИС ABAI<br/>17 модулей"]:::prod
+      end
+      subgraph DOC["📄 Документооборот"]
+        A2["🟢 САПФИР"]:::prod
+        A3["🟢 СДД 🛡️"]:::prod
+        A4["🔴 Электронный архив"]:::out
+        A5["🟢 BoardMaps 🛡️"]:::prod
+      end
+      subgraph ANL["📊 Аналитика / PMO"]
+        A6["🟢 АСДЦ ⚠️"]:::prod
+        A7["🟢 ИСУП"]:::prod
+      end
+      subgraph HSE["🦺 HSE / Compliance"]
+        A8["🟢 ИСОТ / ЭНД 🛡️"]:::prod
+        A9["🟢 АИСЭМ"]:::prod
+        A10["🟢 Compliance Control"]:::prod
+      end
+      subgraph HR["👤 HR / Порталы"]
+        A11["🟢 Work"]:::prod
+        A12["🟢 Team 🛡️"]:::prod
+        A13["🟢 Bitrix ANPZ /<br/>Petrochem / КМКЛ"]:::prod
+      end
+      subgraph PROC["🛒 Закупки"]
+        A14["🟡 Procu / Price"]:::test
+      end
+      subgraph LOG["🚛 Логистика"]
+        A15["🟢 ИС УТО / УТО ЭМГ"]:::prod
+      end
+      subgraph CORP["🏢 Корп. портал / сайты"]
+        A16["🟢 Интранет SharePoint"]:::prod
+        A17["🟢 Сайты КМГ"]:::prod
+      end
+      subgraph OTH["📦 Прочее"]
+        A18["🟢 БДА"]:::prod
+        A19["🔴 Санау"]:::out
+        A20["🔴 Бюро пропусков"]:::out
+      end
+    end
+
+    subgraph INT["🔌 Интеграционный слой"]
+      I1["RabbitMQ / Kafka"]:::infra
+      I2["Redis / Memcached / SP Cache"]:::infra
+      I3["HAProxy + keepalived /<br/>etcd (Patroni)"]:::infra
+      I4["ELK + Grafana + Prometheus<br/>(не во всех ИС)"]:::infra
+      I5["⚠️ API Gateway —<br/>ОТСУТСТВУЕТ"]:::infra
+      I6["GitLab on-prem"]:::infra
+      I7["⚠️ ETL централизованный нет;<br/>SCADA — dbLink-цепочка"]:::infra
+    end
+
+    subgraph DATA["💾 Данные"]
+      D1["PostgreSQL<br/>(основная СУБД ДПППС)"]:::infra
+      D2["MS SQL Server<br/>(АСДЦ, ИСУП, Интранет, BM)"]:::infra
+      D3["MySQL / MariaDB<br/>(Bitrix, SCADA-буферы)"]:::infra
+      D4["MongoDB (Insarco)"]:::infra
+      D5["Druid + Hadoop +<br/>Spark + Kafka (ABAI)"]:::infra
+      D6["MinIO / SeaweedFS"]:::infra
+    end
+
+    subgraph INFRA["🖥️ Инфраструктура"]
+      F1["☁️ QazCloud Koshy"]:::infra
+      F2["☁️ QazCloud Aqqol"]:::infra
+      F3["🏠 On-Prem АНПЗ"]:::infra
+      F4["🖥️ Локальная инфра ЭМГ"]:::infra
+      F5["⚡ GPU IBM POWER 9 +<br/>Tesla V100 (ABAI)"]:::infra
+    end
+
+    U --> APP
+    GOV --> APP
+    COM --> APP
+    SRC --> APP
+    APP --> INT
+    INT --> DATA
+    APP --> DATA
+    APP --> INFRA
+    DATA --> INFRA
+  </div>
+</section>
+
+<section class="card" id="domains">
+  <h2>2. Бизнес-домены и системы</h2>
+  <div class="desc">Группировка ИС по бизнес-доменам с указанием стека и статуса.</div>
+  <div class="mermaid">
+flowchart TB
+    classDef domain fill:#E1F5FE,stroke:#01579B,stroke-width:2px,color:#01579B
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef test fill:#FFFDE7,stroke:#F9A825,color:#F57F17
+    classDef out fill:#FFEBEE,stroke:#C62828,color:#B71C1C
+    classDef vendor fill:#F3E5F5,stroke:#6A1B9A,color:#4A148C
+
+    subgraph DUP["⛽ Upstream"]
+      ABAI["🟢 ИС ABAI<br/>17 модулей • 2947 польз.<br/>Vue/Django/FastAPI/GeoServer<br/>PostgreSQL abaiprot + MySQL<br/>Druid+Spark+Kafka+Hadoop<br/>CentOS 7 ⚠️"]:::sys
+    end
+
+    subgraph DDOC["📄 Документооборот"]
+      SAP1["🟢 САПФИР (Directum RX)<br/>C#/IS-Builder<br/>MS SQL+PG+MongoDB<br/>~17 prod-серверов"]:::sys
+      SDD["🟢 СДД 🛡️<br/>Golang/React/PG Patroni HA<br/>K8s + ELK + GitLab on-prem"]:::sys
+      EA["🔴 Электронный архив<br/>Documentum → собственное<br/>(FastAPI+React+PG)"]:::out
+      BM["🟢 BoardMaps 🛡️<br/>TS/.NET/MS SQL/Vault<br/>(вендор: Дэшборд Системс)"]:::vendor
+    end
+
+    subgraph DAN["📊 Аналитика / PMO"]
+      ASDC["🟢 АСДЦ ⚠️<br/>AngularJS+.NET+PHP+Razor<br/>MS SQL 2014 ⚠️ + Win 2012 R2"]:::sys
+      ISUP["🟢 ИСУП<br/>MS Project 2019 +<br/>SharePoint 2019 + MS SQL"]:::sys
+    end
+
+    subgraph DHSE["🦺 HSE / Compliance / Eco"]
+      ISOT["🟢 ИСОТ / ЭНД 🛡️<br/>Vue + Django + PG<br/>RabbitMQ + Redis + Docker<br/>48 ДЗО + ДОТОС"]:::sys
+      AIS["🟢 АИСЭМ<br/>React + Node.js + PG<br/>⚠️ 1 разработчик"]:::sys
+      CC["🟢 Compliance Control<br/>Angular + .NET + PG<br/>43 ДЗО"]:::sys
+    end
+
+    subgraph DHR["👤 HR / Порталы"]
+      WORK["🟢 Work<br/>Vue + Django REST + PG<br/>ИИ-категоризация резюме"]:::sys
+      TEAM["🟢 Team (Bitrix24) 🛡️<br/>PHP + MySQL/MariaDB"]:::sys
+      ANPZ["🟢 Bitrix ANPZ"]:::sys
+      PCH["🟢 KMG Petrochem"]:::sys
+      KMKL["🟢 КМГ-Кумколь"]:::sys
+    end
+
+    subgraph DPR["🛒 Закупки"]
+      PRC["🟡 Procu / Price (TEST)<br/>Vue3 + Django/DRF + PG 17<br/>MinIO + Celery + Redis<br/>⚠️ Нет бэкапов"]:::test
+    end
+
+    subgraph DLOG["🚛 Логистика"]
+      UTO["🟢 ИС УТО + УТО ЭМГ<br/>Единая платформа с<br/>ИСОТ+Work ⚠️ SPOF"]:::sys
+    end
+
+    subgraph DWEB["🏢 Корп. портал / Public"]
+      INTR["🟢 Интранет SharePoint<br/>2016/2019 + MS SQL Always On"]:::sys
+      SK["🟢 Сайты: kmg.kz, kpi.kz,<br/>kmg-kumkol.kz, kazgpz.kmg.kz"]:::sys
+    end
+
+    subgraph DOTH["📦 Активы / Прочее"]
+      BDA["🟢 БДА<br/>.NET + PG 11 + WAF 🛡️"]:::sys
+      SAN["🔴 Санау"]:::out
+      BURO["🔴 Бюро пропусков<br/>Angular+.NET+PG+Kafka"]:::out
+    end
+  </div>
+</section>
+
+<section class="card" id="integrations">
+  <h2>3. Потоки интеграций</h2>
+  <div class="desc">Ключевые потоки данных между системами. Полный реестр (44+ потоков) — в файле <a href="03-integrations.md">03-integrations.md</a>.</div>
+
+  <h3 style="margin-top:18px;color:#0f172a;font-size:15px;">3.1. ИС ABAI — потоки SCADA / внешние API / SSO</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef ext fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef buf fill:#FFF8E1,stroke:#F9A825,color:#F57F17
+
+    SCADA["SCADA-серверы ДЗО (ЭМГ)"]:::src
+    MEMG["MySQL ЭМГ"]:::buf
+    MKTM["MySQL КТМ"]:::buf
+    MKMG["MySQL SCADA сервер КМГ"]:::buf
+    EGOV["data.egov.kz"]:::ext
+    COMM["Commodities-API"]:::ext
+    AD["AD КМГ"]:::src
+    ABAI["🟢 ИС ABAI<br/>BD abaiprot (PG)<br/>17 модулей"]:::sys
+
+    SCADA -- "dbLink • 1–30 сек" --> MEMG
+    MEMG -- "dbLink • ≤5 мин" --> MKTM
+    MKTM -- "dbLink • ≤5 мин" --> MKMG
+    MKMG -- "dbLink → ETL → PG • 5–15 мин" --> ABAI
+    EGOV -- "REST без API GW • 1 сутки" --> ABAI
+    COMM -- "REST без circuit breaker • раз в сутки" --> ABAI
+    AD -- "SSO LDAP" --> ABAI
+  </div>
+
+  <h3 style="color:#0f172a;font-size:15px;">3.2. АСДЦ — analytics-хаб</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef ext fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef cons fill:#E1F5FE,stroke:#01579B,color:#01579B
+
+    SAP["SAP АНПЗ"]:::src
+    P1["1С ПНХЗ"]:::src
+    P2["1С ПКОП"]:::src
+    M1["MES АНПЗ Honeywell"]:::src
+    M2["MES ПНХЗ"]:::src
+    QL["QlikSense Кумколь"]:::src
+    NB["nationalbank.kz"]:::ext
+    ASDC["🟢 АСДЦ<br/>MS SQL 2014<br/>.NET / PHP / AngularJS"]:::sys
+    IS["ИШ"]:::cons
+    KHD["КХД"]:::cons
+    KMGD["KMG DATA"]:::cons
+
+    SAP -- "SOAP/XML • 2 ч" --> ASDC
+    P1 -- "SOAP/XML • 2 ч" --> ASDC
+    P2 -- "SOAP/XML • 2 ч" --> ASDC
+    M1 -- "TCP/IP byte • 15 мин" --> ASDC
+    M2 -- "TCP/IP byte • 15 мин" --> ASDC
+    QL -- "TCP/IP • ежедневно" --> ASDC
+    NB -- "HTTP/XML • ежедневно" --> ASDC
+    ASDC -- "REST" --> IS
+    ASDC -- "REST" --> KHD
+    ASDC -- "MS SQL SP" --> KMGD
+  </div>
+
+  <h3 style="color:#0f172a;font-size:15px;">3.3. СДД — контракты, ЭЦП, SAP, ЭА</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef gov fill:#FFF3E0,stroke:#E65100,color:#BF360C
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+
+    AD["AD"]:::src
+    SMTP["SMTP"]:::src
+    TSP["НУЦ РК TSP"]:::gov
+    OCSP["НУЦ РК OCSP"]:::gov
+    SAP4["SAP S/4HANA"]:::src
+    SDD["🟢 СДД<br/>Golang + React<br/>PG Patroni + K8s"]:::sys
+    ISEZ["ИСЭЗ"]:::sys
+    EA["Электронный архив<br/>10.123.13.12"]:::sys
+
+    AD -- "LDAP" --> SDD
+    SMTP --> SDD
+    TSP -- "REST • метка ЭЦП" --> SDD
+    OCSP -- "REST • отзыв ЭЦП" --> SDD
+    SAP4 -- "RFC/REST • Business Partner" --> SDD
+    SAP4 -- "REST • АВР 14 полей" --> SDD
+    SDD -- "REST + ЭЦП" --> ISEZ
+    SDD -- "HTTP/JSON • ≤1 ч" --> EA
+  </div>
+
+  <h3 style="color:#0f172a;font-size:15px;">3.4. HR-кластер: Team / Work / Bitrix-порталы</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef ext fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+
+    AD["AD"]:::src
+    ONE["1С Финансы/HR"]:::src
+    SAPK["SAP КМГ"]:::src
+    QSAM["Qsamruk.kz"]:::ext
+    PROCT["Прокторинг"]:::ext
+
+    TEAM["🟢 Team Bitrix24"]:::sys
+    WORK["🟢 Work"]:::sys
+    BANPZ["🟢 Bitrix ANPZ"]:::sys
+    IJ["iJanet АНПЗ"]:::src
+
+    AD --> TEAM
+    ONE -- "API XML/JSON" --> TEAM
+    SAPK -- "API XML/JSON" --> TEAM
+    TEAM -- "API • заявления/отпуска" --> ONE
+    TEAM -- "API • потребности/ДИ" --> WORK
+    QSAM -- "редирект" --> WORK
+    WORK -- "API • резюме/статусы" --> QSAM
+    PROCT -- "REST" --> WORK
+    TEAM <-- "вакансии / этапы" --> WORK
+    AD --> BANPZ
+    SAPK --> BANPZ
+    BANPZ -- "API" --> IJ
+    BANPZ --> WORK
+  </div>
+
+  <h3 style="color:#0f172a;font-size:15px;">3.5. Документооборот: САПФИР ↔ ЕСЭДО (госорганы)</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef gov fill:#FFF3E0,stroke:#E65100,color:#BF360C
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+
+    AD["AD КМГ"]:::src
+    SMTP["SMTP"]:::src
+    ARIO["Directum Ario"]:::src
+    ESEDO["ЕСЭДО (госорганы)"]:::gov
+    SAP["🟢 САПФИР (Directum RX)"]:::sys
+
+    AD -- "LDAP" --> SAP
+    SMTP --> SAP
+    ARIO -- "захват из почты/папок" --> SAP
+    SAP <-- "SOAP/XML • каждые 10 мин" --> ESEDO
+  </div>
+
+  <h3 style="color:#0f172a;font-size:15px;">3.6. Compliance Control & Procu/Price</h3>
+  <div class="mermaid">
+flowchart LR
+    classDef src fill:#F3E5F5,stroke:#7B1FA2,color:#4A148C
+    classDef ext fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+    classDef gov fill:#FFF3E0,stroke:#E65100,color:#BF360C
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef test fill:#FFFDE7,stroke:#F9A825,color:#F57F17
+
+    KOMPRA["Kompra"]:::ext
+    AD["AD"]:::src
+    SAP["SAP"]:::src
+    SAPP["SAP Price"]:::src
+    GBDU["ГБД ЮЛ"]:::gov
+    CC["🟢 Compliance Control"]:::sys
+    PRC["🟡 Procu/Price (TEST)"]:::test
+
+    KOMPRA -- "REST/JSON" --> CC
+    AD -- "REST/JSON • раз в сутки" --> CC
+    SAP -- "SOAP/XML • 3×/сутки" --> CC
+    SAPP -- "REST/JSON" --> PRC
+    GBDU -- "REST/JSON" --> PRC
+  </div>
+</section>
+
+<section class="card" id="infrastructure">
+  <h2>4. Инфраструктура и хостинг</h2>
+  <div class="desc">Распределение систем по хостинг-площадкам.</div>
+  <div class="mermaid">
+flowchart TB
+    classDef cloud fill:#E3F2FD,stroke:#1976D2,color:#0D47A1,stroke-width:2px
+    classDef onprem fill:#FFF3E0,stroke:#E65100,color:#BF360C,stroke-width:2px
+    classDef sys fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef test fill:#FFFDE7,stroke:#F9A825,color:#F57F17
+    classDef out fill:#FFEBEE,stroke:#C62828,color:#B71C1C
+    classDef gpu fill:#F3E5F5,stroke:#6A1B9A,color:#4A148C
+
+    subgraph QC1["☁️ QazCloud — VDC Koshy"]
+      K1["🟢 ИС ABAI<br/>BD abaiprot (PG)<br/>+ MySQL SCADA-буферы<br/>CentOS 7 ⚠️"]:::sys
+      K2["🟢 ИС УТО + ИСОТ + Work<br/>srv1231602-08<br/>Ubuntu 24.04 ⚠️ SPOF"]:::sys
+      K3["🟢 Team / KMG Petrochem"]:::sys
+      K4["🔴 Электронный архив<br/>10.123.13.12 (1334, 8065)"]:::out
+    end
+
+    subgraph GPU["⚡ GPU-кластер ABAI"]
+      G1["5× IBM POWER 9 8335-GTH +<br/>Tesla V100 (ppc64le ⚠️)"]:::gpu
+    end
+
+    subgraph QC2["☁️ QazCloud — VDC Aqqol"]
+      A1["🟢 САПФИР Directum RX<br/>~17 prod + test/dev/Trening"]:::sys
+      A2["🟢 АСДЦ ⚠️<br/>Win 2012 R2 + Ubuntu 14"]:::sys
+      A3["🟢 СДД<br/>Patroni + K8s + ELK + GitLab"]:::sys
+      A4["🟢 ИСУП<br/>MS Project + SP 2019"]:::sys
+      A5["🟢 Интранет SharePoint<br/>SRV5050 + srv5054 (Always On)"]:::sys
+      A6["🟢 BoardMaps Win + IIS + MS SQL + Vault"]:::sys
+      A7["🟡 Procu/Price"]:::test
+      A8["🟢 АИСЭМ Ubuntu 20.04"]:::sys
+      A9["🟢 Compliance Control"]:::sys
+      A10["🟢 БДА (WAF)"]:::sys
+      A11["🟢 Сайт КМГ + КазГПЗ"]:::sys
+      A12["🔴 Санау"]:::out
+    end
+
+    subgraph OP["🏠 On-Prem"]
+      OP1["🟢 Bitrix ANPZ — anpz.kz"]:::sys
+      OP2["🟢 ИС УТО ЭМГ — локально"]:::sys
+      OP3["Портал АО «КазТрансОйл»"]:::sys
+      OP4["Мобильное приложение КТО"]:::sys
+    end
+
+    subgraph CL["☁️ Внешний cloud"]
+      CL1["kmg-kumkol.kz<br/>(MySQL 5.7.36)"]:::sys
+      CL2["kpi.kz (83.97.77.20,<br/>MySQL 8.0.30)"]:::sys
+    end
+
+    GPU --- K1
+  </div>
+
+  <details>
+    <summary>Резервное копирование по системам</summary>
+    <table class="summary">
+      <thead><tr><th>Система</th><th>Стратегия</th><th>Замечание</th></tr></thead>
+      <tbody>
+        <tr><td>ABAI</td><td>pg_dump / WAL → 172.20.102.253/254</td><td>⚠️ Бэкапы в Test/QA, нет DR-плана с RTO/RPO</td></tr>
+        <tr><td>АСДЦ</td><td>vdc-KMG (QazCloud): полные еженед. + инкрем. ежедн.</td><td>Ретеншн 1 мес</td></tr>
+        <tr><td>Procu / Price</td><td>⚠️ НЕТ бэкапов</td><td>Высокий риск утраты</td></tr>
+        <tr><td>ИСОТ</td><td>QazCloud: ежедн. инкрем. + еженед. полные</td><td>Ретеншн 1 мес</td></tr>
+        <tr><td>АИСЭМ</td><td>Ретеншн 90 дней</td><td>—</td></tr>
+        <tr><td>СДД, ИСУП, Интранет, BoardMaps, ЭА, Bitrix-порталы</td><td>Еженедельно/регламентно</td><td>—</td></tr>
+        <tr><td>Compliance Control</td><td>Ежедневно</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </details>
+</section>
+
+<section class="card" id="data">
+  <h2>5. Данные и хранилища</h2>
+  <div class="desc">Карта СУБД, очередей, кэша и файловых хранилищ.</div>
+  <div class="mermaid">
+flowchart LR
+    classDef rel fill:#E8F5E9,stroke:#2E7D32,color:#1B5E20
+    classDef ms fill:#E1F5FE,stroke:#01579B,color:#01579B
+    classDef my fill:#FFF8E1,stroke:#F9A825,color:#F57F17
+    classDef nosql fill:#F3E5F5,stroke:#6A1B9A,color:#4A148C
+    classDef bigd fill:#FFEBEE,stroke:#C62828,color:#B71C1C
+    classDef obj fill:#E0F2F1,stroke:#00695C,color:#004D40
+    classDef cache fill:#FFF3E0,stroke:#E65100,color:#BF360C
+    classDef mq fill:#FCE4EC,stroke:#C2185B,color:#880E4F
+
+    subgraph PG["🐘 PostgreSQL"]
+      PG1["abaiprot (ABAI) ⚠️ единая БД"]:::rel
+      PG2["Patroni HA (СДД)"]:::rel
+      PG3["PG 17 (Procu/Price)"]:::rel
+      PG4["ИСОТ • Work • АИСЭМ"]:::rel
+      PG5["Электронный архив"]:::rel
+      PG6["БДА / Бюро (PG 11)"]:::rel
+    end
+    subgraph MS["🪟 MS SQL Server"]
+      MS1["MS SQL 2014 ⚠️ АСДЦ"]:::ms
+      MS2["ИСУП"]:::ms
+      MS3["Always On HA — Интранет"]:::ms
+      MS4["BoardMaps"]:::ms
+      MS5["САПФИР"]:::ms
+    end
+    subgraph MY["🐬 MySQL / MariaDB"]
+      MY1["Bitrix-порталы (Team, ANPZ, Petrochem, КМКЛ)"]:::my
+      MY2["Bitrix-сайты (kmg.kz, kpi.kz, kmg-kumkol.kz, kazgpz)"]:::my
+      MY3["⚠️ SCADA-буферы (ЭМГ→КТМ→КМГ)"]:::my
+    end
+    subgraph NO["📦 NoSQL"]
+      N1["MongoDB (Insarco/САПФИР)"]:::nosql
+    end
+    subgraph BD["🔥 BigData/OLAP (внутри ABAI)"]
+      BD1["Apache Druid"]:::bigd
+      BD2["Spark 3.3.0"]:::bigd
+      BD3["Kafka 3.2.1"]:::bigd
+      BD4["Hadoop / HDFS"]:::bigd
+    end
+    subgraph BI["📈 BI"]
+      BI1["Power BI (ИСУП)"]:::bigd
+      BI2["Qlik / QlikSense"]:::bigd
+      BI3["OLAP-DC АСДЦ ⚠️"]:::bigd
+    end
+    subgraph OBJ["🗄️ Объектное хранилище"]
+      OBJ1["MinIO (УТО, Procu/Price)"]:::obj
+      OBJ2["SeaweedFS S3 (СДД)"]:::obj
+    end
+    subgraph CA["⚡ Кэш"]
+      CA1["Redis"]:::cache
+      CA2["Memcached"]:::cache
+      CA3["SP Distributed Cache"]:::cache
+    end
+    subgraph MQ["📨 Очереди"]
+      MQ1["RabbitMQ"]:::mq
+      MQ2["Apache Kafka 3.2.1"]:::mq
+    end
+  </div>
+</section>
+
+<section class="card" id="risks">
+  <h2>6. Риски и технический долг (по документу)</h2>
+  <div class="desc">Из раздела «Известные критические узкие места ИТ-ландшафта» (вопрос 20 реестра).</div>
+
+  <div class="risk"><b>1. ABAI — псевдо-модульность.</b> 17 «модулей» работают на единой БД <code>abaiprot</code>. Изоляции и истинной модульности нет.</div>
+  <div class="risk"><b>2. Устаревший стек ABAI.</b> CentOS 7 EOL, Python/Django/Laravel/Hadoop/Spark/Kafka/Druid версий 2021–2022, ZooKeeper, NameNode, HAProxy, Logstash.</div>
+  <div class="risk"><b>3. Множественные SPOF.</b> PostgreSQL/ZooKeeper/NameNode/Druid в ABAI; MS SQL 2014 в АСДЦ.</div>
+  <div class="risk"><b>4. Бэкапы PostgreSQL ABAI</b> размещены в окружении Test/QA; нет DR-плана с RTO/RPO; нет автоматического failover (Patroni/pgBouncer).</div>
+  <div class="risk"><b>5. Архаичная интеграция SCADA</b> через цепочку MySQL-буферов по dbLink: SCADA→ЭМГ→КТМ→СУБД КМГ→ABAI.</div>
+  <div class="risk"><b>6. Отсутствие API Gateway, circuit breaker, retry-политик</b> во всех системах ДПППС.</div>
+  <div class="risk"><b>7. Отсутствие MFA, WAF (кроме БДА), секрет-менеджера (кроме BoardMaps).</b></div>
+  <div class="risk"><b>8. GPU-воркеры IBM POWER 9</b> в ABAI: &lt;1 ТБ диска для ML-задач + ppc64le ограничивает CUDA и Python-экосистему.</div>
+  <div class="risk"><b>9. Нет Kubernetes в ABAI</b> (только Docker+Portainer); единственный K8s — в СДД.</div>
+  <div class="risk"><b>10. Нестандартная Git-стратегия ABAI</b> — инверсия MASTER/STABLE.</div>
+  <div class="risk"><b>11. Устаревшие ОС:</b> Win Server 2012 R2 (АСДЦ — 3 сервера), Ubuntu 14 (web-ast-dc) — критическое устаревание.</div>
+  <div class="risk"><b>12. АСДЦ — legacy mix:</b> AngularJS + Knockout + PHP + Razor + .NET, MS SQL 2014.</div>
+  <div class="risk"><b>13. Единая физическая платформа ИСОТ + УТО + Work</b> — single point of failure (риск падения 4 систем сразу).</div>
+  <div class="risk"><b>14. АИСЭМ:</b> один разработчик на проекте.</div>
+  <div class="risk"><b>15. Procu / Price:</b> нет бэкапов, нет логирования, нет метрик, нет алертов (по паспорту).</div>
+  <div class="risk"><b>16. Внешний доступ к Prod ИСУП и Интранета</b> через ТОО «KMG DIGITAL» (Ushakov, Kenzhegaliev — учётки в AD отключены, но остались в Remote Desktop Users).</div>
+  <div class="risk"><b>17. Большинство ИС без централизованного мониторинга/алертинга</b> — нет Grafana/Prometheus/ELK.</div>
+
+  <h3 style="margin-top:18px;color:#0f172a;font-size:15px;">Топ направлений миграций / технического долга</h3>
+  <table class="summary">
+    <thead><tr><th>Система</th><th>Что мигрировать / обновить</th></tr></thead>
+    <tbody>
+      <tr><td>ABAI</td><td>CentOS 7 → RHEL 9/Rocky Linux 9; обновление Python/Django/Laravel/Hadoop/Spark/Kafka/Druid; истинная модульность/микросервисы; SCADA-интеграция на Kafka; API Gateway/MFA/WAF/Vault; Kubernetes; стандартизация Git-процессов.</td></tr>
+      <tr><td>АСДЦ</td><td>Win Server 2012 R2 → актуальная ОС; Ubuntu 14; MS SQL 2014; справочник нефтепродуктов; обновление карт; интеграция Argus; модуль HR; дашборды ЛК.</td></tr>
+      <tr><td>Procu/Price</td><td>Альтернативные КП и аналоги ТРУ, улучшение работы с КП, аналитика, оптимизация UX заявок.</td></tr>
+      <tr><td>Бюро пропусков (откл.)</td><td>Обновление .NET Core и Angular; CI/CD автоматизация деплоя.</td></tr>
+      <tr><td>Интранет / ИСУП</td><td>Централизация документации, регламент совместного редактирования, оптимизация структуры хранения, контроль владения контентом.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+<footer>
+  Архитектурная схема сгенерирована из реестра ИС ДПППС / КМГИ / АО НК КМГ.
+  Полные текстовые версии диаграмм — в каталоге <code>architecture/</code>.
+</footer>
+</body>
+</html>
