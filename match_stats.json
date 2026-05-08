@@ -1,0 +1,885 @@
+[
+  {
+    "match_index": 1,
+    "id": "207be821-9b39-4219-9f53-782274b07099",
+    "external_id": "1e93b3",
+    "started_at": "2026-05-06T07:38:40.089Z",
+    "finished_at": "2026-05-06T07:41:22.382Z",
+    "score": {
+      "BLUE": 0,
+      "RED": 2
+    },
+    "winner": "RED",
+    "players": [
+      {
+        "userId": "62029d13-e645-4bb7-919e-21c32020382b",
+        "team": "RED",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 0,
+        "kd": 2,
+        "headshots": 0,
+        "headshotPercent": 100,
+        "adr": 117.5
+      },
+      {
+        "userId": "74e5ea61-8050-4b7b-a88f-3c493a67212e",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 2,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 54.5
+      }
+    ]
+  },
+  {
+    "match_index": 2,
+    "id": "b008b855-3ed4-4578-8fe8-d82d568bf25f",
+    "external_id": "1e93b4",
+    "started_at": "2026-05-06T08:41:44.077Z",
+    "finished_at": "2026-05-06T08:44:43.445Z",
+    "score": {
+      "BLUE": 0,
+      "RED": 2
+    },
+    "winner": "RED",
+    "players": [
+      {
+        "userId": "62029d13-e645-4bb7-919e-21c32020382b",
+        "team": "RED",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 0,
+        "kd": 1,
+        "headshots": 0,
+        "headshotPercent": 100,
+        "adr": 50
+      },
+      {
+        "userId": "8168fe00-07f3-425e-a9f9-3691f92a728e",
+        "team": "RED",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 0,
+        "kd": 1,
+        "headshots": 0,
+        "headshotPercent": 100,
+        "adr": 49.5
+      },
+      {
+        "userId": "dd9b9fe9-d4f9-45db-a6ce-ceedb3661ef1",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 2,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      }
+    ]
+  },
+  {
+    "match_index": 3,
+    "id": "274f9516-9146-4b06-a5a7-8431fc6de2da",
+    "external_id": "1e93b7",
+    "started_at": "2026-05-06T18:36:06.145Z",
+    "finished_at": "2026-05-06T18:53:39.447Z",
+    "score": {
+      "BLUE": 6,
+      "RED": 5
+    },
+    "winner": "BLUE",
+    "players": [
+      {
+        "userId": "122f7444-728d-45d4-8db9-fd4270a9ea61",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 1,
+        "deaths": 9,
+        "kd": 0.111,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 14.82
+      },
+      {
+        "userId": "3fe9fad1-e4bd-4fda-b132-3c954bc34ad2",
+        "team": "BLUE",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 9,
+        "kd": 0.222,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 19
+      },
+      {
+        "userId": "488b4472-2861-49cf-8777-090f5aa71480",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 7,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "4f057b2b-9047-4d82-a4af-f0122bc2b34b",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 1,
+        "deaths": 7,
+        "kd": 0.143,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 12.73
+      },
+      {
+        "userId": "55a01074-16e5-4ce7-a006-f02685bb068a",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 9,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "59ee8a76-045e-4f4e-a5e4-e8106a044733",
+        "team": "BLUE",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 0.25,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 20.55
+      },
+      {
+        "userId": "610390c4-4453-4654-8909-8f04192865a5",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 1,
+        "deaths": 8,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 7.45
+      },
+      {
+        "userId": "74147ebe-6179-4d07-9efe-cbd2b35f600a",
+        "team": "RED",
+        "kills": 25,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 3.125,
+        "headshots": 0,
+        "headshotPercent": 8,
+        "adr": 230.27
+      },
+      {
+        "userId": "74c4e102-41b3-4902-84e3-e93bd93eceb4",
+        "team": "RED",
+        "kills": 30,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 5,
+        "headshots": 0,
+        "headshotPercent": 13.33,
+        "adr": 269.82
+      },
+      {
+        "userId": "755bdd33-b603-4bc3-be8b-e8949caadee1",
+        "team": "BLUE",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 9,
+        "kd": 0.222,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 18.91
+      },
+      {
+        "userId": "96d9c54d-9b80-4b47-a0ce-5b7473869f30",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 10,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "d441629c-6400-4b9d-962d-ad04e5bf75e2",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 10,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "e0b22ecf-15f2-4adc-89b3-8d3bf44b5139",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 10,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "ed44d43a-0652-4a0c-ba3d-440d72554461",
+        "team": "RED",
+        "kills": 42,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 5.25,
+        "headshots": 0,
+        "headshotPercent": 11.9,
+        "adr": 387.73
+      },
+      {
+        "userId": "f8203dcd-5bf7-4c0f-9970-446cc8a6c35c",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      }
+    ]
+  },
+  {
+    "match_index": 4,
+    "id": "5fb91ec2-95fd-45cd-b284-474722e30c3f",
+    "external_id": "1e93b8",
+    "started_at": "2026-05-06T19:06:20.115Z",
+    "finished_at": null,
+    "score": {
+      "BLUE": null,
+      "RED": null
+    },
+    "winner": null,
+    "players": []
+  },
+  {
+    "match_index": 5,
+    "id": "cec28cb4-ed96-4750-b7ab-a6761185f41f",
+    "external_id": "1e93b9",
+    "started_at": "2026-05-06T19:10:38.108Z",
+    "finished_at": "2026-05-06T19:31:14.457Z",
+    "score": {
+      "BLUE": 2,
+      "RED": 6
+    },
+    "winner": "RED",
+    "players": [
+      {
+        "userId": "122f7444-728d-45d4-8db9-fd4270a9ea61",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 579.12
+      },
+      {
+        "userId": "3fe9fad1-e4bd-4fda-b132-3c954bc34ad2",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 1,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 808.25
+      },
+      {
+        "userId": "488b4472-2861-49cf-8777-090f5aa71480",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 579.12
+      },
+      {
+        "userId": "4f057b2b-9047-4d82-a4af-f0122bc2b34b",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 178.88
+      },
+      {
+        "userId": "55a01074-16e5-4ce7-a006-f02685bb068a",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0.2,
+        "headshots": 0,
+        "headshotPercent": 100,
+        "adr": 525.62
+      },
+      {
+        "userId": "59ee8a76-045e-4f4e-a5e4-e8106a044733",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 458.5
+      },
+      {
+        "userId": "610390c4-4453-4654-8909-8f04192865a5",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 873.62
+      },
+      {
+        "userId": "74147ebe-6179-4d07-9efe-cbd2b35f600a",
+        "team": "RED",
+        "kills": 20,
+        "assists": 3,
+        "deaths": 2,
+        "kd": 10,
+        "headshots": 0,
+        "headshotPercent": 35,
+        "adr": 193.62
+      },
+      {
+        "userId": "74c4e102-41b3-4902-84e3-e93bd93eceb4",
+        "team": "RED",
+        "kills": 20,
+        "assists": 0,
+        "deaths": 1,
+        "kd": 20,
+        "headshots": 0,
+        "headshotPercent": 30,
+        "adr": 113.88
+      },
+      {
+        "userId": "755bdd33-b603-4bc3-be8b-e8949caadee1",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 239.5
+      },
+      {
+        "userId": "96c38d5d-b167-4546-b078-4d685fcc6849",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 453.12
+      },
+      {
+        "userId": "96d9c54d-9b80-4b47-a0ce-5b7473869f30",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 56.88
+      },
+      {
+        "userId": "ad68d4ed-8239-47ee-a496-6237c2b579f5",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0.167,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 799.88
+      },
+      {
+        "userId": "d441629c-6400-4b9d-962d-ad04e5bf75e2",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 3,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 1276.88
+      },
+      {
+        "userId": "e0b22ecf-15f2-4adc-89b3-8d3bf44b5139",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0.2,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 837.62
+      },
+      {
+        "userId": "ed44d43a-0652-4a0c-ba3d-440d72554461",
+        "team": "RED",
+        "kills": 23,
+        "assists": 6,
+        "deaths": 1,
+        "kd": 23,
+        "headshots": 0,
+        "headshotPercent": 8.7,
+        "adr": 194
+      },
+      {
+        "userId": "f8203dcd-5bf7-4c0f-9970-446cc8a6c35c",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0.2,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 422.88
+      }
+    ]
+  },
+  {
+    "match_index": 6,
+    "id": "b36f8a68-87e2-403f-b9d3-62bb7b0532dc",
+    "external_id": "1e93ba",
+    "started_at": "2026-05-06T19:41:42.123Z",
+    "finished_at": null,
+    "score": {
+      "BLUE": null,
+      "RED": null
+    },
+    "winner": null,
+    "players": []
+  },
+  {
+    "match_index": 7,
+    "id": "f565f625-6169-4374-918f-b73e3f0da355",
+    "external_id": "1e93bb",
+    "started_at": "2026-05-06T19:44:56.111Z",
+    "finished_at": "2026-05-06T19:54:07.287Z",
+    "score": {
+      "BLUE": 0,
+      "RED": 6
+    },
+    "winner": "RED",
+    "players": [
+      {
+        "userId": "122f7444-728d-45d4-8db9-fd4270a9ea61",
+        "team": "BLUE",
+        "kills": 1,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0.167,
+        "headshots": 0,
+        "headshotPercent": 100,
+        "adr": 104.33
+      },
+      {
+        "userId": "488b4472-2861-49cf-8777-090f5aa71480",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "55a01074-16e5-4ce7-a006-f02685bb068a",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 52.17
+      },
+      {
+        "userId": "59ee8a76-045e-4f4e-a5e4-e8106a044733",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 38.5
+      },
+      {
+        "userId": "610390c4-4453-4654-8909-8f04192865a5",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "74147ebe-6179-4d07-9efe-cbd2b35f600a",
+        "team": "RED",
+        "kills": 19,
+        "assists": 0,
+        "deaths": 0,
+        "kd": 19,
+        "headshots": 0,
+        "headshotPercent": 63.16,
+        "adr": 243
+      },
+      {
+        "userId": "74c4e102-41b3-4902-84e3-e93bd93eceb4",
+        "team": "RED",
+        "kills": 14,
+        "assists": 1,
+        "deaths": 0,
+        "kd": 14,
+        "headshots": 0,
+        "headshotPercent": 14.29,
+        "adr": 120.67
+      },
+      {
+        "userId": "755bdd33-b603-4bc3-be8b-e8949caadee1",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 28
+      },
+      {
+        "userId": "96c38d5d-b167-4546-b078-4d685fcc6849",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 5,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "96d9c54d-9b80-4b47-a0ce-5b7473869f30",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 2.67
+      },
+      {
+        "userId": "ad68d4ed-8239-47ee-a496-6237c2b579f5",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 31.83
+      },
+      {
+        "userId": "ed44d43a-0652-4a0c-ba3d-440d72554461",
+        "team": "RED",
+        "kills": 19,
+        "assists": 1,
+        "deaths": 1,
+        "kd": 19,
+        "headshots": 0,
+        "headshotPercent": 57.89,
+        "adr": 228.67
+      }
+    ]
+  },
+  {
+    "match_index": 8,
+    "id": "f1eaf225-bf8c-4196-8eaf-4fab82c1f7a8",
+    "external_id": "1e93bc",
+    "started_at": "2026-05-06T20:02:16.068Z",
+    "finished_at": "2026-05-06T20:08:49.416Z",
+    "score": {
+      "BLUE": 6,
+      "RED": 1
+    },
+    "winner": "BLUE",
+    "players": [
+      {
+        "userId": "122f7444-728d-45d4-8db9-fd4270a9ea61",
+        "team": "BLUE",
+        "kills": 3,
+        "assists": 0,
+        "deaths": 2,
+        "kd": 1.5,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 59.43
+      },
+      {
+        "userId": "488b4472-2861-49cf-8777-090f5aa71480",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 3,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "55a01074-16e5-4ce7-a006-f02685bb068a",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 1,
+        "deaths": 4,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 10.29
+      },
+      {
+        "userId": "610390c4-4453-4654-8909-8f04192865a5",
+        "team": "BLUE",
+        "kills": 3,
+        "assists": 0,
+        "deaths": 4,
+        "kd": 0.75,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 63
+      },
+      {
+        "userId": "74147ebe-6179-4d07-9efe-cbd2b35f600a",
+        "team": "RED",
+        "kills": 3,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0.5,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 74.57
+      },
+      {
+        "userId": "74c4e102-41b3-4902-84e3-e93bd93eceb4",
+        "team": "RED",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0.333,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 27
+      },
+      {
+        "userId": "755bdd33-b603-4bc3-be8b-e8949caadee1",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 3,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "8ef58b3c-0db3-4e96-a78c-cf47f6d4f75c",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 2,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "96d9c54d-9b80-4b47-a0ce-5b7473869f30",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 2,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "ad68d4ed-8239-47ee-a496-6237c2b579f5",
+        "team": "BLUE",
+        "kills": 0,
+        "assists": 0,
+        "deaths": 1,
+        "kd": 0,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 0
+      },
+      {
+        "userId": "ed44d43a-0652-4a0c-ba3d-440d72554461",
+        "team": "RED",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 0.333,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 39.71
+      }
+    ]
+  },
+  {
+    "match_index": 9,
+    "id": "500b8d43-5f74-443e-99ac-47f283b02436",
+    "external_id": "1e93bd",
+    "started_at": "2026-05-06T20:15:36.070Z",
+    "finished_at": "2026-05-06T20:30:28.432Z",
+    "score": {
+      "BLUE": 6,
+      "RED": 5
+    },
+    "winner": "BLUE",
+    "players": [
+      {
+        "userId": "122f7444-728d-45d4-8db9-fd4270a9ea61",
+        "team": "BLUE",
+        "kills": 5,
+        "assists": 0,
+        "deaths": 7,
+        "kd": 0.714,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 45.45
+      },
+      {
+        "userId": "488b4472-2861-49cf-8777-090f5aa71480",
+        "team": "BLUE",
+        "kills": 3,
+        "assists": 0,
+        "deaths": 9,
+        "kd": 0.333,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 27.27
+      },
+      {
+        "userId": "55a01074-16e5-4ce7-a006-f02685bb068a",
+        "team": "BLUE",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 7,
+        "kd": 0.286,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 18.18
+      },
+      {
+        "userId": "610390c4-4453-4654-8909-8f04192865a5",
+        "team": "BLUE",
+        "kills": 10,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 1.25,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 92.36
+      },
+      {
+        "userId": "74147ebe-6179-4d07-9efe-cbd2b35f600a",
+        "team": "RED",
+        "kills": 13,
+        "assists": 0,
+        "deaths": 9,
+        "kd": 1.444,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 120.18
+      },
+      {
+        "userId": "74c4e102-41b3-4902-84e3-e93bd93eceb4",
+        "team": "RED",
+        "kills": 15,
+        "assists": 0,
+        "deaths": 6,
+        "kd": 2.5,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 139
+      },
+      {
+        "userId": "755bdd33-b603-4bc3-be8b-e8949caadee1",
+        "team": "BLUE",
+        "kills": 2,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 0.25,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 18.18
+      },
+      {
+        "userId": "8ef58b3c-0db3-4e96-a78c-cf47f6d4f75c",
+        "team": "BLUE",
+        "kills": 3,
+        "assists": 0,
+        "deaths": 8,
+        "kd": 0.375,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 27.27
+      },
+      {
+        "userId": "ed44d43a-0652-4a0c-ba3d-440d72554461",
+        "team": "RED",
+        "kills": 16,
+        "assists": 0,
+        "deaths": 10,
+        "kd": 1.6,
+        "headshots": 0,
+        "headshotPercent": 0,
+        "adr": 145.45
+      }
+    ]
+  }
+]
