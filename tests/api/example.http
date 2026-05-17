@@ -1,0 +1,15 @@
+### Health check (httpbin demo)
+GET {{baseUrl}}/get
+Accept: application/json
+
+### POST with JSON body
+POST {{baseUrl}}/post
+Content-Type: application/json
+
+{
+  "testCase": "login-happy-path",
+  "user": "qa@example.com"
+}
+
+### Query parameters
+GET {{baseUrl}}/get?foo=bar&page=1

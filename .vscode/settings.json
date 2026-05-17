@@ -1,0 +1,33 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "baseUrl": "https://httpbin.org"
+    },
+    "dev": {
+      "baseUrl": "https://httpbin.org"
+    },
+    "staging": {},
+    "prod": {}
+  },
+  "rest-client.enableTelemetry": false,
+  "thunderClient.requestTimeout": 30000,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json": "openapi*.yaml"
+  },
+  "files.associations": {
+    "*.http": "http",
+    "*.rest": "http"
+  },
+  "peacock.favoriteColors": [
+    { "name": "Dev", "color": "#1e88e5" },
+    { "name": "Staging", "color": "#f9a825" },
+    { "name": "Prod", "color": "#c62828" }
+  ],
+  "editor.formatOnSave": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
