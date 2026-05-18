@@ -18,6 +18,8 @@
 
 > Интерактивная сборка всех диаграмм: [it-landscape.html](./it-landscape.html) — открыть в браузере.
 >
+> **Редактируемые схемы Draw.io:** [drawio/](./drawio/) — 12 файлов `.drawio` (открыть в [diagrams.net](https://app.diagrams.net/) или Desktop Draw.io).
+>
 > Готовые SVG-рендеры (без необходимости рендерера Mermaid):
 > - [svg/01-overview.svg](./svg/01-overview.svg) — общий ИТ-ландшафт
 > - [svg/02-domains.svg](./svg/02-domains.svg) — бизнес-домены

@@ -18,5 +18,6 @@
 | [architecture/07-descriptions-and-questions.md](./architecture/07-descriptions-and-questions.md) | Текстовое описание каждой схемы + 75 уточняющих вопросов |
 | [architecture/08-findings-risks-grey-zones.md](./architecture/08-findings-risks-grey-zones.md) | Выводы, риски (с оценкой), серые зоны, топ-15 рисков, рекомендации P0/P1/P2 |
 | [architecture/it-landscape.html](./architecture/it-landscape.html) | Интерактивная HTML-сборка всех диаграмм (открыть в браузере) |
+| [architecture/drawio/](./architecture/drawio/) | **12 файлов `.drawio`** — редактируемые схемы для [diagrams.net](https://app.diagrams.net/) |
 
 Источник: «Наименование системы.pdf» — реестр ИС ДПППС / КМГИ + реестр ОИБ/ДКБ от 04.2026 + перечень потоков данных.

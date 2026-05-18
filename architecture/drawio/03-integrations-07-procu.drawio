@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="3.7. Интеграции Procu / Price (ЗАКУПКИ)">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="SAPP" value="&quot;SAP Price&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="GBDU" value="&quot;ГБД ЮЛ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PRC" value="&quot;🟡 Procu / Price (ТЕСТ)&lt;br/&gt;price.kmg.kz&lt;br/&gt;Vue3 + Django/DRF + PG 17&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST/JSON • по запросу • H&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAPP" target="PRC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST/JSON • по запросу • L&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="GBDU" target="PRC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
