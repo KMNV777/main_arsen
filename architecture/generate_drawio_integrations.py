@@ -164,8 +164,9 @@ def build():
     return root
 
 
-out = "/workspace/architecture/kmg-integrations.drawio"
-xml = minidom.parseString(ET.tostring(build(), encoding="unicode")).toprettyxml(indent="  ")
-with open(out, "w", encoding="utf-8") as f:
-    f.write("\n".join(ln for ln in xml.split("\n") if ln.strip()))
-print(f"Written {out}")
+if __name__ == "__main__":
+    out = "/workspace/architecture/kmg-integrations.drawio"
+    xml = minidom.parseString(ET.tostring(build(), encoding="unicode")).toprettyxml(indent="  ")
+    with open(out, "w", encoding="utf-8") as f:
+        f.write("\n".join(ln for ln in xml.split("\n") if ln.strip()))
+    print(f"Written {out}")
