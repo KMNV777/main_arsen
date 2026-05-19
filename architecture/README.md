@@ -18,6 +18,8 @@
 
 > Интерактивная сборка всех диаграмм: [it-landscape.html](./it-landscape.html) — открыть в браузере.
 >
+> **Draw.io (редактируемые схемы со связями):** [DRAWIO.md](./DRAWIO.md) · [`kmg-it-landscape.drawio`](./kmg-it-landscape.drawio) · [`kmg-integrations.drawio`](./kmg-integrations.drawio) · [`kmg-connections.csv`](./kmg-connections.csv)
+
 > Готовые SVG-рендеры (без необходимости рендерера Mermaid):
 > - [svg/01-overview.svg](./svg/01-overview.svg) — общий ИТ-ландшафт
 > - [svg/02-domains.svg](./svg/02-domains.svg) — бизнес-домены
