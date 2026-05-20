@@ -2,6 +2,27 @@
 
 Диаграммы построены по результатам обследования ИТ-ландшафта ЭМГ (верхнеуровневая схема + ответы на уточняющие вопросы).
 
+## Draw.io (экспорт)
+
+Файл **[emg-c4-architecture.drawio](./emg-c4-architecture.drawio)** — 6 вкладок:
+
+| Вкладка | Уровень C4 |
+|---|---|
+| `01 — C4 Context` | System Context |
+| `02 — C4 Container` | Container — основной ландшафт |
+| `03 — C4 Data` | Container — данные и интеграции |
+| `04 — C4 ABAI` | Component — ИС ABAI |
+| `05 — C4 OT/SCADA` | Component — АСУ ТП и мониторинг |
+| `06 — C4 Deployment` | Deployment — Qazcloud vs ЦОД |
+
+**Открыть:** [diagrams.net](https://app.diagrams.net/) → *Open Existing Diagram* → выбрать `emg-c4-architecture.drawio`, либо расширение Draw.io Integration в VS Code / Cursor.
+
+**Пересобрать из исходников:**
+
+```bash
+python3 scripts/generate_emg_c4_drawio.py
+```
+
 **Легенда статусов**
 
 | Обозначение | Значение |
