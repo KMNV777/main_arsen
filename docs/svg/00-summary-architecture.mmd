@@ -1,0 +1,59 @@
+flowchart TB
+    subgraph Org["Организационный контур"]
+        KC["КЦ КМГ"]
+        EMG["АО Эмбамунайгаз"]
+        KMGI["КМГИ"]
+    end
+
+    subgraph CoreEMG["Ядро цифровизации ЭМГ"]
+        ABAI["ИС ABAI abai.kmg.kz"]
+        IM["ИМ cmv2 10.32.10.99"]
+        ASDC["АСДЦ iis.thkmg.kz"]
+        UTOEMG["ИС УТО ЭМГ"]
+    end
+
+    subgraph CorpIS["Корпоративные ИС"]
+        SAPFIR["САПФИР Directum"]
+        ISOT["ИСОТ ЭНД"]
+        SAPP["SAP ERP"]
+        UTO["ИС УТО"]
+        SDD["СДД"]
+        Procu["Procu Price"]
+        BDA["БДА"]
+        Team["Портал Team"]
+        Intranet["Интранет"]
+        ISUP["ИСУП"]
+        Compliance["Compliance"]
+    end
+
+    subgraph TechInt["Технические интеграции"]
+        AD["Active Directory"]
+        KHD["КХД КМГ"]
+        ASUNSI["АСУНСИ"]
+        ISEZ["ИСЭЗ"]
+    end
+
+    subgraph OT["Промышленный контур ИМ"]
+        OPC["OPC DA/UA Modbus"]
+        PG["PostgreSQL MySQL"]
+        Analytics["Аналитика ЭМГ"]
+    end
+
+    EMG --> CoreEMG
+    ABAI --> IM
+    IM --> OPC
+    IM --> PG
+    IM --> Analytics
+    UTOEMG --> UTO
+    UTO <--> SAPP
+    Procu --> ASUNSI
+    Procu --> ISEZ
+    SAPP <--> ASUNSI
+    SAPFIR --> KHD
+    Procu --> AD
+    SAPFIR --> AD
+
+    classDef emg fill:#d4edda,stroke:#155724
+    classDef ot fill:#fff3cd,stroke:#856404
+    class ABAI,IM,UTOEMG,ASDC,EMG emg
+    class OPC,PG,Analytics ot

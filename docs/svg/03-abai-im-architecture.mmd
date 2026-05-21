@@ -1,0 +1,47 @@
+flowchart TB
+    subgraph IM["ИМ cmv2 10.32.10.99"]
+        Cron["cron"]
+        Scripts["Python ETL OPC Modbus DB"]
+        Django["Django"]
+        Celery["Celery"]
+        LocalDB[("Локальная БД")]
+    end
+
+    subgraph Sources["Источники"]
+        PG_ABAI[("PostgreSQL ИС ABAI")]
+        OPC_ISUN["OPC DA Kepware ИСУН"]
+        OPC_KOA["OPC DA КОА"]
+        OPC_UA["OPC UA АСУТП ТМ"]
+        Modbus["Modbus TCP КУУН"]
+        SDMO[("MySQL SDMO")]
+        KTM[("MySQL KTM")]
+        KOADB[("MySQL koa-cm")]
+        EMGDB[("PostgreSQL emg")]
+    end
+
+    subgraph Consumers["Получатели"]
+        Analytics["Аналитика 108.181.186.12:8099"]
+        Packets["packet_service :8951"]
+        Speech["Speech API :8777"]
+        SMTP["SMTP Gmail"]
+    end
+
+    Cron --> Scripts
+    Scripts --> LocalDB
+    Django --> LocalDB
+    Celery --> LocalDB
+    Django --> Speech
+    Django --> SMTP
+
+    PG_ABAI --> Scripts
+    OPC_ISUN --> Scripts
+    OPC_KOA --> Scripts
+    OPC_UA --> Scripts
+    Modbus --> Scripts
+    SDMO --> Scripts
+    KTM --> Scripts
+    KOADB <--> Scripts
+    EMGDB <--> Scripts
+
+    LocalDB --> Analytics
+    LocalDB --> Packets

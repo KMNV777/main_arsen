@@ -1,0 +1,20 @@
+flowchart TB
+    ABAI["ИС ABAI + ИМ"]
+    UTOEMG["ИС УТО ЭМГ"]
+    ASDC["АСДЦ"]
+    ISOT["ИСОТ ЭНД"]
+    SAPFIR["САПФИР"]
+    Procu["Procu"]
+    SAP["SAP ERP"]
+    AD["Active Directory"]
+    Analytics["Аналитика ЭМГ"]
+    UTO["ИС УТО"]
+
+    ABAI --> Analytics
+    ABAI --> ISOT
+    ASDC -.-> Analytics
+    UTOEMG --> UTO
+    UTO --> SAP
+    Procu --> SAP
+    SAPFIR --> AD
+    ABAI -.-> SAPFIR

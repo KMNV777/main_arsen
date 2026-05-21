@@ -11,9 +11,27 @@
 
 > **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)
 
+## Все схемы в SVG
+
+Скачивайте файлы из папки [`docs/svg/`](svg/) — готовы для Word, PowerPoint, Visio, Figma.
+
+| § | SVG-файл |
+|---|----------|
+| 0 | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) |
+| 1 | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) |
+| 2.1 | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) |
+| 3 | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) |
+| 4 | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) |
+| 5 | [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg) |
+| ландшафт | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
+
+Полный каталог: [`svg/README.md`](svg/README.md)
+
 ---
 
 ## 0. Сводная архитектура (интеграции + контур КМГ)
+
+**SVG:** [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg)
 
 ```mermaid
 flowchart TB
@@ -84,9 +102,9 @@ flowchart TB
 
 ## 1. Общий ландшафт корпоративных систем
 
-Полная схема ИТ-ландшафта по слоям L0–L5, mindmap доменов и каталог систем — в **[`it-landscape-emg.md`](it-landscape-emg.md)**.
+Полная схема ИТ-ландшафта по слоям L0–L5 — **[`it-landscape-emg.md`](it-landscape-emg.md)** · SVG: [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg)
 
-Ниже — схема связей по интеграциям (детализация потоков).
+**SVG (интеграции):** [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg)
 
 ```mermaid
 flowchart TB
@@ -216,6 +234,8 @@ flowchart LR
 
 ### 2.1. Фокус на ЭМГ: как ИС стыкуются с ABAI
 
+**SVG:** [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg)
+
 ```mermaid
 flowchart TB
     ABAI["ИС ABAI + ИМ"]
@@ -239,6 +259,8 @@ flowchart TB
 ---
 
 ## 3. Архитектура ИС ABAI (информационная модель, хост 10.32.10.99)
+
+**SVG:** [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg)
 
 Центральный контур сбора телеметрии, обогащения данных месторождений и рассылки аналитики. Запуск задач — **cron** + **Django/Celery** + сигналы `post_save`.
 
@@ -315,6 +337,8 @@ flowchart TB
 
 ## 4. Интеграции SAP ERP (хаб предприятия)
 
+**SVG:** [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg)
+
 ```mermaid
 flowchart LR
     SAP["SAP ERP"]
@@ -339,6 +363,8 @@ flowchart LR
 ---
 
 ## 5. Слои архитектуры ABAI (логическое представление)
+
+**SVG:** [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg)
 
 ```mermaid
 flowchart TB
@@ -412,7 +438,8 @@ flowchart TB
 | Какие ИС есть у ЭМГ в группе КМГ? | **2** |
 | Как ABAI собирает телеметрию? | **3**, **5** |
 | Как SAP связан с транспортом и НСИ? | **4** |
-| Общий ИТ-ландшафт по слоям? | **[`it-landscape-emg.md`](it-landscape-emg.md)** |
+| Общий ИТ-ландшафт по слоям? | **[`it-landscape-emg.md`](it-landscape-emg.md)** · [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
+| Все схемы в SVG? | **[`svg/README.md`](svg/README.md)** |
 | Полная картина «организация + потоки»? | **0**, **1** |
 
 ---
@@ -421,7 +448,7 @@ flowchart TB
 
 | Документ | Содержание |
 |----------|------------|
-| Матрица интеграций (19 систем) | Роли, протоколы, форматы, направление, частота, способ запуска |
+| Матрица интеграций (19 систем) | Роли, протоколы, форматы, направление, частота, способ запуска — см. [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) |
 | Матрица «КЦ — ЭМГ — КМГИ» | Охват ИС по организационному контуру |
 | Программа ИТ КМГ 2025–2028, § 7.6.1.3 | Текущая карта автоматизации ЭМГ (контекст) |
 | PDF-схемы (растровые) | Визуальные карты автоматизации |

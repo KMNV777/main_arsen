@@ -11,7 +11,8 @@
 
 | Формат | Файл |
 |--------|------|
-| **SVG** | [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) — для Word / PowerPoint / Figma |
+| **SVG** | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) — для Word / PowerPoint / Figma |
+| **Все SVG** | [`svg/README.md`](svg/README.md) — полный набор схем из architecture-emg-integrations |
 | **PNG** | [`it-landscape-emg-general.png`](it-landscape-emg-general.png) — предпросмотр |
 | **Реестр 19 ИС** | [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) — таблица интеграций |
 | **Потоки ABAI/ИМ** | [`architecture-emg-integrations.md`](architecture-emg-integrations.md) |

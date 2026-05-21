@@ -1,0 +1,18 @@
+flowchart LR
+    SAP["SAP ERP"]
+
+    SAP <--> NSI["АСУНСИ"]
+    SAP <--> UTO["ИСУТО"]
+    SAP --> SCADA["SCADA"]
+    SAP <--> AVR["AVR"]
+    SAP <--> EA["Электронный архив"]
+    SAP <--> DOC["Documentum"]
+    SAP --> SIZ["СИЗ"]
+    SAP --> ZP["1С зарплата"]
+    SAP --> FC["FC консолидация"]
+    SAP --> HR["Кадры УП"]
+    SAP <--> BANK["БВУ"]
+    SAP --> NB["Нацбанк"]
+    SAP <--> ESF["ИС ЭСФ"]
+    SAP --> PL["Platts"]
+    SAS["SAS-FM"] --> SAP
