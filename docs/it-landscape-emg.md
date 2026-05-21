@@ -8,13 +8,16 @@
 
 | Файл | Назначение |
 |------|------------|
-| **[`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)** | **Рекомендуется** — нативный SVG с `<text>`, компактный, удобно вставлять в документы |
-| [`it-landscape-emg.svg`](it-landscape-emg.svg) | Автогенерация из Mermaid (детальнее, шире ~4700px) |
-| [`it-landscape-emg.mmd`](it-landscape-emg.mmd) | Исходник Mermaid для пересборки SVG |
+| **[`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)** | **Рекомендуется для копирования** — вектор, Word/PowerPoint/Figma |
+| [`it-landscape-emg-general.png`](it-landscape-emg-general.png) | Растр для предпросмотра в Markdown / Confluence |
+| [`it-landscape-emg.svg`](it-landscape-emg.svg) | Автогенерация из Mermaid (детальнее) |
+| [`it-landscape-emg.mmd`](it-landscape-emg.mmd) | Исходник Mermaid |
 
-**Как скопировать:** откройте `it-landscape-emg-general.svg` в браузере → выделите всё (Ctrl+A) → копируйте, или перетащите файл в Word/PowerPoint/Figma.
+**Как скопировать:** скачайте `it-landscape-emg-general.svg` и вставьте в документ, или откройте в браузере.
 
-![Общий ИТ-ландшафт](it-landscape-emg-general.svg)
+**Предпросмотр в Markdown** (PNG — локальные SVG в превью часто не работают):
+
+![Общий ИТ-ландшафт ЭМГ](it-landscape-emg-general.png)
 
 ---
 
