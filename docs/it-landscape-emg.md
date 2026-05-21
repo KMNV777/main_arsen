@@ -1,88 +1,128 @@
 # Общая схема ИТ-ландшафта АО «Эмбамунайгаз»
 
-## Схема (файлы для скачивания)
+Собрано из:
+- **Матрицы интеграций** (19 ИС) — реестр и протоколы
+- **Матрицы КЦ – ЭМГ – КМГИ** — охват по организациям
+- **Программы ИТ КМГ 2025–2028** (§ 7.6.1.3)
 
-| Формат | Файл | Для чего |
-|--------|------|----------|
-| **SVG** | [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) | Копирование в Word, PowerPoint, Visio, Figma |
-| **PNG** | [`it-landscape-emg-general.png`](it-landscape-emg-general.png) | Вставка в презентации, Confluence, печать |
+---
+
+## Файлы схемы
+
+| Формат | Файл |
+|--------|------|
+| **SVG** | [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) — для Word / PowerPoint / Figma |
+| **PNG** | [`it-landscape-emg-general.png`](it-landscape-emg-general.png) — предпросмотр |
+| **Реестр 19 ИС** | [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) — таблица интеграций |
+| **Потоки ABAI/ИМ** | [`architecture-emg-integrations.md`](architecture-emg-integrations.md) |
 
 ![Общий ИТ-ландшафт ЭМГ](it-landscape-emg-general.png)
 
 ---
 
-## Структура ландшафта (слои)
+## Общая схема (19 систем + SAP-хаб)
 
 ```mermaid
 flowchart TB
     subgraph L0["L0 · Организация"]
-        KC[КЦ КМГ] --- EMG["АО Эмбамунайгаз"] --- KMGI[КМГИ]
-    end
-
-    subgraph L1["L1 · Порталы"]
-        Team[Team] --- Intranet[Интранет] --- ISUP[ИСУП] --- CC[Compliance]
-    end
-
-    subgraph L2["L2 · Бизнес-приложения"]
-        direction LR
-        subgraph P[Производство]
-            ABAI[ИС ABAI] --- ASDC[АСДЦ]
-        end
-        subgraph T[Транспорт]
-            UTOE[УТО ЭМГ] --- UTO[ИС УТО]
-        end
-        subgraph F[Финансы]
-            SAP[SAP ERP]
-        end
-        subgraph Z[Закупки]
-            Procu[Procu] --- SDD[СДД]
-        end
-        subgraph D[Документы]
-            SAPFIR[САПФИР]
-        end
-        subgraph H[HSE]
-            ISOT[ИСОТ/ЭНД]
-        end
+        KC[КЦ КМГ] --- EMG["Эмбамунайгаз"] --- KMGI[КМГИ]
     end
 
     subgraph L3["L3 · Платформа"]
-        AD[Active Directory] --- ESB[Шина интеграций] --- KHD[КХД КМГ]
+        AD[Active Directory]
+        SAP["SAP ERP №14"]
+        ESB["Шина XML/CSV/SOAP"]
+        KHD[КХД КМГ]
+        ASUNSI[АСУНСИ]
     end
 
-    subgraph L4["L4 · OT · ЭМГ"]
-        IM[ИМ 10.32.10.99] --- OPC[OPC/Modbus] --- BI[Аналитика]
+    subgraph L2["L2 · Реестр ИС — матрица интеграций"]
+        D2["№2 Directum"]
+        D3["№3 ABAI"]
+        D4["№4 Solar Dozor"]
+        D5["№5 FUDOPAM"]
+        D6["№6 E-Pass"]
+        D7["№7 Argus Pro"]
+        D8["№8 1С"]
+        D9["№9 SAS-FM"]
+        D10["№10 Жулдыз"]
+        D11["№11 sPoint"]
+        D12["№12 ИМ"]
+        D13["№13 Упр.персоналом"]
+        D15["№15 ИС УТО"]
+        D16["№16 Alfresco"]
+        D17["№17 КГИС"]
+        D18["№18 Procu"]
+        D19["№19 AVR+"]
+    end
+
+    subgraph L4["L4 · OT — интеграции ИМ №12"]
+        OPC[OPC DA/UA]
+        MB[Modbus]
+        DB[(MySQL/PG)]
+        SVC[Аналитика · packet · Speech · SMTP]
     end
 
     subgraph L5["L5 · ИБ"]
-        DLP[Solar Dozor] --- PAM[FUDOPAM]
+        EX[Exchange]
+        FP[Forcepoint]
     end
 
-    EMG --> L2
-    ABAI --> IM
+    EMG --> D3 & D12
+    D3 --> D12
+    D12 --> OPC & MB & DB --> SVC
+    D2 & D5 & D6 & D10 & D16 & D17 & D18 --> AD
+    D4 --> EX & FP
+    D9 & D8 & D13 & D15 & D19 --> SAP
+    D11 --> KHD
+    D18 --> ASUNSI
+    D7 --> D15
     SAP --> ESB
-    L2 --> AD
 ```
 
 ---
 
-## Системы по доменам
+## Реестр 19 информационных систем
 
-| Домен | Ключевые ИС |
-|-------|-------------|
-| **Производство** | ИС ABAI (abai.kmg.kz), АСДЦ, sPoint, Жулдыз, SCADA |
-| **Транспорт** | ИС «УТО ЭМГ», ИС «УТО», Argus Pro |
-| **Финансы** | SAP ERP, SAS-FM, 1С, AVR, FC, БВУ, Platts |
-| **Закупки** | Procu/Price, СДД (contract.kmg.kz), ИСЭЗ, АСУНСИ |
-| **Документы** | САПФИР/Directum, Alfresco, электронный архив |
-| **Кадры / HSE** | Управление персоналом, E-Pass, ИСОТ/ЭНД (hse.kmg.kz) |
-| **ГИС** | КГИС, БДА |
-| **Платформа** | Active Directory, шина (SOAP/REST/XML/CSV), КХД КМГ |
-| **OT (промысел)** | ИМ/cmv2, OPC DA/UA, Modbus, PostgreSQL/MySQL, аналитика ЭМГ |
-| **ИБ** | Solar Dozor, FUDOPAM, Forcepoint, Exchange |
-| **Вывод** | Documentum, ИС «Санау» · **Отключена:** buro.kmg.kz |
+| № | Система | Роль в ландшафте |
+|---|---------|------------------|
+| 2 | Directum | СЭД, документооборот → AD |
+| 3 | ИС ABAI | Производство, abai.kmg.kz → ИМ |
+| 4 | Solar Dozor | DLP ← Exchange, Forcepoint |
+| 5 | FUDOPAM | PAM → AD |
+| 6 | E-Pass | Пропуска → AD |
+| 7 | Argus Pro | GPS-мониторинг → ИС УТО |
+| 8 | 1С | Зарплата ← SAP |
+| 9 | SAS-FM | Фин. планирование → SAP |
+| 10 | Жулдыз | Мониторинг месторождения → AD |
+| 11 | sPoint | Наряды-допуски → КХД |
+| **12** | **ИМ (10.32.10.99)** | **OT-хаб: OPC, Modbus, БД, REST** |
+| 13 | Управление персоналом | Кадры ↔ SAP |
+| 14 | **SAP ERP** | **Центральный хаб интеграций** |
+| 15 | ИС УТО | Транспорт ↔ SAP |
+| 16 | Alfresco | ECM → AD |
+| 17 | КГИС | ГИС → AD |
+| 18 | Procu | Закупки ↔ АСУНСИ, ИСЭЗ |
+| 19 | AVR+ | Акты работ ↔ SAP |
 
 ---
 
-## Связанные материалы
+## Корпоративный контур КМГ (дополнение к матрице)
 
-- Детальные интеграции и потоки данных: [`architecture-emg-integrations.md`](architecture-emg-integrations.md)
+| ИС | URL | ЭМГ |
+|----|-----|:---:|
+| САПФИР / Directum | docs.kmg.kz | ✓ |
+| АСДЦ | iis.thkmg.kz | ✓ |
+| ИС УТО ЭМГ | — | ✓ |
+| ИСОТ/ЭНД | hse.kmg.kz | ✓ |
+| Team, Интранет, ИСУП, Compliance | kmg.kz, intranet… | ✓ |
+| Documentum, Санау | — | **ВЫВОД** |
+
+---
+
+## Как читать схему
+
+1. **SAP ERP (№14)** — центр финансовых и кадровых интеграций.
+2. **ИМ (№12)** — центр промысловой телеметрии (связан с ABAI №3).
+3. **Active Directory** — идентификация для Directum, Alfresco, КГИС, Procu, E-Pass, Жулдыз, FUDOPAM.
+4. Детальные протоколы, cron и IP — в [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) и [`architecture-emg-integrations.md`](architecture-emg-integrations.md).
