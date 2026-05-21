@@ -2,6 +2,8 @@
 
 Все диаграммы из [`architecture-emg-integrations.md`](../architecture-emg-integrations.md) и общий ландшафт.
 
+**Редактируемые схемы (draw.io):** [`../drawio/`](../drawio/) — полный каталог в [`../drawio/README.md`](../drawio/README.md).
+
 | Файл | Раздел документа | Описание |
 |------|------------------|----------|
 | [`00-summary-architecture.svg`](00-summary-architecture.svg) | §0 | Сводная архитектура: КМГ + ЭМГ + интеграции |

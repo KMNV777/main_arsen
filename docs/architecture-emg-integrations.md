@@ -9,23 +9,25 @@
 | **Программа ИТ КМГ 2025–2028**, § 7.6.1.3 | Карта автоматизации ЭМГ (контекст) |
 | **Схемы-изображения** (PDF) | Визуальные карты автоматизации (см. раздел 6) |
 
-> **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)
+> **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) · **draw.io:** [`drawio/it-landscape-emg-general.drawio`](drawio/it-landscape-emg-general.drawio)
 
-## Все схемы в SVG
+## Все схемы: draw.io (редактируемые) и SVG
 
-Скачивайте файлы из папки [`docs/svg/`](svg/) — готовы для Word, PowerPoint, Visio, Figma.
+| § | draw.io | SVG |
+|---|---------|-----|
+| 0 | [`drawio/00-summary-architecture.drawio`](drawio/00-summary-architecture.drawio) | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) |
+| 1 | [`drawio/01-corporate-landscape.drawio`](drawio/01-corporate-landscape.drawio) | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) |
+| 2.1 | [`drawio/02-1-emg-abai-focus.drawio`](drawio/02-1-emg-abai-focus.drawio) | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) |
+| 3 | [`drawio/03-abai-im-architecture.drawio`](drawio/03-abai-im-architecture.drawio) | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) |
+| 4 | [`drawio/04-sap-erp-integrations.drawio`](drawio/04-sap-erp-integrations.drawio) | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) |
+| 5 | [`drawio/05-abai-layers.drawio`](drawio/05-abai-layers.drawio) | [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg) |
+| ландшафт | [`drawio/06-it-landscape-general.drawio`](drawio/06-it-landscape-general.drawio) | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
+| ландшафт (детально) | [`drawio/07-it-landscape-mermaid-detailed.drawio`](drawio/07-it-landscape-mermaid-detailed.drawio) | [`svg/07-it-landscape-mermaid-detailed.svg`](svg/07-it-landscape-mermaid-detailed.svg) |
 
-| § | SVG-файл |
-|---|----------|
-| 0 | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) |
-| 1 | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) |
-| 2.1 | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) |
-| 3 | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) |
-| 4 | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) |
-| 5 | [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg) |
-| ландшафт | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
+- **draw.io** — открыть в [diagrams.net](https://app.diagrams.net), править блоки и связи. Каталог: [`drawio/README.md`](drawio/README.md)
+- **SVG** — вставка в Word, PowerPoint, Figma. Каталог: [`svg/README.md`](svg/README.md)
 
-Полный каталог: [`svg/README.md`](svg/README.md)
+Пересборка draw.io: `python3 scripts/mmd_to_drawio.py`
 
 ---
 

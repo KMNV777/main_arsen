@@ -11,7 +11,9 @@
 
 | Формат | Файл |
 |--------|------|
+| **draw.io** | [`drawio/it-landscape-emg-general.drawio`](drawio/it-landscape-emg-general.drawio) — редактируемая схема (diagrams.net) |
 | **SVG** | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) — для Word / PowerPoint / Figma |
+| **Все draw.io** | [`drawio/README.md`](drawio/README.md) |
 | **Все SVG** | [`svg/README.md`](svg/README.md) — полный набор схем из architecture-emg-integrations |
 | **PNG** | [`it-landscape-emg-general.png`](it-landscape-emg-general.png) — предпросмотр |
 | **Реестр 19 ИС** | [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) — таблица интеграций |
