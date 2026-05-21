@@ -9,7 +9,7 @@
 | **Программа ИТ КМГ 2025–2028**, § 7.6.1.3 | Карта автоматизации ЭМГ (контекст) |
 | **Схемы-изображения** (PDF) | Визуальные карты автоматизации (см. раздел 6) |
 
-> **Общий ИТ-ландшафт (по слоям и доменам):** [`it-landscape-emg.md`](it-landscape-emg.md)
+> **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)
 
 ---
 

@@ -4,6 +4,18 @@
 
 Детализация интеграций ABAI: [`architecture-emg-integrations.md`](architecture-emg-integrations.md).
 
+### SVG для копирования (Word, PowerPoint, Confluence)
+
+| Файл | Назначение |
+|------|------------|
+| **[`it-landscape-emg-general.svg`](it-landscape-emg-general.svg)** | **Рекомендуется** — нативный SVG с `<text>`, компактный, удобно вставлять в документы |
+| [`it-landscape-emg.svg`](it-landscape-emg.svg) | Автогенерация из Mermaid (детальнее, шире ~4700px) |
+| [`it-landscape-emg.mmd`](it-landscape-emg.mmd) | Исходник Mermaid для пересборки SVG |
+
+**Как скопировать:** откройте `it-landscape-emg-general.svg` в браузере → выделите всё (Ctrl+A) → копируйте, или перетащите файл в Word/PowerPoint/Figma.
+
+![Общий ИТ-ландшафт](it-landscape-emg-general.svg)
+
 ---
 
 ## 1. ИТ-ландшафт по слоям (общая схема)

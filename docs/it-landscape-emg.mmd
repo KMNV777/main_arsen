@@ -1,0 +1,97 @@
+flowchart TB
+    subgraph L0["L0 · Организационный контур"]
+        KC["КЦ АО НК КазМунайГаз"]
+        EMG["АО Эмбамунайгаз"]
+        KMGI["КМГИ"]
+    end
+
+    subgraph L1["L1 · Пользовательский и корпоративный уровень"]
+        direction LR
+        Team["Портал Team kmg.kz"]
+        Intranet["Интранет"]
+        ISUP["ИСУП pmo.kmg.kz"]
+        Compliance["Compliance Control"]
+    end
+
+    subgraph L2["L2 · Бизнес-приложения"]
+        direction TB
+        subgraph Prod["Производство"]
+            ABAI["ИС ABAI abai.kmg.kz"]
+            ASDC["АСДЦ iis.thkmg.kz"]
+            SP["sPoint"]
+        end
+        subgraph Trans["Транспорт"]
+            UTOEMG["ИС УТО ЭМГ"]
+            UTO["ИС УТО"]
+            ARGUS["Argus Pro"]
+        end
+        subgraph Fin["Финансы"]
+            SAP["SAP ERP"]
+            SAS["SAS-FM"]
+            AVR["AVR"]
+        end
+        subgraph Proc["Закупки"]
+            Procu["Procu Price"]
+            SDD["СДД contract.kmg.kz"]
+            ISEZ["ИСЭЗ"]
+        end
+        subgraph Doc["Документы"]
+            SAPFIR["САПФИР Directum"]
+            Alfresco["Alfresco"]
+            EA["ЭА Азия-Софт"]
+        end
+        subgraph HR["Кадры"]
+            UP["Управление персоналом"]
+            EPASS["E-Pass"]
+        end
+        subgraph HSE["HSE"]
+            ISOT["ИСОТ ЭНД hse.kmg.kz"]
+        end
+        subgraph Geo["ГИС"]
+            KGIS["КГИС"]
+            BDA["БДА"]
+        end
+    end
+
+    subgraph L3["L3 · Интеграция и НСИ"]
+        AD["Active Directory"]
+        ASUNSI["АСУНСИ"]
+        ESB["Шина API файлы"]
+        KHD["КХД КМГ"]
+    end
+
+    subgraph L4["L4 · OT-контур ЭМГ"]
+        IM["ИМ cmv2 10.32.10.99"]
+        OPC["OPC DA UA Modbus"]
+        OTDB[("PostgreSQL MySQL")]
+        Analytics["Аналитика ЭМГ"]
+    end
+
+    subgraph L5["L5 · ИБ"]
+        DLP["Solar Dozor DLP"]
+        FUDOPAM["FUDOPAM PAM"]
+        Exchange["Exchange"]
+    end
+
+    EMG --> ABAI
+    ABAI --> IM
+    IM --> OPC --> OTDB
+    IM --> Analytics
+    UTOEMG --> UTO
+    SAP --> ESB
+    Procu --> ASUNSI
+    SAPFIR --> KHD
+    SAP <--> ESB
+    SAPFIR --> AD
+    ABAI --> AD
+    FUDOPAM --> AD
+    Exchange --> DLP
+
+    classDef emg fill:#d4edda,stroke:#155724
+    classDef hub fill:#cce5ff,stroke:#004085
+    classDef ot fill:#fff3cd,stroke:#856404
+    classDef sec fill:#f8d7da,stroke:#721c24
+    class EMG,ABAI,IM,UTOEMG,ASDC emg
+    class SAP,AD,ESB,KHD hub
+    class OPC,OTDB,Analytics ot
+    class DLP,FUDOPAM,Exchange sec
