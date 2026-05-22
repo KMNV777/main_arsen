@@ -36,6 +36,17 @@
 
 Пересборка: `python3 generate_role_balance.py`
 
+## Объединение 7 файлов с D:\
+
+Скопируйте в `sources/` файлы: `Igor_boss_dominion.json`, `Aider_boss2.json`, `roman_marketing_dominion.json`, `Ilya_dominion.json`, `fortuna_dominion.json`, `Valera_dominion.json`, `arsen_dominion.json`.
+
+```bash
+python3 merge_dominion_grants.py
+# или: python3 merge_dominion_grants.py --input-dir /mnt/d
+```
+
+Результат: **`dominion_grants_combined.json`** — один объект `{ "SteamID": [ ...grants ] }` для импорта.
+
 ## Распределение по ролям
 
 См. предыдущую таблицу в PR — эффекты из 16 фабрик эталона разнесены по боссам 1–2 и наёмникам 1–5; общие (лестница, дефьюз, plant damage, вода) — в `shared_global.json`.

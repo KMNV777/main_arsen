@@ -1,0 +1,253 @@
+{
+  "76561198184450067": [
+    {
+      "factory": "bio_regeneration",
+      "buff": {
+        "name": "bullet_mirror_active",
+        "active_frames": 32,
+        "cooldown_frames": 3200
+      },
+      "debuff": {
+        "name": "reload_click_sound",
+        "sound_name": "Buttons.snd15"
+      }
+    },
+    {
+      "factory": "chrome_armor",
+      "buff": {
+        "name": "chrome_armor_buff",
+        "max_health_delta": 25,
+        "immediate_health_delta": 25,
+        "ability_name": "armor_pulse_active",
+        "armor_value": 60
+      },
+      "debuff": {
+        "name": "chrome_armor_debuff",
+        "velocity_modifier": 1.08
+      }
+    },
+    {
+      "factory": "chrome_repair_v2",
+      "buff": {
+        "name": "ability_cooldown_reset",
+        "cooldown_frames": 4480
+      },
+      "debuff": {
+        "name": "weapon_fire_lock",
+        "lock_frames": 1,
+        "locked_velocity_modifier": 0.5
+      }
+    },
+    {
+      "factory": "chromo_armor_tank",
+      "buff": {
+        "name": "extinguish_effect_ability",
+        "cooldown_frames": 1920
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
+      }
+    },
+    {
+      "factory": "ventilation_implant",
+      "buff": {
+        "name": "ventilation_implant_leg_resist",
+        "damage_scale": 0.85,
+        "apply_for_attacker": false,
+        "apply_for_victim": true,
+        "damage_mask": 0,
+        "body_only": false,
+        "leg_only": true
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
+      }
+    }
+  ],
+  "76561198836236006": [
+    {
+      "factory": "singular_regen",
+      "buff": {
+        "name": "singular_regen_active"
+      },
+      "debuff": {
+        "name": "singular_regen_debuff",
+        "max_health_delta": -5,
+        "immediate_health_delta": 0
+      }
+    },
+    {
+      "factory": "chrome_armor",
+      "buff": {
+        "name": "chrome_armor_buff",
+        "max_health_delta": 25,
+        "immediate_health_delta": 25,
+        "ability_name": "armor_pulse_active",
+        "armor_value": 60
+      },
+      "debuff": {
+        "name": "chrome_armor_debuff",
+        "velocity_modifier": 0.92
+      }
+    },
+    {
+      "factory": "data_hack_slowdown",
+      "buff": {
+        "name": "flash_immunity_after_bomb_plant"
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
+      }
+    }
+  ],
+  "76561198836236007": [
+    {
+      "factory": "credit_reader_v1",
+      "buff": {
+        "name": "teammate_death_max_health",
+        "max_health_delta": 15
+      },
+      "debuff": {
+        "name": "reload_primary_attack_penalty",
+        "penalty_scale": 1.05
+      }
+    },
+    {
+      "factory": "ghost_jacket_gray",
+      "buff": {
+        "name": "heal_amplify",
+        "bonus_scale": 0.25
+      },
+      "debuff": {
+        "name": "backpedal_velocity_penalty",
+        "velocity_modifier": 0.96
+      }
+    }
+  ],
+  "76561198836236008": [
+    {
+      "factory": "accuracy_zone_v1",
+      "buff": {
+        "name": "accuracy_zone_v1_trigger",
+        "health_threshold": 15,
+        "velocity_modifier": 1.08
+      },
+      "debuff": {
+        "name": "no_jump_after_damage",
+        "lock_frames": 16
+      }
+    }
+  ],
+  "76561198836236009": [
+    {
+      "factory": "accuracy_zone_v1",
+      "buff": {
+        "name": "accuracy_zone_v1_trigger",
+        "health_threshold": 15,
+        "velocity_modifier": 1.08
+      },
+      "debuff": {
+        "name": "no_jump_after_damage",
+        "lock_frames": 16
+      }
+    }
+  ],
+  "76561198836236010": [
+    {
+      "factory": "bio_patch_hp_v1",
+      "buff": {
+        "name": "knife_move_armor",
+        "armor_bonus": 10
+      },
+      "debuff": {
+        "name": "bio_patch_hp_v1_fire_vulnerability",
+        "damage_scale": 1.08,
+        "apply_for_attacker": false,
+        "apply_for_victim": true,
+        "damage_mask": 8,
+        "body_only": false,
+        "leg_only": false
+      }
+    },
+    {
+      "factory": "bio_regeneration",
+      "buff": {
+        "name": "bio_regeneration_knife_speed_bonus",
+        "velocity_modifier": 1.02
+      },
+      "debuff": {
+        "name": "primary_clip_cap",
+        "max_clip_scale": 0.95
+      }
+    },
+    {
+      "factory": "fast_network_v2",
+      "buff": {
+        "name": "silent_steps_low_health",
+        "health_threshold": 20
+      },
+      "debuff": {
+        "name": "radar_flicker",
+        "toggle_frames": 32,
+        "start_hidden": false
+      }
+    }
+  ],
+  "76561198836236011": [
+    {
+      "factory": "bio_patch_hp_v1",
+      "buff": {
+        "name": "knife_move_armor",
+        "armor_bonus": 10
+      },
+      "debuff": {
+        "name": "bio_patch_hp_v1_fire_vulnerability",
+        "damage_scale": 1.08,
+        "apply_for_attacker": false,
+        "apply_for_victim": true,
+        "damage_mask": 8,
+        "body_only": false,
+        "leg_only": false
+      }
+    },
+    {
+      "factory": "bio_regeneration",
+      "buff": {
+        "name": "bio_regeneration_knife_speed_bonus",
+        "velocity_modifier": 1.02
+      },
+      "debuff": {
+        "name": "primary_clip_cap",
+        "max_clip_scale": 0.95
+      }
+    },
+    {
+      "factory": "fast_network_v2",
+      "buff": {
+        "name": "silent_steps_low_health",
+        "health_threshold": 20
+      },
+      "debuff": {
+        "name": "radar_flicker",
+        "toggle_frames": 32,
+        "start_hidden": false
+      }
+    },
+    {
+      "factory": "mini_radar_v1",
+      "buff": {
+        "name": "mini_radar_v1_round_win_income"
+      },
+      "debuff": {
+        "name": "reload_click_sound",
+        "sound_name": "Buttons.snd15"
+      }
+    }
+  ]
+}
