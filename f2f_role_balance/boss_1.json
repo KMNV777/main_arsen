@@ -1,19 +1,11 @@
 {
-  "_meta": {
-    "role": "boss_1",
-    "displayName": "Босс 1",
-    "description": "Bullet Mirror, HP+, скорость+, блок стрельбы/оружия, тушение molotov, громкая перезарядка.",
-    "source": "КФГ для Арсена.json (redistributed by role)",
-    "balanceProfile": "competitive_tuned",
-    "tickRate": 64
-  },
-  "grants": [
+  "76561198184450067": [
     {
       "factory": "bio_regeneration",
       "buff": {
         "name": "bullet_mirror_active",
-        "active_frames": 64,
-        "cooldown_frames": 2560
+        "active_frames": 32,
+        "cooldown_frames": 3200
       },
       "debuff": {
         "name": "reload_click_sound",
@@ -24,31 +16,45 @@
       "factory": "chrome_armor",
       "buff": {
         "name": "chrome_armor_buff",
-        "max_health_delta": 40,
-        "immediate_health_delta": 40
+        "max_health_delta": 25,
+        "immediate_health_delta": 25,
+        "ability_name": "armor_pulse_active",
+        "armor_value": 60
       },
       "debuff": {
-        "name": "chrome_armor_velocity_buff",
-        "velocity_modifier": 1.15
+        "name": "chrome_armor_debuff",
+        "velocity_modifier": 1.08
       }
     },
     {
       "factory": "chrome_repair_v2",
       "buff": {
-        "name": "extinguish_effect_ability",
-        "cooldown_frames": 1280
+        "name": "ability_cooldown_reset",
+        "cooldown_frames": 4480
       },
       "debuff": {
         "name": "weapon_fire_lock",
-        "lock_frames": 2,
-        "locked_velocity_modifier": 0.25
+        "lock_frames": 1,
+        "locked_velocity_modifier": 0.5
+      }
+    },
+    {
+      "factory": "chromo_armor_tank",
+      "buff": {
+        "name": "extinguish_effect_ability",
+        "cooldown_frames": 1920
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
       }
     },
     {
       "factory": "ventilation_implant",
       "buff": {
         "name": "ventilation_implant_leg_resist",
-        "damage_scale": 0.75,
+        "damage_scale": 0.85,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 0,
