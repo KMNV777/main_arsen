@@ -1,0 +1,386 @@
+{
+  "_meta": {
+    "name": "КФГ для Арсена — распределение по ролям",
+    "format": "f2f_dominion_grants_by_role",
+    "roles": [
+      "boss_1",
+      "boss_2",
+      "mercenary_1",
+      "mercenary_2",
+      "mercenary_3",
+      "mercenary_4",
+      "mercenary_5",
+      "shared_global"
+    ],
+    "note": "Импорт: назначьте grants из каждой секции role на соответствующего игрока/бота."
+  },
+  "roles": {
+    "boss_1": {
+      "_meta": {
+        "role": "boss_1",
+        "displayName": "Босс 1",
+        "description": "Bullet Mirror, HP+, скорость+, блок стрельбы/оружия, тушение molotov, громкая перезарядка.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "bio_regeneration",
+          "buff": {
+            "name": "bullet_mirror_active",
+            "active_frames": 64,
+            "cooldown_frames": 2560
+          },
+          "debuff": {
+            "name": "reload_click_sound",
+            "sound_name": "Buttons.snd15"
+          }
+        },
+        {
+          "factory": "chrome_armor",
+          "buff": {
+            "name": "chrome_armor_buff",
+            "max_health_delta": 40,
+            "immediate_health_delta": 40
+          },
+          "debuff": {
+            "name": "chrome_armor_velocity_buff",
+            "velocity_modifier": 1.15
+          }
+        },
+        {
+          "factory": "chrome_repair_v2",
+          "buff": {
+            "name": "extinguish_effect_ability",
+            "cooldown_frames": 1280
+          },
+          "debuff": {
+            "name": "weapon_fire_lock",
+            "lock_frames": 2,
+            "locked_velocity_modifier": 0.25
+          }
+        },
+        {
+          "factory": "ventilation_implant",
+          "buff": {
+            "name": "ventilation_implant_leg_resist",
+            "damage_scale": 0.75,
+            "apply_for_attacker": false,
+            "apply_for_victim": true,
+            "damage_mask": 0,
+            "body_only": false,
+            "leg_only": true
+          },
+          "debuff": {
+            "name": "ventilation_implant_weapon_block",
+            "blocked_definition_a": 2,
+            "blocked_definition_b": 64
+          }
+        }
+      ]
+    },
+    "boss_2": {
+      "_meta": {
+        "role": "boss_2",
+        "displayName": "Босс 2",
+        "description": "Singular Regen, HP+, замедление, блок оружия, иммунитет к flash после plant.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "singular_regen",
+          "buff": {
+            "name": "singular_regen_active"
+          },
+          "debuff": {
+            "name": "singular_regen_debuff",
+            "max_health_delta": -10,
+            "immediate_health_delta": 0
+          }
+        },
+        {
+          "factory": "chrome_armor",
+          "buff": {
+            "name": "chrome_armor_buff",
+            "max_health_delta": 40,
+            "immediate_health_delta": 40
+          },
+          "debuff": {
+            "name": "chrome_armor_debuff",
+            "velocity_modifier": 0.88
+          }
+        },
+        {
+          "factory": "data_hack_slowdown",
+          "buff": {
+            "name": "flash_immunity_after_bomb_plant"
+          },
+          "debuff": {
+            "name": "ventilation_implant_weapon_block",
+            "blocked_definition_a": 2,
+            "blocked_definition_b": 64
+          }
+        }
+      ]
+    },
+    "mercenary_1": {
+      "_meta": {
+        "role": "mercenary_1",
+        "displayName": "Наёмник 1",
+        "description": "HP после смерти союзника, штраф перезарядки, замедление при движении назад.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "credit_reader_v1",
+          "buff": {
+            "name": "teammate_death_max_health",
+            "max_health_delta": 25
+          },
+          "debuff": {
+            "name": "reload_primary_attack_penalty",
+            "penalty_scale": 1.12
+          }
+        },
+        {
+          "factory": "ghost_jacket_gray",
+          "buff": {
+            "name": "heal_amplify",
+            "bonus_scale": 0.4
+          },
+          "debuff": {
+            "name": "backpedal_velocity_penalty",
+            "velocity_modifier": 0.92
+          }
+        }
+      ]
+    },
+    "mercenary_2": {
+      "_meta": {
+        "role": "mercenary_2",
+        "displayName": "Наёмник 2",
+        "description": "Скорость при low HP, запрет прыжка после урона.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "accuracy_zone_v1",
+          "buff": {
+            "name": "accuracy_zone_v1_trigger",
+            "health_threshold": 20,
+            "velocity_modifier": 1.15
+          },
+          "debuff": {
+            "name": "no_jump_after_damage",
+            "lock_frames": 32
+          }
+        }
+      ]
+    },
+    "mercenary_3": {
+      "_meta": {
+        "role": "mercenary_3",
+        "displayName": "Наёмник 3",
+        "description": "Скорость при low HP, запрет прыжка после урона.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "accuracy_zone_v1",
+          "buff": {
+            "name": "accuracy_zone_v1_trigger",
+            "health_threshold": 20,
+            "velocity_modifier": 1.15
+          },
+          "debuff": {
+            "name": "no_jump_after_damage",
+            "lock_frames": 32
+          }
+        }
+      ]
+    },
+    "mercenary_4": {
+      "_meta": {
+        "role": "mercenary_4",
+        "displayName": "Наёмник 4",
+        "description": "Броня с ножом, скорость с ножом, тихие шаги, мерцание радара, уменьшенный магазин.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "bio_patch_hp_v1",
+          "buff": {
+            "name": "knife_move_armor",
+            "armor_bonus": 20
+          },
+          "debuff": {
+            "name": "bio_patch_hp_v1_fire_vulnerability",
+            "damage_scale": 1.12,
+            "apply_for_attacker": false,
+            "apply_for_victim": true,
+            "damage_mask": 8,
+            "body_only": false,
+            "leg_only": false
+          }
+        },
+        {
+          "factory": "bio_regeneration",
+          "buff": {
+            "name": "bio_regeneration_knife_speed_bonus",
+            "velocity_modifier": 1.08
+          },
+          "debuff": {
+            "name": "primary_clip_cap",
+            "max_clip_scale": 0.9
+          }
+        },
+        {
+          "factory": "fast_network_v2",
+          "buff": {
+            "name": "silent_steps_low_health",
+            "health_threshold": 30
+          },
+          "debuff": {
+            "name": "radar_flicker",
+            "toggle_frames": 24,
+            "start_hidden": false
+          }
+        }
+      ]
+    },
+    "mercenary_5": {
+      "_meta": {
+        "role": "mercenary_5",
+        "displayName": "Наёмник 5",
+        "description": "Как наёмник 4 + громкий щелчок при перезарядке.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "bio_patch_hp_v1",
+          "buff": {
+            "name": "knife_move_armor",
+            "armor_bonus": 20
+          },
+          "debuff": {
+            "name": "bio_patch_hp_v1_fire_vulnerability",
+            "damage_scale": 1.12,
+            "apply_for_attacker": false,
+            "apply_for_victim": true,
+            "damage_mask": 8,
+            "body_only": false,
+            "leg_only": false
+          }
+        },
+        {
+          "factory": "bio_regeneration",
+          "buff": {
+            "name": "bio_regeneration_knife_speed_bonus",
+            "velocity_modifier": 1.08
+          },
+          "debuff": {
+            "name": "primary_clip_cap",
+            "max_clip_scale": 0.9
+          }
+        },
+        {
+          "factory": "fast_network_v2",
+          "buff": {
+            "name": "silent_steps_low_health",
+            "health_threshold": 30
+          },
+          "debuff": {
+            "name": "radar_flicker",
+            "toggle_frames": 24,
+            "start_hidden": false
+          }
+        },
+        {
+          "factory": "mini_radar_v1",
+          "buff": {
+            "name": "mini_radar_v1_round_win_income"
+          },
+          "debuff": {
+            "name": "reload_click_sound",
+            "sound_name": "Buttons.snd15"
+          }
+        }
+      ]
+    },
+    "shared_global": {
+      "_meta": {
+        "role": "shared_global",
+        "displayName": "Общие (без привязки к роли)",
+        "description": "Эффекты из ТЗ без явной роли: лестница, дефьюз, вода, aim punch, урон после plant.",
+        "source": "КФГ для Арсена.json (redistributed by role)",
+        "balanceProfile": "competitive_tuned",
+        "tickRate": 64
+      },
+      "grants": [
+        {
+          "factory": "cyber_limb_accuracy",
+          "buff": {
+            "name": "ladder_climb_velocity",
+            "velocity_modifier": 1.8
+          },
+          "debuff": {
+            "name": "global_water_step_sound",
+            "sound_name": "Player.Wade"
+          }
+        },
+        {
+          "factory": "sonar_v2",
+          "buff": {
+            "name": "defuse_signal",
+            "sound_name": "Geiger.BeepHigh"
+          },
+          "debuff": {
+            "name": "long_range_damage_penalty",
+            "distance_range_scale": 0.55,
+            "damage_scale": 0.92
+          }
+        },
+        {
+          "factory": "anti_kinetic_v1",
+          "buff": {
+            "name": "bomb_plant_body_damage",
+            "damage_scale": 1.1
+          },
+          "debuff": {
+            "name": "anti_kinetic_v1_he_vulnerability",
+            "damage_scale": 1.12,
+            "apply_for_attacker": false,
+            "apply_for_victim": true,
+            "damage_mask": 64,
+            "body_only": false,
+            "leg_only": false
+          }
+        },
+        {
+          "factory": "ghost_jacket_gray",
+          "buff": {
+            "name": "heal_amplify",
+            "bonus_scale": 0.1
+          },
+          "debuff": {
+            "name": "aim_punch_scale",
+            "scale": 1.1
+          }
+        }
+      ]
+    }
+  }
+}

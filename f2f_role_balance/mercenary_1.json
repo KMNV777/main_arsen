@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "role": "mercenary_1",
+    "displayName": "Наёмник 1",
+    "description": "HP после смерти союзника, штраф перезарядки, замедление при движении назад.",
+    "source": "КФГ для Арсена.json (redistributed by role)",
+    "balanceProfile": "competitive_tuned",
+    "tickRate": 64
+  },
+  "grants": [
+    {
+      "factory": "credit_reader_v1",
+      "buff": {
+        "name": "teammate_death_max_health",
+        "max_health_delta": 25
+      },
+      "debuff": {
+        "name": "reload_primary_attack_penalty",
+        "penalty_scale": 1.12
+      }
+    },
+    {
+      "factory": "ghost_jacket_gray",
+      "buff": {
+        "name": "heal_amplify",
+        "bonus_scale": 0.4
+      },
+      "debuff": {
+        "name": "backpedal_velocity_penalty",
+        "velocity_modifier": 0.92
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "role": "shared_global",
+    "displayName": "Общие (без привязки к роли)",
+    "description": "Эффекты из ТЗ без явной роли: лестница, дефьюз, вода, aim punch, урон после plant.",
+    "source": "КФГ для Арсена.json (redistributed by role)",
+    "balanceProfile": "competitive_tuned",
+    "tickRate": 64
+  },
+  "grants": [
+    {
+      "factory": "cyber_limb_accuracy",
+      "buff": {
+        "name": "ladder_climb_velocity",
+        "velocity_modifier": 1.8
+      },
+      "debuff": {
+        "name": "global_water_step_sound",
+        "sound_name": "Player.Wade"
+      }
+    },
+    {
+      "factory": "sonar_v2",
+      "buff": {
+        "name": "defuse_signal",
+        "sound_name": "Geiger.BeepHigh"
+      },
+      "debuff": {
+        "name": "long_range_damage_penalty",
+        "distance_range_scale": 0.55,
+        "damage_scale": 0.92
+      }
+    },
+    {
+      "factory": "anti_kinetic_v1",
+      "buff": {
+        "name": "bomb_plant_body_damage",
+        "damage_scale": 1.1
+      },
+      "debuff": {
+        "name": "anti_kinetic_v1_he_vulnerability",
+        "damage_scale": 1.12,
+        "apply_for_attacker": false,
+        "apply_for_victim": true,
+        "damage_mask": 64,
+        "body_only": false,
+        "leg_only": false
+      }
+    },
+    {
+      "factory": "ghost_jacket_gray",
+      "buff": {
+        "name": "heal_amplify",
+        "bonus_scale": 0.1
+      },
+      "debuff": {
+        "name": "aim_punch_scale",
+        "scale": 1.1
+      }
+    }
+  ]
+}

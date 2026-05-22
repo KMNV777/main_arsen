@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "role": "boss_2",
+    "displayName": "Босс 2",
+    "description": "Singular Regen, HP+, замедление, блок оружия, иммунитет к flash после plant.",
+    "source": "КФГ для Арсена.json (redistributed by role)",
+    "balanceProfile": "competitive_tuned",
+    "tickRate": 64
+  },
+  "grants": [
+    {
+      "factory": "singular_regen",
+      "buff": {
+        "name": "singular_regen_active"
+      },
+      "debuff": {
+        "name": "singular_regen_debuff",
+        "max_health_delta": -10,
+        "immediate_health_delta": 0
+      }
+    },
+    {
+      "factory": "chrome_armor",
+      "buff": {
+        "name": "chrome_armor_buff",
+        "max_health_delta": 40,
+        "immediate_health_delta": 40
+      },
+      "debuff": {
+        "name": "chrome_armor_debuff",
+        "velocity_modifier": 0.88
+      }
+    },
+    {
+      "factory": "data_hack_slowdown",
+      "buff": {
+        "name": "flash_immunity_after_bomb_plant"
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
+      }
+    }
+  ]
+}

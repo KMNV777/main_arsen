@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "role": "mercenary_3",
+    "displayName": "Наёмник 3",
+    "description": "Скорость при low HP, запрет прыжка после урона.",
+    "source": "КФГ для Арсена.json (redistributed by role)",
+    "balanceProfile": "competitive_tuned",
+    "tickRate": 64
+  },
+  "grants": [
+    {
+      "factory": "accuracy_zone_v1",
+      "buff": {
+        "name": "accuracy_zone_v1_trigger",
+        "health_threshold": 20,
+        "velocity_modifier": 1.15
+      },
+      "debuff": {
+        "name": "no_jump_after_damage",
+        "lock_frames": 32
+      }
+    }
+  ]
+}
