@@ -22,17 +22,45 @@ DEFAULT_SOURCE_FILES = (
 
 DEFAULT_OUTPUT = "dominion_grants_combined.json"
 
+BOSS_STEAM_IDS = frozenset({"76561198836236006", "76561198045497938"})
+
+
+def role_for_steam_id(steam_id: str) -> str:
+    return "boss" if steam_id in BOSS_STEAM_IDS else "mercenary"
+
+
+def normalize_player_entry(
+    steam_id: str, entry: Any, *, path: Path | None = None
+) -> dict[str, Any]:
+    label = f"{path}: " if path else ""
+    if isinstance(entry, list):
+        factories = entry
+        role = role_for_steam_id(steam_id)
+    elif isinstance(entry, dict) and "factories" in entry:
+        factories = entry["factories"]
+        role = entry.get("role", role_for_steam_id(steam_id))
+    else:
+        raise ValueError(
+            f"{label}{steam_id}: ожидается [ grants ] или "
+            '{ "role": "...", "factories": [ ... ] }'
+        )
+    if role not in ("boss", "mercenary"):
+        raise ValueError(f"{label}{steam_id}: role должен быть boss или mercenary")
+    if not isinstance(factories, list):
+        raise ValueError(f"{label}{steam_id}: factories должны быть массивом")
+    return {"role": role, "factories": factories}
+
 
 def load_grants_file(path: Path) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ValueError(f"{path}: ожидается объект {{ SteamID: [ grants ] }}")
-    for steam_id, grants in data.items():
+        raise ValueError(f"{path}: ожидается объект {{ SteamID: player }}")
+    out: dict[str, Any] = {}
+    for steam_id, entry in data.items():
         if not isinstance(steam_id, str) or not steam_id.isdigit():
             raise ValueError(f"{path}: некорректный SteamID '{steam_id}'")
-        if not isinstance(grants, list):
-            raise ValueError(f"{path}: grants для {steam_id} должны быть массивом")
-    return data
+        out[steam_id] = normalize_player_entry(steam_id, entry, path=path)
+    return out
 
 
 def merge_grants_files(paths: list[Path]) -> dict[str, Any]:
@@ -104,8 +132,8 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     print(f"merged {len(paths)} files -> {out_path.name}")
-    for sid, grants in combined.items():
-        print(f"  {sid}: {len(grants)} grant(s)")
+    for sid, player in combined.items():
+        print(f"  {sid}: {player['role']}, {len(player['factories'])} factory(ies)")
     return 0
 
 

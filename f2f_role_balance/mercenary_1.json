@@ -1,26 +1,29 @@
 {
-  "76561198836236007": [
-    {
-      "factory": "credit_reader_v1",
-      "buff": {
-        "name": "teammate_death_max_health",
-        "max_health_delta": 15
+  "76561198836236007": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "credit_reader_v1",
+        "buff": {
+          "name": "teammate_death_max_health",
+          "max_health_delta": 15
+        },
+        "debuff": {
+          "name": "reload_primary_attack_penalty",
+          "penalty_scale": 1.05
+        }
       },
-      "debuff": {
-        "name": "reload_primary_attack_penalty",
-        "penalty_scale": 1.05
+      {
+        "factory": "ghost_jacket_gray",
+        "buff": {
+          "name": "heal_amplify",
+          "bonus_scale": 0.25
+        },
+        "debuff": {
+          "name": "backpedal_velocity_penalty",
+          "velocity_modifier": 0.96
+        }
       }
-    },
-    {
-      "factory": "ghost_jacket_gray",
-      "buff": {
-        "name": "heal_amplify",
-        "bonus_scale": 0.25
-      },
-      "debuff": {
-        "name": "backpedal_velocity_penalty",
-        "velocity_modifier": 0.96
-      }
-    }
-  ]
+    ]
+  }
 }

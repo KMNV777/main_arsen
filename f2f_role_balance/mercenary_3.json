@@ -1,16 +1,19 @@
 {
-  "76561198836236009": [
-    {
-      "factory": "accuracy_zone_v1",
-      "buff": {
-        "name": "accuracy_zone_v1_trigger",
-        "health_threshold": 15,
-        "velocity_modifier": 1.08
-      },
-      "debuff": {
-        "name": "no_jump_after_damage",
-        "lock_frames": 16
+  "76561198836236009": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "accuracy_zone_v1",
+        "buff": {
+          "name": "accuracy_zone_v1_trigger",
+          "health_threshold": 15,
+          "velocity_modifier": 1.08
+        },
+        "debuff": {
+          "name": "no_jump_after_damage",
+          "lock_frames": 16
+        }
       }
-    }
-  ]
+    ]
+  }
 }

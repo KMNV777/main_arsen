@@ -247,8 +247,17 @@ def build_grants(role_id: str) -> list[dict[str, Any]]:
     return [grant(key) for key in ROLE_GRANTS[role_id]]
 
 
+def dominion_role(role_id: str) -> str:
+    return "boss" if role_id.startswith("boss") else "mercenary"
+
+
 def build_export(steam_id: str, role_id: str) -> dict[str, Any]:
-    return {steam_id: build_grants(role_id)}
+    return {
+        steam_id: {
+            "role": dominion_role(role_id),
+            "factories": build_grants(role_id),
+        }
+    }
 
 
 def load_steam_ids(path: Path) -> dict[str, str]:
