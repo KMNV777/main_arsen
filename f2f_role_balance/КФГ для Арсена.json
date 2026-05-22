@@ -4,8 +4,8 @@
       "factory": "bio_regeneration",
       "buff": {
         "name": "bullet_mirror_active",
-        "active_frames": 32,
-        "cooldown_frames": 3200
+        "active_frames": 48,
+        "cooldown_frames": 2560
       },
       "debuff": {
         "name": "reload_click_sound",
@@ -16,14 +16,14 @@
       "factory": "chrome_armor",
       "buff": {
         "name": "chrome_armor_buff",
-        "max_health_delta": 25,
-        "immediate_health_delta": 25,
+        "max_health_delta": 40,
+        "immediate_health_delta": 40,
         "ability_name": "armor_pulse_active",
-        "armor_value": 60
+        "armor_value": 100
       },
       "debuff": {
         "name": "chrome_armor_debuff",
-        "velocity_modifier": 1.08
+        "velocity_modifier": 1.2
       }
     },
     {
@@ -34,15 +34,15 @@
       },
       "debuff": {
         "name": "weapon_fire_lock",
-        "lock_frames": 1,
-        "locked_velocity_modifier": 0.5
+        "lock_frames": 3,
+        "locked_velocity_modifier": 0.0
       }
     },
     {
       "factory": "chromo_armor_tank",
       "buff": {
         "name": "extinguish_effect_ability",
-        "cooldown_frames": 1920
+        "cooldown_frames": 1280
       },
       "debuff": {
         "name": "ventilation_implant_weapon_block",
@@ -54,7 +54,7 @@
       "factory": "ventilation_implant",
       "buff": {
         "name": "ventilation_implant_leg_resist",
-        "damage_scale": 0.85,
+        "damage_scale": 0.6,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 0,
@@ -76,7 +76,7 @@
       },
       "debuff": {
         "name": "singular_regen_debuff",
-        "max_health_delta": -5,
+        "max_health_delta": -15,
         "immediate_health_delta": 0
       }
     },
@@ -84,14 +84,14 @@
       "factory": "chrome_armor",
       "buff": {
         "name": "chrome_armor_buff",
-        "max_health_delta": 25,
-        "immediate_health_delta": 25,
+        "max_health_delta": 40,
+        "immediate_health_delta": 40,
         "ability_name": "armor_pulse_active",
-        "armor_value": 60
+        "armor_value": 100
       },
       "debuff": {
         "name": "chrome_armor_debuff",
-        "velocity_modifier": 0.92
+        "velocity_modifier": 0.78
       }
     },
     {
@@ -111,22 +111,22 @@
       "factory": "credit_reader_v1",
       "buff": {
         "name": "teammate_death_max_health",
-        "max_health_delta": 15
+        "max_health_delta": 35
       },
       "debuff": {
         "name": "reload_primary_attack_penalty",
-        "penalty_scale": 1.05
+        "penalty_scale": 1.18
       }
     },
     {
       "factory": "ghost_jacket_gray",
       "buff": {
         "name": "heal_amplify",
-        "bonus_scale": 0.25
+        "bonus_scale": 0.5
       },
       "debuff": {
         "name": "backpedal_velocity_penalty",
-        "velocity_modifier": 0.96
+        "velocity_modifier": 0.82
       }
     }
   ],
@@ -135,12 +135,12 @@
       "factory": "accuracy_zone_v1",
       "buff": {
         "name": "accuracy_zone_v1_trigger",
-        "health_threshold": 15,
-        "velocity_modifier": 1.08
+        "health_threshold": 35,
+        "velocity_modifier": 1.18
       },
       "debuff": {
         "name": "no_jump_after_damage",
-        "lock_frames": 16
+        "lock_frames": 48
       }
     }
   ],
@@ -149,12 +149,12 @@
       "factory": "accuracy_zone_v1",
       "buff": {
         "name": "accuracy_zone_v1_trigger",
-        "health_threshold": 15,
-        "velocity_modifier": 1.08
+        "health_threshold": 35,
+        "velocity_modifier": 1.18
       },
       "debuff": {
         "name": "no_jump_after_damage",
-        "lock_frames": 16
+        "lock_frames": 48
       }
     }
   ],
@@ -163,11 +163,11 @@
       "factory": "bio_patch_hp_v1",
       "buff": {
         "name": "knife_move_armor",
-        "armor_bonus": 10
+        "armor_bonus": 25
       },
       "debuff": {
         "name": "bio_patch_hp_v1_fire_vulnerability",
-        "damage_scale": 1.08,
+        "damage_scale": 1.22,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 8,
@@ -179,22 +179,22 @@
       "factory": "bio_regeneration",
       "buff": {
         "name": "bio_regeneration_knife_speed_bonus",
-        "velocity_modifier": 1.02
+        "velocity_modifier": 1.12
       },
       "debuff": {
         "name": "primary_clip_cap",
-        "max_clip_scale": 0.95
+        "max_clip_scale": 0.75
       }
     },
     {
       "factory": "fast_network_v2",
       "buff": {
         "name": "silent_steps_low_health",
-        "health_threshold": 20
+        "health_threshold": 40
       },
       "debuff": {
         "name": "radar_flicker",
-        "toggle_frames": 32,
+        "toggle_frames": 12,
         "start_hidden": false
       }
     }
@@ -204,11 +204,11 @@
       "factory": "bio_patch_hp_v1",
       "buff": {
         "name": "knife_move_armor",
-        "armor_bonus": 10
+        "armor_bonus": 25
       },
       "debuff": {
         "name": "bio_patch_hp_v1_fire_vulnerability",
-        "damage_scale": 1.08,
+        "damage_scale": 1.22,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 8,
@@ -220,22 +220,22 @@
       "factory": "bio_regeneration",
       "buff": {
         "name": "bio_regeneration_knife_speed_bonus",
-        "velocity_modifier": 1.02
+        "velocity_modifier": 1.12
       },
       "debuff": {
         "name": "primary_clip_cap",
-        "max_clip_scale": 0.95
+        "max_clip_scale": 0.75
       }
     },
     {
       "factory": "fast_network_v2",
       "buff": {
         "name": "silent_steps_low_health",
-        "health_threshold": 20
+        "health_threshold": 40
       },
       "debuff": {
         "name": "radar_flicker",
-        "toggle_frames": 32,
+        "toggle_frames": 12,
         "start_hidden": false
       }
     },
@@ -255,7 +255,7 @@
       "factory": "cyber_limb_accuracy",
       "buff": {
         "name": "ladder_climb_velocity",
-        "velocity_modifier": 1.5
+        "velocity_modifier": 2.0
       },
       "debuff": {
         "name": "global_water_step_sound",
@@ -270,19 +270,19 @@
       },
       "debuff": {
         "name": "long_range_damage_penalty",
-        "distance_range_scale": 0.7,
-        "damage_scale": 0.95
+        "distance_range_scale": 0.55,
+        "damage_scale": 0.88
       }
     },
     {
       "factory": "anti_kinetic_v1",
       "buff": {
         "name": "bomb_plant_body_damage",
-        "damage_scale": 1.05
+        "damage_scale": 1.2
       },
       "debuff": {
         "name": "anti_kinetic_v1_he_vulnerability",
-        "damage_scale": 1.08,
+        "damage_scale": 1.22,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 64,

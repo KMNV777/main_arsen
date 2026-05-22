@@ -7,7 +7,7 @@
       },
       "debuff": {
         "name": "singular_regen_debuff",
-        "max_health_delta": -5,
+        "max_health_delta": -15,
         "immediate_health_delta": 0
       }
     },
@@ -15,14 +15,14 @@
       "factory": "chrome_armor",
       "buff": {
         "name": "chrome_armor_buff",
-        "max_health_delta": 25,
-        "immediate_health_delta": 25,
+        "max_health_delta": 40,
+        "immediate_health_delta": 40,
         "ability_name": "armor_pulse_active",
-        "armor_value": 60
+        "armor_value": 100
       },
       "debuff": {
         "name": "chrome_armor_debuff",
-        "velocity_modifier": 0.92
+        "velocity_modifier": 0.78
       }
     },
     {

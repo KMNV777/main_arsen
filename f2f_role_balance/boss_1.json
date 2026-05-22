@@ -4,8 +4,8 @@
       "factory": "bio_regeneration",
       "buff": {
         "name": "bullet_mirror_active",
-        "active_frames": 32,
-        "cooldown_frames": 3200
+        "active_frames": 48,
+        "cooldown_frames": 2560
       },
       "debuff": {
         "name": "reload_click_sound",
@@ -16,14 +16,14 @@
       "factory": "chrome_armor",
       "buff": {
         "name": "chrome_armor_buff",
-        "max_health_delta": 25,
-        "immediate_health_delta": 25,
+        "max_health_delta": 40,
+        "immediate_health_delta": 40,
         "ability_name": "armor_pulse_active",
-        "armor_value": 60
+        "armor_value": 100
       },
       "debuff": {
         "name": "chrome_armor_debuff",
-        "velocity_modifier": 1.08
+        "velocity_modifier": 1.2
       }
     },
     {
@@ -34,15 +34,15 @@
       },
       "debuff": {
         "name": "weapon_fire_lock",
-        "lock_frames": 1,
-        "locked_velocity_modifier": 0.5
+        "lock_frames": 3,
+        "locked_velocity_modifier": 0.0
       }
     },
     {
       "factory": "chromo_armor_tank",
       "buff": {
         "name": "extinguish_effect_ability",
-        "cooldown_frames": 1920
+        "cooldown_frames": 1280
       },
       "debuff": {
         "name": "ventilation_implant_weapon_block",
@@ -54,7 +54,7 @@
       "factory": "ventilation_implant",
       "buff": {
         "name": "ventilation_implant_leg_resist",
-        "damage_scale": 0.85,
+        "damage_scale": 0.6,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 0,

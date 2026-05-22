@@ -4,22 +4,22 @@
       "factory": "credit_reader_v1",
       "buff": {
         "name": "teammate_death_max_health",
-        "max_health_delta": 15
+        "max_health_delta": 35
       },
       "debuff": {
         "name": "reload_primary_attack_penalty",
-        "penalty_scale": 1.05
+        "penalty_scale": 1.18
       }
     },
     {
       "factory": "ghost_jacket_gray",
       "buff": {
         "name": "heal_amplify",
-        "bonus_scale": 0.25
+        "bonus_scale": 0.5
       },
       "debuff": {
         "name": "backpedal_velocity_penalty",
-        "velocity_modifier": 0.96
+        "velocity_modifier": 0.82
       }
     }
   ]

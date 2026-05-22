@@ -4,11 +4,11 @@
       "factory": "bio_patch_hp_v1",
       "buff": {
         "name": "knife_move_armor",
-        "armor_bonus": 10
+        "armor_bonus": 25
       },
       "debuff": {
         "name": "bio_patch_hp_v1_fire_vulnerability",
-        "damage_scale": 1.08,
+        "damage_scale": 1.22,
         "apply_for_attacker": false,
         "apply_for_victim": true,
         "damage_mask": 8,
@@ -20,22 +20,22 @@
       "factory": "bio_regeneration",
       "buff": {
         "name": "bio_regeneration_knife_speed_bonus",
-        "velocity_modifier": 1.02
+        "velocity_modifier": 1.12
       },
       "debuff": {
         "name": "primary_clip_cap",
-        "max_clip_scale": 0.95
+        "max_clip_scale": 0.75
       }
     },
     {
       "factory": "fast_network_v2",
       "buff": {
         "name": "silent_steps_low_health",
-        "health_threshold": 20
+        "health_threshold": 40
       },
       "debuff": {
         "name": "radar_flicker",
-        "toggle_frames": 32,
+        "toggle_frames": 12,
         "start_hidden": false
       }
     }
