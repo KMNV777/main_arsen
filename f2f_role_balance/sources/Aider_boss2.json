@@ -1,0 +1,40 @@
+{
+  "76561198836236006": [
+    {
+      "factory": "singular_regen",
+      "buff": {
+        "name": "singular_regen_active"
+      },
+      "debuff": {
+        "name": "singular_regen_debuff",
+        "max_health_delta": -5,
+        "immediate_health_delta": 0
+      }
+    },
+    {
+      "factory": "chrome_armor",
+      "buff": {
+        "name": "chrome_armor_buff",
+        "max_health_delta": 25,
+        "immediate_health_delta": 25,
+        "ability_name": "armor_pulse_active",
+        "armor_value": 60
+      },
+      "debuff": {
+        "name": "chrome_armor_debuff",
+        "velocity_modifier": 0.92
+      }
+    },
+    {
+      "factory": "data_hack_slowdown",
+      "buff": {
+        "name": "flash_immunity_after_bomb_plant"
+      },
+      "debuff": {
+        "name": "ventilation_implant_weapon_block",
+        "blocked_definition_a": 2,
+        "blocked_definition_b": 64
+      }
+    }
+  ]
+}

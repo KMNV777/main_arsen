@@ -16,7 +16,20 @@
 python3 merge_dominion_grants.py
 ```
 
-Итог: `dominion_grants_combined.json` (все SteamID в одном объекте).
+Итог: `dominion_grants_combined.json` — все SteamID в одном объекте.
+
+Для **76561198045497938** (Игорь) и **76561198836236006** (Айдер) скрипт выставляет `"role": "boss"`; для остальных — `"mercenary"`.
+
+Формат игрока:
+
+```json
+{
+  "76561198045497938": {
+    "role": "boss",
+    "factories": [ { "factory": "...", "buff": { ... }, "debuff": { ... } } ]
+  }
+}
+```
 
 Указать другой каталог (например, WSL `D:`):
 
