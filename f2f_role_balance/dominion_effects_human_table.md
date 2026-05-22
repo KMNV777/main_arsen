@@ -1,5 +1,7 @@
 # Dominion — баффы и дебаффы (человеческий язык)
 
+> **Одна таблица «имплант — это»:** см. [`dominion_factories_table.md`](dominion_factories_table.md)
+
 Источник: `dominion_grants_combined.json` (7 игроков) + `shared_global.json` (общие эффекты на всех).
 
 | Роль | Игрок | SteamID |
