@@ -16,39 +16,42 @@ flowchart TB
     subgraph L2["L2 · Бизнес-приложения"]
         direction TB
         subgraph Prod["Производство"]
-            ABAI["ИС ABAI abai.kmg.kz"]
+            ABAI["№3 ИС ABAI abai.kmg.kz"]
             ASDC["АСДЦ iis.thkmg.kz"]
             SP["sPoint"]
         end
         subgraph Trans["Транспорт"]
             UTOEMG["ИС УТО ЭМГ"]
-            UTO["ИС УТО"]
-            ARGUS["Argus Pro"]
+            UTO["№13 ИС УТО"]
+            ARGUS["№7 Argus Pro"]
         end
         subgraph Fin["Финансы"]
-            SAP["SAP ERP"]
-            SAS["SAS-FM"]
-            AVR["AVR"]
+            SAP["№18 SAP ERP"]
+            SAS["№9 SAS-FM"]
+            AVR["№17 AVR+SAP"]
+            ONEC["№8 1С"]
         end
         subgraph Proc["Закупки"]
-            Procu["Procu Price"]
+            Procu["№16 Procu Price"]
             SDD["СДД contract.kmg.kz"]
             ISEZ["ИСЭЗ"]
         end
         subgraph Doc["Документы"]
             SAPFIR["САПФИР Directum"]
-            Alfresco["Alfresco"]
+            Directum["№2 Directum"]
+            Alfresco["№14 Alfresco"]
             EA["ЭА Азия-Софт"]
         end
         subgraph HR["Кадры"]
-            UP["Управление персоналом"]
-            EPASS["E-Pass"]
+            UP["№12 Управление персоналом"]
+            EPASS["№6 E-Pass"]
+            ZHYLDYZ["№10 Жулдыз"]
         end
         subgraph HSE["HSE"]
             ISOT["ИСОТ ЭНД hse.kmg.kz"]
         end
         subgraph Geo["ГИС"]
-            KGIS["КГИС"]
+            KGIS["№15 КГИС"]
             BDA["БДА"]
         end
     end
@@ -60,8 +63,8 @@ flowchart TB
         KHD["КХД КМГ"]
     end
 
-    subgraph L4["L4 · OT-контур ЭМГ"]
-        IM["ИМ cmv2 10.32.10.99"]
+    subgraph L4["L4 · OT-контур ЭМГ (№19)"]
+        IM["№19 Интеллектуальное месторождение cmv2 10.32.10.99"]
         OPC["OPC DA UA Modbus"]
         OTDB[("PostgreSQL MySQL")]
         Analytics["Аналитика ЭМГ"]
@@ -78,13 +81,18 @@ flowchart TB
     IM --> OPC --> OTDB
     IM --> Analytics
     UTOEMG --> UTO
+    ARGUS --> UTO
     SAP --> ESB
+    AVR --> SAP
+    ONEC --> SAP
+    SAS --> SAP
     Procu --> ASUNSI
     SAPFIR --> KHD
     SAP <--> ESB
-    SAPFIR --> AD
+    SAPFIR & Directum --> AD
     ABAI --> AD
     FUDOPAM --> AD
+    EPASS & ZHYLDYZ & KGIS & Alfresco & Procu --> AD
     Exchange --> DLP
 
     classDef emg fill:#d4edda,stroke:#155724
