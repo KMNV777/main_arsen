@@ -7,3 +7,6 @@ fi
 
 pip install playwright --quiet
 playwright install chromium
+
+npm install
+npx playwright install
