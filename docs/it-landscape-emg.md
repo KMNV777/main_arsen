@@ -17,6 +17,7 @@
 | **Все SVG** | [`svg/README.md`](svg/README.md) — полный набор схем из architecture-emg-integrations |
 | **PNG** | [`it-landscape-emg-general.png`](it-landscape-emg-general.png) — предпросмотр |
 | **Реестр 19 ИС** | [`it-landscape-emg-registry.md`](it-landscape-emg-registry.md) — таблица интеграций |
+| **Справочник систем и компонентов** | [`it-landscape-emg-components-catalog.md`](it-landscape-emg-components-catalog.md) — описание каждой ИС и блоков схемы |
 | **Потоки ABAI/ИМ** | [`architecture-emg-integrations.md`](architecture-emg-integrations.md) |
 
 ![Общий ИТ-ландшафт ЭМГ](it-landscape-emg-general.png)

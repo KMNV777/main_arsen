@@ -9,7 +9,7 @@
 | **Программа ИТ КМГ 2025–2028**, § 7.6.1.3 | Карта автоматизации ЭМГ (контекст) |
 | **Схемы-изображения** (PDF) | Визуальные карты автоматизации (см. раздел 6) |
 
-> **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) · **draw.io:** [`drawio/it-landscape-emg-general.drawio`](drawio/it-landscape-emg-general.drawio)
+> **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) · **draw.io:** [`drawio/it-landscape-emg-general.drawio`](drawio/it-landscape-emg-general.drawio) · **Справочник систем и компонентов:** [`it-landscape-emg-components-catalog.md`](it-landscape-emg-components-catalog.md)
 
 ## Все схемы: draw.io (редактируемые) и SVG
 
@@ -441,6 +441,7 @@ flowchart TB
 | Как ABAI собирает телеметрию? | **3**, **5** |
 | Как SAP связан с транспортом и НСИ? | **4** |
 | Общий ИТ-ландшафт по слоям? | **[`it-landscape-emg.md`](it-landscape-emg.md)** · [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
+| Где описание каждой системы и каждого компонента? | **[`it-landscape-emg-components-catalog.md`](it-landscape-emg-components-catalog.md)** |
 | Все схемы в SVG? | **[`svg/README.md`](svg/README.md)** |
 | Полная картина «организация + потоки»? | **0**, **1** |
 
