@@ -76,7 +76,7 @@ flowchart TB
     EMG --> D3 & D19
     D3 --> D19
     D19 --> OPC & MB & DB --> SVC
-    D2 & D5 & D6 & D10 & D14 & D15 & D16 --> AD
+    D2 & D4 & D5 & D6 & D10 & D14 & D15 & D16 --> AD
     D4 --> EX & FP
     D9 & D8 & D12 & D13 & D17 --> SAP
     D11 --> KHD
@@ -93,7 +93,7 @@ flowchart TB
 |---|---------|------------------|
 | 2 | Directum | СЭД, документооборот → AD |
 | 3 | ИС ABAI | Производство, abai.kmg.kz → ИМ |
-| 4 | Solar Dozor | DLP ← Exchange, Forcepoint |
+| 4 | Solar Dozor | DLP ← Exchange/Forcepoint, LDAP → AD |
 | 5 | FUDOPAM | PAM → AD |
 | 6 | E-Pass | Пропуска → AD |
 | 7 | Argus Pro | GPS-мониторинг → ИС УТО |
@@ -101,7 +101,7 @@ flowchart TB
 | 9 | SAS-FM | Фин. планирование → SAP |
 | 10 | Жулдыз | Мониторинг месторождения → AD |
 | 11 | sPoint | Наряды-допуски → КХД |
-| 12 | Управление персоналом | Кадры, табельные данные и кадровые сервисы ↔ SAP / корпоративный портал |
+| 12 | Управление персоналом | Кадры, табельные данные и кадровые сервисы ↔ SAP / корпоративный портал, CMIS ↔ архив |
 | 13 | ИС УТО | Транспорт ↔ SAP, GPS-данные от Argus |
 | 14 | Alfresco | ECM → AD |
 | 15 | КГИС | ГИС → AD |
