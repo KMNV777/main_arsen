@@ -142,7 +142,8 @@ flowchart TB
     end
 
     subgraph Ops["Операционные системы ЭМГ / КМГ"]
-        ABAI["ИС ABAI / ИМ<br/>abai.kmg.kz · 10.32.10.99"]
+        ABAI["ИС ABAI №3<br/>abai.kmg.kz"]
+        IMSYS["Интеллектуальное месторождение №19<br/>10.32.10.99"]
         UTOEMG["ИС «УТО ЭМГ»"]
         ASDC["АСДЦ<br/>iis.thkmg.kz"]
         ISUTO["ИС «УТО»"]
@@ -174,15 +175,20 @@ flowchart TB
     FW --> DLP
 
     SAP <-->|SAP PO / XML| ASUNSI
-    SAP <-->|RFC / CSV| SAS
-    SAP <-->|XML| ISUTO & SCADA & AVR & EA & Platts
-    SAP <-->|SOAP| UP
-    SAP <-->|CSV| ZUP & FC & BV & NB & ISEF["ИС ЭСФ"]
-    UP <-->|DB functions| UP
-    EA <-->|CMIS| EA
+    SAP -->|RFC / CSV| SAS
+    SAP <-->|XML| ISUTO & AVR & EA & Platts
+    SAP -->|XML| SCADA
+    SAP -->|CSV| ZUP & FC & UP
+    SAP <-->|MT940/103| BV
+    NB -->|XML| SAP
+    SAP <-->|XML| ISEF["ИС ЭСФ"]
+    UP <-->|DB function result set| Team
+    UP <-->|CMIS XML| EA
     Alfresco --> AD
     Directum --> AD
-    Procu --> ASUNSI & ISEZ & AD
+    Procu --> ASUNSI & AD
+    Procu <-->|API JSON| ISEZ
+    ABAI --> IMSYS
     UTOEMG --> ISUTO
     ISUTO <-->|SOAP XML| SAP
     ARGUS -->|REST JSON| ISUTO
@@ -192,7 +198,7 @@ flowchart TB
     ASDC -.-> ABAI
     ISOT & Team & Intranet & Compliance & SDD --> AD
 
-    ABAI -.->|см. раздел 3| Ops
+    IMSYS -.->|см. раздел 3| Ops
 ```
 
 **Роль Active Directory:** единый источник учётных записей (логин, UPN, ФИО, e-mail) для Directum, Alfresco, КГИС, DLP, FUDOPAM, E-Pass, Жулдыз, Procu — односторонний LDAP, online, автоматически.

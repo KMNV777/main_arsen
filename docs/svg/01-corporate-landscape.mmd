@@ -32,7 +32,8 @@ flowchart TB
     end
 
     subgraph Ops["Операционные ЭМГ"]
-        ABAI["ИС ABAI ИМ"]
+        ABAI["ИС ABAI №3"]
+        IM["Интеллектуальное месторождение №19"]
         UTOEMG["ИС УТО ЭМГ"]
         ASDC["АСДЦ"]
         ISUTO["ИС УТО"]
@@ -55,6 +56,7 @@ flowchart TB
     end
 
     subgraph NSI["НСИ закупки"]
+        Procu["Procu №16"]
         ASUNSI["АСУНСИ"]
         ISEZ["ИСЭЗ"]
         KHD["КХД КМГ"]
@@ -73,20 +75,23 @@ flowchart TB
     Exchange --> DLP
     FW --> DLP
     SAP <--> ASUNSI
-    SAP <--> SAS
+    SAP --> SAS
     SAP <--> ISUTO
-    SAP <--> SCADA
+    SAP --> SCADA
     SAP <--> AVR
     SAP <--> EA
     SAP <--> Platts
     SAP <--> UP
-    SAP <--> ZUP
-    SAP <--> FC
+    SAP --> ZUP
+    SAP --> FC
     SAP <--> BV
-    SAP <--> NB
+    NB --> SAP
     SAP <--> ISEF
+    UP <--> Team
+    UP <--> EA
+    ABAI --> IM
     Procu --> ASUNSI
-    Procu --> ISEZ
+    Procu <--> ISEZ
     UTOEMG --> ISUTO
     ISUTO <--> SAP
     ARGUS --> ISUTO
