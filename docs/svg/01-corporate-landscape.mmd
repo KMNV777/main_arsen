@@ -1,0 +1,98 @@
+flowchart TB
+    subgraph Identity["Идентификация"]
+        AD["Active Directory LDAP"]
+    end
+
+    subgraph Security["ИБ"]
+        DLP["Solar Dozor DLP"]
+        FW["Forcepoint"]
+        FUDOPAM["FUDOPAM PAM"]
+        Exchange["Exchange"]
+    end
+
+    subgraph Docs["Документы"]
+        Directum["Directum СЭД"]
+        Alfresco["Alfresco ECM"]
+        EA["ЭА Азия-Софт"]
+    end
+
+    subgraph Finance["Финансы"]
+        SAP["SAP ERP"]
+        SAS["SAS-FM"]
+        FC["FC консолидация"]
+        NB["Нацбанк"]
+        BV["БВУ MT940"]
+        Platts["Platts.com"]
+    end
+
+    subgraph HR["Кадры"]
+        UP["Управление персоналом"]
+        ZUP["1С зарплата"]
+        EPASS["E-Pass"]
+    end
+
+    subgraph Ops["Операционные ЭМГ"]
+        ABAI["ИС ABAI ИМ"]
+        UTOEMG["ИС УТО ЭМГ"]
+        ASDC["АСДЦ"]
+        ISUTO["ИС УТО"]
+        ARGUS["Argus Pro"]
+        SP["sPoint"]
+        SAPFIR["САПФИР"]
+        ISOT["ИСОТ ЭНД"]
+        BDA["БДА"]
+        AVR["AVR"]
+        KGIS["КГИС"]
+        Zhyldyz["Жулдыз"]
+    end
+
+    subgraph CorpPortal["Порталы КМГ"]
+        Team["Team"]
+        Intranet["Интранет"]
+        ISUP["ИСУП"]
+        Compliance["Compliance"]
+        SDD["СДД"]
+    end
+
+    subgraph NSI["НСИ закупки"]
+        ASUNSI["АСУНСИ"]
+        ISEZ["ИСЭЗ"]
+        KHD["КХД КМГ"]
+        SCADA["SCADA"]
+        ISEF["ИС ЭСФ"]
+    end
+
+    AD --> Directum
+    AD --> Alfresco
+    AD --> KGIS
+    AD --> DLP
+    AD --> FUDOPAM
+    AD --> EPASS
+    AD --> Zhyldyz
+    AD --> Procu
+    Exchange --> DLP
+    FW --> DLP
+    SAP <--> ASUNSI
+    SAP <--> SAS
+    SAP <--> ISUTO
+    SAP <--> SCADA
+    SAP <--> AVR
+    SAP <--> EA
+    SAP <--> Platts
+    SAP <--> UP
+    SAP <--> ZUP
+    SAP <--> FC
+    SAP <--> BV
+    SAP <--> NB
+    SAP <--> ISEF
+    Procu --> ASUNSI
+    Procu --> ISEZ
+    UTOEMG --> ISUTO
+    ISUTO <--> SAP
+    ARGUS --> ISUTO
+    SP --> KHD
+    SAPFIR --> KHD
+    AVR <--> SAP
+    ASDC -.-> ABAI
+    ISOT --> AD
+    Team --> AD

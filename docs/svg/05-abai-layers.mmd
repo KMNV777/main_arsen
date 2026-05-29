@@ -1,0 +1,42 @@
+flowchart TB
+    subgraph L1["L1 Промышленные системы"]
+        ISUN["ИСУН"]
+        ASUTP["АСУТП ТМ"]
+        KOAP["Промысел КОА"]
+        SDMO_P["АСУ ЧРП SDMO"]
+        SIKn["СИКН Floboss"]
+    end
+
+    subgraph L2["L2 Шлюзы протоколы"]
+        Kepware["Kepware OPC DA"]
+        OPCUA["OPC UA"]
+        ModbusGW["Modbus TCP"]
+        WinCC["WinCC HDA"]
+    end
+
+    subgraph L3["L3 Интеграционный слой ИМ"]
+        ETL["Cron Python ETL"]
+        API_OUT["REST клиенты"]
+        Notify["SMTP Celery Signals"]
+    end
+
+    subgraph L4["L4 Корпоративные сервисы"]
+        BI["Аналитика :8099"]
+        PKTS["packet_service :8951"]
+        ASR["Speech :8777"]
+        Mail["Корп. почта"]
+    end
+
+    ISUN --> Kepware --> ETL
+    ASUTP --> OPCUA --> ETL
+    KOAP --> WinCC --> ETL
+    KOAP --> ModbusGW --> ETL
+    SDMO_P --> ETL
+    SIKn --> ETL
+
+    ETL --> API_OUT
+    API_OUT --> BI
+    API_OUT --> PKTS
+    ETL --> Notify
+    Notify --> Mail
+    ETL --> ASR

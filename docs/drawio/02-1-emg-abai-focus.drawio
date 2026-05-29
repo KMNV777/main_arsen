@@ -1,0 +1,64 @@
+<mxfile host="Drawpyo" modified="2026-05-21T16:32:43" agent="Python 3.12, Drawpyo 0.23" version="21.6.5" type="device">
+  <diagram name="02-1-emg-abai-focus" id="140660500739136">
+    <mxGraphModel dx="2037" dy="830" grid="1" gridSize="10" guides="1" toolTips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="140660500738944" value="ИС ABAI + ИМ" style="whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="40" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660500737360" value="ИС УТО ЭМГ" style="whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="240" y="40" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390224" value="АСДЦ" style="whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="440" y="40" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390176" value="ИСОТ ЭНД" style="whiteSpace=wrap;rounded=1;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="640" y="40" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390464" value="САПФИР" style="whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="130" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390608" value="Procu" style="whiteSpace=wrap;rounded=1;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="240" y="130" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390800" value="SAP ERP" style="whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="440" y="130" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493390944" value="Active Directory" style="whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="640" y="130" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391088" value="Аналитика ЭМГ" style="whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="40" y="220" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391232" value="ИС УТО" style="whiteSpace=wrap;rounded=1;dashed=0;" vertex="1" parent="1">
+  <mxGeometry x="240" y="220" width="180" height="56" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391376" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660500738944" target="140660493391088">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391328" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660500738944" target="140660493390176">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391520" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;dashed=1;dashPattern=8 8;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660493390224" target="140660493391088">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391664" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660500737360" target="140660493391232">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391808" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660493391232" target="140660493390800">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493391952" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660493390608" target="140660493390800">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493392096" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660493390464" target="140660493390944">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+        <mxCell id="140660493392240" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;dashed=1;dashPattern=8 8;rounded=0;jettySize=auto;" edge="1" parent="1" source="140660500738944" target="140660493390464">
+  <mxGeometry relative="1" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
