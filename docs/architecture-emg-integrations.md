@@ -13,16 +13,16 @@
 
 ## Все схемы: draw.io (редактируемые) и SVG
 
-| § | draw.io | SVG |
-|---|---------|-----|
-| 0 | [`drawio/00-summary-architecture.drawio`](drawio/00-summary-architecture.drawio) | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) |
-| 1 | [`drawio/01-corporate-landscape.drawio`](drawio/01-corporate-landscape.drawio) | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) |
-| 2.1 | [`drawio/02-1-emg-abai-focus.drawio`](drawio/02-1-emg-abai-focus.drawio) | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) |
-| 3 | [`drawio/03-abai-im-architecture.drawio`](drawio/03-abai-im-architecture.drawio) | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) |
-| 4 | [`drawio/04-sap-erp-integrations.drawio`](drawio/04-sap-erp-integrations.drawio) | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) |
-| 5 | [`drawio/05-abai-layers.drawio`](drawio/05-abai-layers.drawio) | [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg) |
-| ландшафт | [`drawio/06-it-landscape-general.drawio`](drawio/06-it-landscape-general.drawio) | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
-| ландшафт (детально) | [`drawio/07-it-landscape-mermaid-detailed.drawio`](drawio/07-it-landscape-mermaid-detailed.drawio) | [`svg/07-it-landscape-mermaid-detailed.svg`](svg/07-it-landscape-mermaid-detailed.svg) |
+| § | draw.io | SVG | Что показывает | Как объяснить бизнес-заказчику |
+|---|---------|-----|----------------|---------------------------------|
+| 0 | [`drawio/00-summary-architecture.drawio`](drawio/00-summary-architecture.drawio) | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) | Общая картина: оргконтур КМГ + ключевые ИС + интеграции | «Это карта верхнего уровня: где находится ЭМГ в группе КМГ и через какие системы проходят основные процессы». |
+| 1 | [`drawio/01-corporate-landscape.drawio`](drawio/01-corporate-landscape.drawio) | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) | Корпоративные домены: финансы, кадры, документооборот, безопасность, производственный контур | «Показывает, какие бизнес-функции закрыты системами и где есть межфункциональные зависимости». |
+| 2.1 | [`drawio/02-1-emg-abai-focus.drawio`](drawio/02-1-emg-abai-focus.drawio) | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) | Фокус на ЭМГ: связи ABAI с ключевыми смежными системами | «Показывает, какие критичные сервисы ЭМГ зависят от ABAI и что будет затронуто при изменениях». |
+| 3 | [`drawio/03-abai-im-architecture.drawio`](drawio/03-abai-im-architecture.drawio) | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) | Детальная архитектура ИМ/ABAI: сбор телеметрии, обработка и выдача аналитики | «Это схема производственных данных: от датчиков и источников до управленческой аналитики». |
+| 4 | [`drawio/04-sap-erp-integrations.drawio`](drawio/04-sap-erp-integrations.drawio) | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) | SAP ERP как интеграционный хаб предприятия | «Показывает, как финансы, закупки, кадры и внешние контрагенты синхронизируются через SAP». |
+| 5 | [`drawio/05-abai-layers.drawio`](drawio/05-abai-layers.drawio) | [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg) | Логические слои L1-L4: от промысловых систем до корпоративных сервисов | «Объясняет уровни ответственности: где источник данных, где интеграция, где бизнес-потребление». |
+| ландшафт | [`drawio/06-it-landscape-general.drawio`](drawio/06-it-landscape-general.drawio) | [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) | Единый ИТ-ландшафт ЭМГ по слоям L0-L5 | «Базовая карта для руководства: какие системы критичны и как они связаны между собой». |
+| ландшафт (детально) | [`drawio/07-it-landscape-mermaid-detailed.drawio`](drawio/07-it-landscape-mermaid-detailed.drawio) | [`svg/07-it-landscape-mermaid-detailed.svg`](svg/07-it-landscape-mermaid-detailed.svg) | Расширенная версия ландшафта с большей детализацией связей | «Используется, когда нужно разложить верхнеуровневую картину на конкретные интеграционные потоки». |
 
 - **draw.io** — открыть в [diagrams.net](https://app.diagrams.net), править блоки и связи. Каталог: [`drawio/README.md`](drawio/README.md)
 - **SVG** — вставка в Word, PowerPoint, Figma. Каталог: [`svg/README.md`](svg/README.md)
