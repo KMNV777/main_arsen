@@ -19,11 +19,11 @@
 ## Пересборка из Mermaid
 
 ```bash
-pip install drawpyo
+pip install -r requirements.txt
 python3 scripts/mmd_to_drawio.py
 ```
 
-Исходники: `docs/svg/*.mmd`, `docs/it-landscape-emg.mmd`. Слойный ландшафт L0–L5 генерируется отдельно в скрипте (`build_it_landscape_drawio`).
+Исходники: `docs/svg/*.mmd`, `docs/it-landscape-emg.mmd`. Слойный ландшафт L0–L5 генерируется отдельно в скрипте (`build_it_landscape_drawio`) и включает подписанные связи из реестра интеграций.
 
 ## Редактирование
 

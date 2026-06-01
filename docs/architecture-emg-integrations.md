@@ -78,7 +78,10 @@ flowchart TB
     end
 
     KC & EMG & KMGI -.-> CorpIS
-    EMG --> CoreEMG
+    EMG --> ABAI
+    EMG --> IM
+    EMG --> ASDC
+    EMG --> UTOEMG
     ABAI --> IM
     IM --> OPC & PG
     IM --> Analytics

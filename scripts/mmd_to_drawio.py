@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from drawpyo import File, Page
 from drawpyo.diagram.edges import Edge
@@ -37,14 +37,76 @@ CONTAINER_STYLE = (
 )
 
 
-def parse_mermaid(text: str) -> Tuple[List[dict], Dict[str, str], List[Tuple[str, str, str]], str]:
+EdgeSpec = Tuple[str, str, str, str]
+
+EDGE_PATTERN = re.compile(r"\s*(<-->|-->|-\.->)\s*(?:\|([^|]*)\|\s*)?")
+INLINE_NODE_PATTERNS = (
+    re.compile(r'(\w+)\s*\[\("([^"]+)"\)\]'),
+    re.compile(r'(\w+)\s*\["([^"]+)"\]'),
+)
+
+
+def clean_label(label: str) -> str:
+    return label.replace("<br/>", "\n").replace("<br>", "\n").strip()
+
+
+def extract_inline_nodes(line: str, nodes: Dict[str, str]) -> Tuple[str, List[str]]:
+    declared: List[str] = []
+
+    def remember(match: re.Match) -> str:
+        nid, label = match.group(1), clean_label(match.group(2))
+        nodes[nid] = label
+        declared.append(nid)
+        return nid
+
+    for pattern in INLINE_NODE_PATTERNS:
+        line = pattern.sub(remember, line)
+    return line, declared
+
+
+def endpoint_ids(expr: str) -> List[str]:
+    ids: List[str] = []
+    for part in expr.split("&"):
+        part = part.strip()
+        if re.fullmatch(r"[A-Za-z_]\w*", part):
+            ids.append(part)
+        else:
+            ids.extend(re.findall(r"[A-Za-z_]\w*", part))
+    return ids
+
+
+def parse_edge_line(line: str) -> List[EdgeSpec]:
+    parts: List[str] = []
+    arrows: List[Tuple[str, str]] = []
+    pos = 0
+
+    for match in EDGE_PATTERN.finditer(line):
+        parts.append(line[pos : match.start()].strip())
+        arrows.append((match.group(1), clean_label(match.group(2) or "")))
+        pos = match.end()
+    if not arrows:
+        return []
+
+    parts.append(line[pos:].strip())
+    if len(parts) != len(arrows) + 1:
+        return []
+
+    edges: List[EdgeSpec] = []
+    for index, (kind, label) in enumerate(arrows):
+        for src in endpoint_ids(parts[index]):
+            for tgt in endpoint_ids(parts[index + 1]):
+                if src != tgt:
+                    edges.append((src, tgt, kind, label))
+    return edges
+
+
+def parse_mermaid(text: str) -> Tuple[List[dict], Dict[str, str], List[EdgeSpec], str]:
     """Return subgraphs, nodes{id:label}, edges, direction."""
     direction = "TB"
     subgraphs: List[dict] = []
     nodes: Dict[str, str] = {}
-    edges: List[Tuple[str, str, str]] = []
-    current_sg: Optional[str] = None
-    node_to_sg: Dict[str, str] = {}
+    edges: List[EdgeSpec] = []
+    sg_stack: List[str] = []
 
     for raw in text.splitlines():
         line = raw.strip()
@@ -58,53 +120,42 @@ def parse_mermaid(text: str) -> Tuple[List[dict], Dict[str, str], List[Tuple[str
 
         m = re.match(r'subgraph\s+(\w+)\s*\["([^"]+)"\]', line)
         if m:
-            current_sg = m.group(1)
-            subgraphs.append({"id": m.group(1), "label": m.group(2), "nodes": []})
+            parent = sg_stack[-1] if sg_stack else None
+            sg_stack.append(m.group(1))
+            subgraphs.append({"id": m.group(1), "label": m.group(2), "parent": parent, "nodes": []})
             continue
         if re.match(r"direction\s+(TB|LR|BT|RL)", line, re.I):
             continue
         if line == "end":
-            current_sg = None
+            if sg_stack:
+                sg_stack.pop()
             continue
 
-        m = re.match(r'(\w+)\s*\[\("([^"]+)"\)\]', line)
-        if m:
-            nid, label = m.group(1), m.group(2)
-            nodes[nid] = label
-            if current_sg:
-                node_to_sg[nid] = current_sg
-                subgraphs[-1]["nodes"].append(nid)
+        line, declared_nodes = extract_inline_nodes(line, nodes)
+        if declared_nodes and sg_stack:
+            current_sg = next(sg for sg in reversed(subgraphs) if sg["id"] == sg_stack[-1])
+            for nid in declared_nodes:
+                if nid not in current_sg["nodes"]:
+                    current_sg["nodes"].append(nid)
+        if declared_nodes and re.fullmatch(r"[A-Za-z_]\w*", line):
             continue
 
-        m = re.match(r'(\w+)\s*\["([^"]+)"\]', line)
-        if m:
-            nid, label = m.group(1), m.group(2).replace("<br/>", "\n").replace("<br>", "\n")
-            nodes[nid] = label
-            if current_sg:
-                node_to_sg[nid] = current_sg
-                subgraphs[-1]["nodes"].append(nid)
-            continue
-
-        m = re.match(
-            r'(\w+)\s*(-->|<-->|-\.->)\s*(?:\|"?([^"|]+)"?\|\s*)?(\w+)',
-            line,
-        )
-        if m:
-            edges.append((m.group(1), m.group(4), m.group(2)))
+        parsed_edges = parse_edge_line(line)
+        if parsed_edges:
+            edges.extend(parsed_edges)
             continue
 
         m = re.match(r"(\w+)\s*&\s*(\w+)", line)
         if m and "-->" not in line and "<-->" not in line:
             continue
 
-    # nodes only in edges
-    for a, b, _ in edges:
+    subgraph_ids = {sg["id"] for sg in subgraphs}
+    for a, b, _, _ in edges:
         for nid in (a, b):
-            if nid not in nodes:
+            if nid not in nodes and nid not in subgraph_ids:
                 nodes[nid] = nid
 
     return subgraphs, nodes, edges, direction
-
 
 def node_category(nid: str, label: str) -> str:
     key = (nid + " " + label).upper()
@@ -123,7 +174,7 @@ def build_diagram(
     title: str,
     subgraphs: List[dict],
     nodes: Dict[str, str],
-    edges: List[Tuple[str, str, str]],
+    edges: List[EdgeSpec],
     direction: str,
     page_w: int = 2400,
     page_h: int = 1800,
@@ -141,8 +192,10 @@ def build_diagram(
 
     y_cursor = margin_y
 
-    if subgraphs:
-        for sg in subgraphs:
+    visible_subgraphs = [sg for sg in subgraphs if sg["nodes"]]
+
+    if visible_subgraphs:
+        for sg in visible_subgraphs:
             sg_nodes = [n for n in sg["nodes"] if n in nodes]
             if not sg_nodes:
                 sg_nodes = []
@@ -158,6 +211,7 @@ def build_diagram(
             )
             page.add_object(container)
             containers[sg["id"]] = container
+            obj_map[sg["id"]] = container
 
             for i, nid in enumerate(sg_nodes):
                 col = i % cols
@@ -182,9 +236,10 @@ def build_diagram(
             y_cursor += box_h + 30
 
         placed = set()
-        for sg in subgraphs:
+        for sg in visible_subgraphs:
             placed.update(sg["nodes"])
-        orphan = [n for n in nodes if n not in placed]
+        subgraph_ids = {sg["id"] for sg in subgraphs}
+        orphan = [n for n in nodes if n not in placed and n not in subgraph_ids]
         if orphan:
             rows = max(1, (len(orphan) + cols - 1) // cols)
             box_h = 40 + rows * row_h + 20
@@ -241,7 +296,7 @@ def build_diagram(
                 page.add_object(obj)
                 obj_map[nid] = obj
 
-    for src, tgt, kind in edges:
+    for src, tgt, kind, label in edges:
         if src not in obj_map or tgt not in obj_map:
             continue
         pattern = "dashed_medium" if kind == "-.->" else "solid"
@@ -250,6 +305,7 @@ def build_diagram(
             target=obj_map[tgt],
             page=page,
             pattern=pattern,
+            label=label,
         )
         if kind == "<-->":
             edge = Edge(
@@ -257,6 +313,7 @@ def build_diagram(
                 target=obj_map[src],
                 page=page,
                 pattern=pattern,
+                label=label,
             )
             page.add_object(edge)
         page.add_object(edge)
@@ -268,6 +325,7 @@ def build_it_landscape_drawio() -> File:
     """Layered IT landscape (matches 06-it-landscape-general.svg)."""
     f = File(file_name="06-it-landscape-general.drawio", file_path=str(OUT_DIR))
     page = Page(file=f, name="ИТ-ландшафт ЭМГ", width=1520, height=1280)
+    obj_map: Dict[str, Object] = {}
 
     layers = [
         ("L0 · Организация", 108, ["КЦ КМГ", "АО «Эмбамунайгаз»", "КМГИ"], "#f5f5f5", None),
@@ -342,6 +400,7 @@ def build_it_landscape_drawio() -> File:
                         strokeColor=sty.get("strokeColor", "#666666"),
                     )
                     page.add_object(o)
+                    obj_map[it] = o
                 dx += dw + 8
         else:
             nx = 40
@@ -349,6 +408,10 @@ def build_it_landscape_drawio() -> File:
                 cat = "emg" if "Эмбамунайгаз" in it or it == "ИС ABAI" else "default"
                 if "SAP" in it or "Directory" in it or "Шина" in it:
                     cat = "hub"
+                if any(sec in it for sec in ("Solar", "FUDOPAM", "Forcepoint", "Exchange")):
+                    cat = "sec"
+                if any(ot in it for ot in ("OPC", "PostgreSQL", "Аналитика", "ИСУН")):
+                    cat = "ot"
                 sty = NODE_STYLES.get(cat, {})
                 o = Object(
                     value=it,
@@ -361,9 +424,54 @@ def build_it_landscape_drawio() -> File:
                     strokeColor=sty.get("strokeColor"),
                 )
                 page.add_object(o)
+                obj_map[it] = o
                 nx += 180
 
         y += height + 16
+
+    def add_edge(src: str, tgt: str, label: str = "", kind: str = "-->") -> None:
+        if src not in obj_map or tgt not in obj_map:
+            return
+        pattern = "dashed_medium" if kind == "-.->" else "solid"
+        edge = Edge(source=obj_map[src], target=obj_map[tgt], page=page, pattern=pattern, label=label)
+        page.add_object(edge)
+        if kind == "<-->":
+            reverse = Edge(source=obj_map[tgt], target=obj_map[src], page=page, pattern=pattern, label=label)
+            page.add_object(reverse)
+
+    landscape_edges = [
+        ("АО «Эмбамунайгаз»", "№3 ИС ABAI", "цифровой контур", "-->"),
+        ("АО «Эмбамунайгаз»", "№19 ИМ", "промыслы", "-->"),
+        ("№3 ИС ABAI", "№19 ИМ", "SQL", "-->"),
+        ("№19 ИМ", "№19 ИМ cmv2", "OT-хаб", "-->"),
+        ("№19 ИМ cmv2", "OPC DA/UA · Modbus", "OPC/Modbus", "-->"),
+        ("№19 ИМ cmv2", "PostgreSQL/MySQL", "SQL", "-->"),
+        ("№19 ИМ cmv2", "Аналитика ЭМГ", "API", "-->"),
+        ("№19 ИМ cmv2", "ИСУН · АСУТП · КОА", "polling", "-->"),
+        ("ИС УТО ЭМГ", "№13 ИС УТО", "операции", "-->"),
+        ("№7 Argus Pro", "№13 ИС УТО", "REST", "-->"),
+        ("№13 ИС УТО", "№18 SAP ERP", "SOAP XML", "<-->"),
+        ("№18 SAP ERP", "Шина интеграций", "SAP PO/API", "<-->"),
+        ("№18 SAP ERP", "АСУНСИ", "НСИ", "<-->"),
+        ("№9 SAS-FM", "№18 SAP ERP", "RFC/CSV", "-->"),
+        ("№8 1С", "№18 SAP ERP", "CSV", "-->"),
+        ("№17 AVR+SAP", "№18 SAP ERP", "API XML", "<-->"),
+        ("FC · БВУ", "№18 SAP ERP", "MT940/API", "-->"),
+        ("Procu/Price", "АСУНСИ", "API JSON", "<-->"),
+        ("Procu/Price", "ИСЭЗ", "закупки", "-->"),
+        ("sPoint", "КХД КМГ", "API JSON", "-->"),
+        ("№2 Directum", "Active Directory", "LDAP", "-->"),
+        ("№14 Alfresco", "Active Directory", "LDAP", "-->"),
+        ("№6 E-Pass", "Active Directory", "LDAP", "-->"),
+        ("№10 Жулдыз", "Active Directory", "LDAP", "-->"),
+        ("№15 КГИС", "Active Directory", "LDAP", "-->"),
+        ("Procu/Price", "Active Directory", "LDAP", "-->"),
+        ("FUDOPAM", "Active Directory", "LDAP", "-->"),
+        ("Exchange", "Solar Dozor", "BCC", "-->"),
+        ("Forcepoint", "Solar Dozor", "ICAP", "-->"),
+    ]
+    for src, tgt, label, kind in landscape_edges:
+        add_edge(src, tgt, label, kind)
 
     return f
 

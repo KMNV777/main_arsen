@@ -39,7 +39,11 @@ flowchart TB
         Analytics["Аналитика ЭМГ"]
     end
 
-    EMG --> CoreEMG
+    KC & EMG & KMGI -.-> CorpIS
+    EMG --> ABAI
+    EMG --> IM
+    EMG --> ASDC
+    EMG --> UTOEMG
     ABAI --> IM
     IM --> OPC
     IM --> PG
