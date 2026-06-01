@@ -1,0 +1,139 @@
+%%{init: {"theme":"neutral","flowchart":{"curve":"stepBefore","nodeSpacing":70,"rankSpacing":80}}}%%
+flowchart LR
+    %% ===== КОНТУРЫ =====
+    subgraph KSPD["КСПД (корпоративная сеть передачи данных)"]
+        direction LR
+        RT["Маршрутизатор"]
+        CG["Криптошлюз"]
+        ABAI["ABAI"]
+        NDT["Nedra Digital Twin"]
+        AUTH["Сервер аутентификации пользователей"]
+    end
+
+    subgraph DZO1["ДЗО №1 (с локальным MES)"]
+        direction LR
+        OPC1["OPC Server"]
+        ASUTP1["АСУТП сервер"]
+        COL1["Коллектор данных"]
+        FW1["МСЭ"]
+        MES1["MES система ДЗО"]
+    end
+
+    subgraph DZO2["ДЗО №2 (без локального MES)"]
+        direction LR
+        OPC2["OPC Server"]
+        ASUTP2["АСУТП сервер"]
+        COL2["Коллектор данных"]
+        FW2["МСЭ"]
+    end
+
+    subgraph CAAS["CaaS@DigitalTwin"]
+        direction TB
+
+        subgraph UI["Пользовательский доступ"]
+            direction LR
+            FRONT["Frontend (Angular)"]
+            DB["Database (PostgreSQL)"]
+            KEY["Keycloak"]
+            NGINX["Nginx"]
+        end
+
+        subgraph RUNTIME["CaaS@RuntimeService"]
+            direction TB
+            CFG["ConfigManager"]
+            RES["ResourceService"]
+            LOGON["LogonService"]
+            SCR["Script"]
+            VCON["VTSConsole"]
+            VDATA["VTSDataService"]
+            DPROC["DataProcessor"]
+            DIAG["Diagnostics"]
+        end
+
+        subgraph VTS["CaaS@VTSServer"]
+            direction LR
+            VLIB["VtsLibraryService"]
+            VPROJ["VTSProjectService"]
+            DEV["Developer"]
+        end
+
+        subgraph BIZ["CaaS@BusinessService"]
+            direction TB
+            FCC["FCCServer"]
+            WEB["WebConnector"]
+            VLOG["VTSLogbookService"]
+            VNOTIF["VTSNotificationService"]
+            RABBIT["RabbitMQ"]
+        end
+
+        DAL["Data Access Layer"]
+        IBUS["Integration Bus"]
+        S3["S3 хранилище"]
+        EXTDB["External Database"]
+    end
+
+    subgraph EXT["Сторонние системы"]
+        ES["External systems"]
+    end
+
+    %% ===== КЛЮЧЕВЫЕ СВЯЗИ (разведены по уровням) =====
+    OPC1 -->|"HTTP:80"| COL1
+    ASUTP1 -->|"gRPC:8000"| COL1
+    COL1 --> FW1 --> MES1 --> CG
+
+    OPC2 -->|"HTTP:80"| COL2
+    ASUTP2 -->|"gRPC:8000"| COL2
+    COL2 --> FW2 --> CG
+
+    RT --> CG --> ABAI --> NDT --> AUTH
+    CG -->|"HTTPS:443"| FRONT
+
+    FRONT -->|"HTTPS:443 / REST"| NGINX
+    NGINX --> KEY
+    NGINX --> LOGON
+    NGINX --> CFG
+    CFG --> RES
+
+    CFG --> VCON
+    VCON --> VDATA
+    VDATA --> DPROC
+    DPROC --> DIAG
+
+    CFG --> VLIB
+    VLIB --> VPROJ
+    VPROJ --> DEV
+
+    VPROJ --> FCC
+    VPROJ --> WEB
+    VPROJ --> VLOG
+    VPROJ --> VNOTIF
+
+    VNOTIF -->|"TCP:5672"| IBUS --> RABBIT --> ES
+
+    VCON --> DAL
+    VDATA --> DAL
+    DPROC --> DAL
+    WEB --> DAL
+    VLOG --> DAL
+    VNOTIF --> DAL
+    DAL -->|"ODBC:5432"| DB
+    DB -->|"ODBC"| EXTDB
+
+    DPROC -->|"HTTPS:9093"| S3
+    S3 --> ES
+
+    %% ===== СТИЛИ =====
+    classDef perimeter fill:#f8f8f8,stroke:#c95f5f,stroke-width:2px,stroke-dasharray: 6 6,color:#222;
+    classDef kspd fill:#eef4fb,stroke:#4a73b5,stroke-width:1px,color:#222;
+    classDef dzo fill:#f3f7f3,stroke:#5d8b5b,stroke-width:1px,color:#222;
+    classDef caas fill:#f7f7ff,stroke:#6a67ce,stroke-width:1px,color:#222;
+    classDef ext fill:#fff8ec,stroke:#c79a4b,stroke-width:1px,color:#222;
+    classDef svc fill:#ffffff,stroke:#8a8a8a,stroke-width:1px,color:#222;
+    classDef data fill:#edf5ff,stroke:#4a73b5,stroke-width:1px,color:#222;
+
+    class KSPD kspd;
+    class DZO1,DZO2 dzo;
+    class CAAS caas;
+    class EXT perimeter;
+    class RT,CG,ABAI,NDT,AUTH,OPC1,ASUTP1,COL1,FW1,MES1,OPC2,ASUTP2,COL2,FW2,FRONT,KEY,NGINX,CFG,RES,LOGON,SCR,VCON,VDATA,DPROC,DIAG,VLIB,VPROJ,DEV,FCC,WEB,VLOG,VNOTIF,RABBIT,ES,DAL,IBUS svc;
+    class DB,S3,EXTDB data;
