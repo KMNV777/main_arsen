@@ -15,6 +15,7 @@
 | [`06-it-landscape-general.drawio`](06-it-landscape-general.drawio) | ландшафт | Общий ИТ-ландшафт по слоям L0-L5 | Базовая карта для обсуждения приоритетов развития и критичных зависимостей ИТ-ландшафта. |
 | [`it-landscape-emg-general.drawio`](it-landscape-emg-general.drawio) | ландшафт | То же, что `06` (для [`it-landscape-emg.md`](../it-landscape-emg.md)) | Та же бизнес-картина в альтернативном файле для основного обзорного документа. |
 | [`07-it-landscape-mermaid-detailed.drawio`](07-it-landscape-mermaid-detailed.drawio) | ландшафт | Детальная версия из `it-landscape-emg.mmd` | Используется, когда нужно перейти от общей картины к конкретным интеграционным потокам. |
+| [`08-abai-c4-component.drawio`](08-abai-c4-component.drawio) | C4 | **C4 Component ИС «ABAI»**: контейнеры-хосты (веб-приложение, backend MVC, Airflow, Kafka, Spark/Livy, Hadoop, БД, MinIO, ELK, DevOps) с узлами «component», IP-адресами, протоколами и портами | Показывает внутреннее устройство ИС ABAI: путь данных от пользователя через backend в платформу обработки и хранения, а также контуры наблюдаемости и DevOps. |
 
 ## Пересборка из Mermaid
 
@@ -24,6 +25,15 @@ python3 scripts/mmd_to_drawio.py
 ```
 
 Исходники: `docs/svg/*.mmd`, `docs/it-landscape-emg.mmd`. Слойный ландшафт L0–L5 генерируется отдельно в скрипте (`build_it_landscape_drawio`) и включает подписанные связи из реестра интеграций.
+
+C4 Component диаграмма ИС «ABAI» (`08-abai-c4-component.drawio`) строится отдельным скриптом и не зависит от Mermaid:
+
+```bash
+pip install -r requirements.txt
+python3 scripts/build_abai_c4_component.py
+```
+
+Скрипт также сохраняет статичный SVG-просмотр в [`../svg/08-abai-c4-component.svg`](../svg/08-abai-c4-component.svg) (если установлен `matplotlib`). Редактируемым источником остаётся `.drawio`.
 
 ## Редактирование
 

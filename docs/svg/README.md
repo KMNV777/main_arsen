@@ -14,8 +14,11 @@
 | [`05-abai-layers.svg`](05-abai-layers.svg) | §5 | Слои L1-L4 (OT → ИМ → сервисы) | Объясняет уровни архитектуры для обсуждения ответственности и точек отказа. |
 | [`06-it-landscape-general.svg`](06-it-landscape-general.svg) | ландшафт | Общий ИТ-ландшафт по слоям L0-L5 | Базовая карта для руководителей: критичные системы и их связи в одном слайде. |
 | [`07-it-landscape-mermaid-detailed.svg`](07-it-landscape-mermaid-detailed.svg) | ландшафт | Детальная Mermaid-версия ландшафта | Нужна для детального разбора интеграций после обзорной презентации. |
+| [`08-abai-c4-component.svg`](08-abai-c4-component.svg) | C4 | C4 Component ИС «ABAI» (статичный просмотр) | Внутреннее устройство ИС ABAI: компоненты, хосты, протоколы и потоки данных. Редактируемый источник — [`../drawio/08-abai-c4-component.drawio`](../drawio/08-abai-c4-component.drawio). |
 
 Исходники Mermaid: `*.mmd` в этой папке.
+
+> `08-abai-c4-component.svg` не имеет Mermaid-исходника: диаграмма строится скриптом `scripts/build_abai_c4_component.py` (см. [`../drawio/README.md`](../drawio/README.md)).
 
 Пересборка:
 
