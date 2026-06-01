@@ -1,139 +1,144 @@
-%%{init: {"theme":"neutral","flowchart":{"curve":"stepBefore","nodeSpacing":70,"rankSpacing":80}}}%%
+%%{init: {"theme":"neutral","flowchart":{"curve":"stepBefore","nodeSpacing":55,"rankSpacing":62}}}%%
 flowchart LR
-    %% ===== КОНТУРЫ =====
-    subgraph KSPD["КСПД (корпоративная сеть передачи данных)"]
-        direction LR
-        RT["Маршрутизатор"]
-        CG["Криптошлюз"]
-        ABAI["ABAI"]
-        NDT["Nedra Digital Twin"]
-        AUTH["Сервер аутентификации пользователей"]
+    subgraph C14["14. Хранилище файлов"]
+        MCON["MinIO Console\n172.20.103.54"]
+        S3N["S3\nNode1 / Node2 / Node3 / Node4"]
     end
 
-    subgraph DZO1["ДЗО №1 (с локальным MES)"]
-        direction LR
-        OPC1["OPC Server"]
-        ASUTP1["АСУТП сервер"]
-        COL1["Коллектор данных"]
-        FW1["МСЭ"]
-        MES1["MES система ДЗО"]
+    subgraph C1["1. Hadoop Cluster"]
+        HCM["Управление кластерами Hadoop\nCloudera Manager"]
+        HPROC["Сервер консолидации данных\nОбработка в YARN / Spark jobs"]
+        HN1["Сервер хранения данных\nMapReduce/Spark"]
+        HN2["Сервер хранения данных\nMapReduce/Spark"]
+        HN3["Сервер хранения данных\nMapReduce/Spark"]
     end
 
-    subgraph DZO2["ДЗО №2 (без локального MES)"]
-        direction LR
-        OPC2["OPC Server"]
-        ASUTP2["АСУТП сервер"]
-        COL2["Коллектор данных"]
-        FW2["МСЭ"]
+    subgraph C4["4. Преобразования данных Hadoop"]
+        SPARK["Apache Spark"]
     end
 
-    subgraph CAAS["CaaS@DigitalTwin"]
-        direction TB
-
-        subgraph UI["Пользовательский доступ"]
-            direction LR
-            FRONT["Frontend (Angular)"]
-            DB["Database (PostgreSQL)"]
-            KEY["Keycloak"]
-            NGINX["Nginx"]
-        end
-
-        subgraph RUNTIME["CaaS@RuntimeService"]
-            direction TB
-            CFG["ConfigManager"]
-            RES["ResourceService"]
-            LOGON["LogonService"]
-            SCR["Script"]
-            VCON["VTSConsole"]
-            VDATA["VTSDataService"]
-            DPROC["DataProcessor"]
-            DIAG["Diagnostics"]
-        end
-
-        subgraph VTS["CaaS@VTSServer"]
-            direction LR
-            VLIB["VtsLibraryService"]
-            VPROJ["VTSProjectService"]
-            DEV["Developer"]
-        end
-
-        subgraph BIZ["CaaS@BusinessService"]
-            direction TB
-            FCC["FCCServer"]
-            WEB["WebConnector"]
-            VLOG["VTSLogbookService"]
-            VNOTIF["VTSNotificationService"]
-            RABBIT["RabbitMQ"]
-        end
-
-        DAL["Data Access Layer"]
-        IBUS["Integration Bus"]
-        S3["S3 хранилище"]
-        EXTDB["External Database"]
+    subgraph C3["3. Менеджер очередей KAFKA cluster"]
+        ZK["Apache ZooKeeper\n172.20.102.45"]
+        KAFKA["Apache Kafka Broker"]
+        SMM["Streams Messaging Manager"]
+        PROD["Producer"]
+        CONS["Consumer"]
     end
 
-    subgraph EXT["Сторонние системы"]
-        ES["External systems"]
+    subgraph C2["2. Планировщик задач Apache Airflow\n172.20.102.82"]
+        AFWEB["Веб сервер"]
+        AFSCHED["Планировщик"]
+        AFWORK["Рабочие процессы (worker)"]
+        AFDASH["Dashboard"]
+        AFMETA["Metadata DB"]
     end
 
-    %% ===== КЛЮЧЕВЫЕ СВЯЗИ (разведены по уровням) =====
-    OPC1 -->|"HTTP:80"| COL1
-    ASUTP1 -->|"gRPC:8000"| COL1
-    COL1 --> FW1 --> MES1 --> CG
+    subgraph C5["5. СУБД (Storage)"]
+        PGM["OLTP PostgreSQL\n10.82.1.28"]
+        PGS["OLTP PostgreSQL (slave)\n10.82.1.29"]
+        DRUID["OLAP DRUID\n10.82.1.20"]
+    end
 
-    OPC2 -->|"HTTP:80"| COL2
-    ASUTP2 -->|"gRPC:8000"| COL2
-    COL2 --> FW2 --> CG
+    subgraph C6["6. ИС AVAI backend\n172.20.103.203"]
+        BFW["Laravel PHP Python"]
+        BQ["Queue"]
+        BCTR["Controller"]
+        BMOD["Model"]
+        BORM["ORM"]
+        BDBC["DB Connector"]
+        MYSQL["MySQL"]
+        DOCKER["Docker"]
+        REDIS["Redis"]
+    end
 
-    RT --> CG --> ABAI --> NDT --> AUTH
-    CG -->|"HTTPS:443"| FRONT
+    subgraph C15["15. Геосервер"]
+        GEOHOST["HOST\n10.82.1.13"]
+        GEOWEB["WEB\n172.20.100.33"]
+    end
 
-    FRONT -->|"HTTPS:443 / REST"| NGINX
-    NGINX --> KEY
-    NGINX --> LOGON
-    NGINX --> CFG
-    CFG --> RES
+    subgraph C10["10. Анализ/обнаружение"]
+        DS["Python, PySpark,\nScala, SQL, C++"]
+        ML["ML\nComputer Vision"]
+        CUDA["Nvidia CUDA"]
+    end
 
-    CFG --> VCON
-    VCON --> VDATA
-    VDATA --> DPROC
-    DPROC --> DIAG
+    subgraph C11["11. Инструмент визуализации"]
+        SUPERSET["Superset"]
+    end
 
-    CFG --> VLIB
-    VLIB --> VPROJ
-    VPROJ --> DEV
+    subgraph C12["12. База знаний"]
+        YOUTRACK["YouTrack"]
+    end
 
-    VPROJ --> FCC
-    VPROJ --> WEB
-    VPROJ --> VLOG
-    VPROJ --> VNOTIF
+    subgraph C9["9. Контроль качества и безопасности ПО"]
+        SENTRY["Sentry"]
+        SONAR["SonarQube CE"]
+        DTRACK["Dependency-Track"]
+    end
 
-    VNOTIF -->|"TCP:5672"| IBUS --> RABBIT --> ES
+    subgraph C7["7. Журналирование ABAI-ELK"]
+        LOGSTASH["Logstash"]
+        KIBANA["Kibana"]
+        ELASTIC["Elasticsearch"]
+    end
 
-    VCON --> DAL
-    VDATA --> DAL
-    DPROC --> DAL
-    WEB --> DAL
-    VLOG --> DAL
-    VNOTIF --> DAL
-    DAL -->|"ODBC:5432"| DB
-    DB -->|"ODBC"| EXTDB
+    subgraph C8["8. Система управления версиями DEV"]
+        GITLAB["GitLab"]
+    end
 
-    DPROC -->|"HTTPS:9093"| S3
-    S3 --> ES
+    subgraph C13["13. ИС AVAI"]
+        P1["abal.kmg.kz\nFrontend / Форма входа"]
+        P2["qa.kmg.kz\nFrontend / Форма входа"]
+    end
 
-    %% ===== СТИЛИ =====
-    classDef perimeter fill:#f8f8f8,stroke:#c95f5f,stroke-width:2px,stroke-dasharray: 6 6,color:#222;
-    classDef kspd fill:#eef4fb,stroke:#4a73b5,stroke-width:1px,color:#222;
-    classDef dzo fill:#f3f7f3,stroke:#5d8b5b,stroke-width:1px,color:#222;
-    classDef caas fill:#f7f7ff,stroke:#6a67ce,stroke-width:1px,color:#222;
-    classDef ext fill:#fff8ec,stroke:#c79a4b,stroke-width:1px,color:#222;
-    classDef svc fill:#ffffff,stroke:#8a8a8a,stroke-width:1px,color:#222;
-    classDef data fill:#edf5ff,stroke:#4a73b5,stroke-width:1px,color:#222;
+    MCON --> S3N
+    S3N --> PGM
+    HCM --> HPROC --> SPARK
+    HN1 --> SPARK
+    HN2 --> SPARK
+    HN3 --> SPARK
 
-    class KSPD kspd;
-    class DZO1,DZO2 dzo;
-    class CAAS caas;
-    class EXT perimeter;
-    class RT,CG,ABAI,NDT,AUTH,OPC1,ASUTP1,COL1,FW1,MES1,OPC2,ASUTP2,COL2,FW2,FRONT,KEY,NGINX,CFG,RES,LOGON,SCR,VCON,VDATA,DPROC,DIAG,VLIB,VPROJ,DEV,FCC,WEB,VLOG,VNOTIF,RABBIT,ES,DAL,IBUS svc;
-    class DB,S3,EXTDB data;
+    SPARK --> ZK
+    ZK --> KAFKA
+    PROD --> KAFKA --> CONS
+    SMM --> KAFKA
+    AFWEB --> AFSCHED --> AFWORK
+    AFWORK --> AFDASH
+    AFWORK --> AFMETA
+    AFSCHED --> ZK
+
+    ZK --> PGM
+    KAFKA --> DRUID
+    PGM --> PGS
+    PGM --> BDBC
+    PGS --> BDBC
+    DRUID --> BDBC
+    DRUID --> SUPERSET
+
+    BFW --> BQ --> BCTR --> BMOD --> BORM --> BDBC
+    BDBC --> MYSQL
+    DOCKER --> BFW
+    REDIS --> BFW
+
+    BCTR --> GEOHOST --> GEOWEB
+    BCTR --> DS
+    DS --> ML --> CUDA
+    BCTR --> SENTRY
+    BCTR --> SONAR
+    BCTR --> DTRACK
+    BCTR --> LOGSTASH
+    LOGSTASH --> ELASTIC --> KIBANA
+    GITLAB --> BFW
+    BCTR --> YOUTRACK
+
+    BCTR --> P1
+    BCTR --> P2
+    SUPERSET --> P1
+    SUPERSET --> P2
+    GEOWEB --> P1
+    GEOWEB --> P2
+
+    classDef box fill:#ffffff,stroke:#666,stroke-width:1px,color:#111;
+    classDef gray fill:#f4f4f4,stroke:#777,stroke-width:1px,color:#111;
+    class C14,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C15 gray;
+    class MCON,S3N,HCM,HPROC,HN1,HN2,HN3,SPARK,ZK,KAFKA,SMM,PROD,CONS,AFWEB,AFSCHED,AFWORK,AFDASH,AFMETA,PGM,PGS,DRUID,BFW,BQ,BCTR,BMOD,BORM,BDBC,MYSQL,DOCKER,REDIS,GEOHOST,GEOWEB,DS,ML,CUDA,SUPERSET,YOUTRACK,SENTRY,SONAR,DTRACK,LOGSTASH,KIBANA,ELASTIC,GITLAB,P1,P2 box;
