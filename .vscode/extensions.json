@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "humao.rest-client",
+    "rangav.vscode-thunder-client",
+    "ms-playwright.playwright",
+    "cweijan.vscode-database-client2",
+    "redhat.vscode-yaml",
+    "redhat.vscode-xml",
+    "42Crunch.vscode-openapi",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "mikestead.dotenv",
+    "mechatroner.rainbow-csv",
+    "esbenp.prettier-vscode",
+    "formulahendry.code-runner",
+    "johnpapa.vscode-peacock",
+    "yzhang.markdown-all-in-one",
+    "hediet.vscode-drawio",
+    "postman.postman-for-vscode"
+  ]
+}
