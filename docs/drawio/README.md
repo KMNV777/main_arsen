@@ -15,6 +15,21 @@
 | [`06-it-landscape-general.drawio`](06-it-landscape-general.drawio) | ландшафт | Общий ИТ-ландшафт по слоям L0-L5 | Базовая карта для обсуждения приоритетов развития и критичных зависимостей ИТ-ландшафта. |
 | [`it-landscape-emg-general.drawio`](it-landscape-emg-general.drawio) | ландшафт | То же, что `06` (для [`it-landscape-emg.md`](../it-landscape-emg.md)) | Та же бизнес-картина в альтернативном файле для основного обзорного документа. |
 | [`07-it-landscape-mermaid-detailed.drawio`](07-it-landscape-mermaid-detailed.drawio) | ландшафт | Детальная версия из `it-landscape-emg.mmd` | Используется, когда нужно перейти от общей картины к конкретным интеграционным потокам. |
+| [`09-emg-c4-component.drawio`](09-emg-c4-component.drawio) | §9 | **Единая C4 Component диаграмма ЭМГ** (генератор `scripts/build_emg_c4_component.py`) | Одна компонентная схема всего цифрового контура ЭМГ со всеми интеграциями из матрицы 19 систем (протоколы, форматы, направления). |
+
+## C4 Component диаграмма ЭМГ (отдельный генератор)
+
+`09-emg-c4-component.drawio` строится воспроизводимым скриптом в стиле эталонной C4-диаграммы
+(контуры-контейнеры, узлы «component», связи с протоколами/форматами, легенда). Источники данных:
+матрица интеграций (19 систем, [`../it-landscape-emg-registry.md`](../it-landscape-emg-registry.md)),
+верхнеуровневая сводная архитектура и черновик общего ландшафта.
+
+```bash
+pip install -r requirements.txt
+python3 scripts/build_emg_c4_component.py
+```
+
+`.drawio` — редактируемый источник истины; одноимённый SVG ([`../svg/09-emg-c4-component.svg`](../svg/09-emg-c4-component.svg)) — статичный просмотр.
 
 ## Пересборка из Mermaid
 
