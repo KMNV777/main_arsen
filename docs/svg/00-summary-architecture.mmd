@@ -5,38 +5,40 @@ flowchart TB
         KMGI["КМГИ"]
     end
 
-    subgraph CoreEMG["Ядро цифровизации ЭМГ"]
-        ABAI["ИС ABAI abai.kmg.kz"]
-        IM["ИМ cmv2 10.32.10.99"]
-        ASDC["АСДЦ iis.thkmg.kz"]
-        UTOEMG["ИС УТО ЭМГ"]
+    subgraph NetEMG["Корпоративная сеть / цифровой контур ЭМГ"]
+        subgraph CoreEMG["Ядро цифровизации ЭМГ"]
+            ABAI["ИС ABAI abai.kmg.kz"]
+            IM["ИМ cmv2 10.32.10.99"]
+            ASDC["АСДЦ iis.thkmg.kz"]
+            UTOEMG["ИС УТО ЭМГ"]
+        end
+        subgraph OT["Промышленный контур ИМ"]
+            OPC["OPC DA/UA Modbus"]
+            PG["PostgreSQL MySQL"]
+            Analytics["Аналитика ЭМГ"]
+        end
     end
 
-    subgraph CorpIS["Корпоративные ИС"]
-        SAPFIR["САПФИР Directum"]
-        ISOT["ИСОТ ЭНД"]
-        SAPP["SAP ERP"]
-        UTO["ИС УТО"]
-        SDD["СДД"]
-        Procu["Procu Price"]
-        BDA["БДА"]
-        Team["Портал Team"]
-        Intranet["Интранет"]
-        ISUP["ИСУП"]
-        Compliance["Compliance"]
-    end
-
-    subgraph TechInt["Технические интеграции"]
-        AD["Active Directory"]
-        KHD["КХД КМГ"]
-        ASUNSI["АСУНСИ"]
-        ISEZ["ИСЭЗ"]
-    end
-
-    subgraph OT["Промышленный контур ИМ"]
-        OPC["OPC DA/UA Modbus"]
-        PG["PostgreSQL MySQL"]
-        Analytics["Аналитика ЭМГ"]
+    subgraph NetKMG["Корпоративная сеть группы КМГ"]
+        subgraph CorpIS["Корпоративные ИС"]
+            SAPFIR["САПФИР Directum"]
+            ISOT["ИСОТ ЭНД"]
+            SAPP["SAP ERP"]
+            UTO["ИС УТО"]
+            SDD["СДД"]
+            Procu["Procu Price"]
+            BDA["БДА"]
+            Team["Портал Team"]
+            Intranet["Интранет"]
+            ISUP["ИСУП"]
+            Compliance["Compliance"]
+        end
+        subgraph TechInt["Технические интеграции"]
+            AD["Active Directory"]
+            KHD["КХД КМГ"]
+            ASUNSI["АСУНСИ"]
+            ISEZ["ИСЭЗ"]
+        end
     end
 
     KC & EMG & KMGI -.-> CorpIS
