@@ -438,17 +438,182 @@ add_table(
     col_widths=[5, 5, 3.5, 3],
 )
 
-heading("4.3 Active Directory — служба каталогов", level=2)
+heading("4.3 Архитектура ИС ABAI — внутренние компоненты (C4 Component)", level=2)
+normal_para(
+    "ИС ABAI представляет собой многослойную платформу данных, развёрнутую в корпоративном "
+    "контуре КМГ. Архитектура описана по C4 Component диаграмме (PR #29)."
+)
+normal_para("Зона 1 — Прикладной контур (Intranet / VPN DMZ):", bold=True)
+add_table(
+    ["Контейнер / IP", "Компоненты", "Назначение"],
+    [
+        ["Веб-приложение\n172.20.103.77\nNginx, Node.js",
+         "Nginx (веб-сервер), Формы ввода Laravel PHP, Node.js, Frontend Vue.js · Leaflet.js · Plotly, MySQL (локальная БД)",
+         "Пользовательский интерфейс; приём запросов (HTTPS:443); рендеринг карт и графиков"],
+        ["Backend MVC\n172.20.103.203\nLaravel/Django · PHP/Python",
+         "View, Controller, Model, ORM, DB Connector",
+         "Бизнес-логика, REST API, orchestration DAG-триггеров, маршрутизация в БД и хранилища"],
+    ],
+    col_widths=[4, 6, 6.5],
+)
+normal_para("Зона 2 — Платформа данных и обработки:", bold=True)
+add_table(
+    ["Контейнер / IP", "Компоненты", "Ключевые интеграции"],
+    [
+        ["Apache Airflow · ETL\n172.20.102.82",
+         "Web server, Scheduler (DAG), Worker, Broker, Metadata DB",
+         "REST DAG trigger ← Backend; produce → Kafka; submit job (Livy REST) → Spark; логи → ELK"],
+        ["Apache Kafka\n172.20.102.45",
+         "Producer, Broker, Consumer",
+         "produce ← Airflow.Worker; consume/stream → Spark"],
+        ["Apache Spark / Livy\n10.82.1.12 (Nvidia CUDA)",
+         "Apache Livy, Apache Spark, Spark Job (Scala / Python / SQL), ML/CV модели",
+         "Livy REST ← Airflow; YARN/HDFS → Hadoop; write OLAP → Druid; read/write S3 → MinIO"],
+        ["Hadoop / Cloudera\nDistributed",
+         "NameNode · YARN (10.82.1.1), DataNode 1 (MapReduce/Spark)",
+         "HDFS ← Spark Jobs; YARN ← Spark Jobs"],
+        ["Базы данных",
+         "OLTP PostgreSQL (10.82.1.28, master/slave 10.82.1.29), OLAP Druid (10.82.1.20)",
+         "ODBC:5432 ← Backend; SQL ← Backend; write OLAP ← Spark; SQL витрины ← SuperSET"],
+        ["MinIO Object Storage (S3)\n172.20.102.54\n(узлы 10.82.2.36–39)",
+         "MinIO Console, S3 Buckets",
+         "S3/HTTPS ← Backend (Model); read/write S3 ← Spark"],
+    ],
+    col_widths=[4, 5.5, 7],
+)
+normal_para("Зона 3 — DevOps, наблюдаемость и инструменты:", bold=True)
+add_table(
+    ["Контейнер / IP", "Компоненты", "Назначение / интеграции"],
+    [
+        ["Аудит и журналирование (ELK)",
+         "Logstash, Elasticsearch, Kibana",
+         "logs ← Backend, Airflow Scheduler, Spark Job (Scala); ingest: Logstash→Elasticsearch; query: Elasticsearch→Kibana"],
+        ["DevOps · качество кода",
+         "GitLab (DEV 172.20.103.31), SonarQube CE (10.82.4.29), Dependency-Track (10.82.4.30), Sentry (10.82.4.65), Docker (172.20.102.23)",
+         "code scan: GitLab→SonarQube; SBOM: SonarQube→Dependency-Track; errors ← Backend.Model"],
+        ["Управление проектом · визуализация",
+         "YouTrack, SuperSET",
+         "SQL (витрины): SuperSET → Druid"],
+    ],
+    col_widths=[4, 5.5, 7],
+)
+normal_para("Ключевые интеграционные потоки внутри ABAI:")
+add_table(
+    ["Источник", "Приёмник", "Протокол", "Направление"],
+    [
+        ["Пользователь ЭМГ (браузер/АРМ)", "Nginx (веб-сервер)", "HTTPS:443", "→"],
+        ["Frontend Vue.js", "Backend Controller", "REST / HTTPS", "→"],
+        ["Формы ввода Laravel PHP", "Backend Controller", "REST", "→"],
+        ["Backend Controller", "Airflow Web server", "REST (DAG trigger)", "→"],
+        ["Backend DB Connector", "OLTP PostgreSQL 10.82.1.28", "ODBC:5432", "→"],
+        ["Backend DB Connector", "OLAP Druid 10.82.1.20", "SQL", "→"],
+        ["Backend Model", "MinIO Console", "S3 / HTTPS", "→"],
+        ["Airflow Worker", "Kafka Producer", "produce", "→"],
+        ["Airflow Worker", "Apache Livy", "submit job (Livy REST)", "→"],
+        ["Kafka Consumer", "Apache Spark", "consume / stream", "→"],
+        ["Spark Job (Scala)", "Hadoop NameNode/YARN", "YARN / HDFS", "→"],
+        ["Spark Job (Python)", "OLAP Druid", "write OLAP", "→"],
+        ["Spark Job (SQL)", "MinIO Console", "read/write S3", "→"],
+        ["SuperSET", "OLAP Druid", "SQL (витрины)", "→"],
+        ["Backend / Airflow / Spark", "Logstash (ELK)", "logs", "→ (async)"],
+        ["Backend Model", "Sentry", "errors", "→ (async)"],
+    ],
+    col_widths=[4.5, 4.5, 3.5, 2],
+)
+
+heading("4.4 Единая C4 Component диаграмма ЭМГ (PR #31)", level=2)
+normal_para(
+    "Единая компонентная диаграмма C4 охватывает весь цифровой контур ЭМГ: "
+    "12 контуров-контейнеров, 48 подписанных связей, все 19 строк матрицы интеграций. "
+    "Диаграмма зафиксирована в файле docs/drawio/09-emg-c4-component.drawio."
+)
+normal_para("Контуры диаграммы:")
+add_table(
+    ["Контур", "Состав"],
+    [
+        ["Организационный контур", "КЦ КМГ · АО «Эмбамунайгаз» · КМГИ"],
+        ["Ядро цифровизации ЭМГ", "ИС ABAI · ИС «УТО ЭМГ» · АСДЦ"],
+        ["ИМ · OT-хаб", "Интеллектуальное месторождение (cmv2, 10.32.10.99)"],
+        ["Промышленный контур (OT)", "ИСУН · АСУТП/ТМ · ТМ АГЗУ · КУУН НПС-3 · СДМО · KTM Floboss"],
+        ["Бизнес-системы и корпоративные порталы", "Directum/САПФИР · ИСОТ/ЭНД · СДД · БДА · Портал Team · Интранет · ИСУП · ИС «УТО» · КГИС · Procu/Price · sPoint · Argus Pro"],
+        ["Документооборот и архив", "Alfresco (ЭА) · Электронный архив (Documentum / Азия-Софт)"],
+        ["SAP ERP — корпоративный хаб", "SAP ERP · AVR"],
+        ["Финансы и планирование", "SAS-FM · FC · Нацбанк · БВУ · ИС ЭСФ · 1С (зарплата) · СИЗ · Platts.com"],
+        ["Кадры и персонал", "ПК «Управление персоналом» · E-Pass"],
+        ["Служба каталогов", "Active Directory (LDAP)"],
+        ["Информационная безопасность", "Solar Dozor (DLP) · Forcepoint Web Gateway · FUDO PAM · MS Exchange · Жулдыз"],
+        ["Технические интеграции / НСИ", "КХД АО НК КМГ · АСУ НСИ · ИСЭЗ"],
+    ],
+    col_widths=[6, 10.5],
+)
+normal_para("Полная матрица связей C4 ЭМГ (48 потоков):", bold=True)
+add_table(
+    ["Источник", "Приёмник", "Протокол / формат", "Тип", "Направление"],
+    [
+        # OT → ИМ
+        ["ИСУН", "ИМ (10.32.10.99)", "OPC DA · 2ч", "Реальное время", "→"],
+        ["АСУТП / ТМ", "ИМ (10.32.10.99)", "OPC UA · 5мин", "Реальное время", "→"],
+        ["ТМ АГЗУ", "ИМ (10.32.10.99)", "OPC UA / ODBC · 5мин", "Реальное время", "→"],
+        ["СДМО (Danfoss)", "ИМ (10.32.10.99)", "MySQL ODBC · 1ч", "Пакетная", "→"],
+        ["КУУН НПС-3", "ИМ (10.32.10.99)", "Modbus TCP · 2ч", "Реальное время", "→"],
+        ["KTM Floboss", "ИМ (10.32.10.99)", "SQL (PyMySQL)", "Пакетная (вручную)", "→"],
+        # ABAI ↔ ИМ
+        ["ИС ABAI", "ИМ (10.32.10.99)", "SQL read · 08:00/13:30/18:00", "Пакетная", "→"],
+        ["АСДЦ", "ИМ (10.32.10.99)", "диспетчеризация", "Async", "→ (пунктир)"],
+        # ИМ → аналитика
+        ["ИМ (10.32.10.99)", "Аналитика ЭМГ :8099", "REST JSON · 5мин", "Реальное время", "→"],
+        ["ИМ (10.32.10.99)", "packet_service :8951", "REST JSON · 5мин", "Реальное время", "→"],
+        # SAP flows
+        ["SAS-FM", "SAP ERP", "RFC / .sas7bdat / CSV", "Пакетная", "→"],
+        ["SAP ERP", "FC (фин. консолидация)", "CSV (ЕКП)", "Пакетная", "→"],
+        ["Нацбанк", "SAP ERP", "XML (курсы)", "Ежедневно", "→"],
+        ["SAP ERP", "Platts.com", "API (котировки)", "Реальное время", "→"],
+        ["SAP ERP", "1С (зарплата)", "CSV (зарплата)", "Пакетная", "→"],
+        ["SAP ERP", "БВУ (банк)", "MT940 / MT103", "Пакетная", "↔"],
+        ["SAP ERP", "ИС ЭСФ", "XML (ЭСФ)", "Реальное время", "↔"],
+        ["SAP ERP", "СИЗ", "XLSX", "Пакетная", "→"],
+        ["AVR", "SAP ERP", "API XML", "Реальное время", "↔"],
+        ["ИС «УТО»", "SAP ERP", "SOAP XML", "Реальное время", "↔"],
+        ["Электронный архив", "SAP ERP", "API / CMIS", "Реальное время", "↔"],
+        ["SAP ERP", "АСУТП / ТМ (SCADA)", "API XML", "Реальное время", "→"],
+        ["SAP ERP", "АСУ НСИ", "SAP PO / XML", "Реальное время", "↔"],
+        ["ПК «Управление персоналом»", "SAP ERP", "SOAP / DB functions", "Реальное время", "→"],
+        # ПК УП
+        ["ПК «Управление персоналом»", "Электронный архив", "CMIS XML", "Реальное время", "↔"],
+        ["ПК «Управление персоналом»", "Портал Team", "—", "Async", "→"],
+        # Corp ↔ НСИ
+        ["Procu / Price", "АСУ НСИ", "API JSON", "Реальное время", "↔"],
+        ["Procu / Price", "ИСЭЗ", "API JSON", "Реальное время", "↔"],
+        ["sPoint", "КХД АО НК КМГ", "API JSON", "Пакетная", "→"],
+        ["Directum / САПФИР", "КХД АО НК КМГ", "REST JSON", "Пакетная", "→"],
+        ["Argus Pro", "ИС «УТО»", "REST JSON", "Реальное время", "→"],
+        ["ИС «УТО ЭМГ»", "ИС «УТО»", "локальный контур → УТО", "—", "→"],
+        # Security
+        ["MS Exchange", "Solar Dozor (DLP)", "BCC (почта)", "Реальное время", "→"],
+        ["Forcepoint Web Gateway", "Solar Dozor (DLP)", "ICAP (веб)", "Реальное время", "→"],
+        # LDAP → AD
+        ["Directum / САПФИР, ИСОТ/ЭНД, СДД, Procu/Price, sPoint, Портал Team, КГИС, АСДЦ", "Active Directory", "LDAP", "Реальное время", "→"],
+        ["Alfresco (ЭА)", "Active Directory", "LDAP", "Реальное время", "→"],
+        ["Solar Dozor (DLP)", "Active Directory", "LDAP", "Реальное время", "→"],
+        ["FUDO PAM", "Active Directory", "LDAP", "Реальное время", "→"],
+        ["Жулдыз", "Active Directory", "LDAP", "Реальное время", "→"],
+        ["E-Pass", "Active Directory", "LDAP", "Реальное время", "→"],
+    ],
+    col_widths=[4.5, 4, 3.5, 2.5, 2],
+)
+
+heading("4.5 Active Directory — служба каталогов", level=2)
 normal_para(
     "Active Directory является единым источником учётных записей (UPN, ФИО, e-mail) "
-    "для 8 систем ЭМГ. Интеграция — односторонний LDAP-запрос, online, без промежуточного слоя."
+    "для 13 систем ЭМГ. Интеграция — односторонний LDAP-запрос, online, без промежуточного слоя."
 )
-bullet("Directum / САПФИР, Alfresco ECM, КГИС — онлайн-аутентификация сотрудников")
-bullet("Solar Dozor (DLP) — идентификация субъектов перехвата")
+bullet("Directum / САПФИР, Alfresco ECM, КГИС, АСДЦ — аутентификация сотрудников")
+bullet("ИСОТ/ЭНД, СДД, sPoint, Procu/Price, Портал Team — аутентификация пользователей корпоративных порталов")
+bullet("Solar Dozor (DLP) — идентификация субъектов перехвата (почта + веб)")
 bullet("FUDO PAM — управление привилегированными сессиями")
-bullet("E-Pass (СКУД), Жулдыз, Procu — авторизация пользователей")
+bullet("E-Pass (СКУД), Жулдыз — авторизация пользователей")
 
-heading("4.4 Сводная матрица интеграций (по протоколам)", level=2)
+heading("4.6 Сводная матрица интеграций по протоколам", level=2)
 add_table(
     ["Система-источник", "Система-приёмник", "Протокол / формат", "Тип"],
     [
@@ -627,8 +792,8 @@ normal_para(
 doc.add_paragraph()
 normal_para(
     "Документ подготовлен на основании: реестра ИС и матрицы интеграций ЭМГ (19 систем); "
-    "архитектурных схем корпоративного и производственного контуров; верхнеуровневого "
-    "анализа ИТ-ландшафта АО «Эмбамунайгаз»; ТЗ ESP WELLTECH SERVICES – FZCO, Этап 2.",
+    "C4 Component диаграммы ИС ABAI (PR #29); единой C4 Component диаграммы ЭМГ (PR #31, 48 потоков); "
+    "архитектурных схем корпоративного контура; ТЗ ESP WELLTECH SERVICES – FZCO, Этап 2.",
     italic=True,
     size=9,
     color=(100, 100, 100),
