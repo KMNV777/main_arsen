@@ -6,7 +6,8 @@
 
 | Файл | § | Техническое описание | Бизнес-объяснение |
 |------|---|----------------------|-------------------|
-| [`00-summary-architecture.drawio`](00-summary-architecture.drawio) | §0 | Сводная архитектура: КМГ + ЭМГ + интеграции | Верхнеуровневая карта: как устроен цифровой контур ЭМГ в группе КМГ. |
+| [`08-kmg-emg-corporate-networks.drawio`](08-kmg-emg-corporate-networks.drawio) | общая | **Общая схема КМГ и ЭМГ**: корпоративные сети + все ключевые интеграции | Главная презентационная схема: две сети, протоколы, точки стыковки ЭМГ↔КМГ. |
+| [`00-summary-architecture.drawio`](00-summary-architecture.drawio) | §0 | Сводная архитектура: КМГ + ЭМГ + интеграции | Упрощённая карта верхнего уровня. |
 | [`01-corporate-landscape.drawio`](01-corporate-landscape.drawio) | §1 | Общий ландшафт корпоративных систем | Показывает покрытие ключевых бизнес-функций (финансы, кадры, документооборот, ИБ, производство). |
 | [`02-1-emg-abai-focus.drawio`](02-1-emg-abai-focus.drawio) | §2.1 | Фокус ЭМГ: ABAI и смежные ИС | Быстро объясняет, от каких систем зависит работа ABAI и какие процессы ЭМГ это затрагивает. |
 | [`03-abai-im-architecture.drawio`](03-abai-im-architecture.drawio) | §3 | Архитектура ИМ / ABAI (10.32.10.99) | Демонстрирует путь производственных данных: от источников телеметрии до аналитических сервисов. |
@@ -16,6 +17,16 @@
 | [`it-landscape-emg-general.drawio`](it-landscape-emg-general.drawio) | ландшафт | То же, что `06` (для [`it-landscape-emg.md`](../it-landscape-emg.md)) | Та же бизнес-картина в альтернативном файле для основного обзорного документа. |
 | [`07-it-landscape-mermaid-detailed.drawio`](07-it-landscape-mermaid-detailed.drawio) | ландшафт | Детальная версия из `it-landscape-emg.mmd` | Используется, когда нужно перейти от общей картины к конкретным интеграционным потокам. |
 | [`09-emg-c4-component.drawio`](09-emg-c4-component.drawio) | §9 | **Единая C4 Component диаграмма ЭМГ** (генератор `scripts/build_emg_c4_component.py`) | Одна компонентная схема всего цифрового контура ЭМГ со всеми интеграциями из матрицы 19 систем (протоколы, форматы, направления). |
+
+## Схема корпоративных сетей КМГ/ЭМГ (отдельный генератор)
+
+`08-kmg-emg-corporate-networks.drawio` строится скриптом `scripts/build_kmg_emg_network_diagram.py`
+(зелёная зона — сеть ЭМГ, синяя — сеть КМГ, подписанные интеграции между контурами).
+
+```bash
+pip install -r requirements.txt
+python3 scripts/build_kmg_emg_network_diagram.py
+```
 
 ## C4 Component диаграмма ЭМГ (отдельный генератор)
 

@@ -15,7 +15,8 @@
 
 | § | draw.io | SVG | Что показывает | Как объяснить бизнес-заказчику |
 |---|---------|-----|----------------|---------------------------------|
-| 0 | [`drawio/00-summary-architecture.drawio`](drawio/00-summary-architecture.drawio) | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) | Общая картина: оргконтур КМГ + ключевые ИС + интеграции | «Это карта верхнего уровня: где находится ЭМГ в группе КМГ и через какие системы проходят основные процессы». |
+| **общая** | [`drawio/08-kmg-emg-corporate-networks.drawio`](drawio/08-kmg-emg-corporate-networks.drawio) | [`svg/08-kmg-emg-corporate-networks.svg`](svg/08-kmg-emg-corporate-networks.svg) | **Общая архитектурная схема КМГ и ЭМГ**: выделены корпоративная сеть группы КМГ и цифровой контур ЭМГ, все ключевые интеграции с протоколами | «На одном листе видно две корпоративные сети, как они связаны и по каким протоколам обмениваются данными». |
+| 0 | [`drawio/00-summary-architecture.drawio`](drawio/00-summary-architecture.drawio) | [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg) | Сводная картина: оргконтур + сети КМГ/ЭМГ + ключевые ИС | «Упрощённая карта верхнего уровня для быстрого обзора». |
 | 1 | [`drawio/01-corporate-landscape.drawio`](drawio/01-corporate-landscape.drawio) | [`svg/01-corporate-landscape.svg`](svg/01-corporate-landscape.svg) | Корпоративные домены: финансы, кадры, документооборот, безопасность, производственный контур | «Показывает, какие бизнес-функции закрыты системами и где есть межфункциональные зависимости». |
 | 2.1 | [`drawio/02-1-emg-abai-focus.drawio`](drawio/02-1-emg-abai-focus.drawio) | [`svg/02-1-emg-abai-focus.svg`](svg/02-1-emg-abai-focus.svg) | Фокус на ЭМГ: связи ABAI с ключевыми смежными системами | «Показывает, какие критичные сервисы ЭМГ зависят от ABAI и что будет затронуто при изменениях». |
 | 3 | [`drawio/03-abai-im-architecture.drawio`](drawio/03-abai-im-architecture.drawio) | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) | Детальная архитектура ИМ/ABAI: сбор телеметрии, обработка и выдача аналитики | «Это схема производственных данных: от датчиков и источников до управленческой аналитики». |
@@ -28,13 +29,33 @@
 - **draw.io** — открыть в [diagrams.net](https://app.diagrams.net), править блоки и связи. Каталог: [`drawio/README.md`](drawio/README.md)
 - **SVG** — вставка в Word, PowerPoint, Figma. Каталог: [`svg/README.md`](svg/README.md)
 
-Пересборка draw.io: `python3 scripts/mmd_to_drawio.py`
+Пересборка draw.io: `python3 scripts/mmd_to_drawio.py`  
+Схема **§общая** (корпоративные сети КМГ/ЭМГ): `python3 scripts/build_kmg_emg_network_diagram.py`
+
+---
+
+## Общая архитектурная схема: корпоративные сети КМГ и ЭМГ
+
+**SVG:** [`svg/08-kmg-emg-corporate-networks.svg`](svg/08-kmg-emg-corporate-networks.svg) · **draw.io:** [`drawio/08-kmg-emg-corporate-networks.drawio`](drawio/08-kmg-emg-corporate-networks.drawio)
+
+На схеме явно выделены два контура:
+
+| Контур | Содержание |
+|--------|------------|
+| **Корпоративная сеть / цифровой контур ЭМГ** (зелёная зона) | Ядро цифровизации (ИС ABAI, ИС «УТО ЭМГ», АСДЦ), OT-хаб ИМ (10.32.10.99), промышленный контур OT (ИСУН, АСУТП/ТМ, АГЗУ, КУУН, СДМО, KTM) |
+| **Корпоративная сеть группы КМГ** (синяя зона) | Корпоративные ИС и порталы, SAP ERP-хаб, финансы, кадры, документооборот, Active Directory, ИБ, НСИ (КХД, АСУ НСИ, ИСЭЗ) |
+
+**Межсетевые интеграции (примеры):** ИС «УТО ЭМГ» → ИС «УТО» (локальный контур); ABAI → ИСОТ/ЭНД (REST/SMTP, СИЗ и добыча); ABAI → САПФИР (REST JSON); ИМ → аналитика/БДА (REST JSON); OT → ИМ (OPC DA/UA, Modbus, SQL).
+
+Детализация внутренней архитектуры **ИС ABAI** (Nginx, Airflow, Kafka, Spark, MinIO): [`svg/05-abai-layers.svg`](svg/05-abai-layers.svg), [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg).
 
 ---
 
 ## 0. Сводная архитектура (интеграции + контур КМГ)
 
 **SVG:** [`svg/00-summary-architecture.svg`](svg/00-summary-architecture.svg)
+
+Полная схема с выделением сетей: **[`svg/08-kmg-emg-corporate-networks.svg`](svg/08-kmg-emg-corporate-networks.svg)**.
 
 ```mermaid
 flowchart TB
@@ -44,13 +65,21 @@ flowchart TB
         KMGI["КМГИ"]
     end
 
-    subgraph CoreEMG["Ядро цифровизации ЭМГ"]
+    subgraph NetEMG["Корпоративная сеть / цифровой контур ЭМГ"]
+        subgraph CoreEMG["Ядро цифровизации ЭМГ"]
         ABAI["ИС ABAI<br/>abai.kmg.kz · 17 модулей"]
         IM["ИМ / cmv2<br/>10.32.10.99"]
         ASDC["АСДЦ<br/>iis.thkmg.kz"]
         UTOEMG["ИС «УТО ЭМГ»"]
+        end
+        subgraph OT["Промышленный контур (ИМ)"]
+        OPC["OPC DA/UA · Modbus"]
+        PG["PostgreSQL / MySQL"]
+        Analytics["Аналитика ЭМГ :8099"]
+        end
     end
 
+    subgraph NetKMG["Корпоративная сеть группы КМГ"]
     subgraph CorpIS["Корпоративные ИС (матрица КЦ/ЭМГ/КМГИ)"]
         SAPFIR["САПФИР · Directum<br/>docs.kmg.kz"]
         ISOT["ИСОТ / ЭНД<br/>hse.kmg.kz"]
@@ -71,11 +100,6 @@ flowchart TB
         ASUNSI["АСУНСИ"]
         ISEZ["ИСЭЗ"]
     end
-
-    subgraph OT["Промышленный контур (ИМ)"]
-        OPC["OPC DA/UA · Modbus"]
-        PG["PostgreSQL / MySQL"]
-        Analytics["Аналитика ЭМГ :8099"]
     end
 
     KC & EMG & KMGI -.-> CorpIS
@@ -486,7 +510,7 @@ python3 scripts/build_emg_c4_component.py
 | Как SAP связан с транспортом и НСИ? | **4** |
 | Общий ИТ-ландшафт по слоям? | **[`it-landscape-emg.md`](it-landscape-emg.md)** · [`svg/06-it-landscape-general.svg`](svg/06-it-landscape-general.svg) |
 | Все схемы в SVG? | **[`svg/README.md`](svg/README.md)** |
-| Полная картина «организация + потоки»? | **0**, **1** |
+| Полная картина «организация + сети + потоки»? | **общая (08)**, **0**, **1**, **9 (C4)** |
 
 ---
 

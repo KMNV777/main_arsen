@@ -1,0 +1,124 @@
+%% Общая архитектурная схема КМГ и ЭМГ (корпоративные сети + интеграции)
+%% Редактируемая версия: docs/drawio/08-kmg-emg-corporate-networks.drawio (генератор scripts/build_kmg_emg_network_diagram.py)
+
+flowchart TB
+    subgraph Org["Организационный контур группы КМГ"]
+        KC["КЦ КМГ"]
+        EMGorg["АО «Эмбамунайгаз»"]
+        KMGI["КМГИ"]
+    end
+
+    subgraph NetEMG["Корпоративная сеть / цифровой контур ЭМГ"]
+        subgraph CoreEMG["Ядро цифровизации ЭМГ"]
+            ABAI["ИС ABAI<br/>abai.kmg.kz"]
+            UTOEMG["ИС «УТО ЭМГ»"]
+            ASDC["АСДЦ<br/>iis.thkmg.kz"]
+        end
+        subgraph IM["ИМ · OT-хаб · 10.32.10.99"]
+            IMnode["Интеллектуальное месторождение"]
+        end
+        subgraph OT["Промышленный контур OT"]
+            ISUN["ИСУН"]
+            ASUTP["АСУТП / ТМ"]
+            AGZU["ТМ АГЗУ"]
+            KUUN["КУУН НПС-3"]
+            SDMO["СДМО"]
+            KTM["KTM Floboss"]
+        end
+    end
+
+    subgraph NetKMG["Корпоративная сеть группы КМГ"]
+        subgraph CorpIS["Бизнес-системы и порталы"]
+            SAPFIR["СЭД / САПФИР"]
+            ISOT["ИСОТ / ЭНД"]
+            SDD["СДД"]
+            Procu["Procu / Price"]
+            BDA["БДА"]
+            Team["Портал Team"]
+            Intranet["Интранет"]
+            ISUP["ИСУП"]
+            Compliance["Compliance"]
+            UTO["ИС «УТО»"]
+            SP["sPoint"]
+            KGIS["КГИС"]
+            Argus["Argus Pro"]
+        end
+        subgraph Docs["Документооборот и архив"]
+            Alfresco["Alfresco"]
+            EA["Электронный архив"]
+        end
+        subgraph SAPBlock["SAP ERP — хаб"]
+            SAPP["SAP ERP"]
+            AVR["AVR"]
+        end
+        subgraph Finance["Финансы и планирование"]
+            SAS["SAS-FM"]
+            FC["FC"]
+            NB["Нацбанк"]
+            BV["БВУ"]
+            Platts["Platts"]
+            ISEF["ИС ЭСФ"]
+            ZUP["1С зарплата"]
+            SIZ["СИЗ"]
+        end
+        subgraph HR["Кадры"]
+            UP["Управление персоналом"]
+            EPASS["E-Pass"]
+        end
+        subgraph SecID["ИБ и идентификация"]
+            AD["Active Directory"]
+            DLP["Solar Dozor"]
+            FW["Forcepoint"]
+            FUDO["FUDO PAM"]
+            Exchange["Exchange"]
+            Zhyldyz["Жулдыз"]
+        end
+        subgraph NSI["НСИ и тех. интеграции"]
+            KHD["КХД КМГ"]
+            ASUNSI["АСУ НСИ"]
+            ISEZ["ИСЭЗ"]
+        end
+    end
+
+    EMGorg -.->|владеет| ABAI
+    KC -.-> SAPP
+    KMGI -.-> ISUP
+
+    ISUN -->|OPC DA| IMnode
+    ASUTP -->|OPC UA| IMnode
+    AGZU -->|SQL+OPC UA| IMnode
+    SDMO -->|MySQL| IMnode
+    KUUN -->|Modbus| IMnode
+    KTM -->|SQL| IMnode
+    ABAI -->|SQL read| IMnode
+    ASDC -.->|диспетчеризация| IMnode
+
+    UTOEMG -->|локальный контур| UTO
+    ABAI -->|REST/SMTP| ISOT
+    ABAI -.->|REST JSON| SAPFIR
+    ABAI -.-> BDA
+    IMnode -->|REST JSON :8099| BDA
+
+    UTO <-->|SOAP XML| SAPP
+    Argus -->|REST JSON| UTO
+    SAPP <-->|SAP PO/XML| ASUNSI
+    SAS -->|RFC/CSV| SAPP
+    SAPP --> FC & ZUP & SIZ & Platts
+    SAPP <-->|MT940/103| BV
+    SAPP <-->|XML| ISEF & NB
+    AVR <-->|API XML| SAPP
+    EA <-->|API| SAPP
+    UP <-->|SOAP/CMIS| SAPP & EA
+    Procu <-->|API JSON| ASUNSI & ISEZ
+    SP & SAPFIR -->|API/REST JSON| KHD
+
+    SAPFIR & ISOT & SDD & Procu & Team & Intranet & Compliance & KGIS & Alfresco --> AD
+    DLP & FUDO & EPASS & Zhyldyz --> AD
+    Exchange & FW -.-> DLP
+
+    classDef emgNet fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef kmgNet fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef ot fill:#fff3e0,stroke:#e65100
+    class NetEMG,CoreEMG,IM emgNet
+    class NetKMG,CorpIS,SAPBlock kmgNet
+    class ISUN,ASUTP,AGZU,KUUN,SDMO,KTM ot

@@ -491,7 +491,12 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     mmd_dir = Path(__file__).resolve().parents[1] / "docs" / "svg"
+    # Эти .mmd — справочные; .drawio собираются отдельными генераторами
+    skip_mmd = {"08-kmg-emg-corporate-networks.mmd"}
     for mmd in sorted(mmd_dir.glob("*.mmd")):
+        if mmd.name in skip_mmd:
+            print(f"SKIP {mmd.name} (use scripts/build_kmg_emg_network_diagram.py)")
+            continue
         out = convert_mmd(mmd)
         print(f"OK {mmd.name} -> {out}")
 
