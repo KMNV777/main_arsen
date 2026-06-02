@@ -1,0 +1,71 @@
+﻿Источник;Приёмник;Технология/частота;Группа
+SCADA ДЗО;MySQL ЭМГ;dbLink RT;ABAI-SCADA
+MySQL ЭМГ;MySQL КТМ;dbLink ≤5м;ABAI-SCADA
+MySQL КТМ;MySQL SCADA КМГ;dbLink ≤5м;ABAI-SCADA
+MySQL SCADA КМГ;ИС ABAI;ETL→abaiprot;ABAI-SCADA
+data.egov.kz;ИС ABAI;REST;ABAI
+Commodities-API;ИС ABAI;REST/сутки;ABAI
+AD КМГ;ИС ABAI;LDAP SSO;ABAI
+Модули ABAI;Модули ABAI;общая БД PG;ABAI
+abaiprot;pg-backup VM;pg_dump;ABAI
+Darcy;Techlog;API;ABAI
+SAP АНПЗ;АСДЦ;SOAP 2ч;АСДЦ
+1С ПНХЗ;АСДЦ;SOAP 2ч;АСДЦ
+1С ПКОП;АСДЦ;SOAP 2ч;АСДЦ
+MES АНПЗ;АСДЦ;TCP 15м;АСДЦ
+MES ПНХЗ;АСДЦ;TCP 15м;АСДЦ
+QlikSense;АСДЦ;TCP/сутки;АСДЦ
+nationalbank.kz;АСДЦ;HTTP/XML;АСДЦ
+АСДЦ;ИШ;REST;АСДЦ
+АСДЦ;КХД;REST;АСДЦ
+АСДЦ;KMG DATA;MS SQL SP;АСДЦ
+САПФИР;ЕСЭДО;SOAP 10м;САПФИР
+ЕСЭДО;САПФИР;SOAP 10м;САПФИР
+AD КМГ;САПФИР;LDAP;САПФИР
+SMTP;САПФИР;почта;САПФИР
+Directum Ario;САПФИР;захват;САПФИР
+AD КМГ;СДД;LDAP;СДД
+SMTP;СДД;уведомления;СДД
+НУЦ TSP;СДД;REST;СДД
+НУЦ OCSP;СДД;REST;СДД
+SAP S/4;СДД;BP/АВР;СДД
+СДД;ИСЭЗ;REST+ЭЦП;СДД
+СДД;ASR;HTTP/JSON;СДД
+СДД;Электронный архив;HTTP/JSON;СДД
+SAP S/4;Электронный архив;HTTP :1334;ЭА
+Kompra;Compliance Control;REST;Compliance
+AD КМГ;Compliance Control;REST/сутки;Compliance
+SAP;Compliance Control;SOAP 3×/сут;Compliance
+AD КМГ;BoardMaps;LDAP;BoardMaps
+SMTP;BoardMaps;SMTP;BoardMaps
+НУЦ TSP;BoardMaps;ЭЦП;BoardMaps
+AD КМГ;Team;LDAP;HR
+1С;Team;API;HR
+SAP КМГ;Team;API;HR
+Team;1С;отпуска/АО;HR
+Team;Work;вакансии;HR
+Work;Team;этапы;HR
+Qsamruk.kz;Work;редирект;HR
+Work;Qsamruk.kz;резюме;HR
+Прокторинг;Work;REST;HR
+AD;Bitrix ANPZ;LDAP;HR
+SAP;Bitrix ANPZ;API;HR
+Bitrix ANPZ;iJanet;API;HR
+Bitrix ANPZ;Work;API;HR
+AD;Bitrix Petrochem;LDAP;HR
+SAP;Bitrix Petrochem;API;HR
+Bitrix Petrochem;Work;API;HR
+AD;Bitrix КМКЛ;LDAP;HR
+SAP;Bitrix КМКЛ;API;HR
+Bitrix КМКЛ;Work;API;HR
+AD КМГ;ИСУП;LDAP;ИСУП
+КХД;ИСУП;запрос;ИСУП
+ИСУП;Power BI;дашборды;ИСУП
+SMTP;ИСУП;SMTP;ИСУП
+AD КМГ;Интранет SP;LDAP;ИСУП
+SMTP;Интранет SP;SMTP;ИСУП
+SAP Price;Procu/Price;REST;Закупки
+ГБД ЮЛ;Procu/Price;REST;Закупки
+AD КМГ;ИСОТ;LDAP;HSE
+ГБД ФЛ;Бюро пропусков;ESB;откл.
+HikVision;Бюро пропусков;REST 3с;откл.
