@@ -1,0 +1,543 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" agent="EMG-C4-Generator" version="22.1.0" type="device" pages="6">
+  <diagram id="emg-c4-context" name="01 — C4 Context">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-c_title" value="C4 Level 1 — System Context: АО «Эмбамунайгаз»" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="700" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_legend" value="🟢 в эксплуатации &amp;nbsp;|&amp;nbsp; 🟡 план развития &amp;nbsp;|&amp;nbsp; 🔴 отсутствует&lt;br/&gt;Источник: обследование ИТ-ландшафта ЭМГ" style="text;html=1;strokeColor=none;fillColor=#FAFAFA;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=11;fontColor=#37474F;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="20" width="480" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_prod" value="Производственный&lt;br/&gt;персонал" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="200" width="80" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_corp" value="Корпоративные&lt;br/&gt;пользователи" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="380" width="80" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_mgmt" value="Руководство" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="560" width="80" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_ext" value="Внешние&lt;br/&gt;пользователи" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="740" width="80" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_emg" value="ИТ-ландшафт ЭМГ&lt;br/&gt;&lt;br/&gt;Корпоративные и производственные&lt;br/&gt;информационные системы" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontColor=#1B5E20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="380" width="360" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_abai" value="ИС ABAI&lt;br/&gt;(КМГ)&lt;br/&gt;БД скважин, отчёты" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="180" width="200" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_kmg_cc" value="Корп. центр КМГ&lt;br/&gt;SMAX, план. КХД" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="320" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_kmg_eng" value="КМГ Инжиниринг&lt;br/&gt;ABAI, ИСУН" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="450" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_qazcloud" value="Qazcloud&lt;br/&gt;IaaS + ОЦИБ SOC" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="580" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_samruk" value="Самрук-Казына&lt;br/&gt;ИСЭЗ, ИСЗЗ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="710" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_vendors" value="Вендоры&lt;br/&gt;SAP, Schlumberger…" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="840" width="200" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e1" value="добыча, мониторинг" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_prod" target="emg-c4-c_emg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e2" value="учёт, СЭД, закупки" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_corp" target="emg-c4-c_emg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e3" value="отчётность" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_mgmt" target="emg-c4-c_emg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e4" value="emg.kz" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_ext" target="emg-c4-c_emg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e5" value="промысловые данные" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#2E7D32;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e6" value="ITSM, отчётность" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_kmg_cc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e7" value="ABAI, ИСУН" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_kmg_eng">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e8" value="размещение, SOC" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_qazcloud">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e9" value="закупки" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_samruk">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e10" value="лицензии" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_emg" target="emg-c4-c_vendors">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e11" value="сопровождение" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#7B1FA2;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_kmg_eng" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="emg-c4-container" name="02 — C4 Container">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-c_title" value="C4 Level 2 — Container: ИТ-ландшафт ЭМГ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="600" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_bound_emg" value="АО «Эмбамунайгаз»" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#455A64;fontColor=#263238;dashed=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="1500" height="900" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_prod" value="Производственный&lt;br/&gt;персонал" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_corp" value="Корпоративные&lt;br/&gt;пользователи" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_p_mgmt" value="Руководство" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_sap" value="SAP ERP&lt;br/&gt;🟢 FI, CO, MM, PM, TOPO, MDM&lt;br/&gt;☁️ Qazcloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="320" y="140" width="170" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_onec" value="1С 8.2 Зарплата&lt;br/&gt;🟡 план замены&lt;br/&gt;☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="520" y="140" width="150" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_directum" value="Directum СЭД&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="700" y="140" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_alfresco" value="Alfresco ECM&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="870" y="140" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_advanta" value="Advanta PM&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1040" y="140" width="130" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_portal" value="Портал emg.kz&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1200" y="140" width="130" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_portal_int" value="Внутр. портал&lt;br/&gt;🔴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1360" y="140" width="120" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_ofm" value="OFM / Жулдыз&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="320" y="260" width="150" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_situational" value="Ситуационный центр&lt;br/&gt;🟢 ☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="500" y="260" width="160" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_eng" value="Инженерное ПО&lt;br/&gt;Petrel, ArcGIS, Revit…&lt;br/&gt;🟢 Workstation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="690" y="260" width="200" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_scada" value="АСУ ТП / SCADA&lt;br/&gt;WinCC, DeltaV, Mirol&lt;br/&gt;🟢 🏭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="320" y="380" width="200" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_rtdb" value="БД реального времени&lt;br/&gt;Historian&lt;br/&gt;🟢 🏭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="550" y="380" width="180" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_monitor" value="Мониторинг&lt;br/&gt;ArgusPro, Wialon, PetroLine&lt;br/&gt;🟢 🏭/☁️" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="760" y="380" width="220" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_ib" value="ИБ: Kaspersky + Solar Dozor&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1020" y="380" width="200" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_plan" value="🔴 Планирование&lt;br/&gt;добычи / ГТМ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="320" y="520" width="160" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_anal" value="🔴 Произв. аналитика&lt;br/&gt;ГНО, заводнение, ИМ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="510" y="520" width="180" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_digital" value="🔴 Цифровое&lt;br/&gt;месторождение" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="720" y="520" width="150" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_dwh" value="🔴 КХД / BI&lt;br/&gt;(план КМГ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="900" y="520" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_esb" value="🔴 ESB&lt;br/&gt;point-to-point" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1070" y="520" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_eco" value="🔴 Экомониторинг" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1240" y="520" width="130" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_miss_kpi" value="🔴 Страт. KPI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-c_bound_emg">
+          <mxGeometry x="1400" y="520" width="120" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_abai" value="ИС ABAI (КМГ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="200" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_smax" value="SMAX ITSM (КМГ)&lt;br/&gt;🟢 с 2023" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="320" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_qazcloud" value="Qazcloud IaaS + SOC" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="440" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_kmg_eng" value="КМГ Инжиниринг" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="560" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_samruk" value="Самрук-Казына" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1900" y="680" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e1" value="HMI" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_prod" target="emg-c4-c_scada">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e2" value="данные" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_prod" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e3" value="учёт" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_corp" target="emg-c4-c_sap">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e4" value="ITSM" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_corp" target="emg-c4-c_smax">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e5" value="дашборды" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_mgmt" target="emg-c4-c_situational">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e6" value="анализ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_p_mgmt" target="emg-c4-c_ofm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e7" value="телеметрия" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_scada" target="emg-c4-c_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e8" value="🔴 не подтв." style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_rtdb" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e9" value="p2p" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_sap" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e10" value="архив" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_directum" target="emg-c4-c_alfresco">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e11" value="☁️ хостинг" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#0277BD;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_bound_emg" target="emg-c4-c_qazcloud">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-c_e12" value="сопровождение" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-c_kmg_eng" target="emg-c4-c_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="emg-c4-data" name="03 — C4 Data">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-d_title" value="C4 Level 2 — Данные и интеграции ЭМГ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="550" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_bound" value="Контур данных" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#455A64;fontColor=#263238;dashed=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="1700" height="750" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai_db" value="ABAI: Базы данных&lt;br/&gt;🟢 скважины, добыча&lt;br/&gt;6/58 отчётов" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="240" y="140" width="200" height="90" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai_aux" value="ABAI: расчёты&lt;br/&gt;🟡 вспомог." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="480" y="140" width="160" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai_nsi" value="ИС АСУ НСИ&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="670" y="140" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai_lab" value="Лабораторные&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="840" y="140" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai_pass" value="Паспортизация&lt;br/&gt;🟡 + SAP PM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="1010" y="140" width="160" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_sap_db" value="SAP ERP БД&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="240" y="280" width="160" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_onec_db" value="1С 8.2 БД&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="430" y="280" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_alf_db" value="Alfresco&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="600" y="280" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_rtdb" value="Historian RTDB&lt;br/&gt;🟢 🏭" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="770" y="280" width="160" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_tbd" value="ТБД (архив)&lt;br/&gt;⚫ с IV кв. 2024" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#78909C;fontColor=#37474F;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="960" y="280" width="160" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_miss_mdm" value="🔴 MDM / Data Office" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="240" y="420" width="180" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_miss_dwh" value="🔴 КХД / Data Lake&lt;br/&gt;(план КМГ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="450" y="420" width="180" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_miss_esb" value="🔴 ESB / API Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-d_bound">
+          <mxGeometry x="660" y="420" width="180" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_kmg_eng" value="КМГ Инжиниринг&lt;br/&gt;разработка ABAI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="140" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_p_analyst" value="Аналитик" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e1" value="отчёты" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_p_analyst" target="emg-c4-d_abai_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_abai_db" target="emg-c4-d_abai_aux">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e3" value="НСИ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_abai_db" target="emg-c4-d_abai_nsi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_abai_db" target="emg-c4-d_abai_lab">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_abai_db" target="emg-c4-d_abai_pass">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e6" value="p2p" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_sap_db" target="emg-c4-d_abai_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e7" value="🔴 источник?" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_onec_db" target="emg-c4-d_sap_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e8" value="🔴 не подтв." style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_rtdb" target="emg-c4-d_abai_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e9" value="миграция" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_tbd" target="emg-c4-d_abai_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e10" value="52 отчёта" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_kmg_eng" target="emg-c4-d_abai_db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="emg-c4-abai" name="04 — C4 ABAI">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-a_title" value="C4 Level 3 — Component: ИС ABAI (использование ЭМГ)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="600" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_bound" value="ИС ABAI (централизованная, КМГ)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#455A64;fontColor=#263238;dashed=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="1400" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_db_mod" value="Модуль «Базы данных»&lt;br/&gt;🟢 скважины, эксплуатация" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="240" y="150" width="220" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_reports" value="Отчётный модуль&lt;br/&gt;🟡 6/58 форм" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="500" y="150" width="180" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_calc" value="Аналит. расчёты&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="720" y="150" width="150" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_nsi" value="ИС АСУ НСИ&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="900" y="150" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_lab" value="Лабораторные&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="1080" y="150" width="140" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_passport" value="Паспортизация&lt;br/&gt;🟡" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="1260" y="150" width="150" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_gtm" value="Анализ ГТМ&lt;br/&gt;🔴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="240" y="300" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_gno" value="Подбор ГНО&lt;br/&gt;🔴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="410" y="300" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_water" value="Заводнение&lt;br/&gt;🔴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="580" y="300" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_im" value="Система ИМ&lt;br/&gt;🔴" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontColor=#B71C1C;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="750" y="300" width="140" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_support" value="Service Desk&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-a_bound">
+          <mxGeometry x="920" y="300" width="150" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_p_eng" value="Инженер ЭМГ" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_p_rep" value="Отчётность" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_kmg_eng" value="КМГ Инжиниринг" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="200" width="180" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_sap" value="SAP ERP PM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="350" width="150" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_scada" value="SCADA/DCS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="480" width="150" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e1" value="данные" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_p_eng" target="emg-c4-a_db_mod">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e2" value="расчёты" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_p_eng" target="emg-c4-a_calc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e3" value="отчёты" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_p_rep" target="emg-c4-a_reports">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e4" value="заявки" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_p_rep" target="emg-c4-a_support">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_db_mod" target="emg-c4-a_reports">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_db_mod" target="emg-c4-a_calc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_db_mod" target="emg-c4-a_nsi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e8" value="p2p" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_passport" target="emg-c4-a_sap">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e9" value="🔴" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_scada" target="emg-c4-a_db_mod">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e10" value="сопровождение" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_kmg_eng" target="emg-c4-a_db_mod">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-a_e11" value="доработка" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-a_kmg_eng" target="emg-c4-a_reports">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="emg-c4-ot" name="05 — C4 OT/SCADA">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-o_title" value="C4 Level 3 — Component: АСУ ТП и мониторинг (🏭 ЦОД)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="620" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_bound" value="Производственный контур" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#455A64;fontColor=#263238;dashed=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="1500" height="550" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_wincc" value="WinCC SCADA&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="240" y="140" width="130" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_deltav" value="DCS DeltaV&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="400" y="140" width="130" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_mirol" value="СДМО Mirol&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="560" y="140" width="130" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_wincc_oa" value="WINCC OA&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="720" y="140" width="130" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_rtdb" value="Historian RTDB&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="900" y="140" width="150" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_askue" value="АСКУЭ&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="240" y="260" width="120" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_petrol" value="PetroLine&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="390" y="260" width="120" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_video" value="Видеонаблюдение&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="540" y="260" width="140" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_argus" value="ArgusPro GPS&lt;br/&gt;🟢 с 2025" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="710" y="260" width="140" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_wialon" value="Wialon&lt;br/&gt;🟢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-o_bound">
+          <mxGeometry x="880" y="260" width="110" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_p_op" value="Оператор" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#1976D2;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_abai" value="ИС ABAI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1750" y="200" width="150" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_sap" value="SAP TOPO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="1">
+          <mxGeometry x="1750" y="350" width="150" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_p_op" target="emg-c4-o_wincc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_wincc" target="emg-c4-o_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_deltav" target="emg-c4-o_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_mirol" target="emg-c4-o_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_wincc_oa" target="emg-c4-o_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_askue" target="emg-c4-o_rtdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e7" value="🔴" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_rtdb" target="emg-c4-o_abai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-o_e8" value="🔴" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;dashed=1;strokeColor=#C62828;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-o_rtdb" target="emg-c4-o_sap">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="emg-c4-deploy" name="06 — C4 Deployment">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="emg-c4-d_title" value="C4 Deployment — размещение систем ЭМГ" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;fontColor=#263238;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="500" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_qaz_lane" value="Qazcloud IaaS (VMware)" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="700" height="400" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_sap" value="SAP ERP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="230" y="160" width="140" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_onec" value="1С 8.2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontColor=#E65100;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="400" y="160" width="120" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_directum" value="Directum" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="550" y="160" width="120" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_alfresco" value="Alfresco" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="230" y="260" width="120" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_portal" value="Портал emg.kz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="380" y="260" width="130" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_ib" value="Kaspersky + DLP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontColor=#1B5E20;" vertex="1" parent="emg-c4-d_qaz_lane">
+          <mxGeometry x="550" y="260" width="150" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_onprem_lane" value="Собственный ЦОД ЭМГ" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="200" y="550" width="700" height="350" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_scada_cl" value="Кластер АСУ ТП" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#FFF3E0;strokeColor=#E65100;fontColor=#BF360C;" vertex="1" parent="emg-c4-d_onprem_lane">
+          <mxGeometry x="230" y="600" width="300" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_mon_cl" value="Мониторинг (ArgusPro, PetroLine)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#FFF3E0;strokeColor=#E65100;fontColor=#BF360C;" vertex="1" parent="emg-c4-d_onprem_lane">
+          <mxGeometry x="560" y="600" width="280" height="80" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_kmg_lane" value="Инфраструктура КМГ" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="100" width="400" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_abai" value="ИС ABAI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="emg-c4-d_kmg_lane">
+          <mxGeometry x="1030" y="160" width="160" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_smax" value="SMAX ITSM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontColor=#4A148C;dashed=1;dashPattern=8 4;" vertex="1" parent="emg-c4-d_kmg_lane">
+          <mxGeometry x="1030" y="280" width="160" height="70" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_soc" value="ОЦИБ SOC" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;fontColor=#01579B;" vertex="1" parent="emg-c4-d_kmg_lane">
+          <mxGeometry x="1030" y="400" width="160" height="60" as="geometry" relative="0"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e1" value="VPN / защищённые каналы" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_onprem_lane" target="emg-c4-d_qaz_lane">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e2" value="корп. интеграции" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_qaz_lane" target="emg-c4-d_kmg_lane">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="emg-c4-d_e3" value="события ИБ" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;strokeColor=#5C6BC0;endArrow=block;endFill=1;" edge="1" parent="1" source="emg-c4-d_ib" target="emg-c4-d_soc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
