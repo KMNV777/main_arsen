@@ -1,0 +1,199 @@
+{
+  "_preset": {
+    "name": "1 vs 20 — Action-герой",
+    "format": "1v20",
+    "minoritySide": "red",
+    "majoritySide": "blue",
+    "importHint": "F2F Challenge Arena → Импорт настроек. red = меньшинство, blue = большинство."
+  },
+  "common": {
+    "warmupTimer": 300,
+    "requireAllParticipants": true,
+    "tracking": "TRACKING_MODE_POST_GAME",
+    "mode": {
+      "classicDefuse": {
+        "enabled": true
+      }
+    },
+    "economy": {
+      "startMoney": 200,
+      "maxMoney": 99999,
+      "overtimeMoney": 12500
+    },
+    "rounds": {
+      "roundCount": 10,
+      "roundTimeSeconds": 150,
+      "overtime": {
+        "enabled": false,
+        "maxOvertimes": 1,
+        "roundsPerOvertime": 6
+      }
+    }
+  },
+  "red": {
+    "weaponExcluded": [],
+    "defuseKit": "KIT_MODE_START_WITH",
+    "winCondition": {
+      "classic": {
+        "enabled": true
+      },
+      "consecutive": {
+        "winsNeeded": 2
+      }
+    },
+    "visuals": {
+      "wallhack": false,
+      "invisiblePlayers": false
+    },
+    "physics": {
+      "bhop": true,
+      "modelSize": {
+        "value": 0.8,
+        "enabled": true
+      },
+      "speedCharacter": {
+        "value": 1.45,
+        "enabled": true
+      },
+      "gravityModifier": {
+        "value": 0.9,
+        "enabled": true
+      }
+    },
+    "player": {
+      "hitboxes": {
+        "headOnly": false
+      },
+      "armor": {
+        "availableFromTheStart": true,
+        "type": "ARMOR_TYPE_VEST_HELMET"
+      },
+      "health": {
+        "hpValue": 700,
+        "missDamage": {
+          "missHpPercent": 0,
+          "missDamage": false
+        }
+      }
+    },
+    "weapons": {
+      "zoom": {
+        "enabled": true
+      },
+      "bullets": {
+        "infinityBulletWithReload": true
+      },
+      "grenades": {
+        "damageModifier": 1,
+        "radiusModifier": 1.5,
+        "infinite": {
+          "he": true,
+          "flash": true,
+          "smoke": true,
+          "decoy": false,
+          "molotov": false
+        }
+      }
+    }
+  },
+  "blue": {
+    "weaponExcluded": [
+      "WEAPON_DEAGLE",
+      "WEAPON_ELITE",
+      "WEAPON_FIVESEVEN",
+      "WEAPON_HKP2000",
+      "WEAPON_P250",
+      "WEAPON_TEC9",
+      "WEAPON_CZ75A",
+      "WEAPON_REVOLVER",
+      "WEAPON_USP_SILENCER",
+      "WEAPON_MAC10",
+      "WEAPON_P90",
+      "WEAPON_MP5SD",
+      "WEAPON_UMP45",
+      "WEAPON_BIZON",
+      "WEAPON_MP7",
+      "WEAPON_MP9",
+      "WEAPON_AK47",
+      "WEAPON_AUG",
+      "WEAPON_AWP",
+      "WEAPON_FAMAS",
+      "WEAPON_G3SG1",
+      "WEAPON_GALILAR",
+      "WEAPON_M4A1",
+      "WEAPON_M4A1_SILENCER",
+      "WEAPON_SCAR20",
+      "WEAPON_SG556",
+      "WEAPON_SSG08",
+      "WEAPON_M249",
+      "WEAPON_NEGEV",
+      "WEAPON_XM1014",
+      "WEAPON_MAG7",
+      "WEAPON_NOVA",
+      "WEAPON_SAWEDOFF"
+    ],
+    "defuseKit": "KIT_MODE_DEFAULT",
+    "winCondition": {
+      "classic": {
+        "enabled": true
+      },
+      "consecutive": {
+        "winsNeeded": 2
+      }
+    },
+    "visuals": {
+      "wallhack": false,
+      "invisiblePlayers": false
+    },
+    "physics": {
+      "bhop": false,
+      "modelSize": {
+        "value": 1,
+        "enabled": false
+      },
+      "speedCharacter": {
+        "value": 1,
+        "enabled": false
+      },
+      "gravityModifier": {
+        "value": 1,
+        "enabled": false
+      }
+    },
+    "player": {
+      "hitboxes": {
+        "headOnly": false
+      },
+      "armor": {
+        "availableFromTheStart": false,
+        "type": "ARMOR_TYPE_NONE"
+      },
+      "health": {
+        "hpValue": 60,
+        "missDamage": {
+          "missHpPercent": 0,
+          "missDamage": false
+        }
+      }
+    },
+    "weapons": {
+      "zoom": {
+        "enabled": true
+      },
+      "bullets": {
+        "infinityBulletWithReload": false
+      },
+      "grenades": {
+        "damageModifier": 1,
+        "radiusModifier": 1,
+        "infinite": {
+          "he": false,
+          "flash": false,
+          "smoke": false,
+          "decoy": false,
+          "molotov": false
+        }
+      }
+    }
+  }
+}

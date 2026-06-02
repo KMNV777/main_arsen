@@ -1,0 +1,183 @@
+{
+  "_preset": {
+    "name": "2 vs 10 — Дуэт против отряда",
+    "format": "2v10",
+    "minoritySide": "red",
+    "majoritySide": "blue",
+    "importHint": "F2F Challenge Arena → Импорт настроек. red = меньшинство, blue = большинство."
+  },
+  "common": {
+    "warmupTimer": 300,
+    "requireAllParticipants": true,
+    "tracking": "TRACKING_MODE_POST_GAME",
+    "mode": {
+      "classicDefuse": {
+        "enabled": true
+      }
+    },
+    "economy": {
+      "startMoney": 800,
+      "maxMoney": 32000,
+      "overtimeMoney": 12500
+    },
+    "rounds": {
+      "roundCount": 16,
+      "roundTimeSeconds": 115,
+      "overtime": {
+        "enabled": false,
+        "maxOvertimes": 1,
+        "roundsPerOvertime": 6
+      }
+    }
+  },
+  "red": {
+    "weaponExcluded": [],
+    "defuseKit": "KIT_MODE_DEFAULT",
+    "winCondition": {
+      "classic": {
+        "enabled": true
+      },
+      "consecutive": {
+        "winsNeeded": 3
+      }
+    },
+    "visuals": {
+      "wallhack": false,
+      "invisiblePlayers": false
+    },
+    "physics": {
+      "bhop": false,
+      "modelSize": {
+        "value": 0.9,
+        "enabled": true
+      },
+      "speedCharacter": {
+        "value": 1.3,
+        "enabled": true
+      },
+      "gravityModifier": {
+        "value": 1,
+        "enabled": false
+      }
+    },
+    "player": {
+      "hitboxes": {
+        "headOnly": false
+      },
+      "armor": {
+        "availableFromTheStart": true,
+        "type": "ARMOR_TYPE_VEST_HELMET"
+      },
+      "health": {
+        "hpValue": 300,
+        "missDamage": {
+          "missHpPercent": 0,
+          "missDamage": false
+        }
+      }
+    },
+    "weapons": {
+      "zoom": {
+        "enabled": true
+      },
+      "bullets": {
+        "infinityBulletWithReload": false
+      },
+      "grenades": {
+        "damageModifier": 1,
+        "radiusModifier": 1,
+        "infinite": {
+          "he": false,
+          "flash": true,
+          "smoke": true,
+          "decoy": false,
+          "molotov": false
+        }
+      }
+    }
+  },
+  "blue": {
+    "weaponExcluded": [
+      "WEAPON_AK47",
+      "WEAPON_AUG",
+      "WEAPON_AWP",
+      "WEAPON_FAMAS",
+      "WEAPON_G3SG1",
+      "WEAPON_GALILAR",
+      "WEAPON_M4A1",
+      "WEAPON_M4A1_SILENCER",
+      "WEAPON_SCAR20",
+      "WEAPON_SG556",
+      "WEAPON_SSG08",
+      "WEAPON_M249",
+      "WEAPON_NEGEV",
+      "WEAPON_XM1014",
+      "WEAPON_MAG7",
+      "WEAPON_NOVA",
+      "WEAPON_SAWEDOFF"
+    ],
+    "defuseKit": "KIT_MODE_DEFAULT",
+    "winCondition": {
+      "classic": {
+        "enabled": true
+      },
+      "consecutive": {
+        "winsNeeded": 3
+      }
+    },
+    "visuals": {
+      "wallhack": false,
+      "invisiblePlayers": false
+    },
+    "physics": {
+      "bhop": false,
+      "modelSize": {
+        "value": 1,
+        "enabled": false
+      },
+      "speedCharacter": {
+        "value": 1,
+        "enabled": false
+      },
+      "gravityModifier": {
+        "value": 1,
+        "enabled": false
+      }
+    },
+    "player": {
+      "hitboxes": {
+        "headOnly": false
+      },
+      "armor": {
+        "availableFromTheStart": false,
+        "type": "ARMOR_TYPE_NONE"
+      },
+      "health": {
+        "hpValue": 100,
+        "missDamage": {
+          "missHpPercent": 0,
+          "missDamage": false
+        }
+      }
+    },
+    "weapons": {
+      "zoom": {
+        "enabled": true
+      },
+      "bullets": {
+        "infinityBulletWithReload": false
+      },
+      "grenades": {
+        "damageModifier": 1,
+        "radiusModifier": 1,
+        "infinite": {
+          "he": false,
+          "flash": false,
+          "smoke": false,
+          "decoy": true,
+          "molotov": false
+        }
+      }
+    }
+  }
+}
