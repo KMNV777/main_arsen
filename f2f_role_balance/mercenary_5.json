@@ -1,0 +1,56 @@
+{
+  "76561198836236011": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "bio_patch_hp_v1",
+        "buff": {
+          "name": "knife_move_armor",
+          "armor_bonus": 10
+        },
+        "debuff": {
+          "name": "bio_patch_hp_v1_fire_vulnerability",
+          "damage_scale": 1.08,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 8,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "bio_regeneration",
+        "buff": {
+          "name": "bio_regeneration_knife_speed_bonus",
+          "velocity_modifier": 1.02
+        },
+        "debuff": {
+          "name": "primary_clip_cap",
+          "max_clip_scale": 0.95
+        }
+      },
+      {
+        "factory": "fast_network_v2",
+        "buff": {
+          "name": "silent_steps_low_health",
+          "health_threshold": 20
+        },
+        "debuff": {
+          "name": "radar_flicker",
+          "toggle_frames": 32,
+          "start_hidden": false
+        }
+      },
+      {
+        "factory": "mini_radar_v1",
+        "buff": {
+          "name": "mini_radar_v1_round_win_income"
+        },
+        "debuff": {
+          "name": "reload_click_sound",
+          "sound_name": "Buttons.snd15"
+        }
+      }
+    ]
+  }
+}
