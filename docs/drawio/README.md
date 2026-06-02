@@ -1,6 +1,12 @@
 # Draw.io-схемы архитектуры ЭМГ
 
-Редактируемые диаграммы в формате **`.drawio`** (diagrams.net / draw.io Desktop). Откройте файл двойным щелчком или через [app.diagrams.net](https://app.diagrams.net) → **File → Open**.
+Редактируемые диаграммы в формате **`.drawio`** (diagrams.net / draw.io Desktop). Файлы собраны с `host=app.diagrams.net` для совместимости с [diagrams.net](https://app.diagrams.net) и интеграцией **draw.io ↔ GitHub** в репозитории.
+
+**Как открыть**
+
+1. В GitHub: откройте `.drawio` → **Open with draw.io** (если приложение подключено к репозиторию).
+2. Локально: [app.diagrams.net](https://app.diagrams.net) → **File → Open from → Device**.
+3. Desktop: draw.io Desktop — двойной щелчок по файлу.
 
 Соответствуют SVG из [`../svg/`](../svg/) и разделам [`architecture-emg-integrations.md`](../architecture-emg-integrations.md).
 

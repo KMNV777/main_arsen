@@ -21,6 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from drawio_export import configure_drawio_file  # noqa: E402
+
 from build_emg_c4_component import (  # noqa: E402
     B,
     COMP_W,
@@ -71,7 +73,7 @@ ACTOR_STYLE = (
 
 
 def build() -> tuple[File, Diagram]:
-    f = File(file_name=DRAWIO_NAME, file_path=str(OUT_DIR))
+    f = configure_drawio_file(File(file_name=DRAWIO_NAME, file_path=str(OUT_DIR)))
     page = Page(file=f, name="КМГ + ЭМГ — корпоративные сети", width=2380, height=1380)
     d = Diagram(page)
 

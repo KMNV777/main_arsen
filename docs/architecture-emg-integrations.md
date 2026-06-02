@@ -36,7 +36,9 @@
 
 ## Общая архитектурная схема: корпоративные сети КМГ и ЭМГ
 
-**SVG:** [`svg/08-kmg-emg-corporate-networks.svg`](svg/08-kmg-emg-corporate-networks.svg) · **draw.io:** [`drawio/08-kmg-emg-corporate-networks.drawio`](drawio/08-kmg-emg-corporate-networks.drawio)
+**Формат draw.io (основной):** [`drawio/08-kmg-emg-corporate-networks.drawio`](drawio/08-kmg-emg-corporate-networks.drawio) — открыть в [diagrams.net](https://app.diagrams.net) или через интеграцию draw.io с GitHub в репозитории.
+
+**Просмотр без редактора:** [`svg/08-kmg-emg-corporate-networks.svg`](svg/08-kmg-emg-corporate-networks.svg)
 
 На схеме явно выделены два контура:
 

@@ -27,6 +27,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from drawpyo import File, Page
+
+from drawio_export import configure_drawio_file
 from drawpyo.diagram.edges import Edge
 from drawpyo.diagram.objects import Object
 
@@ -238,7 +240,7 @@ class Diagram:
 
 
 def build() -> Tuple[File, Diagram]:
-    f = File(file_name="09-emg-c4-component.drawio", file_path=str(OUT_DIR))
+    f = configure_drawio_file(File(file_name="09-emg-c4-component.drawio", file_path=str(OUT_DIR)))
     page = Page(file=f, name="C4 Component — ЭМГ", width=2240, height=1320)
     d = Diagram(page)
 

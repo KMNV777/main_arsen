@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 from drawpyo import File, Page
+
+from drawio_export import configure_drawio_file
 from drawpyo.diagram.edges import Edge
 from drawpyo.diagram.objects import Object
 
@@ -179,7 +181,7 @@ def build_diagram(
     page_w: int = 2400,
     page_h: int = 1800,
 ) -> File:
-    f = File(file_name=f"{title}.drawio", file_path=str(OUT_DIR))
+    f = configure_drawio_file(File(file_name=f"{title}.drawio", file_path=str(OUT_DIR)))
     page = Page(file=f, name=title, width=page_w, height=page_h)
 
     obj_map: Dict[str, Object] = {}
@@ -323,7 +325,7 @@ def build_diagram(
 
 def build_it_landscape_drawio() -> File:
     """Layered IT landscape (matches 06-it-landscape-general.svg)."""
-    f = File(file_name="06-it-landscape-general.drawio", file_path=str(OUT_DIR))
+    f = configure_drawio_file(File(file_name="06-it-landscape-general.drawio", file_path=str(OUT_DIR)))
     page = Page(file=f, name="ИТ-ландшафт ЭМГ", width=1520, height=1280)
     obj_map: Dict[str, Object] = {}
 
