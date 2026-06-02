@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="3.2. Интеграции АСДЦ (analytics)">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="SAP_ANPZ" value="&quot;SAP АНПЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ONE_PNHZ" value="&quot;1С ПНХЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ONE_PKOP" value="&quot;1С ПКОП&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MES_ANPZ" value="&quot;MES Honeywell АНПЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MES_PNHZ" value="&quot;MES ПНХЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="QLIK" value="&quot;QlikSense Кумколь&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="460" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="NB" value="&quot;nationalbank.kz&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="540" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ASDC" value="&quot;🟢 АСДЦ&lt;br/&gt;iis.thkmg.kz&lt;br/&gt;MS SQL 2014 + .NET/PHP/AngularJS&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="620" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="IS" value="&quot;ИШ (НПЗ/ДАЦ)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="KHD" value="&quot;КХД&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="KMGD" value="&quot;KMG DATA&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="860" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;SOAP/XML • каждые 2 ч&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAP_ANPZ" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;SOAP/XML • каждые 2 ч&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ONE_PNHZ" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;SOAP/XML • каждые 2 ч&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ONE_PKOP" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;TCP/IP byte • каждые 15 мин&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="MES_ANPZ" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;TCP/IP byte • каждые 15 мин&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="MES_PNHZ" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;TCP/IP • ежедневно&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="QLIK" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;HTTP/XML • ежедневно&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="NB" target="ASDC" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST API • номера вагонов&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ASDC" target="IS" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST API • переработка сырья&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ASDC" target="KHD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;MS SQL хранимые процедуры&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ASDC" target="KMGD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

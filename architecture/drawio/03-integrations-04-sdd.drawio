@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="3.4. Интеграции СДД (контракты)">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="AD" value="&quot;Active Directory КМГ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="SMTP" value="&quot;SMTP&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="TSP" value="&quot;НУЦ РК — TSP&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="OCSP" value="&quot;НУЦ РК — OCSP&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="SAP4" value="&quot;SAP S/4HANA&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ISEZ" value="&quot;ИСЭЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="460" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ASR" value="&quot;ASR&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="540" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="SDD" value="&quot;🟢 СДД&lt;br/&gt;contract.kmg.kz&lt;br/&gt;Patroni HA + K8s&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="620" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="EA" value="&quot;Электронный архив&lt;br/&gt;10.123.13.12&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;LDAP • ≤1 мин&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="AD" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;уведомления&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SMTP" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST • временная метка ЭЦП&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="TSP" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST • проверка отзыва ЭЦП&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="OCSP" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;Business Partner — RFC/REST&lt;br/&gt;ежедневно&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAP4" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;АВР (14 полей) — REST&lt;br/&gt;ежедневно&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAP4" target="SDD" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST + ЭЦП&lt;br/&gt;подписание АВР&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SDD" target="ISEZ" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;HTTP/JSON&lt;br/&gt;передача данных&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SDD" target="ASR" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;HTTP/JSON • по подписанию • ≤1 ч&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SDD" target="EA" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

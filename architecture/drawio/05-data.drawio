@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Карта данных по типам хранилищ">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="0b8c40c616" value="PG[&quot;🐘 PostgreSQL — основная СУБД ДПППС&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="220" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="d50e7768cb" value="MS[&quot;🪟 Microsoft SQL Server&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="220" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="2b1e609f80" value="MY[&quot;🐬 MySQL / MariaDB&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="920" width="220" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="9629ed8b9e" value="NO[&quot;📦 NoSQL&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1160" width="220" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="72a03ab8ae" value="BD[&quot;🔥 BigData / Аналитика (внутри ABAI)&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1240" width="220" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4cd362218" value="BI[&quot;📈 OLAP / BI&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="440" height="1620" as="geometry"/>
+        </mxCell>
+        <mxCell id="1a9272f99e" value="OBJ[&quot;🗄️ Объектное хранилище&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="200" width="220" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="83c3a594dc" value="CA[&quot;⚡ Кэш&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="440" width="220" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="0ab153f959" value="MQ[&quot;📨 Очереди сообщений&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="680" width="220" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="4d5c846984" value="LOG[&quot;🔍 Поиск / Логи&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="840" width="220" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="1b31ce49ce" value="BK[&quot;💿 Бэкапы&quot;]" style="swimlane;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="1000" width="220" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG1" value="&quot;abaiprot&lt;br/&gt;ABAI&lt;br/&gt;(единая для 17 модулей ⚠️)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG2" value="&quot;Patroni HA-кластер&lt;br/&gt;СДД&lt;br/&gt;10.123.13.120&lt;br/&gt;(HAProxy + master + etcd)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG3" value="&quot;PostgreSQL 17&lt;br/&gt;Procu / Price&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG4" value="&quot;ИСОТ • Work • АИСЭМ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG5" value="&quot;Электронный архив&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PG6" value="&quot;БДА (PostgreSQL 11)&lt;br/&gt;Бюро пропусков (PG 11)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0b8c40c616">
+          <mxGeometry x="60" y="460" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MS1" value="&quot;MS SQL 2014 ⚠️ EOL&lt;br/&gt;АСДЦ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="d50e7768cb">
+          <mxGeometry x="60" y="540" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MS2" value="&quot;MS SQL Server&lt;br/&gt;ИСУП (srv5243)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="d50e7768cb">
+          <mxGeometry x="60" y="620" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MS3" value="&quot;MS SQL Always On HA&lt;br/&gt;Failover Cluster&lt;br/&gt;Интранет (srv5054)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="d50e7768cb">
+          <mxGeometry x="60" y="700" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MS4" value="&quot;MS SQL Server&lt;br/&gt;BoardMaps&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="d50e7768cb">
+          <mxGeometry x="60" y="780" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MS5" value="&quot;MS SQL&lt;br/&gt;САПФИР&lt;br/&gt;(наряду с PostgreSQL)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="d50e7768cb">
+          <mxGeometry x="60" y="860" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MY1" value="&quot;MySQL/MariaDB&lt;br/&gt;Bitrix24-порталы&lt;br/&gt;Team / ANPZ / Petrochem / КМКЛ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="2b1e609f80">
+          <mxGeometry x="60" y="940" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MY2" value="&quot;MySQL для Bitrix-сайтов&lt;br/&gt;kmg.kz / kazgpz&lt;br/&gt;kmg-kumkol.kz (5.7.36)&lt;br/&gt;kpi.kz (8.0.30)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="2b1e609f80">
+          <mxGeometry x="60" y="1020" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MY3" value="&quot;⚠️ MySQL-цепочка SCADA-буферов&lt;br/&gt;ЭМГ → КТМ → SCADA сервер КМГ&lt;br/&gt;(dbLink)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="2b1e609f80">
+          <mxGeometry x="60" y="1100" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="N1" value="&quot;MongoDB&lt;br/&gt;Directum Insarco (САПФИР)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="9629ed8b9e">
+          <mxGeometry x="60" y="1180" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BD1" value="&quot;Apache Druid (OLAP)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="72a03ab8ae">
+          <mxGeometry x="60" y="1260" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BD2" value="&quot;Apache Spark 3.3.0&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="72a03ab8ae">
+          <mxGeometry x="60" y="1340" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BD3" value="&quot;Apache Kafka 3.2.1&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="72a03ab8ae">
+          <mxGeometry x="60" y="1420" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BD4" value="&quot;Hadoop / HDFS&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="72a03ab8ae">
+          <mxGeometry x="60" y="1500" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BI1" value="&quot;Power BI&lt;br/&gt;(ИСУП — дашборды)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="e4cd362218">
+          <mxGeometry x="60" y="1580" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BI2" value="&quot;Qlik / QlikSense&lt;br/&gt;(Procu/Price; источник АСДЦ)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="e4cd362218">
+          <mxGeometry x="280" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BI3" value="&quot;OLAP-DC (АСДЦ)&lt;br/&gt;kmgiis/kmgcab&lt;br/&gt;Win Server 2012 R2 ⚠️&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="e4cd362218">
+          <mxGeometry x="280" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="OBJ1" value="&quot;MinIO S3&lt;br/&gt;УТО (10.123.16.5)&lt;br/&gt;Procu/Price&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1a9272f99e">
+          <mxGeometry x="280" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="OBJ2" value="&quot;SeaweedFS S3 Gateway&lt;br/&gt;СДД&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1a9272f99e">
+          <mxGeometry x="280" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="OBJ3" value="&quot;s3.contract.kmg.kz&lt;br/&gt;(СДД)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1a9272f99e">
+          <mxGeometry x="280" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CA1" value="&quot;Redis&lt;br/&gt;СДД, Procu/Price,&lt;br/&gt;ИСОТ, Work, АИСЭМ,&lt;br/&gt;BoardMaps&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="83c3a594dc">
+          <mxGeometry x="280" y="460" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CA2" value="&quot;Memcached&lt;br/&gt;(сайт kmg-kumkol.kz)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="83c3a594dc">
+          <mxGeometry x="280" y="540" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="CA3" value="&quot;Distributed Cache SharePoint&lt;br/&gt;(Интранет, ИСУП)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="83c3a594dc">
+          <mxGeometry x="280" y="620" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MQ1" value="&quot;RabbitMQ&lt;br/&gt;ABAI, ИСОТ, Work,&lt;br/&gt;АИСЭМ, СДД, САПФИР&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0ab153f959">
+          <mxGeometry x="280" y="700" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="MQ2" value="&quot;Apache Kafka 3.2.1&lt;br/&gt;ABAI, Бюро пропусков&lt;br/&gt;(отключена)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="0ab153f959">
+          <mxGeometry x="280" y="780" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1" value="&quot;Elasticsearch + Kibana + Logstash&lt;br/&gt;САПФИР • СДД (10.123.13.126/127)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="4d5c846984">
+          <mxGeometry x="280" y="860" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2" value="&quot;Grafana + Prometheus&lt;br/&gt;СДД (10.123.13.128)&lt;br/&gt;(не во всех ИС)&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="4d5c846984">
+          <mxGeometry x="280" y="940" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BK1" value="&quot;pg-backupVM1 (172.20.102.253)&lt;br/&gt;pg-backupVM2 (172.20.102.254)&lt;br/&gt;⚠️ Test/QA окружение&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1b31ce49ce">
+          <mxGeometry x="280" y="1020" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BK2" value="&quot;vdc-KMG (QazCloud)&lt;br/&gt;еженедельные полные +&lt;br/&gt;ежедневные инкрем.&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1b31ce49ce">
+          <mxGeometry x="280" y="1100" width="180" height="60" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

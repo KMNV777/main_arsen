@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="3.5. Интеграции HR-кластера (Team / Work)">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="AD" value="&quot;Active Directory&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ONE" value="&quot;1С Финансы/HR&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="SAPK" value="&quot;SAP КМГ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="QSAM" value="&quot;Qsamruk.kz&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="PROCT" value="&quot;Модуль прокторинга&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="TEAM" value="&quot;🟢 Team (kmg.kz)&lt;br/&gt;Bitrix24&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="460" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="WORK" value="&quot;🟢 Work (work.kmg.kz)&lt;br/&gt;Django + Vue&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="540" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="BANPZ" value="&quot;🟢 Bitrix ANPZ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="620" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="IJ" value="&quot;iJanet АНПЗ&quot;" style="shape=rectangle;fillColor=#DAE8FC;strokeColor=#333333;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="700" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;LDAP • по расписанию&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="AD" target="TEAM" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API XML/JSON • по регламенту&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="ONE" target="TEAM" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API XML/JSON • по регламенту&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAPK" target="TEAM" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API • отпуска/командировки/АО&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="TEAM" target="ONE" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API • потребности, ДИ&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="TEAM" target="WORK" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;редирект регистрация/отклики&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="QSAM" target="WORK" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API • резюме, статусы&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="WORK" target="QSAM" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;REST API • тестирование&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="PROCT" target="WORK" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;LDAP&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="AD" target="BANPZ" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API XML/JSON&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="SAPK" target="BANPZ" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="BANPZ" target="IJ" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell value="&quot;API&quot;" style="endArrow=block;strokeColor=#666666;strokeWidth=2;" edge="1" source="BANPZ" target="WORK" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
