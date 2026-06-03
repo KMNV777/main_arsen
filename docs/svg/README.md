@@ -15,8 +15,9 @@
 | [`06-it-landscape-general.svg`](06-it-landscape-general.svg) | ландшафт | Общий ИТ-ландшафт по слоям L0-L5 | Базовая карта для руководителей: критичные системы и их связи в одном слайде. |
 | [`07-it-landscape-mermaid-detailed.svg`](07-it-landscape-mermaid-detailed.svg) | ландшафт | Детальная Mermaid-версия ландшафта | Нужна для детального разбора интеграций после обзорной презентации. |
 | [`10-kmg-emg-architecture.svg`](10-kmg-emg-architecture.svg) | §8 | **Сетевая топология КМГ + ЭМГ**: сегменты КСПД (КМГ / ЭМГ / НГДУ-ТСПД), транспорты ЕСПД и L2VPN, размещение систем и интеграции | Показывает, какие системы в каком сетевом контуре размещены и как сегменты связаны (ЕСПД, L2VPN). |
+| [`11-kmg-emg-c4-component.svg`](11-kmg-emg-c4-component.svg) | §8 (C4) | **C4 Component диаграмма КМГ + ЭМГ** по сетевым контурам: системы как «component», границы сетей, отношения с протоколами | Та же сетевая картина в нотации C4 для инженерного обсуждения интеграций. |
 
-Исходники Mermaid: `*.mmd` в этой папке. Файл `10-kmg-emg-architecture.svg` генерируется скриптом `scripts/build_kmg_emg_architecture.py` (Mermaid-исходника не имеет).
+Исходники Mermaid: `*.mmd` в этой папке. Файлы `10-kmg-emg-architecture.svg` и `11-kmg-emg-c4-component.svg` генерируются скриптами `scripts/build_kmg_emg_architecture.py` и `scripts/build_kmg_emg_c4_component.py` (Mermaid-исходника не имеют).
 
 Пересборка:
 

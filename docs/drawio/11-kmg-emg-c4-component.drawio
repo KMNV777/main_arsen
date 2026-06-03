@@ -1,0 +1,340 @@
+<mxfile host="Drawpyo" modified="2026-06-03T15:08:40" agent="Python 3.12, Drawpyo 0.23" version="21.6.5" type="device">
+  <diagram name="C4 Component — КМГ + ЭМГ (по сетевым контурам)" id="139629305686080">
+    <mxGraphModel dx="2037" dy="830" grid="1" gridSize="10" guides="1" toolTips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1640" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="139629303937552" value="Граница сети: КСПД КМГ — корпоративная сеть АО НК «КазМунайГаз» (доступ ЭМГ по ЕСПД)" style="rounded=1;html=1;dashed=1;dashPattern=10 6;fillColor=#F2F6FC;strokeColor=#1565C0;strokeWidth=2;verticalAlign=top;align=left;fontStyle=1;fontSize=15;fontColor=#0D3C78;spacingLeft=14;spacingTop=8;;" vertex="1" parent="1">
+  <mxGeometry x="40" y="120" width="1880" height="410" as="geometry" />
+</mxCell>
+        <mxCell id="139629307019136" value="Граница сети: КСПД ЭМГ — АУП АО «Эмбамунайгаз»" style="rounded=1;html=1;dashed=1;dashPattern=10 6;fillColor=#F1FAF1;strokeColor=#2E7D32;strokeWidth=2;verticalAlign=top;align=left;fontStyle=1;fontSize=15;fontColor=#1B5E20;spacingLeft=14;spacingTop=8;;" vertex="1" parent="1">
+  <mxGeometry x="40" y="610" width="1880" height="540" as="geometry" />
+</mxCell>
+        <mxCell id="139629306986224" value="Граница сети: ТСПД НГДУ — производственная сеть (доступ по L2VPN)" style="rounded=1;html=1;dashed=1;dashPattern=10 6;fillColor=#FFF8EF;strokeColor=#D9760A;strokeWidth=2;verticalAlign=top;align=left;fontStyle=1;fontSize=15;fontColor=#8A4B00;spacingLeft=14;spacingTop=8;;" vertex="1" parent="1">
+  <mxGeometry x="40" y="1230" width="1880" height="350" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938176" value="Внешние системы (интернет)" style="rounded=1;html=1;dashed=1;dashPattern=10 6;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=2;verticalAlign=top;align=left;fontStyle=1;fontSize=13;fontColor=#555;spacingLeft=12;spacingTop=8;;" vertex="1" parent="1">
+  <mxGeometry x="1960" y="610" width="380" height="360" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938272" value="Пользователи&#xa;АУП ЭМГ / КЦ КМГ&#xa;[АРМ, браузер]" style="rounded=12;whiteSpace=wrap;html=1;fillColor=#08427B;strokeColor=#073B6F;fontColor=#ffffff;fontStyle=1;verticalAlign=middle;align=center;fontSize=11;;" vertex="1" parent="1">
+  <mxGeometry x="980" y="30" width="280" height="70" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938464" value="ИС КЦ КМГ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="70" y="180" width="198" height="216" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938560" value="«component»&#xa;ИС ABAI" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B3C7E6;strokeColor=#3F5F8F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="214" width="170" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938800" value="«component»&#xa;ИСУН" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B3C7E6;strokeColor=#3F5F8F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="274" width="170" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938944" value="«component»&#xa;SAP ERP" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B3C7E6;strokeColor=#3F5F8F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="334" width="170" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629303939040" value="Платформа Nedra Digital" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="300" y="180" width="342" height="216" as="geometry" />
+</mxCell>
+        <mxCell id="139629296582832" value="«component»&#xa;MES Nedra Digital" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="314" y="214" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583072" value="«component»&#xa;Data Loader" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="478" y="214" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583216" value="«component»&#xa;Twin" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="314" y="274" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583360" value="«component»&#xa;WWO" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="478" y="274" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583504" value="«component»&#xa;INFRAPLAN" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="314" y="334" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583648" value="«component»&#xa;Pipe" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#B0E3E6;strokeColor=#0E8088;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="478" y="334" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629303938608" value="Служба каталогов" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="706" y="180" width="238" height="96" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583744" value="«component»&#xa;Active Directory" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E08A00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="720" y="214" width="210" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296583840" value="Иные корпоративные сервисы КМГ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="968" y="180" width="342" height="276" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584080" value="«component»&#xa;ИСОТ / ЭНД" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="982" y="214" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584320" value="«component»&#xa;Портал Team" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1146" y="214" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584416" value="«component»&#xa;Интранет" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="982" y="274" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584608" value="«component»&#xa;ИСУП" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1146" y="274" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584704" value="«component»&#xa;Compliance" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="982" y="334" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584896" value="«component»&#xa;КХД АО НК КМГ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1146" y="334" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584992" value="«component»&#xa;АСУ НСИ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="982" y="394" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585184" value="«component»&#xa;ИСЭЗ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1146" y="394" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585280" value="Контрагенты и котировки" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="1990" y="660" width="328" height="336" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585472" value="«component»&#xa;Нацбанк" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#9E9E9E;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="2004" y="694" width="300" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585616" value="«component»&#xa;БВУ (банки)" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#9E9E9E;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="2004" y="754" width="300" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585760" value="«component»&#xa;ИС ЭСФ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#9E9E9E;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="2004" y="814" width="300" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296585904" value="«component»&#xa;Platts.com" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#9E9E9E;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="2004" y="874" width="300" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586048" value="«component»&#xa;СИЗ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#9E9E9E;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="2004" y="934" width="300" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296584128" value="Ядро ЭМГ · OT-хаб" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="70" y="670" width="208" height="216" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586240" value="«component»&#xa;ИМ · cmv2&#xa;10.32.10.99" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#5C9A4F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="704" width="180" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586480" value="«component»&#xa;MES система ЭМГ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#5C9A4F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="764" width="180" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586624" value="«component»&#xa;АСДЦ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#5C9A4F;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="824" width="180" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586288" value="Производственные серверы ЭМГ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="310" y="670" width="342" height="156" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586816" value="«component»&#xa;Жулдыз" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#519657;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="324" y="704" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587056" value="«component»&#xa;КГИС" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#519657;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="488" y="704" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587200" value="«component»&#xa;SAS-FM" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#519657;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="324" y="764" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587344" value="«component»&#xa;SAP (контур ЭМГ)" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#519657;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="488" y="764" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296586864" value="Бизнес-приложения ЭМГ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="700" y="670" width="358" height="336" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587536" value="«component»&#xa;Alfresco (ЭА)" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="714" y="704" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587776" value="«component»&#xa;1С (зарплата)" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="886" y="704" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587920" value="«component»&#xa;Directum / САПФИР" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="714" y="764" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588064" value="«component»&#xa;E-Pass" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="886" y="764" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588208" value="«component»&#xa;sPoint" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="714" y="824" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588352" value="«component»&#xa;Procu / Price" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="886" y="824" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588496" value="«component»&#xa;AVR+" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="714" y="884" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588640" value="«component»&#xa;ПК «Управление&#xa;персоналом»" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="886" y="884" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588784" value="«component»&#xa;Argus Pro" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="714" y="944" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296588928" value="«component»&#xa;ИС «УТО ЭМГ»" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#DCEAF7;strokeColor=#6C8EBF;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="886" y="944" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589072" value="Информационная безопасность ЭМГ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="1090" y="670" width="342" height="216" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589216" value="«component»&#xa;PetroLine" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1104" y="704" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589360" value="«component»&#xa;Solar Dozor" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1268" y="704" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589504" value="«component»&#xa;FUDO PAM" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1104" y="764" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589648" value="«component»&#xa;MS Exchange" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1268" y="764" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589792" value="«component»&#xa;Forcepoint WG" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="1104" y="824" width="150" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296589168" value="АСУ ТП «Кайнармунайгаз» (В. Молдабек)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="70" y="1290" width="358" height="216" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590032" value="«component»&#xa;OPC server" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="1324" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590272" value="«component»&#xa;АСУТП сервер" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="256" y="1324" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590416" value="«component»&#xa;КУУН НПС-3" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="1384" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590560" value="«component»&#xa;ТМ АГЗУ" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="256" y="1384" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590704" value="«component»&#xa;СДМО" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="84" y="1444" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590848" value="«component»&#xa;Коллектор данных" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="256" y="1444" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296587584" value="АСУ ТП «Жылыоймунайгаз» (С. Нуржанова, Прорва)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#8497B0;verticalAlign=top;align=left;fontStyle=1;fontSize=11;fontColor=#23364B;spacingLeft=8;spacingTop=5;;" vertex="1" parent="1">
+  <mxGeometry x="680" y="1290" width="358" height="156" as="geometry" />
+</mxCell>
+        <mxCell id="139629296590944" value="«component»&#xa;OPC server" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="694" y="1324" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296591232" value="«component»&#xa;АСУТП сервер" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="866" y="1324" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296591376" value="«component»&#xa;КУУН" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="694" y="1384" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296591520" value="«component»&#xa;Коллектор данных" style="shape=module;jettyWidth=12;jettyHeight=6;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=8;verticalAlign=middle;align=center;spacingLeft=4;spacingRight=2;;" vertex="1" parent="1">
+  <mxGeometry x="866" y="1384" width="158" height="50" as="geometry" />
+</mxCell>
+        <mxCell id="139629296591040" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0.0;exitX=0.5;exitY=1.0;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938272" target="139629303938560" value="Работает с [HTTPS]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="1120" y="110" />
+<mxPoint x="158" y="110" />
+<mxPoint x="158" y="180" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629304848048" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0.0;exitX=0.5;exitY=1.0;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938272" target="139629296586864" value="Работает с [HTTPS]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="1120" y="120" />
+<mxPoint x="779" y="120" />
+<mxPoint x="779" y="670" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296591808" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.4;entryY=1.0;exitX=0.5;exitY=0.0;strokeColor=#E8710A;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296589168" target="139629296586240" value="Передаёт телеметрию [OPC UA/DA, Modbus, SQL]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="249" y="1180" />
+<mxPoint x="150" y="1180" />
+<mxPoint x="150" y="920" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296592096" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.6;entryY=1.0;exitX=0.5;exitY=0.0;strokeColor=#E8710A;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296587584" target="139629296586240" value="Передаёт телеметрию [OPC UA / SQL]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="859" y="1170" />
+<mxPoint x="172" y="1170" />
+<mxPoint x="172" y="924" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296592384" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0.0;exitX=0.0;exitY=0.5;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938560" target="139629296586240" value="Фонд скважин, режимы [SQL · 08:00/13:30/18:00]">
+  <mxGeometry x="-0.31999999999999995" relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="52" y="205" />
+<mxPoint x="52" y="640" />
+<mxPoint x="160" y="640" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296592672" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0.0;exitX=0.0;exitY=0.5;startArrow=classic;startFill=1;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938944" target="139629296587344" value="Финансы/кадры [SAP PO · SOAP · RFC · CSV · API]">
+  <mxGeometry x="-0.07999999999999996" relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="60" y="355" />
+<mxPoint x="60" y="642" />
+<mxPoint x="385" y="642" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296592960" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;dashed=1;dashPattern=8 8;rounded=0;jettySize=auto;entryX=0.5;entryY=0.0;exitX=0.5;exitY=1.0;strokeColor=#7E8896;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296583744" target="139629296586864" value="Аутентификация [LDAP]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="811" y="560" />
+<mxPoint x="815" y="560" />
+<mxPoint x="815" y="642" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296593248" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=1.0;exitX=1.0;exitY=0.5;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296588208" target="139629296584896" value="Наряды-допуски [REST/API JSON]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="1330" y="779" />
+<mxPoint x="1330" y="560" />
+<mxPoint x="1118" y="560" />
+<mxPoint x="1118" y="438" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296593536" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=1.0;exitX=1.0;exitY=0.5;startArrow=classic;startFill=1;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296588352" target="139629296584992" value="НСИ/закупки [API JSON]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="1345" y="753" />
+<mxPoint x="1345" y="540" />
+<mxPoint x="1043" y="540" />
+<mxPoint x="1043" y="438" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296593872" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=1.0;exitX=1.0;exitY=0.6;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629296588928" target="139629303938944" value="Транспорт → SAP [SOAP XML]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="1360" y="804" />
+<mxPoint x="1360" y="500" />
+<mxPoint x="66" y="500" />
+<mxPoint x="66" y="372" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296594208" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.0;entryY=0.5;exitX=1.0;exitY=0.5;startArrow=classic;startFill=1;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938944" target="139629296585472" value="Курсы, выписки, ЭСФ, котировки [XML/MT940/API]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="258" y="496" />
+<mxPoint x="1958" y="496" />
+<mxPoint x="1958" y="700" />
+<mxPoint x="1990" y="700" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296594544" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.0;entryY=0.5;exitX=1.0;exitY=0.4;strokeColor=#1565C0;jumpStyle=arc;jumpSize=8;" edge="1" parent="1" source="139629303938560" target="139629296584080" value="СИЗ, нарушения, добыча [REST/SMTP]">
+  <mxGeometry relative="1" as="geometry">
+<Array as="points">
+<mxPoint x="940" y="212" />
+<mxPoint x="940" y="222" />
+</Array>
+</mxGeometry>
+</mxCell>
+        <mxCell id="139629296594880" value="Легенда C4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#999999;verticalAlign=middle;align=left;fontStyle=1;spacingLeft=10;fontSize=11;;" vertex="1" parent="1">
+  <mxGeometry x="40" y="1600" width="2300" height="30" as="geometry" />
+</mxCell>
+        <mxCell id="139629296595168" value="«component» — система (узел C4).  Пунктирные рамки — границы сетей (КСПД КМГ / ЭМГ / ТСПД НГДУ) и внешний контур.  Синие стрелки — интеграции данных (с протоколом), оранжевые — телеметрия OT, серый пунктир — LDAP, двойная стрелка — двусторонний обмен.  Цвет узла = функциональная группа.  Транспорт между сетями: КМГ↔ЭМГ — ЕСПД, ЭМГ↔НГДУ — L2VPN (на C4 показан подписями связей)." style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#5A5A5A;spacingLeft=8;;" vertex="1" parent="1">
+  <mxGeometry x="360" y="1600" width="1980" height="30" as="geometry" />
+</mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

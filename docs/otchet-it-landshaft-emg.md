@@ -10,6 +10,7 @@
 | Документ | Содержание |
 |----------|------------|
 | [`svg/10-kmg-emg-architecture.svg`](svg/10-kmg-emg-architecture.svg) | Сетевая топология КМГ + ЭМГ: сегменты КСПД (КМГ / ЭМГ / НГДУ-ТСПД), транспорты ЕСПД и L2VPN, интеграции (см. § 4) |
+| [`svg/11-kmg-emg-c4-component.svg`](svg/11-kmg-emg-c4-component.svg) | C4 Component диаграмма КМГ + ЭМГ по сетевым контурам: системы как «component», границы сетей, отношения с протоколами (см. § 4) |
 | [`svg/09-emg-c4-component.svg`](svg/09-emg-c4-component.svg) | Единая C4 Component диаграмма ЭМГ — 48 потоков (см. § 4.4) |
 | [`svg/03-abai-im-architecture.svg`](svg/03-abai-im-architecture.svg) | Архитектура ИМ / ABAI — сбор телеметрии (см. § 4.2) |
 | [`svg/04-sap-erp-integrations.svg`](svg/04-sap-erp-integrations.svg) | Интеграции SAP ERP (см. § 4.1) |
