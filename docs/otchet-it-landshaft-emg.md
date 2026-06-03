@@ -4,6 +4,8 @@
 **Месторождение В. Молдабек** (НГДУ «Кайнармунайгаз») · **Месторождение С. Нуржанова** (НГДУ «Жылыоймунайгаз»)
 **Блок:** UPSTREAM АО НК «КазМунайГаз».
 
+> **DOCX-версия отчёта:** [`otchet-it-landshaft-emg.docx`](otchet-it-landshaft-emg.docx) (генерируется из этого Markdown: `python3 scripts/export_otchet_docx.py`).
+
 > **Актуализация:** документ синхронизирован с реестром интеграций ([`it-landscape-emg-registry.md`](it-landscape-emg-registry.md)) и архитектурными схемами ([`architecture-emg-integrations.md`](architecture-emg-integrations.md)). Учтены изменения: ТБД выведена и заменена ИС ABAI (Q4 2024); CityPoint заменён Argus Pro (2025); Documentum выведен из эксплуатации — архив на платформе Азия-Софт; SMAX (ITSM) эксплуатируется с 2023 г.; добавлен внешний SOC — ОЦИБ Qazcloud.
 
 **Связанные схемы:**
