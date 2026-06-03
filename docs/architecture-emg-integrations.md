@@ -10,6 +10,8 @@
 | **Схемы-изображения** (PDF) | Визуальные карты автоматизации (см. раздел 6) |
 
 > **Общий ИТ-ландшафт:** [`it-landscape-emg.md`](it-landscape-emg.md) · **SVG:** [`it-landscape-emg-general.svg`](it-landscape-emg-general.svg) · **draw.io:** [`drawio/it-landscape-emg-general.drawio`](drawio/it-landscape-emg-general.drawio)
+>
+> **Полный отчёт по исследованию ИТ-ландшафта ЭМГ (актуализированный):** [`otchet-it-landshaft-emg.md`](otchet-it-landshaft-emg.md)
 
 ## Все схемы: draw.io (редактируемые) и SVG
 

@@ -268,7 +268,7 @@ def build() -> Tuple[File, Diagram]:
     _, dk = d.container(
         "Документооборот, архив, КХД", 1090, 720,
         [("СЭД Directum /\nСАПФИР", "doc"), ("Alfresco (ЭА)", "doc"),
-         ("Электронный архив\nDocumentum", "doc"), ("КХД АО НК КМГ", "doc")],
+         ("Электронный архив\n(Азия-Софт)", "doc"), ("КХД АО НК КМГ", "doc")],
         cols=1, comp_w=300,
     )
     _, erp = d.container(
@@ -307,7 +307,7 @@ def build() -> Tuple[File, Diagram]:
     ISOT = tr["ИСОТ / ЭНД"]
     ARGUS = tr["Argus Pro (GPS)"]
     SAPFIR = dk["СЭД Directum /\nСАПФИР"]
-    DOCM = dk["Электронный архив\nDocumentum"]
+    DOCM = dk["Электронный архив\n(Азия-Софт)"]
     KHD = dk["КХД АО НК КМГ"]
     SAP = erp["SAP ERP"]
     AVR = erp["AVR"]
