@@ -15,6 +15,16 @@
 | [`06-it-landscape-general.drawio`](06-it-landscape-general.drawio) | ландшафт | Общий ИТ-ландшафт по слоям L0-L5 | Базовая карта для обсуждения приоритетов развития и критичных зависимостей ИТ-ландшафта. |
 | [`it-landscape-emg-general.drawio`](it-landscape-emg-general.drawio) | ландшафт | То же, что `06` (для [`it-landscape-emg.md`](../it-landscape-emg.md)) | Та же бизнес-картина в альтернативном файле для основного обзорного документа. |
 | [`07-it-landscape-mermaid-detailed.drawio`](07-it-landscape-mermaid-detailed.drawio) | ландшафт | Детальная версия из `it-landscape-emg.mmd` | Используется, когда нужно перейти от общей картины к конкретным интеграционным потокам. |
+| [`10-kmg-emg-architecture.drawio`](10-kmg-emg-architecture.drawio) | §8 | **Общая архитектура КМГ + ЭМГ** (генератор `scripts/build_kmg_emg_architecture.py`) | Выделены корпоративная сеть КМГ и сеть ЭМГ; кросс-сетевые интеграции проходят через канал между контурами. |
+
+## Общая архитектура КМГ + ЭМГ (отдельный генератор)
+
+`10-kmg-emg-architecture.drawio` строится воспроизводимым скриптом: две сети (зелёный контур ЭМГ, синий контур КМГ), функциональные контейнеры с системами и проброшенные интеграции (кросс-сетевые — оранжевым).
+
+```bash
+pip install -r requirements.txt
+python3 scripts/build_kmg_emg_architecture.py
+```
 
 ## Пересборка из Mermaid
 

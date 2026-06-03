@@ -1,1 +1,2 @@
 drawpyo==0.2.5
+matplotlib>=3.7  # статичный SVG/PNG-просмотр для генераторов схем (scripts/build_*.py)
