@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Женя Чухрей — Резюме</title>
+<style>
+  :root {
+    --ink: #111111;
+    --muted: #6b6b6b;
+    --line: #e2e2e2;
+    --accent: #1a1a1a;
+    --page-pad: 14mm;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: #f3f3f3;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 16px auto;
+    background: #ffffff;
+    padding: var(--page-pad);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 12mm;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  /* Header spans both columns */
+  header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 6mm;
+    margin-bottom: 7mm;
+  }
+
+  .name {
+    font-size: 30pt;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .role {
+    font-size: 10.5pt;
+    color: var(--muted);
+    margin-top: 3mm;
+    letter-spacing: 0.4px;
+  }
+
+  .contacts {
+    text-align: right;
+    font-size: 9pt;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .contacts a { color: var(--ink); text-decoration: none; }
+  .contacts .label { color: var(--muted); }
+
+  .col { display: flex; flex-direction: column; gap: 6.5mm; }
+
+  section h2 {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--muted);
+    margin-bottom: 3mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .item { margin-bottom: 3.2mm; }
+  .item:last-child { margin-bottom: 0; }
+
+  .item .when {
+    font-size: 8pt;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+  .item .what {
+    font-size: 10pt;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 0.5mm;
+  }
+  .item .desc {
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.35;
+    margin-top: 0.5mm;
+  }
+
+  .lead {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6mm;
+    margin-top: 2.5mm;
+  }
+  .tags span {
+    font-size: 8pt;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1mm 2mm;
+    color: var(--ink);
+    background: #fafafa;
+  }
+
+  .skill-group { margin-bottom: 2.6mm; }
+  .skill-group .k {
+    font-size: 8pt;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .skill-group .v {
+    font-size: 9pt;
+    line-height: 1.4;
+    margin-top: 0.4mm;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm 6mm;
+  }
+  .meta-grid .k {
+    font-size: 8pt;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .meta-grid .v {
+    font-size: 9.5pt;
+    font-weight: 600;
+    margin-top: 0.6mm;
+  }
+
+  .clients {
+    font-size: 8.8pt;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  footer {
+    grid-column: 1 / -1;
+    margin-top: 6mm;
+    padding-top: 3mm;
+    border-top: 1px solid var(--line);
+    font-size: 7.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="name">Женя Чухрей</div>
+        <div class="role">Коммуникационный дизайнер · Бренд, арт-дирекшн, нейростиль</div>
+      </div>
+      <div class="contacts">
+        <div><span class="label">Email</span> <a href="mailto:chukrei.ev@yandex.ru">chukrei.ev@yandex.ru</a></div>
+        <div><span class="label">Instagram</span> <a href="https://www.instagram.com/zhenyachoo">@zhenyachoo</a></div>
+        <div><span class="label">Портфолио</span> <a href="https://zhenyachoo.ru/">zhenyachoo.ru</a></div>
+        <div><span class="label">Гео</span> СПб · Москва · Нью-Йорк · Дубай</div>
+      </div>
+    </header>
+
+    <!-- LEFT COLUMN -->
+    <div class="col">
+      <section>
+        <h2>О себе</h2>
+        <p class="lead">
+          Коммуникационный дизайнер с опытом 5+ лет. Работаю с проектами в сфере
+          технологий (IT, automotive) и культуры (искусство, образование) —
+          от стратегии бренда до финальной реализации.
+        </p>
+      </section>
+
+      <section>
+        <h2>Опыт работы</h2>
+        <div class="item">
+          <div class="when">2024 — 2026</div>
+          <div class="what">Атом</div>
+          <div class="desc">Дизайнер. Первый российский серийный электромобиль.</div>
+        </div>
+        <div class="item">
+          <div class="when">2023 — 2024</div>
+          <div class="what">Pickles Marketing Team</div>
+          <div class="desc">Дизайнер маркетингового агентства.</div>
+        </div>
+        <div class="item">
+          <div class="when">2021 — сейчас</div>
+          <div class="what">Проектная деятельность</div>
+          <div class="desc">Брендинг и арт-дирекшн для tech- и арт-проектов.</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Образование</h2>
+        <div class="item">
+          <div class="when">2020 — 2024</div>
+          <div class="what">Школа Дизайна НИУ ВШЭ (СПб)</div>
+          <div class="desc">Бакалавриат «Коммуникационный дизайн».</div>
+        </div>
+        <div class="item">
+          <div class="when">2025</div>
+          <div class="what">View.Found — Мастерская фотографии</div>
+        </div>
+        <div class="item">
+          <div class="when">2023</div>
+          <div class="what">Sens.collective — Контент-маркетинг</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Языки</h2>
+        <p class="lead">English — C1 · Deutsch — C1 · Русский — родной</p>
+      </section>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col">
+      <section>
+        <h2>Направления</h2>
+        <div class="tags">
+          <span>Брендинг</span>
+          <span>Айдентика</span>
+          <span>Веб-дизайн</span>
+          <span>Моушн-дизайн</span>
+          <span>Презентации</span>
+          <span>Печатная продукция</span>
+          <span>Мерч</span>
+          <span>SMM</span>
+          <span>Реклама</span>
+          <span>Нейростиль</span>
+          <span>Фотография</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Навыки и инструменты</h2>
+        <div class="skill-group">
+          <div class="k">Дизайн</div>
+          <div class="v">Figma · Adobe Creative Cloud (Photoshop, Illustrator, Lightroom, InDesign, Premiere Pro, After Effects)</div>
+        </div>
+        <div class="skill-group">
+          <div class="k">Web / no-code</div>
+          <div class="v">Readymag · Tilda</div>
+        </div>
+        <div class="skill-group">
+          <div class="k">3D</div>
+          <div class="v">Blender</div>
+        </div>
+        <div class="skill-group">
+          <div class="k">Нейросети</div>
+          <div class="v">Midjourney · Nano Banana · Runway</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Кратко</h2>
+        <div class="meta-grid">
+          <div>
+            <div class="k">На рынке</div>
+            <div class="v">5+ лет</div>
+          </div>
+          <div>
+            <div class="k">Индустрии</div>
+            <div class="v">Tech · Культура</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Компании и клиенты</h2>
+        <p class="clients">
+          Атом · Drivo · Car2Sell · Beck Kamolov · Чудоквест ·
+          Федерация компьютерного спорта · Sturm Curatory Group ·
+          Arts Square Gallery · Cube.Moscow · Эрарта · Anna Nova · Пассаж
+        </p>
+      </section>
+    </div>
+
+    <footer>
+      <span>Женя Чухрей · Коммуникационный дизайнер</span>
+      <span>chukrei.ev@yandex.ru · zhenyachoo.ru</span>
+    </footer>
+  </div>
+</body>
+</html>
