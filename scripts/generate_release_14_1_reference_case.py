@@ -574,6 +574,7 @@ def main() -> None:
     "---",
     "",
     "*Документ: эталонный кейс релиза 14.1. Версия 1.0. Процесс 2.0 (оптимизированный).*",
+    "*PDF: `docs/release-14.1-reference-case.pdf` — сборка: `./scripts/build_release_14_1_pdf.sh`*",
     "",
   ]
 
