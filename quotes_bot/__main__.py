@@ -12,6 +12,7 @@ from telegram.ext import (
 from quotes_bot.config import TELEGRAM_BOT_TOKEN
 from quotes_bot.db import init_db
 from quotes_bot.generate_placeholders import generate_all_placeholders
+from quotes_bot.filters import person_name_filter
 from quotes_bot.handlers import cards, photo_upload, search, start
 from quotes_bot.import_photos import import_inbox_photos
 from quotes_bot.seed import seed_database
@@ -58,6 +59,23 @@ def build_application() -> Application:
             photo_upload.upload_person_photo_handler,
         )
     )
+    application.add_handler(
+        MessageHandler(
+            filters.PHOTO & ~filters.CAPTION,
+            photo_upload.upload_person_photo_handler,
+        )
+    )
+    application.add_handler(
+        MessageHandler(filters.Document.IMAGE, photo_upload.upload_person_photo_handler)
+    )
+    person_names = person_name_filter()
+    if person_names:
+        application.add_handler(
+            MessageHandler(
+                filters.Regex(person_names) & ~filters.COMMAND,
+                photo_upload.prepare_photo_handler,
+            )
+        )
     application.add_handler(
         MessageHandler(filters.Regex("^🎴 Случайная карточка$"), cards.random_card_handler)
     )
