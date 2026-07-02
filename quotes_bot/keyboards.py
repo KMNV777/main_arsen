@@ -1,21 +1,38 @@
+from quotes_bot.config import WEBAPP_URL
 from quotes_bot.formatters import truncate
 from quotes_bot.models import get_adjacent_quote_id
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
-
-MAIN_KEYBOARD = ReplyKeyboardMarkup(
-    [
-        ["🎁 Открыть пак", "📚 Коллекция"],
-        ["🎴 Моя карточка", "👤 Профиль"],
-        ["🔁 Обмен", "🏆 Лидеры"],
-        ["🔍 Поиск"],
-    ],
-    resize_keyboard=True,
-)
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
 
 SEARCH_HINT = (
     "Введите имя или фрагмент цитаты.\n"
     "Например: <i>Ваня</i> или <i>круассаны</i>"
 )
+
+
+def main_keyboard() -> ReplyKeyboardMarkup:
+    rows = []
+    if WEBAPP_URL:
+        rows.append([KeyboardButton("🎮 Играть", web_app=WebAppInfo(url=WEBAPP_URL))])
+    rows.extend(
+        [
+            ["🎁 Открыть пак", "📚 Коллекция"],
+            ["🎴 Моя карточка", "👤 Профиль"],
+            ["🔁 Обмен", "🏆 Лидеры"],
+            ["🔍 Поиск"],
+        ]
+    )
+    return ReplyKeyboardMarkup(rows, resize_keyboard=True)
+
+
+MAIN_KEYBOARD = main_keyboard()
+
+
+def start_inline_keyboard() -> InlineKeyboardMarkup | None:
+    if not WEBAPP_URL:
+        return None
+    return InlineKeyboardMarkup(
+        [[InlineKeyboardButton("🎮 Открыть игру", web_app=WebAppInfo(url=WEBAPP_URL))]]
+    )
 
 
 def card_keyboard(card, *, owned_only: bool = False, user_id: int | None = None) -> InlineKeyboardMarkup:
@@ -79,7 +96,12 @@ def exchange_keyboard(dust: int) -> InlineKeyboardMarkup:
 
 
 def profile_keyboard() -> InlineKeyboardMarkup:
-    return InlineKeyboardMarkup(
+    rows = []
+    if WEBAPP_URL:
+        rows.append(
+            [InlineKeyboardButton("🎮 Mini App", web_app=WebAppInfo(url=WEBAPP_URL))]
+        )
+    rows.extend(
         [
             [InlineKeyboardButton("🔁 Обмен", callback_data="exchange_menu")],
             [InlineKeyboardButton("🏆 Лидеры", callback_data="leaderboard")],
@@ -88,6 +110,7 @@ def profile_keyboard() -> InlineKeyboardMarkup:
             ],
         ]
     )
+    return InlineKeyboardMarkup(rows)
 
 
 def search_results_keyboard(cards) -> InlineKeyboardMarkup:

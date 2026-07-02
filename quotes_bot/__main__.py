@@ -17,6 +17,7 @@ from quotes_bot.generate_placeholders import generate_all_placeholders
 from quotes_bot.handlers import cards, game, photo_upload, search, start
 from quotes_bot.import_photos import import_inbox_photos
 from quotes_bot.seed import seed_database
+from quotes_bot.webapp_server import start_webapp_server
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -103,7 +104,7 @@ def build_application() -> Application:
     application.add_handler(
         CallbackQueryHandler(
             game.game_callback_handler,
-            pattern=r"^(open_pack:|grant_ticket|owned_person:|exchange_menu|exchange_ticket|exchange_card|leaderboard)$",
+            pattern=r"^(open_pack:\d+|grant_ticket|owned_person:\d+|exchange_menu|exchange_ticket|exchange_card|leaderboard)$",
         )
     )
     application.add_handler(CallbackQueryHandler(cards.callback_handler))
@@ -118,6 +119,7 @@ def main() -> None:
         logger.info("Imported photos: %s", ", ".join(imported))
     generate_all_placeholders()
     seed_database()
+    start_webapp_server()
     application = build_application()
     logger.info("Quotes bot started")
     application.run_polling(allowed_updates=["message", "callback_query"])

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Quote Cards</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">⚡</span>
+        <div>
+          <div class="brand-title">Quote Cards</div>
+          <div class="brand-sub">кибер-коллекция</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span id="tickets">0</span> 🎫</div>
+        <div class="stat"><span id="dust">0</span> 🔁</div>
+        <div class="stat"><span id="cards">0</span> 📚</div>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="packs">Паки</button>
+      <button class="tab" data-tab="collection">Коллекция</button>
+      <button class="tab" data-tab="exchange">Обмен</button>
+      <button class="tab" data-tab="leaders">Лидеры</button>
+    </nav>
+
+    <main>
+      <section id="tab-packs" class="panel active">
+        <p class="hint">1 🎫 = 2 карты · дубликаты → пыль</p>
+        <div id="pack-list" class="pack-list"></div>
+      </section>
+
+      <section id="tab-collection" class="panel">
+        <div id="collection-people" class="chip-list"></div>
+        <div id="collection-cards" class="card-grid"></div>
+      </section>
+
+      <section id="tab-exchange" class="panel">
+        <div class="exchange-box">
+          <p>Пыль: <strong id="exchange-dust">0</strong></p>
+          <button id="btn-exchange-ticket" class="btn primary">🎫 Билет (3 пыли)</button>
+          <button id="btn-exchange-card" class="btn secondary">🃏 Карта (5 пыли)</button>
+        </div>
+        <p id="exchange-message" class="message"></p>
+      </section>
+
+      <section id="tab-leaders" class="panel">
+        <div id="leaderboard" class="leaderboard"></div>
+      </section>
+    </main>
+
+    <div id="overlay" class="overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-title" id="overlay-title">Открываем пак…</div>
+        <div id="reveal-cards" class="reveal-grid"></div>
+        <button id="overlay-close" class="btn primary">Продолжить</button>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

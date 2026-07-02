@@ -1,18 +1,19 @@
 from pathlib import Path
 
-from telegram import BotCommand
+from telegram import BotCommand, MenuButtonWebApp, WebAppInfo
 
-from quotes_bot.config import BASE_DIR, TELEGRAM_BOT_TOKEN
+from quotes_bot.config import BASE_DIR, TELEGRAM_BOT_TOKEN, WEBAPP_URL
 
 LOGO_PATH = BASE_DIR / "assets" / "bot_logo.png"
 
-BOT_SHORT_DESCRIPTION = "Кибер-коллекция цитат: паки, билеты, карточки игроков."
+BOT_SHORT_DESCRIPTION = "Кибер-коллекция цитат: Mini App, паки, билеты, карточки."
 BOT_DESCRIPTION = (
-    "🎮 Мини-игра с карточками цитат в кибер-стиле.\n\n"
+    "🎮 Мини-приложение с карточками цитат в кибер-стиле.\n\n"
+    "• Нажми 🎮 Играть — откроется Mini App\n"
     "• 4 пака по 2 игрока\n"
     "• Открывай паки за билеты 🎫\n"
-    "• Собирай коллекцию карточек\n"
-    "• Фото + ник + цитата на одной картинке\n"
+    "• Дубликаты → пыль → обмен\n"
+    "• Таблица лидеров\n"
     "• /photo Имя — обновить фото"
 )
 
@@ -28,6 +29,13 @@ async def configure_bot_profile(application) -> None:
             BotCommand("help", "Справка"),
         ]
     )
+    if WEBAPP_URL:
+        await application.bot.set_chat_menu_button(
+            menu_button=MenuButtonWebApp(
+                text="🎮 Играть",
+                web_app=WebAppInfo(url=WEBAPP_URL),
+            )
+        )
 
 
 def logo_setup_hint() -> str:
