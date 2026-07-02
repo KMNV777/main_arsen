@@ -10,16 +10,17 @@ MAIN_KEYBOARD = ReplyKeyboardMarkup(
 
 SEARCH_HINT = (
     "Введите имя, профессию или фрагмент цитаты.\n"
-    "Например: <i>Эйнштейн</i> или <i>воображение</i>"
+    "Например: <i>Ваня</i> или <i>круассаны</i>"
 )
 
 
 def card_keyboard(card) -> InlineKeyboardMarkup:
-    quote_prev = (card.quote_index - 1) % card.quote_total
-    quote_next = (card.quote_index + 1) % card.quote_total
+    rows: list[list[InlineKeyboardButton]] = []
 
-    return InlineKeyboardMarkup(
-        [
+    if card.quote_total > 1:
+        quote_prev = (card.quote_index - 1) % card.quote_total
+        quote_next = (card.quote_index + 1) % card.quote_total
+        rows.append(
             [
                 InlineKeyboardButton(
                     "◀️ Цитата",
@@ -33,19 +34,32 @@ def card_keyboard(card) -> InlineKeyboardMarkup:
                     "Цитата ▶️",
                     callback_data=f"quote:{card.person.id}:{quote_next}",
                 ),
-            ],
+            ]
+        )
+    else:
+        rows.append(
             [
                 InlineKeyboardButton(
-                    "◀️ Человек",
-                    callback_data=f"person_prev:{card.person.id}",
+                    "🎲 Случайная",
+                    callback_data="random",
                 ),
-                InlineKeyboardButton(
-                    "Человек ▶️",
-                    callback_data=f"person_next:{card.person.id}",
-                ),
-            ],
+            ]
+        )
+
+    rows.append(
+        [
+            InlineKeyboardButton(
+                "◀️ Человек",
+                callback_data=f"person_prev:{card.person.id}",
+            ),
+            InlineKeyboardButton(
+                "Человек ▶️",
+                callback_data=f"person_next:{card.person.id}",
+            ),
         ]
     )
+
+    return InlineKeyboardMarkup(rows)
 
 
 def people_list_keyboard(people: list, page: int = 0, page_size: int = 8) -> InlineKeyboardMarkup:

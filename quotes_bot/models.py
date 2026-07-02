@@ -22,7 +22,7 @@ class Quote:
 @dataclass
 class PersonCard:
     person: Person
-    quote: Quote
+    quote: Quote | None
     quote_index: int
     quote_total: int
     person_index: int
@@ -123,18 +123,25 @@ def get_random_card() -> PersonCard | None:
             LIMIT 1
             """
         ).fetchone()
-        if not row:
+        if row:
+            person = Person(
+                id=row["person_id"],
+                name=row["name"],
+                bio=row["bio"],
+                years=row["years"],
+                photo_url=row["photo_url"],
+            )
+            quote = Quote(id=row["quote_id"], person_id=person.id, text=row["quote_text"])
+            return _build_card(conn, person, quote)
+
+        person_row = conn.execute(
+            "SELECT * FROM people ORDER BY RANDOM() LIMIT 1"
+        ).fetchone()
+        if not person_row:
             return None
 
-        person = Person(
-            id=row["person_id"],
-            name=row["name"],
-            bio=row["bio"],
-            years=row["years"],
-            photo_url=row["photo_url"],
-        )
-        quote = Quote(id=row["quote_id"], person_id=person.id, text=row["quote_text"])
-        return _build_card(conn, person, quote)
+        person = _row_to_person(person_row)
+        return _build_card(conn, person, quote=None)
 
 
 def get_card_for_person(person_id: int, quote_index: int = 0) -> PersonCard | None:
@@ -151,7 +158,7 @@ def get_card_for_person(person_id: int, quote_index: int = 0) -> PersonCard | No
             (person_id,),
         ).fetchall()
         if not quotes:
-            return None
+            return _build_card(conn, person, quote=None)
 
         quote_index = quote_index % len(quotes)
         quote = _row_to_quote(quotes[quote_index])
@@ -189,13 +196,25 @@ def get_adjacent_person_id(current_person_id: int, direction: int) -> int | None
     return ids[next_index]
 
 
-def _build_card(conn, person: Person, quote: Quote) -> PersonCard:
+def _build_card(conn, person: Person, quote: Quote | None = None) -> PersonCard:
     quote_rows = conn.execute(
         "SELECT id FROM quotes WHERE person_id = ? ORDER BY id",
         (person.id,),
     ).fetchall()
     quote_ids = [row["id"] for row in quote_rows]
-    quote_index = quote_ids.index(quote.id)
+
+    if quote and quote.id in quote_ids:
+        quote_index = quote_ids.index(quote.id)
+    elif quote_ids:
+        quote_index = 0
+        if quote is None or quote.id not in quote_ids:
+            quote_row = conn.execute(
+                "SELECT * FROM quotes WHERE id = ?", (quote_ids[0],)
+            ).fetchone()
+            quote = _row_to_quote(quote_row)
+    else:
+        quote_index = 0
+        quote = None
 
     people_rows = conn.execute(
         "SELECT id FROM people ORDER BY name COLLATE NOCASE"
