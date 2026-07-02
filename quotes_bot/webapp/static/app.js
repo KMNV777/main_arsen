@@ -75,6 +75,26 @@ function updateStats(nextProfile) {
   document.getElementById("dust").textContent = nextProfile.duplicate_dust;
   document.getElementById("cards").textContent = `${nextProfile.cards_owned}/${nextProfile.total_cards}`;
   document.getElementById("exchange-dust").textContent = nextProfile.duplicate_dust;
+  updateDustBars(nextProfile.duplicate_dust);
+}
+
+function updateDustBars(dust) {
+  const ticketBar = document.getElementById("dust-bar-ticket");
+  const cardBar = document.getElementById("dust-bar-card");
+  if (ticketBar) ticketBar.style.width = `${Math.min(100, (dust / 3) * 100)}%`;
+  if (cardBar) cardBar.style.width = `${Math.min(100, (dust / 5) * 100)}%`;
+}
+
+function animateDustGain(amount = 1) {
+  const dustEl = document.getElementById("dust");
+  dustEl.classList.add("dust-pulse");
+  setTimeout(() => dustEl.classList.remove("dust-pulse"), 700);
+
+  const float = document.createElement("div");
+  float.className = "dust-float";
+  float.textContent = `+${amount} 🔁`;
+  document.body.appendChild(float);
+  setTimeout(() => float.remove(), 1200);
 }
 
 function showToast(text) {
@@ -149,21 +169,34 @@ function showRevealCard(card, index, total) {
   el.slot.classList.remove("hidden");
   el.summary.classList.add("hidden");
 
-  const badge = card.is_new ? "✨ NEW" : "🔁 DUP";
+  const isDup = !card.is_new;
+  const badge = card.is_new ? "✨ NEW" : "💨 РАСПЫЛЕНО";
   const badgeClass = card.is_new ? "new" : "dup";
 
   el.progress.textContent = total > 1 ? `Карта ${index + 1} из ${total}` : "";
-  el.title.textContent = card.is_new ? "✨ Новая карта!" : "🔁 Дубликат";
+  el.title.textContent = card.is_new ? "✨ Новая карта!" : "💨 Дубликат → пыль";
+
+  const dustLine = isDup
+    ? `<div class="reveal-dust-gain">+1 пыль 🔁</div>`
+    : "";
 
   el.slot.innerHTML = `
     <div class="reveal-card-frame">
-      <div class="reveal-card-inner ${card.is_new ? "is-new" : ""}">
+      <div class="reveal-card-inner ${card.is_new ? "is-new" : "is-dup-disintegrate"}">
         <img src="${cardImageUrl(card, card.is_new)}" alt="${card.person_name}" />
       </div>
     </div>
     <div class="reveal-card-badge ${badgeClass}">${badge}</div>
     <div class="reveal-card-name">${card.person_name}</div>
+    ${dustLine}
   `;
+
+  if (isDup) {
+    animateDustGain(1);
+    tg?.HapticFeedback?.notificationOccurred("warning");
+  } else {
+    tg?.HapticFeedback?.impactOccurred("medium");
+  }
 
   if (index < total - 1) {
     el.btnNext.textContent = "Следующая карта →";
@@ -177,8 +210,6 @@ function showRevealCard(card, index, total) {
     el.btnNext.classList.add("hidden");
     el.btnClose.classList.remove("hidden");
   }
-
-  tg?.HapticFeedback?.impactOccurred(card.is_new ? "medium" : "light");
 }
 
 function showRevealSummary(summaryText) {
@@ -285,6 +316,24 @@ async function loadPacks() {
   renderPacks();
 }
 
+async function disintegrateCard(quoteId, personName, buttonEl) {
+  if (!confirm(`Распылить «${personName}»?\n\nКарта исчезнет из коллекции → +1 пыль 🔁`)) {
+    return;
+  }
+  buttonEl.disabled = true;
+  try {
+    const data = await api(`/api/cards/${quoteId}/disintegrate`, { method: "POST" });
+    updateStats(data.profile);
+    animateDustGain(data.dust_gained || 1);
+    showToast(`💨 +${data.dust_gained || 1} пыль`);
+    tg?.HapticFeedback?.notificationOccurred("success");
+    await loadCollection();
+  } catch (err) {
+    buttonEl.disabled = false;
+    showToast(err.message.replace(/<[^>]+>/g, ""));
+  }
+}
+
 async function loadCollection() {
   const data = await api("/api/collection", { method: "POST" });
   updateStats(data.profile);
@@ -293,19 +342,25 @@ async function loadCollection() {
   peopleRoot.innerHTML = data.people.length
     ? data.people.map((p) => `<span class="chip">${p.name} ${p.owned}/${p.total}</span>`).join("")
     : '<p class="empty">Коллекция пуста. Открой пак!</p>';
-  cardsRoot.innerHTML = data.cards.length
-    ? data.cards
-        .slice(0, 40)
-        .map(
-          (card) => `
-            <div class="card-thumb">
-              <img src="${cardImageUrl(card)}" alt="${card.person_name}" loading="lazy" />
-              <div class="card-caption">${card.person_name}</div>
-            </div>
-          `
-        )
-        .join("")
-    : "";
+
+  cardsRoot.innerHTML = "";
+  if (!data.cards.length) return;
+
+  for (const card of data.cards.slice(0, 40)) {
+    const thumb = document.createElement("div");
+    thumb.className = "card-thumb";
+    thumb.innerHTML = `
+      <img src="${cardImageUrl(card)}" alt="${card.person_name}" loading="lazy" />
+      <div class="card-caption">${card.person_name}</div>
+      <button type="button" class="btn-disintegrate">💨 Распылить</button>
+    `;
+    const btn = thumb.querySelector(".btn-disintegrate");
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      disintegrateCard(card.quote_id, card.person_name, btn);
+    });
+    cardsRoot.appendChild(thumb);
+  }
 }
 
 async function loadLeaderboard() {
@@ -381,6 +436,7 @@ document.querySelectorAll(".tab").forEach((tab) => {
     try {
       if (name === "packs") await loadPacks();
       if (name === "collection") await loadCollection();
+      if (name === "exchange") updateDustBars(profile?.duplicate_dust || 0);
       if (name === "leaders") await loadLeaderboard();
     } catch (err) {
       showToast(err.message);

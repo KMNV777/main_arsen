@@ -33,18 +33,34 @@
 
     <main>
       <section id="tab-packs" class="panel active">
-        <p class="hint">🆓 Паки бесплатные · 2 карты · дубликаты → пыль</p>
+        <p class="hint">🆓 Паки бесплатные · 2 карты · дубликат = 💨 +1 пыль</p>
         <div id="pack-list" class="pack-list"></div>
       </section>
 
       <section id="tab-collection" class="panel">
+        <p class="hint">💨 Нажми «Распылить» на карте — +1 пыль (карта исчезнет из коллекции)</p>
         <div id="collection-people" class="chip-list"></div>
         <div id="collection-cards" class="card-grid"></div>
       </section>
 
       <section id="tab-exchange" class="panel">
+        <div class="dust-info">
+          <div class="dust-info-title">Как получить пыль 🔁</div>
+          <ul class="dust-info-list">
+            <li>Дубликат при открытии пака → <strong>+1 пыль</strong> (авто-распыление)</li>
+            <li>Распылить карту из коллекции → <strong>+1 пыль</strong></li>
+          </ul>
+        </div>
         <div class="exchange-box">
           <p>Пыль: <strong id="exchange-dust">0</strong></p>
+          <div class="dust-progress">
+            <div class="dust-bar"><div id="dust-bar-ticket" class="dust-bar-fill"></div></div>
+            <span class="dust-bar-label">🎫 билет — 3 пыли</span>
+          </div>
+          <div class="dust-progress">
+            <div class="dust-bar"><div id="dust-bar-card" class="dust-bar-fill"></div></div>
+            <span class="dust-bar-label">🃏 карта — 5 пыли</span>
+          </div>
           <button id="btn-exchange-ticket" class="btn primary">🎫 Билет (3 пыли)</button>
           <button id="btn-exchange-card" class="btn secondary">🃏 Карта (5 пыли)</button>
         </div>

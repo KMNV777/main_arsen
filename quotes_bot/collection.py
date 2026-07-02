@@ -37,6 +37,8 @@ STARTER_TICKETS = 5
 PACK_OPEN_COST = 0
 DUST_FOR_TICKET = 3
 DUST_FOR_CARD = 5
+DUST_PER_DUPLICATE = 1
+DUST_PER_DISINTEGRATE = 1
 
 
 @dataclass
@@ -477,7 +479,7 @@ def open_pack(user_id: int, pack_id: int) -> tuple[list[QuoteCard], list[QuoteCa
         if is_new:
             new_cards.append(card)
         else:
-            add_duplicate_dust(user_id, 1)
+            add_duplicate_dust(user_id, DUST_PER_DUPLICATE)
 
     with connect() as conn:
         conn.execute(
@@ -489,6 +491,28 @@ def open_pack(user_id: int, pack_id: int) -> tuple[list[QuoteCard], list[QuoteCa
         return [], [], "Не удалось выдать карточки из пака."
 
     return new_cards, all_revealed, None
+
+
+def disintegrate_card(user_id: int, quote_id: int) -> tuple[bool, str]:
+    """Remove an owned card from collection and grant dust."""
+    if not user_owns_quote(user_id, quote_id):
+        return False, "Эта карточка не в твоей коллекции"
+
+    card = get_card_by_quote_id(quote_id)
+    if not card:
+        return False, "Карточка не найдена"
+
+    with connect() as conn:
+        conn.execute(
+            "DELETE FROM user_cards WHERE user_id = ? AND quote_id = ?",
+            (user_id, quote_id),
+        )
+    add_duplicate_dust(user_id, DUST_PER_DISINTEGRATE)
+    profile = get_user_profile(user_id)
+    return True, (
+        f"💨 <b>{card.person.name}</b> распылена → +{DUST_PER_DISINTEGRATE} пыль\n"
+        f"Пыль: <b>{profile.duplicate_dust}</b> · Карточек: <b>{profile.cards_owned}</b>"
+    )
 
 
 def grant_tickets(user_id: int, amount: int) -> None:

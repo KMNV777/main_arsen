@@ -26,6 +26,9 @@ from quotes_bot.collection import (
     list_packs,
     open_pack,
     touch_user,
+    disintegrate_card,
+    DUST_PER_DUPLICATE,
+    DUST_PER_DISINTEGRATE,
 )
 from quotes_bot.config import TELEGRAM_BOT_TOKEN, WEBAPP_HOST, WEBAPP_PORT, WEBAPP_URL
 from quotes_bot.db import connect
@@ -136,6 +139,8 @@ def _profile_payload(user_id: int) -> dict:
         "rank": rank,
         "dust_for_ticket": DUST_FOR_TICKET,
         "dust_for_card": DUST_FOR_CARD,
+        "dust_per_duplicate": DUST_PER_DUPLICATE,
+        "dust_per_disintegrate": DUST_PER_DISINTEGRATE,
         "pack_open_cost": PACK_OPEN_COST,
         "packs_are_free": PACK_OPEN_COST == 0,
     }
@@ -250,10 +255,12 @@ async def handle_open_pack(request: web.Request) -> web.Response:
         return web.json_response({"error": error}, status=400)
 
     new_ids = {card.quote.id for card in new_cards}
+    dust_gained = (len(revealed) - len(new_cards)) * DUST_PER_DUPLICATE
     return web.json_response(
         {
             "new_count": len(new_cards),
             "duplicate_count": len(revealed) - len(new_cards),
+            "dust_gained": dust_gained,
             "cards": [_card_payload(card, is_new=card.quote.id in new_ids) for card in revealed],
             "profile": _profile_payload(user_id),
         }
@@ -345,6 +352,25 @@ async def handle_exchange_card(request: web.Request) -> web.Response:
     return web.json_response(payload, status=200 if ok else 400)
 
 
+async def handle_disintegrate(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    quote_id = int(request.match_info["quote_id"])
+    ok, message = disintegrate_card(user_id, quote_id)
+    return web.json_response(
+        {
+            "ok": ok,
+            "message": message,
+            "dust_gained": DUST_PER_DISINTEGRATE if ok else 0,
+            "profile": _profile_payload(user_id),
+        },
+        status=200 if ok else 400,
+    )
+
+
 async def handle_card_image(request: web.Request) -> web.Response:
     quote_id = int(request.match_info["quote_id"])
     try:
@@ -376,6 +402,7 @@ def create_webapp() -> web.Application:
     app.router.add_post("/api/leaderboard", handle_leaderboard)
     app.router.add_post("/api/exchange/ticket", handle_exchange_ticket)
     app.router.add_post("/api/exchange/card", handle_exchange_card)
+    app.router.add_post("/api/cards/{quote_id}/disintegrate", handle_disintegrate)
     app.router.add_get("/api/card/{quote_id}/image", handle_card_image)
     app.router.add_get("/static/{path:.+}", handle_static)
     return app
