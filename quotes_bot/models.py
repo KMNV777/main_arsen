@@ -98,6 +98,16 @@ def get_person_by_id(person_id: int) -> Person | None:
     return _row_to_person(row) if row else None
 
 
+def find_person_by_name(name: str) -> Person | None:
+    needle = name.strip().casefold()
+    if not needle:
+        return None
+    for person in list_people():
+        if person.name.casefold() == needle:
+            return person
+    return None
+
+
 def search_people(query: str, limit: int = 10) -> list[Person]:
     needle = query.strip().casefold()
     if not needle:
