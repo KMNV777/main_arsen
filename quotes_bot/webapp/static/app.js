@@ -8,20 +8,23 @@ function refreshInitData() {
   return initData;
 }
 
-function apiUrl(path) {
-  refreshInitData();
-  if (!initData) return path;
-  const sep = path.includes("?") ? "&" : "?";
-  return `${path}${sep}initData=${encodeURIComponent(initData)}`;
-}
-
 function api(path, options = {}) {
+  refreshInitData();
+  const method = options.method || "POST";
   const headers = {
     "Content-Type": "application/json",
-    "X-Telegram-Init-Data": refreshInitData(),
     ...(options.headers || {}),
   };
-  return fetch(apiUrl(path), { ...options, headers }).then(async (res) => {
+  if (initData) {
+    headers.Authorization = `tma ${initData}`;
+  }
+
+  const body =
+    method === "GET"
+      ? undefined
+      : JSON.stringify({ initData, ...(options.body || {}) });
+
+  return fetch(path, { ...options, method, headers, body }).then(async (res) => {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || data.message || "Request failed");
     return data;
@@ -38,6 +41,7 @@ function cardImageUrl(card, isNew = false) {
 }
 
 function updateStats(nextProfile) {
+  if (!nextProfile) return;
   profile = nextProfile;
   document.getElementById("tickets").textContent = nextProfile.tickets;
   document.getElementById("dust").textContent = nextProfile.duplicate_dust;
@@ -57,6 +61,13 @@ function showPackError(text) {
   root.innerHTML = `<p class="empty error">${text}</p>`;
 }
 
+function showAuthWarning(text) {
+  const hint = document.querySelector("#tab-packs .hint");
+  if (hint && text) {
+    hint.innerHTML = `<span class="error">${text}</span><br>1 🎫 = 2 карты · дубликаты → пыль`;
+  }
+}
+
 function renderPacks() {
   const root = document.getElementById("pack-list");
   root.innerHTML = "";
@@ -67,7 +78,7 @@ function renderPacks() {
   for (const pack of packs) {
     const card = document.createElement("div");
     card.className = "pack-card";
-    if ((profile?.tickets || 0) < 1) card.classList.add("disabled");
+    if (profile && (profile.tickets || 0) < 1) card.classList.add("disabled");
     card.innerHTML = `
       <div class="pack-head">
         <div class="pack-name">${pack.emoji} ${pack.name}</div>
@@ -82,7 +93,11 @@ function renderPacks() {
 }
 
 async function openPack(pack) {
-  if ((profile?.tickets || 0) < 1) {
+  if (!profile) {
+    showToast("Не удалось авторизоваться. Перезапусти Mini App");
+    return;
+  }
+  if ((profile.tickets || 0) < 1) {
     showToast("Не хватает билетов 🎫");
     return;
   }
@@ -117,14 +132,17 @@ async function openPack(pack) {
 }
 
 async function loadPacks() {
-  const data = await api("/api/packs");
-  packs = data.packs;
+  const data = await api("/api/packs", { method: "POST" });
+  packs = data.packs || [];
   updateStats(data.profile);
   renderPacks();
+  if (data.auth_error) {
+    showAuthWarning("Авторизация не прошла — видны паки, но открыть их нельзя. Закрой и открой Mini App заново.");
+  }
 }
 
 async function loadCollection() {
-  const data = await api("/api/collection");
+  const data = await api("/api/collection", { method: "POST" });
   updateStats(data.profile);
   const peopleRoot = document.getElementById("collection-people");
   const cardsRoot = document.getElementById("collection-cards");
@@ -147,7 +165,7 @@ async function loadCollection() {
 }
 
 async function loadLeaderboard() {
-  const data = await api("/api/leaderboard");
+  const data = await api("/api/leaderboard", { method: "POST" });
   const root = document.getElementById("leaderboard");
   if (!data.entries.length) {
     root.innerHTML = '<p class="empty">Пока никто не собрал карточки</p>';

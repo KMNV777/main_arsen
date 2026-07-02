@@ -27,6 +27,7 @@ from quotes_bot.collection import (
     touch_user,
 )
 from quotes_bot.config import TELEGRAM_BOT_TOKEN, WEBAPP_HOST, WEBAPP_PORT, WEBAPP_URL
+from quotes_bot.db import connect
 from quotes_bot.models import QuoteCard, get_card_by_quote_id, list_people
 from quotes_bot.webapp_auth import InitDataError, get_user_id_from_init_data, validate_init_data
 
@@ -35,27 +36,60 @@ logger = logging.getLogger(__name__)
 STATIC_DIR = Path(__file__).resolve().parent / "webapp" / "static"
 
 
-def _init_data_from_request(request: web.Request) -> str:
+async def _collect_init_data_candidates(request: web.Request) -> list[str]:
+    candidates: list[str] = []
+
+    auth = request.headers.get("Authorization", "")
+    if auth.lower().startswith("tma "):
+        value = auth[4:].strip()
+        if value:
+            candidates.append(value)
+
+    if request.body_exists and request.content_type == "application/json":
+        try:
+            body = await request.json()
+            value = body.get("initData", "")
+            if value:
+                candidates.append(value)
+        except Exception:
+            pass
+
+    query_value = request.query.get("initData")
+    if query_value:
+        candidates.append(query_value)
+
     header = request.headers.get("X-Telegram-Init-Data", "")
     if header:
-        return header
-    return request.query.get("initData", "")
+        candidates.append(header)
+
+    unique: list[str] = []
+    seen: set[str] = set()
+    for item in candidates:
+        if item not in seen:
+            seen.add(item)
+            unique.append(item)
+    return unique
 
 
-def _resolve_user(request: web.Request) -> tuple[int, dict]:
-    init_data = _init_data_from_request(request)
-    payload = validate_init_data(init_data, TELEGRAM_BOT_TOKEN)
-    user = payload.get("user") or {}
-    display_name = user.get("first_name", "")
-    if user.get("last_name"):
-        display_name = f"{display_name} {user['last_name']}".strip()
-    user_id = int(user["id"])
-    touch_user(
-        user_id,
-        username=user.get("username"),
-        display_name=display_name or None,
-    )
-    return user_id, payload
+async def _resolve_user(request: web.Request) -> tuple[int, dict]:
+    last_error: InitDataError | None = None
+    for init_data in await _collect_init_data_candidates(request):
+        try:
+            payload = validate_init_data(init_data, TELEGRAM_BOT_TOKEN)
+            user = payload.get("user") or {}
+            display_name = user.get("first_name", "")
+            if user.get("last_name"):
+                display_name = f"{display_name} {user['last_name']}".strip()
+            user_id = int(user["id"])
+            touch_user(
+                user_id,
+                username=user.get("username"),
+                display_name=display_name or None,
+            )
+            return user_id, payload
+        except InitDataError as exc:
+            last_error = exc
+    raise last_error or InitDataError("initData is required")
 
 
 def _profile_payload(user_id: int) -> dict:
@@ -76,6 +110,54 @@ def _profile_payload(user_id: int) -> dict:
         "rank": rank,
         "dust_for_ticket": DUST_FOR_TICKET,
         "dust_for_card": DUST_FOR_CARD,
+    }
+
+
+def _pack_catalog_item(pack, *, user_id: int | None = None) -> dict:
+    if user_id is not None:
+        progress = get_pack_progress(user_id, pack.id)
+        if progress:
+            return {
+                "id": pack.id,
+                "slug": pack.slug,
+                "name": pack.name,
+                "emoji": pack.emoji,
+                "description": pack.description,
+                "owned": progress.owned,
+                "total": progress.total,
+                "members": progress.members,
+            }
+
+    with connect() as conn:
+        member_rows = conn.execute(
+            """
+            SELECT p.name
+            FROM pack_members pm
+            JOIN people p ON p.id = pm.person_id
+            WHERE pm.pack_id = ?
+            ORDER BY p.name COLLATE NOCASE
+            """,
+            (pack.id,),
+        ).fetchall()
+        total = conn.execute(
+            """
+            SELECT COUNT(*)
+            FROM quotes q
+            JOIN pack_members pm ON pm.person_id = q.person_id
+            WHERE pm.pack_id = ?
+            """,
+            (pack.id,),
+        ).fetchone()[0]
+
+    return {
+        "id": pack.id,
+        "slug": pack.slug,
+        "name": pack.name,
+        "emoji": pack.emoji,
+        "description": pack.description,
+        "owned": 0,
+        "total": total,
+        "members": [row["name"] for row in member_rows],
     }
 
 
@@ -108,39 +190,29 @@ async def handle_config(_: web.Request) -> web.Response:
 
 async def handle_profile(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
     return web.json_response(_profile_payload(user_id))
 
 
 async def handle_packs(request: web.Request) -> web.Response:
-    try:
-        user_id, _ = _resolve_user(request)
-    except InitDataError as exc:
-        return web.json_response({"error": str(exc)}, status=401)
+    items = [_pack_catalog_item(pack) for pack in list_packs()]
+    payload: dict = {"packs": items, "profile": None}
 
-    items = []
-    for pack in list_packs():
-        progress = get_pack_progress(user_id, pack.id)
-        items.append(
-            {
-                "id": pack.id,
-                "slug": pack.slug,
-                "name": pack.name,
-                "emoji": pack.emoji,
-                "description": pack.description,
-                "owned": progress.owned if progress else 0,
-                "total": progress.total if progress else 0,
-                "members": progress.members if progress else [],
-            }
-        )
-    return web.json_response({"packs": items, "profile": _profile_payload(user_id)})
+    try:
+        user_id, _ = await _resolve_user(request)
+        payload["profile"] = _profile_payload(user_id)
+        payload["packs"] = [_pack_catalog_item(pack, user_id=user_id) for pack in list_packs()]
+    except InitDataError as exc:
+        payload["auth_error"] = str(exc)
+
+    return web.json_response(payload)
 
 
 async def handle_open_pack(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -162,7 +234,7 @@ async def handle_open_pack(request: web.Request) -> web.Response:
 
 async def handle_collection(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -192,7 +264,7 @@ async def handle_collection(request: web.Request) -> web.Response:
 
 async def handle_leaderboard(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -220,7 +292,7 @@ async def handle_leaderboard(request: web.Request) -> web.Response:
 
 async def handle_exchange_ticket(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -231,7 +303,7 @@ async def handle_exchange_ticket(request: web.Request) -> web.Response:
 
 async def handle_exchange_card(request: web.Request) -> web.Response:
     try:
-        user_id, _ = _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -247,11 +319,16 @@ async def handle_exchange_card(request: web.Request) -> web.Response:
 
 async def handle_card_image(request: web.Request) -> web.Response:
     quote_id = int(request.match_info["quote_id"])
-    init_data = _init_data_from_request(request)
-    try:
-        get_user_id_from_init_data(init_data, TELEGRAM_BOT_TOKEN)
-    except InitDataError as exc:
-        return web.json_response({"error": str(exc)}, status=401)
+    last_error: InitDataError | None = None
+    for init_data in await _collect_init_data_candidates(request):
+        try:
+            get_user_id_from_init_data(init_data, TELEGRAM_BOT_TOKEN)
+            last_error = None
+            break
+        except InitDataError as exc:
+            last_error = exc
+    if last_error:
+        return web.json_response({"error": str(last_error)}, status=401)
 
     card = get_card_by_quote_id(quote_id)
     if not card:
@@ -267,10 +344,14 @@ def create_webapp() -> web.Application:
     app.router.add_get("/", handle_index)
     app.router.add_get("/api/config", handle_config)
     app.router.add_get("/api/profile", handle_profile)
+    app.router.add_post("/api/profile", handle_profile)
     app.router.add_get("/api/packs", handle_packs)
+    app.router.add_post("/api/packs", handle_packs)
     app.router.add_post("/api/packs/{pack_id}/open", handle_open_pack)
     app.router.add_get("/api/collection", handle_collection)
+    app.router.add_post("/api/collection", handle_collection)
     app.router.add_get("/api/leaderboard", handle_leaderboard)
+    app.router.add_post("/api/leaderboard", handle_leaderboard)
     app.router.add_post("/api/exchange/ticket", handle_exchange_ticket)
     app.router.add_post("/api/exchange/card", handle_exchange_card)
     app.router.add_get("/api/card/{quote_id}/image", handle_card_image)
