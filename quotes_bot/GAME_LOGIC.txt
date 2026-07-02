@@ -116,6 +116,48 @@
 Доступ:
   - Кнопка «🔁 Обмен» в главном меню
   - Кнопка в профиле (inline callback exchange_menu)
+  - Mini App → вкладка «Обмен» (пыль + P2P)
+
+
+6B. ОБМЕН С ДРУГИМИ ИГРОКАМИ (P2P, trading.py)
+--------------------------------------------------------------------------------
+
+Игрок A предлагает игроку B обмен: отдаёт одну свою карту, опционально
+запрашивает конкретную карту B. B принимает (отдаёт запрошенную или любую
+выбранную) или отклоняет. A может отменить исходящее предложение.
+
+Поиск партнёра:
+  - По @username (регистр не важен)
+  - Партнёр должен хотя бы раз написать боту (есть запись в user_profiles)
+
+Ограничения:
+  - Нельзя обмениваться с самим собой
+  - Максимум 5 активных исходящих предложений на игрока
+  - Нельзя отправить два одинаковых pending-предложения одному игроку
+  - Карты должны быть в коллекции на момент создания и принятия
+
+Статусы trades.status: pending | accepted | declined | cancelled
+
+При принятии (accept_trade):
+  - Атомарный swap: offered → B, give → A
+  - duplicate_count у переданных карт сбрасывается (новый владелец получает «чистую» карту)
+
+Уведомления (notifications.py):
+  - Получателю — при новом предложении
+  - Отправителю — при успешном обмене
+
+Mini App UI (вкладка «Обмен» → «Обмен с игроками»):
+  - Создать: @username, выбор своей карты, опционально карта партнёра
+  - Входящие: принять / отклонить
+  - Исходящие: отменить
+
+API:
+  GET/POST /api/trades
+  POST     /api/trades/create
+  GET/POST /api/trades/partner-cards?username=
+  POST     /api/trades/{id}/accept   body: { give_quote_id }
+  POST     /api/trades/{id}/decline
+  POST     /api/trades/{id}/cancel
 
 
 7. ТАБЛИЦА ЛИДЕРОВ (🏆 Лидеры)
@@ -241,6 +283,11 @@ API:
   GET  /api/leaderboard
   POST /api/exchange/ticket
   POST /api/exchange/card
+  GET/POST /api/trades
+  POST /api/trades/create
+  GET/POST /api/trades/partner-cards
+  POST /api/trades/{id}/accept|decline|cancel
+  POST /api/cards/{quote_id}/disintegrate
   GET  /api/card/{quote_id}/image
 
 Настройка:
@@ -254,6 +301,8 @@ API:
 --------------------------------------------------------------------------------
 
   collection.py     — вся игровая логика (паки, обмен, лидеры, профиль)
+  trading.py        — P2P-обмен карт между игроками
+  notifications.py  — push-уведомления через Bot API из Mini App
   db.py             — схема SQLite и миграции
   seed.py           — люди, цитаты, паки
   handlers/game.py  — Telegram-хендлеры игры

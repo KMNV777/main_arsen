@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Quote Cards</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="/static/app.css?v=2" />
+  <link rel="stylesheet" href="/static/app.css?v=3" />
   <style>
     #boot-loader {
       position: fixed; inset: 0; display: flex; flex-direction: column;
@@ -84,6 +84,52 @@
           <button id="btn-exchange-card" class="btn secondary">🃏 Карта (5 пыли)</button>
         </div>
         <p id="exchange-message" class="message"></p>
+
+        <div class="trade-section">
+          <div class="trade-section-head">
+            <div class="trade-section-title">🤝 Обмен с игроками</div>
+            <div id="trade-username-hint" class="trade-hint"></div>
+          </div>
+
+          <div class="trade-subtabs">
+            <button type="button" class="trade-subtab active" data-trade-tab="create">Создать</button>
+            <button type="button" class="trade-subtab" data-trade-tab="incoming">Входящие <span id="trade-in-count" class="trade-badge hidden">0</span></button>
+            <button type="button" class="trade-subtab" data-trade-tab="outgoing">Исходящие</button>
+          </div>
+
+          <div id="trade-panel-create" class="trade-panel active">
+            <p class="hint">Укажи @username игрока — он должен хотя бы раз написать боту</p>
+            <div class="trade-form-row">
+              <input id="trade-partner-input" class="trade-input" type="text" placeholder="@username" autocomplete="off" />
+              <button id="btn-trade-lookup" type="button" class="btn secondary">Найти</button>
+            </div>
+            <p id="trade-partner-label" class="message"></p>
+
+            <div class="trade-picker-block">
+              <div class="trade-picker-title">Твоя карта</div>
+              <div id="trade-my-cards" class="trade-card-picker"></div>
+            </div>
+
+            <div class="trade-picker-block">
+              <div class="trade-picker-title">Запросить у игрока <span class="muted-inline">(необязательно)</span></div>
+              <div id="trade-partner-cards" class="trade-card-picker empty-picker">
+                <p class="empty">Сначала найди игрока</p>
+              </div>
+            </div>
+
+            <button id="btn-trade-create" type="button" class="btn primary" disabled>Отправить предложение</button>
+          </div>
+
+          <div id="trade-panel-incoming" class="trade-panel">
+            <div id="trade-incoming-list" class="trade-list"></div>
+          </div>
+
+          <div id="trade-panel-outgoing" class="trade-panel">
+            <div id="trade-outgoing-list" class="trade-list"></div>
+          </div>
+
+          <p id="trade-message" class="message"></p>
+        </div>
       </section>
 
       <section id="tab-leaders" class="panel">
@@ -117,6 +163,6 @@
 
     <div id="toast" class="toast hidden"></div>
   </div>
-  <script src="/static/app.js?v=2"></script>
+  <script src="/static/app.js?v=3"></script>
 </body>
 </html>

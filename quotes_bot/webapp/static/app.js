@@ -5,6 +5,15 @@ let profile = null;
 let packs = [];
 
 let revealState = null;
+let tradeState = {
+  myCards: [],
+  partnerCards: [],
+  selectedOfferId: null,
+  selectedRequestId: null,
+  incoming: [],
+  outgoing: [],
+  acceptGiveByTrade: {},
+};
 
 function refreshInitData() {
   initData = tg?.initData || window.Telegram?.WebApp?.initData || "";
@@ -438,6 +447,302 @@ async function exchangeCard() {
   }
 }
 
+function switchTradeTab(name) {
+  document.querySelectorAll(".trade-subtab").forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.tradeTab === name);
+  });
+  document.querySelectorAll(".trade-panel").forEach((panel) => {
+    panel.classList.toggle("active", panel.id === `trade-panel-${name}`);
+  });
+}
+
+function updateTradeUsernameHint() {
+  const el = document.getElementById("trade-username-hint");
+  if (!el) return;
+  if (profile?.username) {
+    el.textContent = `Ты: @${profile.username}`;
+  } else {
+    el.textContent = "Задай @username в Telegram";
+  }
+}
+
+function renderTradeCardPicker(root, cards, { selectedId, onSelect, emptyText }) {
+  root.innerHTML = "";
+  if (!cards.length) {
+    root.classList.add("empty-picker");
+    root.innerHTML = `<p class="empty">${emptyText}</p>`;
+    return;
+  }
+  root.classList.remove("empty-picker");
+  for (const card of cards) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `trade-pick rarity-border rarity-${card.rarity}${selectedId === card.quote_id ? " selected" : ""}`;
+    btn.style.setProperty("--rarity-color", card.rarity_color);
+    btn.innerHTML = `
+      <img src="${cardImageUrl(card)}" alt="${card.person_name}" loading="lazy" />
+      <div class="trade-pick-name">${card.person_name}</div>
+    `;
+    btn.addEventListener("click", () => onSelect(card.quote_id));
+    root.appendChild(btn);
+  }
+}
+
+function updateTradeCreateButton() {
+  const btn = document.getElementById("btn-trade-create");
+  const partner = document.getElementById("trade-partner-input")?.value.trim();
+  btn.disabled = !(partner && tradeState.selectedOfferId);
+}
+
+function renderTradeCreateForm() {
+  renderTradeCardPicker(document.getElementById("trade-my-cards"), tradeState.myCards, {
+    selectedId: tradeState.selectedOfferId,
+    onSelect: (id) => {
+      tradeState.selectedOfferId = tradeState.selectedOfferId === id ? null : id;
+      renderTradeCreateForm();
+      updateTradeCreateButton();
+    },
+    emptyText: "Нет карт для обмена",
+  });
+
+  renderTradeCardPicker(document.getElementById("trade-partner-cards"), tradeState.partnerCards, {
+    selectedId: tradeState.selectedRequestId,
+    onSelect: (id) => {
+      tradeState.selectedRequestId = tradeState.selectedRequestId === id ? null : id;
+      renderTradeCreateForm();
+    },
+    emptyText: "Сначала найди игрока",
+  });
+  updateTradeCreateButton();
+}
+
+function tradeMiniCard(card) {
+  if (!card) return `<div class="trade-mini-card"><span>любая карта</span></div>`;
+  return `
+    <div class="trade-mini-card">
+      <img src="${cardImageUrl(card)}" alt="${card.person_name}" />
+      <span>${card.person_name}</span>
+    </div>
+  `;
+}
+
+function renderTradeOfferActions(trade) {
+  if (trade.is_incoming) {
+    const giveId =
+      trade.requested_card?.quote_id ||
+      tradeState.acceptGiveByTrade[trade.id] ||
+      null;
+
+    const givePicker =
+      trade.requested_card
+        ? ""
+        : `
+          <div class="trade-give-picker">
+            <div class="trade-picker-title">Выбери карту для отдачи</div>
+            <div class="trade-card-picker" id="trade-give-${trade.id}"></div>
+          </div>
+        `;
+
+    return `
+      ${givePicker}
+      <div class="trade-actions">
+        <button type="button" class="btn primary btn-trade-accept" data-id="${trade.id}">✅ Принять</button>
+        <button type="button" class="btn danger btn-trade-decline" data-id="${trade.id}">✖️ Отклонить</button>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="trade-actions">
+      <button type="button" class="btn danger btn-trade-cancel" data-id="${trade.id}">Отменить</button>
+    </div>
+  `;
+}
+
+function renderTradeLists() {
+  const incomingRoot = document.getElementById("trade-incoming-list");
+  const outgoingRoot = document.getElementById("trade-outgoing-list");
+  const countEl = document.getElementById("trade-in-count");
+
+  if (tradeState.incoming.length) {
+    countEl.textContent = String(tradeState.incoming.length);
+    countEl.classList.remove("hidden");
+  } else {
+    countEl.classList.add("hidden");
+  }
+
+  incomingRoot.innerHTML = tradeState.incoming.length
+    ? tradeState.incoming
+        .map(
+          (trade) => `
+            <div class="trade-offer" data-trade-id="${trade.id}">
+              <div class="trade-offer-head">
+                <span>От <strong>${trade.from_name}</strong></span>
+              </div>
+              <div class="trade-offer-cards">
+                ${tradeMiniCard(trade.offered_card)}
+                <div class="trade-arrow">⇄</div>
+                ${tradeMiniCard(trade.requested_card)}
+              </div>
+              ${renderTradeOfferActions(trade)}
+            </div>
+          `
+        )
+        .join("")
+    : '<p class="empty">Нет входящих предложений</p>';
+
+  outgoingRoot.innerHTML = tradeState.outgoing.length
+    ? tradeState.outgoing
+        .map(
+          (trade) => `
+            <div class="trade-offer" data-trade-id="${trade.id}">
+              <div class="trade-offer-head">
+                <span>Для <strong>${trade.to_name}</strong></span>
+              </div>
+              <div class="trade-offer-cards">
+                ${tradeMiniCard(trade.offered_card)}
+                <div class="trade-arrow">→</div>
+                ${tradeMiniCard(trade.requested_card)}
+              </div>
+              ${renderTradeOfferActions(trade)}
+            </div>
+          `
+        )
+        .join("")
+    : '<p class="empty">Нет исходящих предложений</p>';
+
+  for (const trade of tradeState.incoming) {
+    if (trade.requested_card) continue;
+    const picker = document.getElementById(`trade-give-${trade.id}`);
+    if (!picker) continue;
+    renderTradeCardPicker(picker, tradeState.myCards, {
+      selectedId: tradeState.acceptGiveByTrade[trade.id] || null,
+      onSelect: (id) => {
+        tradeState.acceptGiveByTrade[trade.id] = id;
+        renderTradeLists();
+      },
+      emptyText: "Нет карт",
+    });
+  }
+
+  incomingRoot.querySelectorAll(".btn-trade-accept").forEach((btn) => {
+    btn.addEventListener("click", () => acceptTrade(Number(btn.dataset.id)));
+  });
+  incomingRoot.querySelectorAll(".btn-trade-decline").forEach((btn) => {
+    btn.addEventListener("click", () => declineTrade(Number(btn.dataset.id)));
+  });
+  outgoingRoot.querySelectorAll(".btn-trade-cancel").forEach((btn) => {
+    btn.addEventListener("click", () => cancelTrade(Number(btn.dataset.id)));
+  });
+}
+
+function applyTradesData(data) {
+  tradeState.myCards = data.my_cards || [];
+  tradeState.incoming = data.incoming || [];
+  tradeState.outgoing = data.outgoing || [];
+  if (data.profile) updateStats(data.profile);
+  updateTradeUsernameHint();
+  renderTradeCreateForm();
+  renderTradeLists();
+}
+
+async function loadTrades() {
+  const data = await api("/api/trades", { method: "POST" });
+  applyTradesData(data);
+}
+
+async function lookupTradePartner() {
+  const username = document.getElementById("trade-partner-input").value.trim();
+  const label = document.getElementById("trade-partner-label");
+  if (!username) {
+    label.textContent = "Введи @username";
+    return;
+  }
+  label.textContent = "Ищем…";
+  try {
+    const data = await api(`/api/trades/partner-cards?username=${encodeURIComponent(username)}`, {
+      method: "GET",
+    });
+    tradeState.partnerCards = data.cards || [];
+    tradeState.selectedRequestId = null;
+    label.textContent = `Игрок: ${data.partner_name} · карт: ${tradeState.partnerCards.length}`;
+    renderTradeCreateForm();
+  } catch (err) {
+    tradeState.partnerCards = [];
+    tradeState.selectedRequestId = null;
+    label.textContent = err.message;
+    renderTradeCreateForm();
+  }
+}
+
+async function createTrade() {
+  const partner_username = document.getElementById("trade-partner-input").value.trim();
+  if (!partner_username || !tradeState.selectedOfferId) return;
+
+  const body = {
+    partner_username,
+    offered_quote_id: tradeState.selectedOfferId,
+  };
+  if (tradeState.selectedRequestId) {
+    body.requested_quote_id = tradeState.selectedRequestId;
+  }
+
+  try {
+    const data = await api("/api/trades/create", { method: "POST", body });
+    applyTradesData(data);
+    document.getElementById("trade-message").textContent = (data.message || "").replace(/<[^>]+>/g, "");
+    tradeState.selectedOfferId = null;
+    tradeState.selectedRequestId = null;
+    renderTradeCreateForm();
+    switchTradeTab("outgoing");
+    tg?.HapticFeedback?.notificationOccurred("success");
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+async function acceptTrade(tradeId) {
+  const trade = tradeState.incoming.find((item) => item.id === tradeId);
+  const giveQuoteId = trade?.requested_card?.quote_id || tradeState.acceptGiveByTrade[tradeId];
+  if (!giveQuoteId) {
+    showToast("Выбери карту для отдачи");
+    return;
+  }
+
+  try {
+    const data = await api(`/api/trades/${tradeId}/accept`, {
+      method: "POST",
+      body: { give_quote_id: giveQuoteId },
+    });
+    applyTradesData(data);
+    document.getElementById("trade-message").textContent = (data.message || "").replace(/<[^>]+>/g, "");
+    delete tradeState.acceptGiveByTrade[tradeId];
+    tg?.HapticFeedback?.notificationOccurred("success");
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+async function declineTrade(tradeId) {
+  try {
+    const data = await api(`/api/trades/${tradeId}/decline`, { method: "POST" });
+    applyTradesData(data);
+    document.getElementById("trade-message").textContent = data.message || "";
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+async function cancelTrade(tradeId) {
+  try {
+    const data = await api(`/api/trades/${tradeId}/cancel`, { method: "POST" });
+    applyTradesData(data);
+    document.getElementById("trade-message").textContent = data.message || "";
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
 function switchTab(name) {
   document.querySelectorAll(".tab").forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.tab === name);
@@ -454,7 +759,10 @@ document.querySelectorAll(".tab").forEach((tab) => {
     try {
       if (name === "packs") await loadPacks();
       if (name === "collection") await loadCollection();
-      if (name === "exchange") updateDustBars(profile?.duplicate_dust || 0);
+      if (name === "exchange") {
+        updateDustBars(profile?.duplicate_dust || 0);
+        await loadTrades();
+      }
       if (name === "leaders") await loadLeaderboard();
     } catch (err) {
       showToast(err.message);
@@ -465,6 +773,12 @@ document.querySelectorAll(".tab").forEach((tab) => {
 
 document.getElementById("btn-exchange-ticket").addEventListener("click", exchangeTicket);
 document.getElementById("btn-exchange-card").addEventListener("click", exchangeCard);
+document.querySelectorAll(".trade-subtab").forEach((tab) => {
+  tab.addEventListener("click", () => switchTradeTab(tab.dataset.tradeTab));
+});
+document.getElementById("btn-trade-lookup").addEventListener("click", lookupTradePartner);
+document.getElementById("trade-partner-input").addEventListener("input", updateTradeCreateButton);
+document.getElementById("btn-trade-create").addEventListener("click", createTrade);
 document.getElementById("overlay-next").addEventListener("click", advanceReveal);
 document.getElementById("overlay-close").addEventListener("click", closeReveal);
 

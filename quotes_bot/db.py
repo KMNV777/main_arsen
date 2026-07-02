@@ -71,6 +71,22 @@ def init_db(db_path: Path | None = None) -> None:
                 PRIMARY KEY (user_id, quote_id),
                 FOREIGN KEY (quote_id) REFERENCES quotes(id) ON DELETE CASCADE
             );
+
+            CREATE TABLE IF NOT EXISTS trades (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                from_user_id INTEGER NOT NULL,
+                to_user_id INTEGER NOT NULL,
+                offered_quote_id INTEGER NOT NULL,
+                requested_quote_id INTEGER,
+                returned_quote_id INTEGER,
+                status TEXT NOT NULL DEFAULT 'pending',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                resolved_at TEXT,
+                FOREIGN KEY (offered_quote_id) REFERENCES quotes(id) ON DELETE CASCADE
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_trades_to_user ON trades(to_user_id, status);
+            CREATE INDEX IF NOT EXISTS idx_trades_from_user ON trades(from_user_id, status);
             """
         )
         _migrate_user_profiles(conn)

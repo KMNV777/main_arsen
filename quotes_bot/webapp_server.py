@@ -34,7 +34,18 @@ from quotes_bot.collection import (
 from quotes_bot.config import TELEGRAM_BOT_TOKEN, WEBAPP_HOST, WEBAPP_PORT, WEBAPP_URL
 from quotes_bot.db import connect
 from quotes_bot.models import QuoteCard, get_card_by_quote_id, list_people
+from quotes_bot.notifications import notify_user
 from quotes_bot.rarity import get_quote_rarity, rarity_payload
+from quotes_bot.trading import (
+    accept_trade,
+    cancel_trade,
+    create_trade,
+    decline_trade,
+    find_user_id_by_username,
+    get_partner_trade_cards,
+    list_trades,
+    trade_card_payload,
+)
 from quotes_bot.webapp_auth import InitDataError, parse_init_data_loose, validate_init_data
 
 logger = logging.getLogger(__name__)
@@ -133,6 +144,7 @@ def _profile_payload(user_id: int) -> dict:
             total_cards += progress.total
     return {
         "user_id": user_id,
+        "username": profile.username,
         "tickets": profile.tickets,
         "duplicate_dust": profile.duplicate_dust,
         "cards_owned": profile.cards_owned,
@@ -398,6 +410,179 @@ async def handle_disintegrate(request: web.Request) -> web.Response:
     )
 
 
+def _my_trade_cards(user_id: int) -> list[dict]:
+    return [
+        trade_card_payload(card, duplicate_count=dup)
+        for card, dup in get_owned_cards_with_stats(user_id)
+    ]
+
+
+async def handle_trades_list(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    payload = list_trades(user_id)
+    payload["my_cards"] = _my_trade_cards(user_id)
+    payload["profile"] = _profile_payload(user_id)
+    return web.json_response(payload)
+
+
+async def handle_trades_create(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    body = await request.json()
+    partner_username = str(body.get("partner_username", "")).strip()
+    try:
+        offered_quote_id = int(body["offered_quote_id"])
+    except (KeyError, TypeError, ValueError):
+        return web.json_response({"error": "Выбери карту для обмена"}, status=400)
+
+    requested_raw = body.get("requested_quote_id")
+    requested_quote_id = int(requested_raw) if requested_raw not in (None, "") else None
+
+    ok, message, trade = create_trade(
+        user_id,
+        partner_username=partner_username,
+        offered_quote_id=offered_quote_id,
+        requested_quote_id=requested_quote_id,
+    )
+    if ok and trade:
+        offered_card = get_card_by_quote_id(trade.offered_quote_id)
+        offered_name = offered_card.person.name if offered_card else "?"
+        notify_user(
+            trade.to_user_id,
+            (
+                f"🤝 <b>Новое предложение обмена</b>\n"
+                f"От: {trade.from_name}\n"
+                f"Предлагает: <b>{offered_name}</b>\n"
+                f"Открой Mini App → Обмен → входящие"
+            ),
+        )
+
+    payload = {
+        "ok": ok,
+        "message": message,
+        "profile": _profile_payload(user_id),
+        **list_trades(user_id),
+        "my_cards": _my_trade_cards(user_id),
+    }
+    return web.json_response(payload, status=200 if ok else 400)
+
+
+async def handle_trades_partner_cards(request: web.Request) -> web.Response:
+    try:
+        await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    username = request.query.get("username", "").strip()
+    if not username and request.body_exists:
+        try:
+            body = await request.json()
+            username = str(body.get("username", "")).strip()
+        except Exception:
+            pass
+
+    partner_id = find_user_id_by_username(username)
+    if not partner_id:
+        return web.json_response(
+            {"error": "Игрок не найден. Укажи @username — он должен хотя бы раз написать боту."},
+            status=404,
+        )
+
+    from quotes_bot.collection import format_player_name, get_user_profile
+
+    profile = get_user_profile(partner_id)
+    partner_name = format_player_name(partner_id, profile.username, profile.display_name)
+    return web.json_response(
+        {
+            "partner_name": partner_name,
+            "cards": get_partner_trade_cards(partner_id),
+        }
+    )
+
+
+async def handle_trades_accept(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    trade_id = int(request.match_info["trade_id"])
+    body = await request.json()
+    try:
+        give_quote_id = int(body["give_quote_id"])
+    except (KeyError, TypeError, ValueError):
+        return web.json_response({"error": "Выбери карту для отдачи"}, status=400)
+
+    row_before = None
+    with connect() as conn:
+        row_before = conn.execute("SELECT * FROM trades WHERE id = ?", (trade_id,)).fetchone()
+
+    ok, message = accept_trade(user_id, trade_id, give_quote_id=give_quote_id)
+    if ok and row_before:
+        offered = get_card_by_quote_id(row_before["offered_quote_id"])
+        given = get_card_by_quote_id(give_quote_id)
+        notify_user(
+            row_before["from_user_id"],
+            (
+                f"✅ <b>Обмен завершён!</b>\n"
+                f"Ты отдал: <b>{offered.person.name if offered else '?'}</b>\n"
+                f"Получил: <b>{given.person.name if given else '?'}</b>"
+            ),
+        )
+
+    payload = {
+        "ok": ok,
+        "message": message,
+        "profile": _profile_payload(user_id),
+        **list_trades(user_id),
+        "my_cards": _my_trade_cards(user_id),
+    }
+    return web.json_response(payload, status=200 if ok else 400)
+
+
+async def handle_trades_decline(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    trade_id = int(request.match_info["trade_id"])
+    ok, message = decline_trade(user_id, trade_id)
+    payload = {
+        "ok": ok,
+        "message": message,
+        "profile": _profile_payload(user_id),
+        **list_trades(user_id),
+        "my_cards": _my_trade_cards(user_id),
+    }
+    return web.json_response(payload, status=200 if ok else 400)
+
+
+async def handle_trades_cancel(request: web.Request) -> web.Response:
+    try:
+        user_id, _ = await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
+
+    trade_id = int(request.match_info["trade_id"])
+    ok, message = cancel_trade(user_id, trade_id)
+    payload = {
+        "ok": ok,
+        "message": message,
+        "profile": _profile_payload(user_id),
+        **list_trades(user_id),
+        "my_cards": _my_trade_cards(user_id),
+    }
+    return web.json_response(payload, status=200 if ok else 400)
+
+
 async def handle_card_image(request: web.Request) -> web.Response:
     quote_id = int(request.match_info["quote_id"])
     try:
@@ -435,6 +620,14 @@ def create_webapp() -> web.Application:
     app.router.add_post("/api/leaderboard", handle_leaderboard)
     app.router.add_post("/api/exchange/ticket", handle_exchange_ticket)
     app.router.add_post("/api/exchange/card", handle_exchange_card)
+    app.router.add_get("/api/trades", handle_trades_list)
+    app.router.add_post("/api/trades", handle_trades_list)
+    app.router.add_post("/api/trades/create", handle_trades_create)
+    app.router.add_get("/api/trades/partner-cards", handle_trades_partner_cards)
+    app.router.add_post("/api/trades/partner-cards", handle_trades_partner_cards)
+    app.router.add_post("/api/trades/{trade_id}/accept", handle_trades_accept)
+    app.router.add_post("/api/trades/{trade_id}/decline", handle_trades_decline)
+    app.router.add_post("/api/trades/{trade_id}/cancel", handle_trades_cancel)
     app.router.add_post("/api/cards/{quote_id}/disintegrate", handle_disintegrate)
     app.router.add_get("/api/card/{quote_id}/image", handle_card_image)
     app.router.add_get("/static/{path:.+}", handle_static)
