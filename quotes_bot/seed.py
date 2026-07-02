@@ -1,6 +1,6 @@
 from quotes_bot.db import connect
 
-SEED_VERSION = 2
+SEED_VERSION = 3
 
 SEED_DATA: list[dict] = [
     {
@@ -37,7 +37,45 @@ SEED_DATA: list[dict] = [
         "years": "",
         "bio": "",
         "photo_url": None,
-        "quotes": [],
+        "quotes": [
+            "Блядь Акманов опять насрал",
+        ],
+    },
+    {
+        "name": "Акманов Арсен",
+        "years": "",
+        "bio": "",
+        "photo_url": None,
+        "quotes": [
+            "Втирай в меня светлое нефильтрованное",
+        ],
+    },
+    {
+        "name": "Гриша",
+        "years": "",
+        "bio": "",
+        "photo_url": None,
+        "quotes": [
+            "Ну я ебал в рот",
+        ],
+    },
+    {
+        "name": "Артемида",
+        "years": "",
+        "bio": "",
+        "photo_url": None,
+        "quotes": [
+            "Ебаные дебилы блядь",
+        ],
+    },
+    {
+        "name": "Йомма",
+        "years": "",
+        "bio": "",
+        "photo_url": None,
+        "quotes": [
+            "Хочу тян с аниме",
+        ],
     },
 ]
 
