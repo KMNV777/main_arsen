@@ -57,10 +57,26 @@
     </main>
 
     <div id="overlay" class="overlay hidden">
-      <div class="overlay-card">
-        <div class="overlay-title" id="overlay-title">Открываем пак…</div>
-        <div id="reveal-cards" class="reveal-grid"></div>
-        <button id="overlay-close" class="btn primary">Продолжить</button>
+      <div class="pack-reveal">
+        <div class="pack-reveal-header">
+          <div class="overlay-title" id="overlay-title">Открываем пак…</div>
+          <div class="reveal-progress" id="reveal-progress"></div>
+        </div>
+
+        <div class="reveal-stage" id="reveal-stage">
+          <div id="opening-animation" class="opening-animation">
+            <div class="pack-box">📦</div>
+            <div class="opening-text">Тасуем карты…</div>
+          </div>
+          <div id="reveal-card-slot" class="reveal-card-slot hidden"></div>
+        </div>
+
+        <div class="reveal-summary hidden" id="reveal-summary"></div>
+
+        <div class="reveal-actions">
+          <button id="overlay-next" class="btn primary hidden">Следующая карта →</button>
+          <button id="overlay-close" class="btn primary hidden">Готово</button>
+        </div>
       </div>
     </div>
 

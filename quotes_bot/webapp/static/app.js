@@ -4,6 +4,8 @@ let tgUser = null;
 let profile = null;
 let packs = [];
 
+let revealState = null;
+
 function refreshInitData() {
   initData = tg?.initData || window.Telegram?.WebApp?.initData || "";
   tgUser = tg?.initDataUnsafe?.user || null;
@@ -51,6 +53,15 @@ function cardImageUrl(card, isNew = false) {
   return qs ? `${card.image_url}?${qs}` : card.image_url;
 }
 
+function preloadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
 function updateStats(nextProfile) {
   if (!nextProfile) return;
   profile = nextProfile;
@@ -95,37 +106,168 @@ function renderPacks() {
   }
 }
 
+function getRevealElements() {
+  return {
+    overlay: document.getElementById("overlay"),
+    title: document.getElementById("overlay-title"),
+    progress: document.getElementById("reveal-progress"),
+    opening: document.getElementById("opening-animation"),
+    slot: document.getElementById("reveal-card-slot"),
+    summary: document.getElementById("reveal-summary"),
+    btnNext: document.getElementById("overlay-next"),
+    btnClose: document.getElementById("overlay-close"),
+  };
+}
+
+function resetRevealUI() {
+  const el = getRevealElements();
+  el.opening.classList.remove("hidden");
+  el.slot.classList.add("hidden");
+  el.slot.innerHTML = "";
+  el.summary.classList.add("hidden");
+  el.summary.textContent = "";
+  el.progress.textContent = "";
+  el.btnNext.classList.add("hidden");
+  el.btnClose.classList.add("hidden");
+}
+
+function closeReveal() {
+  revealState = null;
+  document.getElementById("overlay").classList.add("hidden");
+  resetRevealUI();
+}
+
+function showRevealCard(card, index, total) {
+  const el = getRevealElements();
+  el.opening.classList.add("hidden");
+  el.slot.classList.remove("hidden");
+  el.summary.classList.add("hidden");
+
+  const badge = card.is_new ? "✨ NEW" : "🔁 DUP";
+  const badgeClass = card.is_new ? "new" : "dup";
+
+  el.progress.textContent = total > 1 ? `Карта ${index + 1} из ${total}` : "";
+  el.title.textContent = card.is_new ? "✨ Новая карта!" : "🔁 Дубликат";
+
+  el.slot.innerHTML = `
+    <div class="reveal-card-frame">
+      <div class="reveal-card-inner ${card.is_new ? "is-new" : ""}">
+        <img src="${cardImageUrl(card, card.is_new)}" alt="${card.person_name}" />
+      </div>
+    </div>
+    <div class="reveal-card-badge ${badgeClass}">${badge}</div>
+    <div class="reveal-card-name">${card.person_name}</div>
+  `;
+
+  if (index < total - 1) {
+    el.btnNext.textContent = "Следующая карта →";
+    el.btnNext.classList.remove("hidden");
+    el.btnClose.classList.add("hidden");
+  } else if (revealState?.packName) {
+    el.btnNext.textContent = total > 1 ? "Итоги →" : "Готово";
+    el.btnNext.classList.remove("hidden");
+    el.btnClose.classList.add("hidden");
+  } else {
+    el.btnNext.classList.add("hidden");
+    el.btnClose.classList.remove("hidden");
+  }
+
+  tg?.HapticFeedback?.impactOccurred(card.is_new ? "medium" : "light");
+}
+
+function showRevealSummary(summaryText) {
+  const el = getRevealElements();
+  el.slot.classList.add("hidden");
+  el.summary.classList.remove("hidden");
+  el.summary.textContent = summaryText;
+  el.progress.textContent = "";
+  el.btnNext.classList.add("hidden");
+  el.btnClose.classList.remove("hidden");
+}
+
+function advanceReveal() {
+  if (!revealState) return;
+  if (revealState.index >= revealState.cards.length - 1 && revealState.packName) {
+    finishReveal();
+    return;
+  }
+  revealState.index += 1;
+  if (revealState.index >= revealState.cards.length) {
+    finishReveal();
+    return;
+  }
+  showRevealCard(revealState.cards[revealState.index], revealState.index, revealState.cards.length);
+}
+
+function finishReveal() {
+  if (!revealState) return;
+  revealState.summaryShown = true;
+  const { packName, newCount, dupCount, dustGained } = revealState;
+  let text = `✅ ${packName}: ✨ ${newCount} · 🔁 ${dupCount}`;
+  if (dustGained > 0) text += ` · +${dustGained} пыли`;
+  showRevealSummary(text);
+  const el = getRevealElements();
+  el.title.textContent = "Пак открыт!";
+  tg?.HapticFeedback?.notificationOccurred("success");
+}
+
+async function startRevealFlow({ title, cards, packName, newCount, dupCount, dustGained }) {
+  const el = getRevealElements();
+  resetRevealUI();
+  el.overlay.classList.remove("hidden");
+  el.title.textContent = title;
+  el.opening.querySelector(".opening-text").textContent = "Тасуем карты…";
+
+  revealState = {
+    cards,
+    index: 0,
+    summaryShown: false,
+    packName: packName || "",
+    newCount: newCount ?? cards.filter((c) => c.is_new).length,
+    dupCount: dupCount ?? cards.filter((c) => !c.is_new).length,
+    dustGained: dustGained ?? 0,
+  };
+
+  try {
+    await Promise.all(cards.map((c) => preloadImage(cardImageUrl(c, c.is_new))));
+  } catch {
+    /* show anyway even if preload fails */
+  }
+
+  await new Promise((r) => setTimeout(r, 900));
+  showRevealCard(cards[0], 0, cards.length);
+}
+
 async function openPack(pack) {
   if (!profile && !tgUser) {
     showToast("Не удалось определить игрока. Перезапусти Mini App");
     return;
   }
-  const overlay = document.getElementById("overlay");
-  const title = document.getElementById("overlay-title");
-  const reveal = document.getElementById("reveal-cards");
-  overlay.classList.remove("hidden");
-  title.textContent = `${pack.emoji} Открываем ${pack.name}…`;
-  reveal.innerHTML = '<p class="empty">Тасуем карты…</p>';
+
+  const el = getRevealElements();
+  resetRevealUI();
+  el.overlay.classList.remove("hidden");
+  el.title.textContent = `${pack.emoji} Открываем ${pack.name}…`;
 
   try {
     const data = await api(`/api/packs/${pack.id}/open`, { method: "POST" });
     updateStats(data.profile);
-    title.textContent = `✅ ${pack.name}: ✨ ${data.new_count} · 🔁 ${data.duplicate_count}`;
-    reveal.innerHTML = data.cards
-      .map(
-        (card) => `
-          <div>
-            <img src="${cardImageUrl(card, card.is_new)}" alt="${card.person_name}" />
-            <div class="card-caption">${card.is_new ? "✨ NEW" : "🔁 DUP"} · ${card.person_name}</div>
-          </div>
-        `
-      )
-      .join("");
     renderPacks();
-    tg?.HapticFeedback?.notificationOccurred("success");
+
+    await startRevealFlow({
+      title: `${pack.emoji} ${pack.name}`,
+      cards: data.cards,
+      packName: pack.name,
+      newCount: data.new_count,
+      dupCount: data.duplicate_count,
+      dustGained: data.dust_gained || 0,
+    });
   } catch (err) {
-    title.textContent = "Ошибка";
-    reveal.innerHTML = `<p class="empty">${err.message}</p>`;
+    el.opening.classList.add("hidden");
+    el.slot.classList.remove("hidden");
+    el.slot.innerHTML = `<p class="empty error">${err.message}</p>`;
+    el.btnClose.classList.remove("hidden");
+    el.title.textContent = "Ошибка";
     tg?.HapticFeedback?.notificationOccurred("error");
   }
 }
@@ -203,11 +345,13 @@ async function exchangeCard() {
     updateStats(data.profile);
     document.getElementById("exchange-message").textContent = data.message.replace(/<[^>]+>/g, "");
     if (data.card) {
-      const overlay = document.getElementById("overlay");
-      const reveal = document.getElementById("reveal-cards");
-      document.getElementById("overlay-title").textContent = "✨ Новая карта из обмена";
-      reveal.innerHTML = `<img src="${cardImageUrl(data.card, true)}" alt="${data.card.person_name}" />`;
-      overlay.classList.remove("hidden");
+      await startRevealFlow({
+        title: "✨ Новая карта из обмена",
+        cards: [{ ...data.card, is_new: true }],
+        packName: "Обмен",
+        newCount: 1,
+        dupCount: 0,
+      });
     }
     tg?.HapticFeedback?.notificationOccurred("success");
   } catch (err) {
@@ -241,8 +385,18 @@ document.querySelectorAll(".tab").forEach((tab) => {
 
 document.getElementById("btn-exchange-ticket").addEventListener("click", exchangeTicket);
 document.getElementById("btn-exchange-card").addEventListener("click", exchangeCard);
-document.getElementById("overlay-close").addEventListener("click", () => {
-  document.getElementById("overlay").classList.add("hidden");
+document.getElementById("overlay-next").addEventListener("click", advanceReveal);
+document.getElementById("overlay-close").addEventListener("click", closeReveal);
+
+document.getElementById("reveal-stage").addEventListener("click", (e) => {
+  if (e.target.closest(".btn")) return;
+  if (!revealState || revealState.summaryShown) return;
+  if (revealState.index < revealState.cards.length - 1) {
+    revealState.index += 1;
+    showRevealCard(revealState.cards[revealState.index], revealState.index, revealState.cards.length);
+  } else if (revealState.packName) {
+    finishReveal();
+  }
 });
 
 async function boot() {
