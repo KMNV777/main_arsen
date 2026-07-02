@@ -109,7 +109,9 @@ def touch_user(user_id: int, username: str | None = None, display_name: str | No
         row = conn.execute(
             "SELECT * FROM user_profiles WHERE user_id = ?", (user_id,)
         ).fetchone()
-    return _row_to_profile(row, conn) if row else ensure_user(user_id)
+        if row:
+            return _row_to_profile(row, conn)
+    return ensure_user(user_id)
 
 
 def add_duplicate_dust(user_id: int, amount: int = 1) -> None:
