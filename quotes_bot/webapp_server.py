@@ -218,7 +218,10 @@ def _card_payload(
 
 
 async def handle_index(_: web.Request) -> web.Response:
-    return web.FileResponse(STATIC_DIR / "index.html")
+    return web.FileResponse(
+        STATIC_DIR / "index.html",
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
 
 
 async def handle_static(request: web.Request) -> web.Response:

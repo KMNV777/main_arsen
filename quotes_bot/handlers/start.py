@@ -3,7 +3,7 @@ from telegram.ext import ContextTypes
 
 from quotes_bot.collection import DUST_FOR_CARD, DUST_FOR_TICKET, touch_user
 from quotes_bot.config import WEBAPP_URL
-from quotes_bot.keyboards import MAIN_KEYBOARD, start_inline_keyboard
+from quotes_bot.keyboards import get_main_keyboard, start_inline_keyboard
 
 
 WELCOME_TEXT = (
@@ -15,6 +15,8 @@ WELCOME_TEXT = (
     "• 🏆 Таблица лидеров\n\n"
     "У тебя <b>5 стартовых билетов</b>.\n"
     "Кнопки в чате ниже — запасной режим, основная игра в Mini App.\n\n"
+    "⚠️ <b>Если экран пустой:</b> нажми кнопку меню <b>🎮 Играть</b> "
+    "слева от поля ввода (не старые кнопки в чате). Или отправь /start.\n\n"
     "Фото обновляется через /photo Имя"
 )
 
@@ -34,7 +36,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
     await update.message.reply_text(
         text,
-        reply_markup=MAIN_KEYBOARD,
+        reply_markup=get_main_keyboard(),
         parse_mode="HTML",
     )
     if inline:
@@ -56,6 +58,6 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         f"🔁 Обмен — {DUST_FOR_TICKET} пыли → 🎫, {DUST_FOR_CARD} пыли → 🃏\n"
         "🏆 Лидеры — топ коллекционеров\n"
         "/photo Имя — обновить фото",
-        reply_markup=MAIN_KEYBOARD,
+        reply_markup=get_main_keyboard(),
         parse_mode="HTML",
     )

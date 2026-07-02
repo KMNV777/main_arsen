@@ -9,7 +9,15 @@ load_dotenv(BASE_DIR / ".env")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 WEBAPP_URL = os.getenv("WEBAPP_URL", "").rstrip("/")
+WEBAPP_CACHE_VERSION = os.getenv("WEBAPP_CACHE_VERSION", "1")
 WEBAPP_HOST = os.getenv("WEBAPP_HOST", "0.0.0.0")
+
+
+def get_webapp_url() -> str:
+    """Public Mini App URL with cache-buster for Telegram WebView."""
+    if not WEBAPP_URL:
+        return ""
+    return f"{WEBAPP_URL}/?v={WEBAPP_CACHE_VERSION}"
 WEBAPP_PORT = int(os.getenv("WEBAPP_PORT", "8765"))
 DEFAULT_DATABASE_PATH = BASE_DIR / "data" / "quotes.db"
 DATABASE_PATH = Path(os.getenv("DATABASE_PATH", str(DEFAULT_DATABASE_PATH)))

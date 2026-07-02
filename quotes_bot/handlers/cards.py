@@ -3,7 +3,7 @@ from telegram.ext import ContextTypes
 
 from quotes_bot.card_renderer import render_card_bytes
 from quotes_bot.collection import get_duplicate_count
-from quotes_bot.keyboards import MAIN_KEYBOARD, card_keyboard
+from quotes_bot.keyboards import get_main_keyboard, card_keyboard
 from quotes_bot.models import get_card_by_quote_id
 
 
@@ -56,7 +56,7 @@ async def random_card_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
         await update.effective_message.reply_text(
             "У тебя пока нет карточек.\nОткрой пак через 🎁 <b>Открыть пак</b>!",
             parse_mode="HTML",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
     await send_card(update, card, owned_only=True, user_id=user_id)

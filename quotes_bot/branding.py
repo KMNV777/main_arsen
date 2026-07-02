@@ -2,7 +2,7 @@ from pathlib import Path
 
 from telegram import BotCommand, MenuButtonWebApp, WebAppInfo
 
-from quotes_bot.config import BASE_DIR, TELEGRAM_BOT_TOKEN, WEBAPP_URL
+from quotes_bot.config import BASE_DIR, TELEGRAM_BOT_TOKEN, WEBAPP_URL, get_webapp_url
 
 LOGO_PATH = BASE_DIR / "assets" / "bot_logo.png"
 
@@ -29,11 +29,12 @@ async def configure_bot_profile(application) -> None:
             BotCommand("help", "Справка"),
         ]
     )
-    if WEBAPP_URL:
+    webapp_url = get_webapp_url()
+    if webapp_url:
         await application.bot.set_chat_menu_button(
             menu_button=MenuButtonWebApp(
                 text="🎮 Играть",
-                web_app=WebAppInfo(url=WEBAPP_URL),
+                web_app=WebAppInfo(url=webapp_url),
             )
         )
 

@@ -6,7 +6,7 @@ from telegram.ext import ContextTypes
 from quotes_bot.card_renderer import render_card_bytes
 from quotes_bot.config import PHOTOS_DIR
 from quotes_bot.import_photos import import_photo
-from quotes_bot.keyboards import MAIN_KEYBOARD, card_keyboard
+from quotes_bot.keyboards import card_keyboard, get_main_keyboard
 from quotes_bot.models import find_person_by_name, get_first_card_for_person, list_people
 
 AWAITING_PHOTO_KEY = "awaiting_photo_person_id"
@@ -27,7 +27,7 @@ async def _save_photo_for_person(update: Update, person, source_path: Path) -> N
     await update.effective_message.reply_text(
         f"Фото для <b>{person.name}</b> обновлено ✅",
         parse_mode="HTML",
-        reply_markup=MAIN_KEYBOARD,
+        reply_markup=get_main_keyboard(),
     )
 
 
@@ -89,21 +89,21 @@ async def upload_person_photo_handler(
                 "<b>Машинка</b>\n\n"
                 f"Сейчас в базе: {names}",
                 parse_mode="HTML",
-                reply_markup=MAIN_KEYBOARD,
+                reply_markup=get_main_keyboard(),
             )
         else:
             await message.reply_text(
                 "Сначала напиши имя человека, например <b>Машинка</b>, "
                 "а потом отправь фото.",
                 parse_mode="HTML",
-                reply_markup=MAIN_KEYBOARD,
+                reply_markup=get_main_keyboard(),
             )
         return
 
     if not person.photo_url:
         await message.reply_text(
             f"У {person.name} не задан файл фото в базе.",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
 
@@ -111,7 +111,7 @@ async def upload_person_photo_handler(
     if not await _download_image_message(update, temp_path):
         await message.reply_text(
             "Не удалось получить изображение. Отправь фото или файл-картинку.",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
 
@@ -133,7 +133,7 @@ async def prepare_photo_handler(update: Update, context: ContextTypes.DEFAULT_TY
         f"Жду фото для <b>{person.name}</b>.\n"
         "Отправь картинку следующим сообщением.",
         parse_mode="HTML",
-        reply_markup=MAIN_KEYBOARD,
+        reply_markup=get_main_keyboard(),
     )
 
 
@@ -148,7 +148,7 @@ async def photo_help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
                 "Можно без подписи или с подписью "
                 f"<b>{person.name}</b>.",
                 parse_mode="HTML",
-                reply_markup=MAIN_KEYBOARD,
+                reply_markup=get_main_keyboard(),
             )
             return
 
@@ -156,7 +156,7 @@ async def photo_help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
             f"Не нашёл «{' '.join(context.args)}».\n"
             "Пример: <code>/photo Машинка</code>",
             parse_mode="HTML",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
 
@@ -166,5 +166,5 @@ async def photo_help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         "2. Отправь фото следующим сообщением\n\n"
         "Или сразу: фото + подпись <b>Машинка</b>",
         parse_mode="HTML",
-        reply_markup=MAIN_KEYBOARD,
+        reply_markup=get_main_keyboard(),
     )

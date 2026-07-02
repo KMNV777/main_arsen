@@ -1,4 +1,4 @@
-from quotes_bot.config import WEBAPP_URL
+from quotes_bot.config import WEBAPP_URL, get_webapp_url
 from quotes_bot.formatters import truncate
 from quotes_bot.models import get_adjacent_quote_id
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
@@ -11,8 +11,9 @@ SEARCH_HINT = (
 
 def main_keyboard() -> ReplyKeyboardMarkup:
     rows = []
-    if WEBAPP_URL:
-        rows.append([KeyboardButton("🎮 Играть", web_app=WebAppInfo(url=WEBAPP_URL))])
+    webapp_url = get_webapp_url()
+    if webapp_url:
+        rows.append([KeyboardButton("🎮 Играть", web_app=WebAppInfo(url=webapp_url))])
     rows.extend(
         [
             ["🎁 Открыть пак", "📚 Коллекция"],
@@ -24,14 +25,16 @@ def main_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(rows, resize_keyboard=True)
 
 
-MAIN_KEYBOARD = main_keyboard()
+def get_main_keyboard() -> ReplyKeyboardMarkup:
+    return main_keyboard()
 
 
 def start_inline_keyboard() -> InlineKeyboardMarkup | None:
-    if not WEBAPP_URL:
+    webapp_url = get_webapp_url()
+    if not webapp_url:
         return None
     return InlineKeyboardMarkup(
-        [[InlineKeyboardButton("🎮 Открыть игру", web_app=WebAppInfo(url=WEBAPP_URL))]]
+        [[InlineKeyboardButton("🎮 Открыть игру", web_app=WebAppInfo(url=webapp_url))]]
     )
 
 
@@ -97,9 +100,10 @@ def exchange_keyboard(dust: int) -> InlineKeyboardMarkup:
 
 def profile_keyboard() -> InlineKeyboardMarkup:
     rows = []
-    if WEBAPP_URL:
+    webapp_url = get_webapp_url()
+    if webapp_url:
         rows.append(
-            [InlineKeyboardButton("🎮 Mini App", web_app=WebAppInfo(url=WEBAPP_URL))]
+            [InlineKeyboardButton("🎮 Mini App", web_app=WebAppInfo(url=webapp_url))]
         )
     rows.extend(
         [

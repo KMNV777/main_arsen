@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 
 from quotes_bot.collection import get_owned_cards
-from quotes_bot.keyboards import MAIN_KEYBOARD, SEARCH_HINT, search_results_keyboard
+from quotes_bot.keyboards import SEARCH_HINT, get_main_keyboard, search_results_keyboard
 
 SEARCH_QUERY = 1
 
@@ -17,7 +17,7 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     if not query:
         await update.message.reply_text(
             "Введите текст для поиска.",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return ConversationHandler.END
 
@@ -32,7 +32,7 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
     if not results:
         await update.message.reply_text(
             f"В твоей коллекции по запросу «{query}» ничего не найдено.",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return ConversationHandler.END
 
@@ -45,5 +45,5 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
 
 
 async def cancel_search(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    await update.message.reply_text("Поиск отменён.", reply_markup=MAIN_KEYBOARD)
+    await update.message.reply_text("Поиск отменён.", reply_markup=get_main_keyboard())
     return ConversationHandler.END

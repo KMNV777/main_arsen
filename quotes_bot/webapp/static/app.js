@@ -480,23 +480,26 @@ document.getElementById("reveal-stage").addEventListener("click", (e) => {
 });
 
 async function boot() {
-  tg?.ready();
-  tg?.expand();
-  tg?.setHeaderColor("#0f1014");
-  tg?.setBackgroundColor("#0f1014");
-  refreshInitData();
-
-  if (!initData && !tgUser) {
-    showPackError("Открой Mini App через кнопку 🎮 Играть в боте");
-    showToast("Нет данных Telegram");
-    return;
-  }
-
+  const loader = document.getElementById("boot-loader");
   try {
+    tg?.ready();
+    tg?.expand();
+    tg?.setHeaderColor("#0f1014");
+    tg?.setBackgroundColor("#0f1014");
+    refreshInitData();
+
+    if (!initData && !tgUser) {
+      showPackError("Открой Mini App через кнопку 🎮 Играть в боте");
+      showToast("Нет данных Telegram");
+      return;
+    }
+
     await loadPacks();
   } catch (err) {
     showPackError(err.message);
     showToast(err.message);
+  } finally {
+    loader?.classList.add("hidden");
   }
 }
 

@@ -26,7 +26,7 @@ from quotes_bot.collection import (
 )
 from quotes_bot.handlers.cards import send_card
 from quotes_bot.keyboards import (
-    MAIN_KEYBOARD,
+    get_main_keyboard,
     exchange_keyboard,
     pack_list_keyboard,
     profile_keyboard,
@@ -112,7 +112,7 @@ async def collection_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text(
             "Коллекция пуста.\nОткрой пак через 🎁 <b>Открыть пак</b>!",
             parse_mode="HTML",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
 
@@ -260,7 +260,7 @@ async def game_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
 
         new_cards, revealed, error = open_pack(user_id, pack_id)
         if error:
-            await query.edit_message_text(error, reply_markup=MAIN_KEYBOARD)
+            await query.edit_message_text(error, reply_markup=get_main_keyboard())
             return
 
         for index, card in enumerate(revealed):
@@ -292,7 +292,7 @@ async def game_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
         await update.effective_chat.send_message(
             "\n".join(summary),
             parse_mode="HTML",
-            reply_markup=MAIN_KEYBOARD,
+            reply_markup=get_main_keyboard(),
         )
         return
 
