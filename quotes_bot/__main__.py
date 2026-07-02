@@ -9,6 +9,7 @@ from telegram.ext import (
     filters,
 )
 
+from quotes_bot.branding import configure_if_token_present
 from quotes_bot.config import TELEGRAM_BOT_TOKEN
 from quotes_bot.db import init_db
 from quotes_bot.generate_placeholders import generate_all_placeholders
@@ -31,7 +32,7 @@ def build_application() -> Application:
             "и укажите токен от @BotFather."
         )
 
-    application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(configure_if_token_present).build()
 
     search_conversation = ConversationHandler(
         entry_points=[

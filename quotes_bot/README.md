@@ -21,6 +21,17 @@ python -m quotes_bot
 
 При запуске создаются база SQLite, placeholder-фото (если файлов ещё нет) и начальные карточки.
 
+## Логотип бота
+
+Файл: `quotes_bot/assets/bot_logo.png` (512×512, киберспорт + цитаты).
+
+Чтобы поставить аватар в Telegram:
+1. Открой [@BotFather](https://t.me/BotFather)
+2. `/mybots` → выбери бота → **Edit Botpic**
+3. Загрузи `bot_logo.png`
+
+При старте бот также обновляет имя и описание через API.
+
 ## Фото
 
 Фото лежат в `quotes_bot/assets/photos/`:
