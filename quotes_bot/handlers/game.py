@@ -45,7 +45,7 @@ async def open_pack_menu_handler(update: Update, context: ContextTypes.DEFAULT_T
     profile = ensure_user(user_id)
     lines = [
         "<b>🎁 Открыть пак</b>",
-        f"Билетов: <b>{profile.tickets}</b> 🎫 · 1 пак = {PACK_OPEN_COST} билет",
+        f"Билетов: <b>{profile.tickets}</b> 🎫 · паки <b>бесплатные</b> 🆓",
         f"🔁 Пыль: <b>{profile.duplicate_dust}</b> (за дубликаты)",
         "",
     ]

@@ -110,3 +110,19 @@ def get_user_id_from_init_data(init_data: str, bot_token: str) -> int:
     if not user or "id" not in user:
         raise InitDataError("user id missing")
     return int(user["id"])
+
+
+def parse_init_data_loose(init_data: str) -> dict:
+    """Parse initData without signature check (Mini App fallback)."""
+    init_data = init_data.strip()
+    if not init_data:
+        raise InitDataError("initData is required")
+
+    parsed = dict(parse_qsl(init_data, keep_blank_values=True))
+    parsed.pop("hash", None)
+    parsed.pop("signature", None)
+    user_raw = parsed.get("user")
+    if not user_raw:
+        raise InitDataError("user id missing")
+
+    return _finalize_payload(parsed)

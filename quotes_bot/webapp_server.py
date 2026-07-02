@@ -13,6 +13,7 @@ from quotes_bot.card_renderer import render_card_bytes
 from quotes_bot.collection import (
     DUST_FOR_CARD,
     DUST_FOR_TICKET,
+    PACK_OPEN_COST,
     exchange_dust_for_card,
     exchange_dust_for_ticket,
     format_leaderboard,
@@ -29,30 +30,22 @@ from quotes_bot.collection import (
 from quotes_bot.config import TELEGRAM_BOT_TOKEN, WEBAPP_HOST, WEBAPP_PORT, WEBAPP_URL
 from quotes_bot.db import connect
 from quotes_bot.models import QuoteCard, get_card_by_quote_id, list_people
-from quotes_bot.webapp_auth import InitDataError, get_user_id_from_init_data, validate_init_data
+from quotes_bot.webapp_auth import InitDataError, parse_init_data_loose, validate_init_data
 
 logger = logging.getLogger(__name__)
 
 STATIC_DIR = Path(__file__).resolve().parent / "webapp" / "static"
 
 
-async def _collect_init_data_candidates(request: web.Request) -> list[str]:
+async def _read_auth_payload(request: web.Request) -> tuple[list[str], dict | None]:
     candidates: list[str] = []
+    body_user: dict | None = None
 
     auth = request.headers.get("Authorization", "")
     if auth.lower().startswith("tma "):
         value = auth[4:].strip()
         if value:
             candidates.append(value)
-
-    if request.body_exists and request.content_type == "application/json":
-        try:
-            body = await request.json()
-            value = body.get("initData", "")
-            if value:
-                candidates.append(value)
-        except Exception:
-            pass
 
     query_value = request.query.get("initData")
     if query_value:
@@ -62,33 +55,66 @@ async def _collect_init_data_candidates(request: web.Request) -> list[str]:
     if header:
         candidates.append(header)
 
+    if request.body_exists and request.content_type == "application/json":
+        try:
+            body = await request.json()
+            value = body.get("initData", "")
+            if value:
+                candidates.append(value)
+            if isinstance(body.get("user"), dict):
+                body_user = body["user"]
+        except Exception:
+            pass
+
     unique: list[str] = []
     seen: set[str] = set()
     for item in candidates:
         if item not in seen:
             seen.add(item)
             unique.append(item)
-    return unique
+    return unique, body_user
+
+
+def _touch_from_user_dict(user: dict) -> int:
+    display_name = user.get("first_name", "")
+    if user.get("last_name"):
+        display_name = f"{display_name} {user['last_name']}".strip()
+    user_id = int(user["id"])
+    touch_user(
+        user_id,
+        username=user.get("username"),
+        display_name=display_name or None,
+    )
+    return user_id
 
 
 async def _resolve_user(request: web.Request) -> tuple[int, dict]:
+    candidates, body_user = await _read_auth_payload(request)
     last_error: InitDataError | None = None
-    for init_data in await _collect_init_data_candidates(request):
+
+    for init_data in candidates:
         try:
             payload = validate_init_data(init_data, TELEGRAM_BOT_TOKEN)
             user = payload.get("user") or {}
-            display_name = user.get("first_name", "")
-            if user.get("last_name"):
-                display_name = f"{display_name} {user['last_name']}".strip()
-            user_id = int(user["id"])
-            touch_user(
-                user_id,
-                username=user.get("username"),
-                display_name=display_name or None,
-            )
+            user_id = _touch_from_user_dict(user)
             return user_id, payload
         except InitDataError as exc:
             last_error = exc
+
+    for init_data in candidates:
+        try:
+            payload = parse_init_data_loose(init_data)
+            user_id = _touch_from_user_dict(payload["user"])
+            logger.info("Mini App: loose initData auth for user %s", user_id)
+            return user_id, payload
+        except (InitDataError, KeyError, TypeError, ValueError):
+            continue
+
+    if body_user and body_user.get("id"):
+        user_id = _touch_from_user_dict(body_user)
+        logger.info("Mini App: initDataUnsafe auth for user %s", user_id)
+        return user_id, {"user": body_user}
+
     raise last_error or InitDataError("initData is required")
 
 
@@ -110,6 +136,8 @@ def _profile_payload(user_id: int) -> dict:
         "rank": rank,
         "dust_for_ticket": DUST_FOR_TICKET,
         "dust_for_card": DUST_FOR_CARD,
+        "pack_open_cost": PACK_OPEN_COST,
+        "packs_are_free": PACK_OPEN_COST == 0,
     }
 
 
@@ -319,16 +347,10 @@ async def handle_exchange_card(request: web.Request) -> web.Response:
 
 async def handle_card_image(request: web.Request) -> web.Response:
     quote_id = int(request.match_info["quote_id"])
-    last_error: InitDataError | None = None
-    for init_data in await _collect_init_data_candidates(request):
-        try:
-            get_user_id_from_init_data(init_data, TELEGRAM_BOT_TOKEN)
-            last_error = None
-            break
-        except InitDataError as exc:
-            last_error = exc
-    if last_error:
-        return web.json_response({"error": str(last_error)}, status=401)
+    try:
+        await _resolve_user(request)
+    except InitDataError as exc:
+        return web.json_response({"error": str(exc)}, status=401)
 
     card = get_card_by_quote_id(quote_id)
     if not card:

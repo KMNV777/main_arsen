@@ -34,7 +34,7 @@ class PackProgress:
 
 
 STARTER_TICKETS = 5
-PACK_OPEN_COST = 1
+PACK_OPEN_COST = 0
 DUST_FOR_TICKET = 3
 DUST_FOR_CARD = 5
 
@@ -433,6 +433,8 @@ def add_card_to_collection(user_id: int, quote_id: int) -> bool:
 
 
 def spend_ticket(user_id: int, amount: int = PACK_OPEN_COST) -> bool:
+    if amount <= 0:
+        return True
     profile = ensure_user(user_id)
     if profile.tickets < amount:
         return False
@@ -450,14 +452,14 @@ def open_pack(user_id: int, pack_id: int) -> tuple[list[QuoteCard], list[QuoteCa
         return [], [], "Пак не найден."
 
     profile = ensure_user(user_id)
-    if profile.tickets < PACK_OPEN_COST:
+    if PACK_OPEN_COST > 0 and profile.tickets < PACK_OPEN_COST:
         return [], [], "Не хватает билетов 🎫. Открой «👤 Профиль» — там баланс."
 
     member_ids = get_pack_member_ids(pack_id)
     if len(member_ids) < 2:
         return [], [], "В паке недостаточно игроков."
 
-    if not spend_ticket(user_id):
+    if PACK_OPEN_COST > 0 and not spend_ticket(user_id):
         return [], [], "Не удалось списать билет."
 
     new_cards: list[QuoteCard] = []

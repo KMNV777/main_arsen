@@ -1,11 +1,22 @@
 const tg = window.Telegram?.WebApp;
 let initData = "";
+let tgUser = null;
 let profile = null;
 let packs = [];
 
 function refreshInitData() {
   initData = tg?.initData || window.Telegram?.WebApp?.initData || "";
+  tgUser = tg?.initDataUnsafe?.user || null;
   return initData;
+}
+
+function authBody(extra = {}) {
+  refreshInitData();
+  return JSON.stringify({
+    initData,
+    user: tgUser,
+    ...extra,
+  });
 }
 
 function api(path, options = {}) {
@@ -22,7 +33,7 @@ function api(path, options = {}) {
   const body =
     method === "GET"
       ? undefined
-      : JSON.stringify({ initData, ...(options.body || {}) });
+      : authBody(typeof options.body === "object" ? options.body : {});
 
   return fetch(path, { ...options, method, headers, body }).then(async (res) => {
     const data = await res.json().catch(() => ({}));
@@ -61,13 +72,6 @@ function showPackError(text) {
   root.innerHTML = `<p class="empty error">${text}</p>`;
 }
 
-function showAuthWarning(text) {
-  const hint = document.querySelector("#tab-packs .hint");
-  if (hint && text) {
-    hint.innerHTML = `<span class="error">${text}</span><br>1 🎫 = 2 карты · дубликаты → пыль`;
-  }
-}
-
 function renderPacks() {
   const root = document.getElementById("pack-list");
   root.innerHTML = "";
@@ -78,7 +82,6 @@ function renderPacks() {
   for (const pack of packs) {
     const card = document.createElement("div");
     card.className = "pack-card";
-    if (profile && (profile.tickets || 0) < 1) card.classList.add("disabled");
     card.innerHTML = `
       <div class="pack-head">
         <div class="pack-name">${pack.emoji} ${pack.name}</div>
@@ -93,12 +96,8 @@ function renderPacks() {
 }
 
 async function openPack(pack) {
-  if (!profile) {
-    showToast("Не удалось авторизоваться. Перезапусти Mini App");
-    return;
-  }
-  if ((profile.tickets || 0) < 1) {
-    showToast("Не хватает билетов 🎫");
+  if (!profile && !tgUser) {
+    showToast("Не удалось определить игрока. Перезапусти Mini App");
     return;
   }
   const overlay = document.getElementById("overlay");
@@ -136,9 +135,6 @@ async function loadPacks() {
   packs = data.packs || [];
   updateStats(data.profile);
   renderPacks();
-  if (data.auth_error) {
-    showAuthWarning("Авторизация не прошла — видны паки, но открыть их нельзя. Закрой и открой Mini App заново.");
-  }
 }
 
 async function loadCollection() {
@@ -256,9 +252,9 @@ async function boot() {
   tg?.setBackgroundColor("#0f1014");
   refreshInitData();
 
-  if (!initData) {
+  if (!initData && !tgUser) {
     showPackError("Открой Mini App через кнопку 🎮 Играть в боте");
-    showToast("Нет Telegram initData");
+    showToast("Нет данных Telegram");
     return;
   }
 
