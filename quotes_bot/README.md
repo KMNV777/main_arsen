@@ -31,13 +31,13 @@ python -m quotes_bot
 | `mashinka.jpg` | Машинка |
 | `khurov_azamat.jpg` | Хуров Азамат |
 | `arsen_sensei.jpg` | Арсен Сенсей |
-| `akmanov_arsen.jpg` | Акманов Арсен |
+| `arsen_akmanov.jpg` | Арсен Акманов |
 | `grisha.jpg` | Гриша |
 | `artemida.jpg` | Артемида |
 | `yomma.jpg` | Йомма |
 
-Чтобы поставить своё фото — замените нужный `.jpg` в этой папке (имя файла не меняйте).  
-Placeholder-ы не перезаписываются, если файл уже существует.
+Чтобы поставить своё фото — положите `.jpg` в `quotes_bot/assets/photos/inbox/` с нужным именем и перезапустите бота.  
+Либо замените файл напрямую в `quotes_bot/assets/photos/`.
 
 Перегенерировать placeholder-ы:
 

@@ -13,6 +13,7 @@ from quotes_bot.config import TELEGRAM_BOT_TOKEN
 from quotes_bot.db import init_db
 from quotes_bot.generate_placeholders import generate_all_placeholders
 from quotes_bot.handlers import cards, search, start
+from quotes_bot.import_photos import import_inbox_photos
 from quotes_bot.seed import seed_database
 
 logging.basicConfig(
@@ -63,6 +64,9 @@ def build_application() -> Application:
 
 def main() -> None:
     init_db()
+    imported = import_inbox_photos()
+    if imported:
+        logger.info("Imported photos: %s", ", ".join(imported))
     generate_all_placeholders()
     seed_database()
     application = build_application()

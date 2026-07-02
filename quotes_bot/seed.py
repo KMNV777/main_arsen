@@ -1,6 +1,6 @@
 from quotes_bot.db import connect
 
-SEED_VERSION = 4
+SEED_VERSION = 5
 
 SEED_DATA: list[dict] = [
     {
@@ -42,10 +42,10 @@ SEED_DATA: list[dict] = [
         ],
     },
     {
-        "name": "Акманов Арсен",
+        "name": "Арсен Акманов",
         "years": "",
         "bio": "",
-        "photo_url": "akmanov_arsen.jpg",
+        "photo_url": "arsen_akmanov.jpg",
         "quotes": [
             "Втирай в меня светлое нефильтрованное",
         ],
