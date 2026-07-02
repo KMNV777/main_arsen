@@ -227,6 +227,10 @@ body {
   margin-top: 10px;
 }
 
+.empty.error {
+  color: var(--danger);
+}
+
 .toast {
   position: fixed;
   left: 50%;

@@ -1,15 +1,27 @@
 const tg = window.Telegram?.WebApp;
-let initData = tg?.initData || "";
+let initData = "";
 let profile = null;
 let packs = [];
+
+function refreshInitData() {
+  initData = tg?.initData || window.Telegram?.WebApp?.initData || "";
+  return initData;
+}
+
+function apiUrl(path) {
+  refreshInitData();
+  if (!initData) return path;
+  const sep = path.includes("?") ? "&" : "?";
+  return `${path}${sep}initData=${encodeURIComponent(initData)}`;
+}
 
 function api(path, options = {}) {
   const headers = {
     "Content-Type": "application/json",
-    "X-Telegram-Init-Data": initData,
+    "X-Telegram-Init-Data": refreshInitData(),
     ...(options.headers || {}),
   };
-  return fetch(path, { ...options, headers }).then(async (res) => {
+  return fetch(apiUrl(path), { ...options, headers }).then(async (res) => {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || data.message || "Request failed");
     return data;
@@ -17,8 +29,12 @@ function api(path, options = {}) {
 }
 
 function cardImageUrl(card, isNew = false) {
-  const suffix = isNew ? "?new=1&" : "?";
-  return `${card.image_url}${suffix}initData=${encodeURIComponent(initData)}`;
+  refreshInitData();
+  const params = new URLSearchParams();
+  if (isNew) params.set("new", "1");
+  if (initData) params.set("initData", initData);
+  const qs = params.toString();
+  return qs ? `${card.image_url}?${qs}` : card.image_url;
 }
 
 function updateStats(nextProfile) {
@@ -33,7 +49,12 @@ function showToast(text) {
   const el = document.getElementById("toast");
   el.textContent = text;
   el.classList.remove("hidden");
-  setTimeout(() => el.classList.add("hidden"), 2400);
+  setTimeout(() => el.classList.add("hidden"), 3200);
+}
+
+function showPackError(text) {
+  const root = document.getElementById("pack-list");
+  root.innerHTML = `<p class="empty error">${text}</p>`;
 }
 
 function renderPacks() {
@@ -199,6 +220,7 @@ document.querySelectorAll(".tab").forEach((tab) => {
       if (name === "leaders") await loadLeaderboard();
     } catch (err) {
       showToast(err.message);
+      if (name === "packs") showPackError(err.message);
     }
   });
 });
@@ -214,15 +236,18 @@ async function boot() {
   tg?.expand();
   tg?.setHeaderColor("#0f1014");
   tg?.setBackgroundColor("#0f1014");
+  refreshInitData();
 
   if (!initData) {
-    showToast("Открой через Telegram Mini App");
+    showPackError("Открой Mini App через кнопку 🎮 Играть в боте");
+    showToast("Нет Telegram initData");
     return;
   }
 
   try {
     await loadPacks();
   } catch (err) {
+    showPackError(err.message);
     showToast(err.message);
   }
 }

@@ -23,6 +23,9 @@ def validate_init_data(init_data: str, bot_token: str) -> dict:
     if not received_hash:
         raise InitDataError("hash missing")
 
+    # Ed25519 signature for third-party checks — not part of bot HMAC hash.
+    parsed.pop("signature", None)
+
     data_check_string = "\n".join(f"{key}={value}" for key, value in sorted(parsed.items()))
     secret_key = hmac.new(b"WebAppData", bot_token.encode(), hashlib.sha256).digest()
     calculated_hash = hmac.new(
