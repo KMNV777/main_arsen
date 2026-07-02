@@ -1,6 +1,6 @@
 from quotes_bot.db import connect
 
-SEED_VERSION = 5
+SEED_VERSION = 6
 
 SEED_DATA: list[dict] = [
     {
@@ -12,6 +12,9 @@ SEED_DATA: list[dict] = [
             "КАК-ТО ТАК-ТО",
             "Молодежная карта Сбер",
             "Обожаю русский рэп-баттл",
+            "Нужен ксанакс",
+            "Меня ебнул диабет",
+            "Всем привет дорогие друзья",
         ],
     },
     {
@@ -21,6 +24,8 @@ SEED_DATA: list[dict] = [
         "photo_url": "mashinka.jpg",
         "quotes": [
             "Круассаны",
+            "МММ Винлайн дал круассан",
+            "Чмок",
         ],
     },
     {
@@ -39,6 +44,9 @@ SEED_DATA: list[dict] = [
         "photo_url": "arsen_sensei.jpg",
         "quotes": [
             "Блядь Акманов опять насрал",
+            "Ебаные цыгане",
+            "Ебаный сырник",
+            "Пегов",
         ],
     },
     {
@@ -48,6 +56,8 @@ SEED_DATA: list[dict] = [
         "photo_url": "arsen_akmanov.jpg",
         "quotes": [
             "Втирай в меня светлое нефильтрованное",
+            "Блядь",
+            "Пиздец",
         ],
     },
     {
@@ -57,6 +67,9 @@ SEED_DATA: list[dict] = [
         "photo_url": "grisha.jpg",
         "quotes": [
             "Ну я ебал в рот",
+            "Ебаный ФКС БЛЯДЬ",
+            "Ну ебаный колхоз блядь",
+            "Бля может в Шанхай ебануть",
         ],
     },
     {
@@ -66,6 +79,8 @@ SEED_DATA: list[dict] = [
         "photo_url": "artemida.jpg",
         "quotes": [
             "Ебаные дебилы блядь",
+            "Ботики",
+            "Паша A'VI неприятный чел",
         ],
     },
     {
@@ -75,6 +90,7 @@ SEED_DATA: list[dict] = [
         "photo_url": "yomma.jpg",
         "quotes": [
             "Хочу тян с аниме",
+            "Гриша мешал мне спать",
         ],
     },
 ]
