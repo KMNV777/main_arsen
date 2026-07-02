@@ -94,7 +94,18 @@ def build_application() -> Application:
     application.add_handler(
         MessageHandler(filters.Regex("^👤 Профиль$"), game.profile_handler)
     )
-    application.add_handler(CallbackQueryHandler(game.game_callback_handler, pattern=r"^(open_pack:|grant_ticket|owned_person:)"))
+    application.add_handler(
+        MessageHandler(filters.Regex("^🔁 Обмен$"), game.exchange_handler)
+    )
+    application.add_handler(
+        MessageHandler(filters.Regex("^🏆 Лидеры$"), game.leaderboard_handler)
+    )
+    application.add_handler(
+        CallbackQueryHandler(
+            game.game_callback_handler,
+            pattern=r"^(open_pack:|grant_ticket|owned_person:|exchange_menu|exchange_ticket|exchange_card|leaderboard)$",
+        )
+    )
     application.add_handler(CallbackQueryHandler(cards.callback_handler))
 
     return application

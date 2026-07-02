@@ -6,6 +6,7 @@ MAIN_KEYBOARD = ReplyKeyboardMarkup(
     [
         ["🎁 Открыть пак", "📚 Коллекция"],
         ["🎴 Моя карточка", "👤 Профиль"],
+        ["🔁 Обмен", "🏆 Лидеры"],
         ["🔍 Поиск"],
     ],
     resize_keyboard=True,
@@ -58,12 +59,33 @@ def pack_list_keyboard(packs) -> InlineKeyboardMarkup:
     )
 
 
-def profile_keyboard() -> InlineKeyboardMarkup:
+def exchange_keyboard(dust: int) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         [
             [
+                InlineKeyboardButton(
+                    f"🎫 Билет ({dust}/3 пыли)",
+                    callback_data="exchange_ticket",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    f"🃏 Карта ({dust}/5 пыли)",
+                    callback_data="exchange_card",
+                )
+            ],
+        ]
+    )
+
+
+def profile_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("🔁 Обмен", callback_data="exchange_menu")],
+            [InlineKeyboardButton("🏆 Лидеры", callback_data="leaderboard")],
+            [
                 InlineKeyboardButton("🎫 +2 билета (бонус)", callback_data="grant_ticket"),
-            ]
+            ],
         ]
     )
 

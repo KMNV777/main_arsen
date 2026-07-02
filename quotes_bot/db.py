@@ -47,6 +47,9 @@ def init_db(db_path: Path | None = None) -> None:
                 user_id INTEGER PRIMARY KEY,
                 tickets INTEGER NOT NULL DEFAULT 5,
                 packs_opened INTEGER NOT NULL DEFAULT 0,
+                duplicate_dust INTEGER NOT NULL DEFAULT 0,
+                username TEXT,
+                display_name TEXT,
                 created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
@@ -62,6 +65,19 @@ def init_db(db_path: Path | None = None) -> None:
             CREATE INDEX IF NOT EXISTS idx_user_cards_user_id ON user_cards(user_id);
             """
         )
+        _migrate_user_profiles(conn)
+
+
+def _migrate_user_profiles(conn) -> None:
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(user_profiles)")}
+    if "duplicate_dust" not in columns:
+        conn.execute(
+            "ALTER TABLE user_profiles ADD COLUMN duplicate_dust INTEGER NOT NULL DEFAULT 0"
+        )
+    if "username" not in columns:
+        conn.execute("ALTER TABLE user_profiles ADD COLUMN username TEXT")
+    if "display_name" not in columns:
+        conn.execute("ALTER TABLE user_profiles ADD COLUMN display_name TEXT")
 
 
 @contextmanager
