@@ -63,6 +63,14 @@ def init_db(db_path: Path | None = None) -> None:
 
             CREATE INDEX IF NOT EXISTS idx_quotes_person_id ON quotes(person_id);
             CREATE INDEX IF NOT EXISTS idx_user_cards_user_id ON user_cards(user_id);
+
+            CREATE TABLE IF NOT EXISTS user_card_stats (
+                user_id INTEGER NOT NULL,
+                quote_id INTEGER NOT NULL,
+                duplicate_count INTEGER NOT NULL DEFAULT 0,
+                PRIMARY KEY (user_id, quote_id),
+                FOREIGN KEY (quote_id) REFERENCES quotes(id) ON DELETE CASCADE
+            );
             """
         )
         _migrate_user_profiles(conn)

@@ -18,7 +18,8 @@ from quotes_bot.collection import (
     exchange_dust_for_ticket,
     format_leaderboard,
     get_leaderboard,
-    get_owned_cards,
+    get_duplicate_count,
+    get_owned_cards_with_stats,
     get_pack_progress,
     get_person_collection_progress,
     get_user_profile,
@@ -33,6 +34,7 @@ from quotes_bot.collection import (
 from quotes_bot.config import TELEGRAM_BOT_TOKEN, WEBAPP_HOST, WEBAPP_PORT, WEBAPP_URL
 from quotes_bot.db import connect
 from quotes_bot.models import QuoteCard, get_card_by_quote_id, list_people
+from quotes_bot.rarity import get_quote_rarity, rarity_payload
 from quotes_bot.webapp_auth import InitDataError, parse_init_data_loose, validate_init_data
 
 logger = logging.getLogger(__name__)
@@ -194,16 +196,25 @@ def _pack_catalog_item(pack, *, user_id: int | None = None) -> dict:
     }
 
 
-def _card_payload(card: QuoteCard, *, is_new: bool = False) -> dict:
-    return {
+def _card_payload(
+    card: QuoteCard,
+    *,
+    is_new: bool = False,
+    duplicate_count: int = 0,
+) -> dict:
+    payload = {
         "quote_id": card.quote.id,
         "person_name": card.person.name,
         "quote_text": card.quote.text,
         "card_index": card.card_index,
         "card_total": card.card_total,
         "is_new": is_new,
+        "duplicate_count": duplicate_count,
+        "is_duplicate": duplicate_count > 0,
         "image_url": f"/api/card/{card.quote.id}/image",
     }
+    payload.update(rarity_payload(get_quote_rarity(card.quote.id)))
+    return payload
 
 
 async def handle_index(_: web.Request) -> web.Response:
@@ -256,12 +267,19 @@ async def handle_open_pack(request: web.Request) -> web.Response:
 
     new_ids = {card.quote.id for card in new_cards}
     dust_gained = (len(revealed) - len(new_cards)) * DUST_PER_DUPLICATE
+    cards_payload = []
+    for card in revealed:
+        is_new = card.quote.id in new_ids
+        dup_count = 0 if is_new else 1
+        cards_payload.append(
+            _card_payload(card, is_new=is_new, duplicate_count=dup_count)
+        )
     return web.json_response(
         {
             "new_count": len(new_cards),
             "duplicate_count": len(revealed) - len(new_cards),
             "dust_gained": dust_gained,
-            "cards": [_card_payload(card, is_new=card.quote.id in new_ids) for card in revealed],
+            "cards": cards_payload,
             "profile": _profile_payload(user_id),
         }
     )
@@ -287,7 +305,10 @@ async def handle_collection(request: web.Request) -> web.Response:
             }
         )
 
-    cards = [_card_payload(card) for card in get_owned_cards(user_id)]
+    cards = [
+        _card_payload(card, duplicate_count=dup_count)
+        for card, dup_count in get_owned_cards_with_stats(user_id)
+    ]
     return web.json_response(
         {
             "people": people,
@@ -374,7 +395,7 @@ async def handle_disintegrate(request: web.Request) -> web.Response:
 async def handle_card_image(request: web.Request) -> web.Response:
     quote_id = int(request.match_info["quote_id"])
     try:
-        await _resolve_user(request)
+        user_id, _ = await _resolve_user(request)
     except InitDataError as exc:
         return web.json_response({"error": str(exc)}, status=401)
 
@@ -383,7 +404,13 @@ async def handle_card_image(request: web.Request) -> web.Response:
         raise web.HTTPNotFound()
 
     is_new = request.query.get("new") == "1"
-    image = render_card_bytes(card, is_new=is_new)
+    duplicate_count = get_duplicate_count(user_id, quote_id)
+    image = render_card_bytes(
+        card,
+        is_new=is_new,
+        duplicate_count=duplicate_count,
+        show_duplicate=duplicate_count > 0,
+    )
     return web.Response(body=image.read(), content_type="image/jpeg")
 
 

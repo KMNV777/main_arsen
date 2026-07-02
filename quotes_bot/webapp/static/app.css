@@ -160,6 +160,65 @@ body {
   flex-direction: column;
 }
 
+.card-thumb.rarity-border {
+  border-color: color-mix(in srgb, var(--rarity-color) 55%, var(--border));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rarity-color) 25%, transparent);
+}
+
+.card-thumb-media {
+  position: relative;
+}
+
+.rarity-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--rarity-color) 85%, #000);
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.rarity-tag.rarity-common { --rarity-color: #9aa0b5; }
+.rarity-tag.rarity-rare { --rarity-color: #5a8dff; }
+.rarity-tag.rarity-epic { --rarity-color: #7c5cff; }
+.rarity-tag.rarity-legendary { --rarity-color: #ffb84d; }
+
+.dup-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(90, 90, 110, 0.92);
+  color: #e8e8f0;
+  white-space: nowrap;
+}
+
+.reveal-dup-label .dup-tag {
+  position: static;
+  display: inline-flex;
+  margin-top: 2px;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.rarity-tag.rarity-inline {
+  position: static;
+  display: inline-flex;
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-bottom: 2px;
+}
+
 .btn-disintegrate {
   margin: 0 8px 8px;
   border: 1px solid rgba(61, 214, 181, 0.35);

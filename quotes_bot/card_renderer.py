@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from quotes_bot.config import PHOTOS_DIR
-from quotes_bot.models import QuoteCard
+from quotes_bot.rarity import get_quote_rarity
 from quotes_bot.photos import resolve_photo
 
 CARD_WIDTH = 900
@@ -105,20 +105,55 @@ def _load_portrait(photo_url: str | None, person_name: str) -> Image.Image:
     return image
 
 
-def render_card_image(card: QuoteCard, *, is_new: bool = False) -> Image.Image:
+def render_card_image(
+    card: QuoteCard,
+    *,
+    is_new: bool = False,
+    show_duplicate: bool = False,
+    duplicate_count: int = 0,
+) -> Image.Image:
     canvas = Image.new("RGB", (CARD_WIDTH, CARD_HEIGHT), BG_COLOR)
     portrait = _load_portrait(card.person.photo_url, card.person.name)
     canvas.paste(portrait, (0, 0))
 
     draw = ImageDraw.Draw(canvas)
+    rarity = get_quote_rarity(card.quote.id)
+    badge_font = _load_font(26, bold=True)
+    small_font = _load_font(22, bold=True)
+
+    rarity_text = f"{rarity.emoji} {rarity.label.upper()}"
+    rarity_bbox = draw.textbbox((0, 0), rarity_text, font=badge_font)
+    rarity_w = rarity_bbox[2] - rarity_bbox[0]
+    rarity_h = rarity_bbox[3] - rarity_bbox[1]
+    draw.rounded_rectangle(
+        (24, 24, 36 + rarity_w, 36 + rarity_h),
+        radius=12,
+        fill=rarity.color,
+    )
+    draw.text((30, 28), rarity_text, fill=(255, 255, 255), font=badge_font)
+
     if is_new:
-        badge_font = _load_font(28, bold=True)
         draw.rounded_rectangle(
             (CARD_WIDTH - 196, 24, CARD_WIDTH - 24, 72),
             radius=12,
             fill=(0, 180, 120),
         )
         draw.text((CARD_WIDTH - 178, 30), "✨ NEW", fill=(255, 255, 255), font=badge_font)
+
+    if show_duplicate or duplicate_count > 0:
+        dup_label = "🔁 DUP"
+        if duplicate_count > 1:
+            dup_label = f"🔁 DUP ×{duplicate_count}"
+        dup_bbox = draw.textbbox((0, 0), dup_label, font=small_font)
+        dup_w = dup_bbox[2] - dup_bbox[0]
+        dup_h = dup_bbox[3] - dup_bbox[1]
+        dup_y = 84 if is_new else 24
+        draw.rounded_rectangle(
+            (CARD_WIDTH - dup_w - 48, dup_y, CARD_WIDTH - 24, dup_y + dup_h + 12),
+            radius=12,
+            fill=(90, 90, 110),
+        )
+        draw.text((CARD_WIDTH - dup_w - 36, dup_y + 4), dup_label, fill=(255, 255, 255), font=small_font)
 
     draw.rectangle((0, PANEL_TOP, CARD_WIDTH, CARD_HEIGHT), fill=PANEL_COLOR)
     draw.line((56, PANEL_TOP + 28, CARD_WIDTH - 56, PANEL_TOP + 28), fill=ACCENT_COLOR, width=2)
@@ -150,9 +185,20 @@ def render_card_image(card: QuoteCard, *, is_new: bool = False) -> Image.Image:
     return canvas
 
 
-def render_card_bytes(card: QuoteCard, *, is_new: bool = False) -> BytesIO:
+def render_card_bytes(
+    card: QuoteCard,
+    *,
+    is_new: bool = False,
+    show_duplicate: bool = False,
+    duplicate_count: int = 0,
+) -> BytesIO:
     buffer = BytesIO()
-    render_card_image(card, is_new=is_new).save(buffer, format="JPEG", quality=92)
+    render_card_image(
+        card,
+        is_new=is_new,
+        show_duplicate=show_duplicate,
+        duplicate_count=duplicate_count,
+    ).save(buffer, format="JPEG", quality=92)
     buffer.seek(0)
     return buffer
 

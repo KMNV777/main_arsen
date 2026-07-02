@@ -431,7 +431,75 @@ def add_card_to_collection(user_id: int, quote_id: int) -> bool:
             "INSERT INTO user_cards (user_id, quote_id) VALUES (?, ?)",
             (user_id, quote_id),
         )
+        conn.execute(
+            """
+            INSERT INTO user_card_stats (user_id, quote_id, duplicate_count)
+            VALUES (?, ?, 0)
+            ON CONFLICT(user_id, quote_id) DO NOTHING
+            """,
+            (user_id, quote_id),
+        )
         return True
+
+
+def record_duplicate_pull(user_id: int, quote_id: int) -> int:
+    ensure_user(user_id)
+    with connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO user_card_stats (user_id, quote_id, duplicate_count)
+            VALUES (?, ?, 1)
+            ON CONFLICT(user_id, quote_id) DO UPDATE SET
+                duplicate_count = duplicate_count + 1
+            """,
+            (user_id, quote_id),
+        )
+        row = conn.execute(
+            """
+            SELECT duplicate_count
+            FROM user_card_stats
+            WHERE user_id = ? AND quote_id = ?
+            """,
+            (user_id, quote_id),
+        ).fetchone()
+    return int(row["duplicate_count"]) if row else 1
+
+
+def get_duplicate_count(user_id: int, quote_id: int) -> int:
+    with connect() as conn:
+        row = conn.execute(
+            """
+            SELECT duplicate_count
+            FROM user_card_stats
+            WHERE user_id = ? AND quote_id = ?
+            """,
+            (user_id, quote_id),
+        ).fetchone()
+    return int(row["duplicate_count"]) if row else 0
+
+
+def get_owned_cards_with_stats(user_id: int) -> list[tuple[QuoteCard, int]]:
+    with connect() as conn:
+        rows = conn.execute(
+            """
+            SELECT
+                uc.quote_id,
+                COALESCE(ucs.duplicate_count, 0) AS duplicate_count
+            FROM user_cards uc
+            LEFT JOIN user_card_stats ucs
+                ON ucs.user_id = uc.user_id AND ucs.quote_id = uc.quote_id
+            WHERE uc.user_id = ?
+            ORDER BY uc.quote_id
+            """,
+            (user_id,),
+        ).fetchall()
+
+    cards: list[tuple[QuoteCard, int]] = []
+    for row in rows:
+        card = get_card_by_quote_id(row["quote_id"])
+        if card:
+            cards.append((card, int(row["duplicate_count"])))
+    return cards
 
 
 def spend_ticket(user_id: int, amount: int = PACK_OPEN_COST) -> bool:
@@ -479,6 +547,7 @@ def open_pack(user_id: int, pack_id: int) -> tuple[list[QuoteCard], list[QuoteCa
         if is_new:
             new_cards.append(card)
         else:
+            record_duplicate_pull(user_id, quote_id)
             add_duplicate_dust(user_id, DUST_PER_DUPLICATE)
 
     with connect() as conn:
@@ -505,6 +574,10 @@ def disintegrate_card(user_id: int, quote_id: int) -> tuple[bool, str]:
     with connect() as conn:
         conn.execute(
             "DELETE FROM user_cards WHERE user_id = ? AND quote_id = ?",
+            (user_id, quote_id),
+        )
+        conn.execute(
+            "DELETE FROM user_card_stats WHERE user_id = ? AND quote_id = ?",
             (user_id, quote_id),
         )
     add_duplicate_dust(user_id, DUST_PER_DISINTEGRATE)

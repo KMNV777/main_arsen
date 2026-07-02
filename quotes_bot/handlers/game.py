@@ -11,6 +11,7 @@ from quotes_bot.collection import (
     exchange_dust_for_card,
     exchange_dust_for_ticket,
     format_leaderboard,
+    get_duplicate_count,
     get_leaderboard,
     get_owned_cards,
     get_pack_by_id,
@@ -264,7 +265,16 @@ async def game_callback_handler(update: Update, context: ContextTypes.DEFAULT_TY
 
         for index, card in enumerate(revealed):
             is_new = any(item.quote.id == card.quote.id for item in new_cards)
-            await send_card(update, card, edit=False, is_new=is_new, owned_only=True, user_id=user_id)
+            dup_count = None if is_new else get_duplicate_count(user_id, card.quote.id)
+            await send_card(
+                update,
+                card,
+                edit=False,
+                is_new=is_new,
+                owned_only=True,
+                user_id=user_id,
+                duplicate_count=dup_count,
+            )
             if index < len(revealed) - 1:
                 await asyncio.sleep(0.4)
 

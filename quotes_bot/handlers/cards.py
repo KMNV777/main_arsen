@@ -2,7 +2,7 @@ from telegram import InputFile, Update
 from telegram.ext import ContextTypes
 
 from quotes_bot.card_renderer import render_card_bytes
-from quotes_bot.collection import get_random_owned_card
+from quotes_bot.collection import get_duplicate_count
 from quotes_bot.keyboards import MAIN_KEYBOARD, card_keyboard
 from quotes_bot.models import get_card_by_quote_id
 
@@ -15,11 +15,30 @@ async def send_card(
     is_new: bool = False,
     owned_only: bool = False,
     user_id: int | None = None,
+    duplicate_count: int | None = None,
 ) -> None:
     chat = update.effective_chat
     uid = user_id or (update.effective_user.id if update.effective_user else None)
     markup = card_keyboard(card, owned_only=owned_only, user_id=uid)
-    photo = InputFile(render_card_bytes(card, is_new=is_new), filename="card.jpg")
+
+    dup_count = 0
+    show_duplicate = False
+    if duplicate_count is not None:
+        dup_count = duplicate_count
+        show_duplicate = duplicate_count > 0
+    elif uid:
+        dup_count = get_duplicate_count(uid, card.quote.id)
+        show_duplicate = dup_count > 0
+
+    photo = InputFile(
+        render_card_bytes(
+            card,
+            is_new=is_new,
+            duplicate_count=dup_count,
+            show_duplicate=show_duplicate,
+        ),
+        filename="card.jpg",
+    )
 
     if edit and update.callback_query and update.callback_query.message:
         try:

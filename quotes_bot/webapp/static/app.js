@@ -59,6 +59,17 @@ function cardImageUrl(card, isNew = false) {
   return qs ? `${card.image_url}?${qs}` : card.image_url;
 }
 
+function rarityTag(card, { inline = false } = {}) {
+  const cls = inline ? "rarity-tag rarity-inline" : "rarity-tag";
+  return `<span class="${cls} rarity-${card.rarity}" style="--rarity-color:${card.rarity_color}">${card.rarity_emoji} ${card.rarity_label}</span>`;
+}
+
+function duplicateTag(card) {
+  if (!card.is_duplicate && !(card.duplicate_count > 0)) return "";
+  const suffix = card.duplicate_count > 1 ? ` ×${card.duplicate_count}` : "";
+  return `<span class="dup-tag">🔁 Дубликат${suffix}</span>`;
+}
+
 function preloadImage(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -186,8 +197,10 @@ function showRevealCard(card, index, total) {
         <img src="${cardImageUrl(card, card.is_new)}" alt="${card.person_name}" />
       </div>
     </div>
+    ${rarityTag(card, { inline: true })}
     <div class="reveal-card-badge ${badgeClass}">${badge}</div>
     <div class="reveal-card-name">${card.person_name}</div>
+    ${isDup ? `<div class="reveal-dup-label">${duplicateTag({ ...card, duplicate_count: card.duplicate_count || 1 })}</div>` : ""}
     ${dustLine}
   `;
 
@@ -348,9 +361,14 @@ async function loadCollection() {
 
   for (const card of data.cards.slice(0, 40)) {
     const thumb = document.createElement("div");
-    thumb.className = "card-thumb";
+    thumb.className = `card-thumb rarity-border rarity-${card.rarity}`;
+    thumb.style.setProperty("--rarity-color", card.rarity_color);
     thumb.innerHTML = `
-      <img src="${cardImageUrl(card)}" alt="${card.person_name}" loading="lazy" />
+      <div class="card-thumb-media">
+        ${rarityTag(card)}
+        ${duplicateTag(card)}
+        <img src="${cardImageUrl(card)}" alt="${card.person_name}" loading="lazy" />
+      </div>
       <div class="card-caption">${card.person_name}</div>
       <button type="button" class="btn-disintegrate">💨 Распылить</button>
     `;
