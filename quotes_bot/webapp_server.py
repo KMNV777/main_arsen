@@ -225,7 +225,10 @@ async def handle_static(request: web.Request) -> web.Response:
     path = STATIC_DIR / request.match_info["path"]
     if not path.exists() or not path.is_file():
         raise web.HTTPNotFound()
-    return web.FileResponse(path)
+    return web.FileResponse(
+        path,
+        headers={"Cache-Control": "no-cache, must-revalidate"},
+    )
 
 
 async def handle_config(_: web.Request) -> web.Response:
@@ -437,6 +440,8 @@ def create_webapp() -> web.Application:
 
 _runner: web.AppRunner | None = None
 _thread: threading.Thread | None = None
+_ready = threading.Event()
+_failed = threading.Event()
 
 
 def _run_server_loop() -> None:
@@ -457,14 +462,33 @@ def _run_server_loop() -> None:
             logger.warning(
                 "WEBAPP_URL is not set. Configure HTTPS URL in .env and BotFather Menu Button."
             )
+        _ready.set()
 
-    loop.run_until_complete(_start())
-    loop.run_forever()
+    try:
+        loop.run_until_complete(_start())
+        loop.run_forever()
+    except OSError as exc:
+        _failed.set()
+        logger.error("Mini App server failed to start on port %s: %s", WEBAPP_PORT, exc)
+    except Exception:
+        _failed.set()
+        logger.exception("Mini App server crashed during startup")
 
 
 def start_webapp_server() -> None:
     global _thread
-    if _thread and _thread.is_alive():
+    if _thread and _thread.is_alive() and _ready.is_set():
         return
+
+    _ready.clear()
+    _failed.clear()
     _thread = threading.Thread(target=_run_server_loop, name="quotes-webapp", daemon=True)
     _thread.start()
+
+    if not _ready.wait(timeout=8):
+        if _failed.is_set():
+            raise RuntimeError(
+                f"Mini App server could not bind to port {WEBAPP_PORT}. "
+                "Stop other bot instances and try again."
+            )
+        raise RuntimeError("Mini App server did not start in time")
