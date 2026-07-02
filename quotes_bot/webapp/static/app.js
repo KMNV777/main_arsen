@@ -37,11 +37,17 @@ function api(path, options = {}) {
       ? undefined
       : authBody(typeof options.body === "object" ? options.body : {});
 
-  return fetch(path, { ...options, method, headers, body }).then(async (res) => {
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || data.message || "Request failed");
-    return data;
-  });
+  return fetch(path, { ...options, method, headers, body })
+    .catch(() => {
+      throw new Error("Сервер недоступен. Закрой Mini App и открой снова через 🎮 Играть");
+    })
+    .then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `Ошибка сервера (${res.status})`);
+      }
+      return data;
+    });
 }
 
 function cardImageUrl(card, isNew = false) {
