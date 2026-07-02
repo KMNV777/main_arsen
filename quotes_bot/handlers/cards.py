@@ -1,10 +1,9 @@
-from pathlib import Path
-
 from telegram import InputFile, Update
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
-from quotes_bot.formatters import format_card, format_card_list_item
+from quotes_bot.card_renderer import render_card_bytes
+from quotes_bot.formatters import format_card_list_item
 from quotes_bot.keyboards import MAIN_KEYBOARD, all_cards_keyboard, card_keyboard
 from quotes_bot.models import (
     get_adjacent_quote_id,
@@ -12,83 +11,20 @@ from quotes_bot.models import (
     get_random_card,
     list_all_cards,
 )
-from quotes_bot.photos import resolve_photo
-
-
-def _photo_input(photo_url: str | None) -> str | InputFile | None:
-    source = resolve_photo(photo_url)
-    if source is None:
-        return None
-    if isinstance(source, Path):
-        return InputFile(source.open("rb"), filename=source.name)
-    return source
 
 
 async def send_card(update: Update, card, *, edit: bool = False) -> None:
-    text = format_card(card)
-    markup = card_keyboard(card)
-    photo = _photo_input(card.person.photo_url)
     chat = update.effective_chat
+    markup = card_keyboard(card)
+    photo = InputFile(render_card_bytes(card), filename="card.jpg")
 
     if edit and update.callback_query and update.callback_query.message:
-        message = update.callback_query.message
         try:
-            if photo and message.photo:
-                if isinstance(photo, InputFile):
-                    await message.delete()
-                    await chat.send_photo(
-                        photo=photo,
-                        caption=text,
-                        reply_markup=markup,
-                        parse_mode="HTML",
-                    )
-                    return
-                await message.edit_caption(
-                    caption=text,
-                    reply_markup=markup,
-                    parse_mode="HTML",
-                )
-                return
-            if photo and not message.photo:
-                await message.delete()
-                await chat.send_photo(
-                    photo=photo,
-                    caption=text,
-                    reply_markup=markup,
-                    parse_mode="HTML",
-                )
-                return
-            if not photo and message.photo:
-                await message.delete()
-                await chat.send_message(
-                    text=text,
-                    reply_markup=markup,
-                    parse_mode="HTML",
-                )
-                return
-            await message.edit_text(
-                text=text,
-                reply_markup=markup,
-                parse_mode="HTML",
-            )
+            await update.callback_query.message.delete()
         except BadRequest:
-            await message.delete()
-            await send_card(update, card, edit=False)
-        return
+            pass
 
-    if photo:
-        await chat.send_photo(
-            photo=photo,
-            caption=text,
-            reply_markup=markup,
-            parse_mode="HTML",
-        )
-    else:
-        await chat.send_message(
-            text=text,
-            reply_markup=markup,
-            parse_mode="HTML",
-        )
+    await chat.send_photo(photo=photo, reply_markup=markup)
 
 
 async def random_card_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
