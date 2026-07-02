@@ -105,12 +105,21 @@ def _load_portrait(photo_url: str | None, person_name: str) -> Image.Image:
     return image
 
 
-def render_card_image(card: QuoteCard) -> Image.Image:
+def render_card_image(card: QuoteCard, *, is_new: bool = False) -> Image.Image:
     canvas = Image.new("RGB", (CARD_WIDTH, CARD_HEIGHT), BG_COLOR)
     portrait = _load_portrait(card.person.photo_url, card.person.name)
     canvas.paste(portrait, (0, 0))
 
     draw = ImageDraw.Draw(canvas)
+    if is_new:
+        badge_font = _load_font(28, bold=True)
+        draw.rounded_rectangle(
+            (CARD_WIDTH - 196, 24, CARD_WIDTH - 24, 72),
+            radius=12,
+            fill=(0, 180, 120),
+        )
+        draw.text((CARD_WIDTH - 178, 30), "✨ NEW", fill=(255, 255, 255), font=badge_font)
+
     draw.rectangle((0, PANEL_TOP, CARD_WIDTH, CARD_HEIGHT), fill=PANEL_COLOR)
     draw.line((56, PANEL_TOP + 28, CARD_WIDTH - 56, PANEL_TOP + 28), fill=ACCENT_COLOR, width=2)
 
@@ -141,9 +150,9 @@ def render_card_image(card: QuoteCard) -> Image.Image:
     return canvas
 
 
-def render_card_bytes(card: QuoteCard) -> BytesIO:
+def render_card_bytes(card: QuoteCard, *, is_new: bool = False) -> BytesIO:
     buffer = BytesIO()
-    render_card_image(card).save(buffer, format="JPEG", quality=92)
+    render_card_image(card, is_new=is_new).save(buffer, format="JPEG", quality=92)
     buffer.seek(0)
     return buffer
 

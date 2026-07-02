@@ -12,9 +12,9 @@ from telegram.ext import (
 from quotes_bot.branding import configure_if_token_present
 from quotes_bot.config import TELEGRAM_BOT_TOKEN
 from quotes_bot.db import init_db
-from quotes_bot.generate_placeholders import generate_all_placeholders
 from quotes_bot.filters import person_name_filter
-from quotes_bot.handlers import cards, photo_upload, search, start
+from quotes_bot.generate_placeholders import generate_all_placeholders
+from quotes_bot.handlers import cards, game, photo_upload, search, start
 from quotes_bot.import_photos import import_inbox_photos
 from quotes_bot.seed import seed_database
 
@@ -32,7 +32,12 @@ def build_application() -> Application:
             "и укажите токен от @BotFather."
         )
 
-    application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(configure_if_token_present).build()
+    application = (
+        Application.builder()
+        .token(TELEGRAM_BOT_TOKEN)
+        .post_init(configure_if_token_present)
+        .build()
+    )
 
     search_conversation = ConversationHandler(
         entry_points=[
@@ -78,11 +83,18 @@ def build_application() -> Application:
             )
         )
     application.add_handler(
-        MessageHandler(filters.Regex("^🎴 Случайная карточка$"), cards.random_card_handler)
+        MessageHandler(filters.Regex("^🎁 Открыть пак$"), game.open_pack_menu_handler)
     )
     application.add_handler(
-        MessageHandler(filters.Regex("^📚 Все карточки$"), cards.all_cards_handler)
+        MessageHandler(filters.Regex("^📚 Коллекция$"), game.collection_handler)
     )
+    application.add_handler(
+        MessageHandler(filters.Regex("^🎴 Моя карточка$"), cards.random_card_handler)
+    )
+    application.add_handler(
+        MessageHandler(filters.Regex("^👤 Профиль$"), game.profile_handler)
+    )
+    application.add_handler(CallbackQueryHandler(game.game_callback_handler, pattern=r"^(open_pack:|grant_ticket|owned_person:)"))
     application.add_handler(CallbackQueryHandler(cards.callback_handler))
 
     return application

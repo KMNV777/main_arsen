@@ -4,7 +4,8 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 
 MAIN_KEYBOARD = ReplyKeyboardMarkup(
     [
-        ["🎴 Случайная карточка", "📚 Все карточки"],
+        ["🎁 Открыть пак", "📚 Коллекция"],
+        ["🎴 Моя карточка", "👤 Профиль"],
         ["🔍 Поиск"],
     ],
     resize_keyboard=True,
@@ -16,55 +17,55 @@ SEARCH_HINT = (
 )
 
 
-def card_keyboard(card) -> InlineKeyboardMarkup:
-    prev_id = get_adjacent_quote_id(card.quote.id, -1)
-    next_id = get_adjacent_quote_id(card.quote.id, 1)
+def card_keyboard(card, *, owned_only: bool = False, user_id: int | None = None) -> InlineKeyboardMarkup:
+    if owned_only and user_id is not None:
+        from quotes_bot.collection import get_adjacent_owned_quote_id
+
+        prev_id = get_adjacent_owned_quote_id(user_id, card.quote.id, -1)
+        next_id = get_adjacent_owned_quote_id(user_id, card.quote.id, 1)
+        random_data = "owned_random"
+        prev_data = f"owned_prev:{prev_id}"
+        next_data = f"owned_next:{next_id}"
+    else:
+        prev_id = get_adjacent_quote_id(card.quote.id, -1)
+        next_id = get_adjacent_quote_id(card.quote.id, 1)
+        random_data = "random"
+        prev_data = f"card_prev:{prev_id}"
+        next_data = f"card_next:{next_id}"
+
     return InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(
-                    "◀️",
-                    callback_data=f"card_prev:{prev_id}",
-                ),
-                InlineKeyboardButton(
-                    "🎲",
-                    callback_data="random",
-                ),
-                InlineKeyboardButton(
-                    "▶️",
-                    callback_data=f"card_next:{next_id}",
-                ),
+                InlineKeyboardButton("◀️", callback_data=prev_data),
+                InlineKeyboardButton("🎲", callback_data=random_data),
+                InlineKeyboardButton("▶️", callback_data=next_data),
             ]
         ]
     )
 
 
-def all_cards_keyboard(cards, page: int = 0, page_size: int = 8) -> InlineKeyboardMarkup:
-    start = page * page_size
-    chunk = cards[start : start + page_size]
-    rows = [
+def pack_list_keyboard(packs) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
         [
-            InlineKeyboardButton(
-                f"{card.person.name} — {truncate(card.quote.text)}",
-                callback_data=f"card:{card.quote.id}",
-            )
+            [
+                InlineKeyboardButton(
+                    f"{pack.emoji} {pack.name}",
+                    callback_data=f"open_pack:{pack.id}",
+                )
+            ]
+            for pack in packs
         ]
-        for card in chunk
-    ]
+    )
 
-    nav_row: list[InlineKeyboardButton] = []
-    if start > 0:
-        nav_row.append(
-            InlineKeyboardButton("⬅️ Назад", callback_data=f"cards_page:{page - 1}")
-        )
-    if start + page_size < len(cards):
-        nav_row.append(
-            InlineKeyboardButton("Вперёд ➡️", callback_data=f"cards_page:{page + 1}")
-        )
-    if nav_row:
-        rows.append(nav_row)
 
-    return InlineKeyboardMarkup(rows)
+def profile_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("🎫 +2 билета (бонус)", callback_data="grant_ticket"),
+            ]
+        ]
+    )
 
 
 def search_results_keyboard(cards) -> InlineKeyboardMarkup:
@@ -73,7 +74,7 @@ def search_results_keyboard(cards) -> InlineKeyboardMarkup:
             [
                 InlineKeyboardButton(
                     f"{card.person.name} — {truncate(card.quote.text)}",
-                    callback_data=f"card:{card.quote.id}",
+                    callback_data=f"owned_view:{card.quote.id}",
                 )
             ]
             for card in cards

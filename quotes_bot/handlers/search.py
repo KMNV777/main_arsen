@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 
+from quotes_bot.collection import get_owned_cards
 from quotes_bot.keyboards import MAIN_KEYBOARD, SEARCH_HINT, search_results_keyboard
-from quotes_bot.models import search_cards
 
 SEARCH_QUERY = 1
 
@@ -21,17 +21,24 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         )
         return ConversationHandler.END
 
-    results = search_cards(query)
+    needle = query.casefold()
+    owned = get_owned_cards(update.effective_user.id)
+    results = [
+        card
+        for card in owned
+        if needle in card.person.name.casefold() or needle in card.quote.text.casefold()
+    ]
+
     if not results:
         await update.message.reply_text(
-            f"По запросу «{query}» ничего не найдено.",
+            f"В твоей коллекции по запросу «{query}» ничего не найдено.",
             reply_markup=MAIN_KEYBOARD,
         )
         return ConversationHandler.END
 
     await update.message.reply_text(
         f"Найдено: <b>{len(results)}</b>\nВыберите карточку:",
-        reply_markup=search_results_keyboard(results),
+        reply_markup=search_results_keyboard(results[:10]),
         parse_mode="HTML",
     )
     return ConversationHandler.END
