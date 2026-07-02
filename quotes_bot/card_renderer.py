@@ -4,6 +4,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from quotes_bot.config import PHOTOS_DIR
+from quotes_bot.models import QuoteCard
 from quotes_bot.rarity import get_quote_rarity
 from quotes_bot.photos import resolve_photo
 
