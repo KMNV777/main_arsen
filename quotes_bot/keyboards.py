@@ -1,88 +1,65 @@
+from quotes_bot.formatters import truncate
+from quotes_bot.models import get_adjacent_quote_id
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 
 MAIN_KEYBOARD = ReplyKeyboardMarkup(
     [
-        ["🎴 Случайная карточка", "📚 Все люди"],
+        ["🎴 Случайная карточка", "📚 Все карточки"],
         ["🔍 Поиск"],
     ],
     resize_keyboard=True,
 )
 
 SEARCH_HINT = (
-    "Введите имя, профессию или фрагмент цитаты.\n"
+    "Введите имя или фрагмент цитаты.\n"
     "Например: <i>Ваня</i> или <i>круассаны</i>"
 )
 
 
 def card_keyboard(card) -> InlineKeyboardMarkup:
-    rows: list[list[InlineKeyboardButton]] = []
-
-    if card.quote_total > 1:
-        quote_prev = (card.quote_index - 1) % card.quote_total
-        quote_next = (card.quote_index + 1) % card.quote_total
-        rows.append(
-            [
-                InlineKeyboardButton(
-                    "◀️ Цитата",
-                    callback_data=f"quote:{card.person.id}:{quote_prev}",
-                ),
-                InlineKeyboardButton(
-                    "🎲 Случайная",
-                    callback_data="random",
-                ),
-                InlineKeyboardButton(
-                    "Цитата ▶️",
-                    callback_data=f"quote:{card.person.id}:{quote_next}",
-                ),
-            ]
-        )
-    else:
-        rows.append(
-            [
-                InlineKeyboardButton(
-                    "🎲 Случайная",
-                    callback_data="random",
-                ),
-            ]
-        )
-
-    rows.append(
+    prev_id = get_adjacent_quote_id(card.quote.id, -1)
+    next_id = get_adjacent_quote_id(card.quote.id, 1)
+    return InlineKeyboardMarkup(
         [
-            InlineKeyboardButton(
-                "◀️ Человек",
-                callback_data=f"person_prev:{card.person.id}",
-            ),
-            InlineKeyboardButton(
-                "Человек ▶️",
-                callback_data=f"person_next:{card.person.id}",
-            ),
+            [
+                InlineKeyboardButton(
+                    "◀️",
+                    callback_data=f"card_prev:{prev_id}",
+                ),
+                InlineKeyboardButton(
+                    "🎲",
+                    callback_data="random",
+                ),
+                InlineKeyboardButton(
+                    "▶️",
+                    callback_data=f"card_next:{next_id}",
+                ),
+            ]
         ]
     )
 
-    return InlineKeyboardMarkup(rows)
 
-
-def people_list_keyboard(people: list, page: int = 0, page_size: int = 8) -> InlineKeyboardMarkup:
+def all_cards_keyboard(cards, page: int = 0, page_size: int = 8) -> InlineKeyboardMarkup:
     start = page * page_size
-    chunk = people[start : start + page_size]
+    chunk = cards[start : start + page_size]
     rows = [
         [
             InlineKeyboardButton(
-                person.name,
-                callback_data=f"person:{person.id}:0",
+                f"{card.person.name} — {truncate(card.quote.text)}",
+                callback_data=f"card:{card.quote.id}",
             )
         ]
-        for person in chunk
+        for card in chunk
     ]
 
     nav_row: list[InlineKeyboardButton] = []
     if start > 0:
         nav_row.append(
-            InlineKeyboardButton("⬅️ Назад", callback_data=f"people_page:{page - 1}")
+            InlineKeyboardButton("⬅️ Назад", callback_data=f"cards_page:{page - 1}")
         )
-    if start + page_size < len(people):
+    if start + page_size < len(cards):
         nav_row.append(
-            InlineKeyboardButton("Вперёд ➡️", callback_data=f"people_page:{page + 1}")
+            InlineKeyboardButton("Вперёд ➡️", callback_data=f"cards_page:{page + 1}")
         )
     if nav_row:
         rows.append(nav_row)
@@ -90,15 +67,15 @@ def people_list_keyboard(people: list, page: int = 0, page_size: int = 8) -> Inl
     return InlineKeyboardMarkup(rows)
 
 
-def search_results_keyboard(people: list) -> InlineKeyboardMarkup:
+def search_results_keyboard(cards) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
-                    person.name,
-                    callback_data=f"person:{person.id}:0",
+                    f"{card.person.name} — {truncate(card.quote.text)}",
+                    callback_data=f"card:{card.quote.id}",
                 )
             ]
-            for person in people
+            for card in cards
         ]
     )

@@ -1,13 +1,13 @@
 from quotes_bot.db import connect
 
-SEED_VERSION = 3
+SEED_VERSION = 4
 
 SEED_DATA: list[dict] = [
     {
         "name": "Ваня WYHM",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "vanya_wyhm.jpg",
         "quotes": [
             "КАК-ТО ТАК-ТО",
             "Молодежная карта Сбер",
@@ -18,7 +18,7 @@ SEED_DATA: list[dict] = [
         "name": "Машинка",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "mashinka.jpg",
         "quotes": [
             "Круассаны",
         ],
@@ -27,7 +27,7 @@ SEED_DATA: list[dict] = [
         "name": "Хуров Азамат",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "khurov_azamat.jpg",
         "quotes": [
             "Мне двойной шаурма в сырной и самса говядина",
         ],
@@ -36,7 +36,7 @@ SEED_DATA: list[dict] = [
         "name": "Арсен Сенсей",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "arsen_sensei.jpg",
         "quotes": [
             "Блядь Акманов опять насрал",
         ],
@@ -45,7 +45,7 @@ SEED_DATA: list[dict] = [
         "name": "Акманов Арсен",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "akmanov_arsen.jpg",
         "quotes": [
             "Втирай в меня светлое нефильтрованное",
         ],
@@ -54,7 +54,7 @@ SEED_DATA: list[dict] = [
         "name": "Гриша",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "grisha.jpg",
         "quotes": [
             "Ну я ебал в рот",
         ],
@@ -63,7 +63,7 @@ SEED_DATA: list[dict] = [
         "name": "Артемида",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "artemida.jpg",
         "quotes": [
             "Ебаные дебилы блядь",
         ],
@@ -72,7 +72,7 @@ SEED_DATA: list[dict] = [
         "name": "Йомма",
         "years": "",
         "bio": "",
-        "photo_url": None,
+        "photo_url": "yomma.jpg",
         "quotes": [
             "Хочу тян с аниме",
         ],

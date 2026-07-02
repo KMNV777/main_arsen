@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 
 from quotes_bot.keyboards import MAIN_KEYBOARD, SEARCH_HINT, search_results_keyboard
-from quotes_bot.models import search_people
+from quotes_bot.models import search_cards
 
 SEARCH_QUERY = 1
 
@@ -21,7 +21,7 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         )
         return ConversationHandler.END
 
-    results = search_people(query)
+    results = search_cards(query)
     if not results:
         await update.message.reply_text(
             f"По запросу «{query}» ничего не найдено.",
@@ -30,7 +30,7 @@ async def search_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         return ConversationHandler.END
 
     await update.message.reply_text(
-        f"Найдено: <b>{len(results)}</b>\nВыберите человека:",
+        f"Найдено: <b>{len(results)}</b>\nВыберите карточку:",
         reply_markup=search_results_keyboard(results),
         parse_mode="HTML",
     )

@@ -11,6 +11,7 @@ from telegram.ext import (
 
 from quotes_bot.config import TELEGRAM_BOT_TOKEN
 from quotes_bot.db import init_db
+from quotes_bot.generate_placeholders import generate_all_placeholders
 from quotes_bot.handlers import cards, search, start
 from quotes_bot.seed import seed_database
 
@@ -53,7 +54,7 @@ def build_application() -> Application:
         MessageHandler(filters.Regex("^🎴 Случайная карточка$"), cards.random_card_handler)
     )
     application.add_handler(
-        MessageHandler(filters.Regex("^📚 Все люди$"), cards.all_people_handler)
+        MessageHandler(filters.Regex("^📚 Все карточки$"), cards.all_cards_handler)
     )
     application.add_handler(CallbackQueryHandler(cards.callback_handler))
 
@@ -62,6 +63,7 @@ def build_application() -> Application:
 
 def main() -> None:
     init_db()
+    generate_all_placeholders()
     seed_database()
     application = build_application()
     logger.info("Quotes bot started")

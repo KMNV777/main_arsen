@@ -20,13 +20,11 @@ class Quote:
 
 
 @dataclass
-class PersonCard:
+class QuoteCard:
     person: Person
-    quote: Quote | None
-    quote_index: int
-    quote_total: int
-    person_index: int
-    person_total: int
+    quote: Quote
+    card_index: int
+    card_total: int
 
 
 def _row_to_person(row) -> Person:
@@ -41,6 +39,42 @@ def _row_to_person(row) -> Person:
 
 def _row_to_quote(row) -> Quote:
     return Quote(id=row["id"], person_id=row["person_id"], text=row["text"])
+
+
+def _list_all_quote_rows(conn) -> list:
+    return conn.execute(
+        """
+        SELECT
+            q.id AS quote_id,
+            q.person_id,
+            q.text AS quote_text,
+            p.id AS person_id,
+            p.name,
+            p.bio,
+            p.years,
+            p.photo_url
+        FROM quotes q
+        JOIN people p ON p.id = q.person_id
+        ORDER BY p.name COLLATE NOCASE, q.id
+        """
+    ).fetchall()
+
+
+def _row_to_card(row, card_index: int, card_total: int) -> QuoteCard:
+    person = Person(
+        id=row["person_id"],
+        name=row["name"],
+        bio=row["bio"],
+        years=row["years"],
+        photo_url=row["photo_url"],
+    )
+    quote = Quote(id=row["quote_id"], person_id=person.id, text=row["quote_text"])
+    return QuoteCard(
+        person=person,
+        quote=quote,
+        card_index=card_index,
+        card_total=card_total,
+    )
 
 
 def get_people_count() -> int:
@@ -60,14 +94,6 @@ def get_person_by_id(person_id: int) -> Person | None:
     with connect() as conn:
         row = conn.execute(
             "SELECT * FROM people WHERE id = ?", (person_id,)
-        ).fetchone()
-    return _row_to_person(row) if row else None
-
-
-def get_person_by_name(name: str) -> Person | None:
-    with connect() as conn:
-        row = conn.execute(
-            "SELECT * FROM people WHERE LOWER(name) = LOWER(?)", (name.strip(),)
         ).fetchone()
     return _row_to_person(row) if row else None
 
@@ -97,136 +123,82 @@ def get_quotes_for_person(person_id: int) -> list[Quote]:
     return [_row_to_quote(row) for row in rows]
 
 
-def get_quote_by_id(quote_id: int) -> Quote | None:
+def list_all_cards() -> list[QuoteCard]:
     with connect() as conn:
-        row = conn.execute(
-            "SELECT * FROM quotes WHERE id = ?", (quote_id,)
-        ).fetchone()
-    return _row_to_quote(row) if row else None
+        rows = _list_all_quote_rows(conn)
+    total = len(rows)
+    return [_row_to_card(row, index, total) for index, row in enumerate(rows)]
 
 
-def get_random_card() -> PersonCard | None:
+def get_card_by_quote_id(quote_id: int) -> QuoteCard | None:
+    with connect() as conn:
+        rows = _list_all_quote_rows(conn)
+        total = len(rows)
+        for index, row in enumerate(rows):
+            if row["quote_id"] == quote_id:
+                return _row_to_card(row, index, total)
+    return None
+
+
+def get_first_card_for_person(person_id: int) -> QuoteCard | None:
+    with connect() as conn:
+        rows = _list_all_quote_rows(conn)
+        total = len(rows)
+        for index, row in enumerate(rows):
+            if row["person_id"] == person_id:
+                return _row_to_card(row, index, total)
+    return None
+
+
+def get_random_card() -> QuoteCard | None:
     with connect() as conn:
         row = conn.execute(
             """
             SELECT
+                q.id AS quote_id,
+                q.person_id,
+                q.text AS quote_text,
                 p.id AS person_id,
                 p.name,
                 p.bio,
                 p.years,
-                p.photo_url,
-                q.id AS quote_id,
-                q.text AS quote_text
-            FROM people p
-            JOIN quotes q ON q.person_id = p.id
+                p.photo_url
+            FROM quotes q
+            JOIN people p ON p.id = q.person_id
             ORDER BY RANDOM()
             LIMIT 1
             """
         ).fetchone()
-        if row:
-            person = Person(
-                id=row["person_id"],
-                name=row["name"],
-                bio=row["bio"],
-                years=row["years"],
-                photo_url=row["photo_url"],
-            )
-            quote = Quote(id=row["quote_id"], person_id=person.id, text=row["quote_text"])
-            return _build_card(conn, person, quote)
-
-        person_row = conn.execute(
-            "SELECT * FROM people ORDER BY RANDOM() LIMIT 1"
-        ).fetchone()
-        if not person_row:
+        if not row:
             return None
-
-        person = _row_to_person(person_row)
-        return _build_card(conn, person, quote=None)
+        return get_card_by_quote_id(row["quote_id"])
 
 
-def get_card_for_person(person_id: int, quote_index: int = 0) -> PersonCard | None:
-    with connect() as conn:
-        person_row = conn.execute(
-            "SELECT * FROM people WHERE id = ?", (person_id,)
-        ).fetchone()
-        if not person_row:
-            return None
-
-        person = _row_to_person(person_row)
-        quotes = conn.execute(
-            "SELECT * FROM quotes WHERE person_id = ? ORDER BY id",
-            (person_id,),
-        ).fetchall()
-        if not quotes:
-            return _build_card(conn, person, quote=None)
-
-        quote_index = quote_index % len(quotes)
-        quote = _row_to_quote(quotes[quote_index])
-        return _build_card(conn, person, quote)
-
-
-def get_card_by_quote_id(quote_id: int) -> PersonCard | None:
-    quote = get_quote_by_id(quote_id)
-    if not quote:
+def get_adjacent_quote_id(current_quote_id: int, direction: int) -> int | None:
+    cards = list_all_cards()
+    if not cards:
         return None
 
-    with connect() as conn:
-        person_row = conn.execute(
-            "SELECT * FROM people WHERE id = ?", (quote.person_id,)
-        ).fetchone()
-        if not person_row:
-            return None
-
-        person = _row_to_person(person_row)
-        return _build_card(conn, person, quote)
-
-
-def get_adjacent_person_id(current_person_id: int, direction: int) -> int | None:
-    people = list_people()
-    if not people:
-        return None
-
-    ids = [person.id for person in people]
+    quote_ids = [card.quote.id for card in cards]
     try:
-        index = ids.index(current_person_id)
+        index = quote_ids.index(current_quote_id)
     except ValueError:
-        return people[0].id
+        return cards[0].quote.id
 
-    next_index = (index + direction) % len(ids)
-    return ids[next_index]
+    next_index = (index + direction) % len(quote_ids)
+    return quote_ids[next_index]
 
 
-def _build_card(conn, person: Person, quote: Quote | None = None) -> PersonCard:
-    quote_rows = conn.execute(
-        "SELECT id FROM quotes WHERE person_id = ? ORDER BY id",
-        (person.id,),
-    ).fetchall()
-    quote_ids = [row["id"] for row in quote_rows]
+def search_cards(query: str, limit: int = 10) -> list[QuoteCard]:
+    needle = query.strip().casefold()
+    if not needle:
+        return []
 
-    if quote and quote.id in quote_ids:
-        quote_index = quote_ids.index(quote.id)
-    elif quote_ids:
-        quote_index = 0
-        if quote is None or quote.id not in quote_ids:
-            quote_row = conn.execute(
-                "SELECT * FROM quotes WHERE id = ?", (quote_ids[0],)
-            ).fetchone()
-            quote = _row_to_quote(quote_row)
-    else:
-        quote_index = 0
-        quote = None
-
-    people_rows = conn.execute(
-        "SELECT id FROM people ORDER BY name COLLATE NOCASE"
-    ).fetchall()
-    person_ids = [row["id"] for row in people_rows]
-    person_index = person_ids.index(person.id)
-
-    return PersonCard(
-        person=person,
-        quote=quote,
-        quote_index=quote_index,
-        quote_total=len(quote_ids),
-        person_index=person_index,
-        person_total=len(person_ids),
-    )
+    results: list[QuoteCard] = []
+    for card in list_all_cards():
+        haystacks = [card.person.name, card.quote.text]
+        if any(needle in text.casefold() for text in haystacks if text):
+            results.append(card)
+        if len(results) >= limit:
+            break
+    return results
