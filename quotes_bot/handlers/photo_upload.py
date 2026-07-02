@@ -5,7 +5,6 @@ from telegram.ext import ContextTypes
 
 from quotes_bot.card_renderer import render_card_bytes
 from quotes_bot.config import PHOTOS_DIR
-from quotes_bot.handlers.cards import send_card
 from quotes_bot.import_photos import import_photo
 from quotes_bot.keyboards import MAIN_KEYBOARD, card_keyboard
 from quotes_bot.models import find_person_by_name, get_first_card_for_person, list_people
@@ -144,19 +143,28 @@ async def photo_help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
         if person:
             context.user_data[AWAITING_PHOTO_KEY] = person.id
             await update.message.reply_text(
-                f"Жду фото для <b>{person.name}</b>.\n"
-                "Отправь картинку следующим сообщением.",
+                f"Ок, жду фото для <b>{person.name}</b>.\n\n"
+                "Отправь <b>следующим сообщением</b> картинку.\n"
+                "Можно без подписи или с подписью "
+                f"<b>{person.name}</b>.",
                 parse_mode="HTML",
                 reply_markup=MAIN_KEYBOARD,
             )
             return
 
+        await update.message.reply_text(
+            f"Не нашёл «{' '.join(context.args)}».\n"
+            "Пример: <code>/photo Машинка</code>",
+            parse_mode="HTML",
+            reply_markup=MAIN_KEYBOARD,
+        )
+        return
+
     await update.message.reply_text(
         "Как обновить фото:\n"
-        "1. Напиши <b>Машинка</b>\n"
+        "1. <code>/photo Машинка</code>\n"
         "2. Отправь фото следующим сообщением\n\n"
-        "Или сразу: фото + подпись <b>Машинка</b>\n"
-        "Или команда: /photo Машинка",
+        "Или сразу: фото + подпись <b>Машинка</b>",
         parse_mode="HTML",
         reply_markup=MAIN_KEYBOARD,
     )
