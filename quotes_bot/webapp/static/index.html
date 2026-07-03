@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Quote Cards</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="/static/app.css?v=3" />
+  <style>
+    #boot-loader {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      background: #0f1014; color: #9aa0b5; z-index: 100;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    #boot-loader.hidden { display: none; }
+    .boot-spinner {
+      width: 36px; height: 36px; border: 3px solid rgba(124,92,255,.25);
+      border-top-color: #7c5cff; border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="boot-loader">
+    <div class="boot-spinner"></div>
+    <div>Загружаем Quote Cards…</div>
+  </div>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">⚡</span>
+        <div>
+          <div class="brand-title">Quote Cards</div>
+          <div class="brand-sub">кибер-коллекция</div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span id="tickets">0</span> 🎫</div>
+        <div class="stat"><span id="dust">0</span> 🔁</div>
+        <div class="stat"><span id="cards">0</span> 📚</div>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="packs">Паки</button>
+      <button class="tab" data-tab="collection">Коллекция</button>
+      <button class="tab" data-tab="exchange">Обмен</button>
+      <button class="tab" data-tab="leaders">Лидеры</button>
+    </nav>
+
+    <main>
+      <section id="tab-packs" class="panel active">
+        <p class="hint">🆓 Паки бесплатные · 2 карты · дубликат = 💨 +1 пыль</p>
+        <div id="pack-list" class="pack-list"></div>
+      </section>
+
+      <section id="tab-collection" class="panel">
+        <p class="hint">Редкость на карте · 🔁 «Дубликат» если выпадала снова · 💨 «Распылить» → +1 пыль</p>
+        <div id="collection-people" class="chip-list"></div>
+        <div id="collection-cards" class="card-grid"></div>
+      </section>
+
+      <section id="tab-exchange" class="panel">
+        <div class="dust-info">
+          <div class="dust-info-title">Как получить пыль 🔁</div>
+          <ul class="dust-info-list">
+            <li>Дубликат при открытии пака → <strong>+1 пыль</strong> (авто-распыление)</li>
+            <li>Распылить карту из коллекции → <strong>+1 пыль</strong></li>
+          </ul>
+        </div>
+        <div class="exchange-box">
+          <p>Пыль: <strong id="exchange-dust">0</strong></p>
+          <div class="dust-progress">
+            <div class="dust-bar"><div id="dust-bar-ticket" class="dust-bar-fill"></div></div>
+            <span class="dust-bar-label">🎫 билет — 3 пыли</span>
+          </div>
+          <div class="dust-progress">
+            <div class="dust-bar"><div id="dust-bar-card" class="dust-bar-fill"></div></div>
+            <span class="dust-bar-label">🃏 карта — 5 пыли</span>
+          </div>
+          <button id="btn-exchange-ticket" class="btn primary">🎫 Билет (3 пыли)</button>
+          <button id="btn-exchange-card" class="btn secondary">🃏 Карта (5 пыли)</button>
+        </div>
+        <p id="exchange-message" class="message"></p>
+
+        <div class="trade-section">
+          <div class="trade-section-head">
+            <div class="trade-section-title">🤝 Обмен с игроками</div>
+            <div id="trade-username-hint" class="trade-hint"></div>
+          </div>
+
+          <div class="trade-subtabs">
+            <button type="button" class="trade-subtab active" data-trade-tab="create">Создать</button>
+            <button type="button" class="trade-subtab" data-trade-tab="incoming">Входящие <span id="trade-in-count" class="trade-badge hidden">0</span></button>
+            <button type="button" class="trade-subtab" data-trade-tab="outgoing">Исходящие</button>
+          </div>
+
+          <div id="trade-panel-create" class="trade-panel active">
+            <p class="hint">Укажи @username игрока — он должен хотя бы раз написать боту</p>
+            <div class="trade-form-row">
+              <input id="trade-partner-input" class="trade-input" type="text" placeholder="@username" autocomplete="off" />
+              <button id="btn-trade-lookup" type="button" class="btn secondary">Найти</button>
+            </div>
+            <p id="trade-partner-label" class="message"></p>
+
+            <div class="trade-picker-block">
+              <div class="trade-picker-title">Твоя карта</div>
+              <div id="trade-my-cards" class="trade-card-picker"></div>
+            </div>
+
+            <div class="trade-picker-block">
+              <div class="trade-picker-title">Запросить у игрока <span class="muted-inline">(необязательно)</span></div>
+              <div id="trade-partner-cards" class="trade-card-picker empty-picker">
+                <p class="empty">Сначала найди игрока</p>
+              </div>
+            </div>
+
+            <button id="btn-trade-create" type="button" class="btn primary" disabled>Отправить предложение</button>
+          </div>
+
+          <div id="trade-panel-incoming" class="trade-panel">
+            <div id="trade-incoming-list" class="trade-list"></div>
+          </div>
+
+          <div id="trade-panel-outgoing" class="trade-panel">
+            <div id="trade-outgoing-list" class="trade-list"></div>
+          </div>
+
+          <p id="trade-message" class="message"></p>
+        </div>
+      </section>
+
+      <section id="tab-leaders" class="panel">
+        <div id="leaderboard" class="leaderboard"></div>
+      </section>
+    </main>
+
+    <div id="overlay" class="overlay hidden">
+      <div class="pack-reveal">
+        <div class="pack-reveal-header">
+          <div class="overlay-title" id="overlay-title">Открываем пак…</div>
+          <div class="reveal-progress" id="reveal-progress"></div>
+        </div>
+
+        <div class="reveal-stage" id="reveal-stage">
+          <div id="opening-animation" class="opening-animation">
+            <div class="pack-box">📦</div>
+            <div class="opening-text">Тасуем карты…</div>
+          </div>
+          <div id="reveal-card-slot" class="reveal-card-slot hidden"></div>
+        </div>
+
+        <div class="reveal-summary hidden" id="reveal-summary"></div>
+
+        <div class="reveal-actions">
+          <button id="overlay-next" class="btn primary hidden">Следующая карта →</button>
+          <button id="overlay-close" class="btn primary hidden">Готово</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+  <script src="/static/app.js?v=3"></script>
+</body>
+</html>
