@@ -1,0 +1,280 @@
+{
+  "_meta": {
+    "variant": "flashpoint",
+    "philosophy": "Burst / situational loadouts per Steam ID. Другие импланты, чем в balanced-профиле — акцент на короткие окна силы и event-триггеры."
+  },
+  "76561199530013153": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "AdrenalineChestImplant",
+        "buff": {
+          "name": "FlashpointKillstreakShield",
+          "damage_scale": 0.0,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "FlashpointHeVulnerability",
+          "damage_scale": 1.18,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 64,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "FortressChestBlock",
+        "buff": {
+          "name": "FlashpointKillVelocity",
+          "velocity_modifier": 1.18
+        },
+        "debuff": {
+          "name": "FlashpointKnifeSlow",
+          "velocity_modifier": 0.88
+        }
+      },
+      {
+        "factory": "KineticAmplifier",
+        "buff": {
+          "name": "FlashpointForwardDash",
+          "active_frames": 24,
+          "cooldown_frames": 2560
+        },
+        "debuff": {
+          "name": "FlashpointSmgBlock",
+          "blocked_definition_a": 17,
+          "blocked_definition_b": 23
+        }
+      }
+    ]
+  },
+  "76561198836236005": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "AdaptiveCamouflageGhost",
+        "buff": {
+          "name": "FlashpointShortInvuln",
+          "damage_scale": 0.0,
+          "active_frames": 32,
+          "cooldown_frames": 3840,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "FlashpointEarlyRoundVuln",
+          "damage_scale": 1.1,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "DataHackSlowdown",
+        "buff": {
+          "name": "FlashpointPostPlantFlashImmunity"
+        },
+        "debuff": {
+          "name": "FlashpointPrimaryClipCap",
+          "max_clip_scale": 0.88
+        }
+      },
+      {
+        "factory": "OracleVisor",
+        "buff": {
+          "name": "FlashpointGrenadeXray",
+          "active_frames": 32,
+          "cooldown_frames": 2880
+        },
+        "debuff": {
+          "name": "FlashpointDefuseSignal",
+          "sound_name": "Buttons.snd9"
+        }
+      }
+    ]
+  },
+  "76561198290940309": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "SecondBreathImplant",
+        "buff": {
+          "name": "FlashpointSmokeRegen",
+          "immediate_health_delta": 5,
+          "max_health_delta": 0
+        },
+        "debuff": {
+          "name": "FlashpointVignette",
+          "pulse_frames": 48,
+          "pulse_speed": 1.08
+        }
+      },
+      {
+        "factory": "MedicCargoPants",
+        "buff": {
+          "name": "FlashpointDefuseTeamHeal",
+          "immediate_health_delta": 25,
+          "max_health_delta": 0
+        },
+        "debuff": {
+          "name": "FlashpointModelGlow",
+          "glow_range": 1200
+        }
+      },
+      {
+        "factory": "CreditReaderV1",
+        "buff": {
+          "name": "FlashpointTeammateDownHealth",
+          "max_health_delta": 28
+        },
+        "debuff": {
+          "name": "FlashpointAimPunch",
+          "scale": 1.12
+        }
+      }
+    ]
+  },
+  "76561198728722755": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "LightningReflex",
+        "buff": {
+          "name": "FlashpointTapDamage",
+          "damage_scale": 1.1
+        },
+        "debuff": {
+          "name": "FlashpointFireGrenadeBlock",
+          "blocked_definition_a": 46,
+          "blocked_definition_b": 48
+        }
+      },
+      {
+        "factory": "SprinterBioMuscles",
+        "buff": {
+          "name": "FlashpointBhopAssist",
+          "velocity_modifier": 1.1
+        },
+        "debuff": {
+          "name": "FlashpointMolotovPrepareSlow",
+          "lock_frames": 10,
+          "locked_velocity_modifier": 0.85
+        }
+      },
+      {
+        "factory": "AccuracyZoneV1",
+        "buff": {
+          "name": "FlashpointLowHpSpeed",
+          "health_threshold": 22,
+          "velocity_modifier": 1.18
+        },
+        "debuff": {
+          "name": "FlashpointReloadPenalty",
+          "penalty_scale": 1.15
+        }
+      }
+    ]
+  },
+  "76561198184450067": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "AntiKineticV1",
+        "buff": {
+          "name": "FlashpointBombBodyDamage",
+          "damage_scale": 1.15
+        },
+        "debuff": {
+          "name": "FlashpointHeVulnerability",
+          "damage_scale": 1.18,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 64,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "JumperServo",
+        "buff": {
+          "name": "FlashpointSilentPlant"
+        },
+        "debuff": {
+          "name": "FlashpointSelfFlashDuration",
+          "duration_scale": 1.2,
+          "alpha_scale": 1.2
+        }
+      },
+      {
+        "factory": "HackProtocolBomb",
+        "buff": {
+          "name": "FlashpointFakeSteps",
+          "sound_name": "Buttons.snd9"
+        },
+        "debuff": {
+          "name": "FlashpointRunCrosshairSway",
+          "scale": 1.1
+        }
+      }
+    ]
+  },
+  "76561198302751753": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "SniperCyberProsthesis",
+        "buff": {
+          "name": "FlashpointHeavyRecoilResist",
+          "scale": 0.65
+        },
+        "debuff": {
+          "name": "FlashpointAirborneVulnerability",
+          "damage_scale": 1.15,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "RangefinderV1",
+        "buff": {
+          "name": "FlashpointArmResist",
+          "damage_scale": 0.88,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": true,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "FlashpointJumpLandingLoud",
+          "sound_name": "Buttons.snd9"
+        }
+      },
+      {
+        "factory": "PistolReflexV1",
+        "buff": {
+          "name": "FlashpointPistolDamage",
+          "damage_scale": 1.1
+        },
+        "debuff": {
+          "name": "FlashpointDrawTimePenalty",
+          "lock_frames": 12,
+          "locked_velocity_modifier": 0.7
+        }
+      }
+    ]
+  }
+}
