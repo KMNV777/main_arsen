@@ -8,6 +8,7 @@
 | 2 | `variant_2_defensive.json` | Low-risk / low-reward | Командная игра, новички |
 | 3 | `variant_3_competitive.json` | Симметричный, k≈1.0 | Соревновательный режим |
 | 4 | `variant_4_flashpoint.json` | **Burst / situational** | Короткие окна силы, event-триггеры |
+| 5 | `dominion_grants_bulwark.json` | **Bulwark / survival** | Броня, резисты, хил — цена в скорости и мобильности |
 
 ## Форматы
 
@@ -17,7 +18,7 @@
 
 ### Per-player (роли + Steam ID)
 
-`dominion_grants_flashpoint.json` — объект `{ steamId: { role, factories } }`, PascalCase factory names.
+`dominion_grants_flashpoint.json`, `dominion_grants_bulwark.json` — объект `{ steamId: { role, factories } }`, PascalCase factory names.
 
 ## Вариант 4 — Flashpoint
 
