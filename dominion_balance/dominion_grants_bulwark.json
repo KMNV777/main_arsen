@@ -1,0 +1,249 @@
+{
+  "76561199530013153": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "ChromeArmor",
+        "buff": {
+          "name": "BulwarkBossArmor",
+          "max_health_delta": 35,
+          "immediate_health_delta": 35,
+          "ability_name": "BulwarkArmorPulse",
+          "armor_value": 80
+        },
+        "debuff": {
+          "name": "BulwarkBossArmorWeight",
+          "velocity_modifier": 0.88
+        }
+      },
+      {
+        "factory": "KevlarAntishockJacket",
+        "buff": {
+          "name": "BulwarkWallbangResist",
+          "damage_scale": 0.55,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkSmgRecoil",
+          "scale": 1.12
+        }
+      },
+      {
+        "factory": "ChromoArmorTank",
+        "buff": {
+          "name": "BulwarkExtinguish",
+          "cooldown_frames": 1600
+        },
+        "debuff": {
+          "name": "BulwarkNoJumpAfterDamage",
+          "lock_frames": 32
+        }
+      }
+    ]
+  },
+  "76561198836236005": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "SyndicateJacketLeather",
+        "buff": {
+          "name": "BulwarkMolotovResist",
+          "damage_scale": 0.45,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 8,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkFastSmokeDissipate",
+          "pulse_frames": 64,
+          "pulse_speed": 1.08
+        }
+      },
+      {
+        "factory": "EnergyShield",
+        "buff": {
+          "name": "BulwarkLowHealthHeal",
+          "immediate_health_delta": 35,
+          "max_health_delta": 0
+        },
+        "debuff": {
+          "name": "BulwarkKillRadarReveal",
+          "toggle_frames": 64,
+          "start_hidden": false
+        }
+      },
+      { "factory": "PhoenixJacket" }
+    ]
+  },
+  "76561198290940309": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GhostJacketGray",
+        "buff": {
+          "name": "BulwarkHealAmplify",
+          "bonus_scale": 0.55
+        },
+        "debuff": {
+          "name": "BulwarkBackpedalPenalty",
+          "velocity_modifier": 0.9
+        }
+      },
+      {
+        "factory": "MedicCargoPants",
+        "buff": {
+          "name": "BulwarkDefuseTeamHeal",
+          "immediate_health_delta": 30,
+          "max_health_delta": 0
+        },
+        "debuff": {
+          "name": "BulwarkModelGlow",
+          "glow_range": 1200
+        }
+      },
+      {
+        "factory": "MedicArmorJacket",
+        "buff": { "name": "BulwarkKeepWeaponNextRound" },
+        "debuff": {
+          "name": "BulwarkStrafeTrail",
+          "pulse_frames": 64,
+          "pulse_speed": 1.08
+        }
+      }
+    ]
+  },
+  "76561198728722755": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GladiatorChromeHelmetMetal",
+        "buff": {
+          "name": "BulwarkDeagleHeadshotResist",
+          "damage_scale": 0.88,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkJumpAccuracyPenalty",
+          "scale": 1.08
+        }
+      },
+      {
+        "factory": "VanguardJacketBlue",
+        "buff": {
+          "name": "BulwarkAwpBodyResist",
+          "damage_scale": 0.82,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": true,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkArmorPiercePenalty",
+          "damage_scale": 0.94
+        }
+      },
+      {
+        "factory": "VentilationImplant",
+        "buff": {
+          "name": "BulwarkLegResist",
+          "damage_scale": 0.72,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": true
+        },
+        "debuff": {
+          "name": "BulwarkSidearmBlock",
+          "blocked_definition_a": 2,
+          "blocked_definition_b": 64
+        }
+      }
+    ]
+  },
+  "76561198184450067": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "ResistorBoots",
+        "buff": {
+          "name": "BulwarkBossDeathSpeed",
+          "velocity_modifier": 1.15
+        },
+        "debuff": {
+          "name": "BulwarkArmorBreak",
+          "damage_scale": 1.12,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        }
+      },
+      {
+        "factory": "RangefinderV1",
+        "buff": {
+          "name": "BulwarkArmResist",
+          "damage_scale": 0.88,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": true,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkJumpLandingLoud",
+          "sound_name": "Buttons.snd9"
+        }
+      },
+      { "factory": "VisorGridHelmetLed" }
+    ]
+  },
+  "76561198302751753": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "BioTriggerAutoHeal",
+        "buff": {
+          "name": "BulwarkFirstHitArmorResist",
+          "damage_scale": 0.92,
+          "apply_for_attacker": false,
+          "apply_for_victim": true,
+          "damage_mask": 0,
+          "body_only": false,
+          "leg_only": false
+        },
+        "debuff": {
+          "name": "BulwarkAssistIncomeBlock",
+          "pulse_frames": 64,
+          "pulse_speed": 1.08
+        }
+      },
+      {
+        "factory": "SecondBreathImplant",
+        "buff": {
+          "name": "BulwarkSmokeRegen",
+          "immediate_health_delta": 4,
+          "max_health_delta": 0
+        },
+        "debuff": {
+          "name": "BulwarkVignette",
+          "pulse_frames": 48,
+          "pulse_speed": 1.08
+        }
+      },
+      { "factory": "QuietStepPants" }
+    ]
+  }
+}
