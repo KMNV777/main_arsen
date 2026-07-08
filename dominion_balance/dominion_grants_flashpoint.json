@@ -1,8 +1,4 @@
 {
-  "_meta": {
-    "variant": "flashpoint",
-    "philosophy": "Burst / situational loadouts per Steam ID. Другие импланты, чем в balanced-профиле — акцент на короткие окна силы и event-триггеры."
-  },
   "76561199530013153": {
     "role": "boss",
     "factories": [
@@ -81,9 +77,7 @@
       },
       {
         "factory": "DataHackSlowdown",
-        "buff": {
-          "name": "FlashpointPostPlantFlashImmunity"
-        },
+        "buff": { "name": "FlashpointPostPlantFlashImmunity" },
         "debuff": {
           "name": "FlashpointPrimaryClipCap",
           "max_clip_scale": 0.88
@@ -206,9 +200,7 @@
       },
       {
         "factory": "JumperServo",
-        "buff": {
-          "name": "FlashpointSilentPlant"
-        },
+        "buff": { "name": "FlashpointSilentPlant" },
         "debuff": {
           "name": "FlashpointSelfFlashDuration",
           "duration_scale": 1.2,
