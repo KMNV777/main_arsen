@@ -1,0 +1,11 @@
+{
+  "name": "anniversary-quiz",
+  "install": "cd anniversary && npm install",
+  "start": "cd anniversary && npm run dev",
+  "terminals": [
+    {
+      "name": "anniversary-dev",
+      "command": "cd anniversary && npm run dev"
+    }
+  ]
+}
