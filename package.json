@@ -1,0 +1,10 @@
+{
+  "name": "main-arsen",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix anniversary run dev",
+    "start": "npm --prefix anniversary run start",
+    "install:anniversary": "npm --prefix anniversary install",
+    "build:anniversary": "npm --prefix anniversary run build"
+  }
+}
