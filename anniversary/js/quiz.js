@@ -481,7 +481,7 @@ function burstConfetti() {
   };
   resize();
 
-  const colors = ["#d4a574", "#c45c6a", "#f7ebe3", "#7db88a", "#e8b4b8"];
+  const colors = ["#f0c93d", "#e86b8a", "#5b8fd9", "#fff8f2", "#7db88a"];
   const pieces = Array.from({ length: 70 }, () => ({
     x: Math.random() * canvas.clientWidth,
     y: -20 - Math.random() * canvas.clientHeight * 0.4,
