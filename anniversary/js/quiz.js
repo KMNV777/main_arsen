@@ -1,3 +1,5 @@
+const STORAGE_KEY = "anniversary-quiz-v1";
+
 const quarters = {
   1: [
     {
@@ -189,26 +191,51 @@ const scoreMessages = [
   {
     min: 14,
     title: "Ты знаешь нас наизусть",
-    message: "Шестнадцать вопросов — и почти все ответы из самого сердца. Я так тебя люблю.",
+    message:
+      "Шестнадцать вопросов — и почти все ответы из самого сердца. Я так тебя люблю.",
   },
   {
     min: 10,
     title: "Ты чувствуешь нашу историю",
-    message: "Мы говорим на одном языке даже тогда, когда выбираем разные слова. Это и есть мы.",
+    message:
+      "Мы говорим на одном языке даже тогда, когда выбираем разные слова. Это и есть мы.",
   },
   {
     min: 6,
     title: "Главное ты помнишь точно",
-    message: "Не в баллах дело — в том, что каждый вопрос про нас настоящих. С праздником, любовь моя.",
+    message:
+      "Не в баллах дело — в том, что каждый вопрос про нас настоящих. С праздником, любовь моя.",
   },
   {
     min: 0,
     title: "Любовь важнее правильных ответов",
-    message: "Пусть викторина пошутила — а год вместе сказал всё сам. Я выбираю тебя снова.",
+    message:
+      "Пусть викторина пошутила — а год вместе сказал всё сам. Я выбираю тебя снова.",
   },
 ];
 
+/** @type {Map<string, { selected: number, correct: boolean }>} */
 const answers = new Map();
+let sectionObserver = null;
+let confettiStarted = false;
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.entries(data).forEach(([id, value]) => {
+      answers.set(id, value);
+    });
+  } catch {
+    /* ignore broken storage */
+  }
+}
+
+function saveAnswers() {
+  const data = Object.fromEntries(answers.entries());
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
 
 function renderQuizzes() {
   document.querySelectorAll(".quiz").forEach((container) => {
@@ -218,78 +245,178 @@ function renderQuizzes() {
     container.innerHTML = questions
       .map((q, index) => {
         const id = `q${quarter}-${index}`;
+        const saved = answers.get(id);
         const options = q.options
-          .map(
-            (label, optionIndex) => `
+          .map((label, optionIndex) => {
+            const classes = ["option"];
+            let disabled = "";
+            if (saved) {
+              disabled = "disabled";
+              if (optionIndex === q.correct) classes.push("is-correct");
+              if (optionIndex === saved.selected) classes.push("is-selected");
+              if (
+                optionIndex === saved.selected &&
+                optionIndex !== q.correct
+              ) {
+                classes.push("is-wrong");
+              }
+            }
+            return `
             <button
               type="button"
-              class="option"
+              class="${classes.join(" ")}"
               data-question="${id}"
               data-option="${optionIndex}"
               data-correct="${q.correct}"
-            >${label}</button>`
-          )
+              ${disabled}
+            >${label}</button>`;
+          })
           .join("");
+
+        const feedbackText = saved
+          ? saved.correct
+            ? q.feedback
+            : `Почти! ${q.feedback}`
+          : "";
 
         return `
           <article class="question" data-id="${id}">
             <h3 class="question__text">${index + 1}. ${q.text}</h3>
             <div class="options">${options}</div>
-            <p class="question__feedback" hidden></p>
+            <p class="question__feedback${saved ? " is-show" : ""}"${
+              saved ? "" : " hidden"
+            }>${feedbackText}</p>
           </article>`;
       })
       .join("");
   });
 }
 
-function updateScore() {
-  const score = [...answers.values()].filter(Boolean).length;
+function quarterAnsweredCount(quarter) {
+  let count = 0;
+  for (let i = 0; i < 4; i += 1) {
+    if (answers.has(`q${quarter}-${i}`)) count += 1;
+  }
+  return count;
+}
+
+function updateQuarterUi() {
+  for (let quarter = 1; quarter <= 4; quarter += 1) {
+    const count = quarterAnsweredCount(quarter);
+    const counter = document.querySelector(`[data-count-for="${quarter}"]`);
+    const next = document.querySelector(`[data-unlock="${quarter}"]`);
+    if (counter) {
+      counter.textContent = `${count} / 4`;
+      counter.classList.toggle("is-done", count === 4);
+    }
+    if (next) {
+      const unlocked = count === 4;
+      const wasLocked = next.classList.contains("is-locked");
+      next.classList.toggle("is-locked", !unlocked);
+      if (unlocked) {
+        next.classList.add("is-unlocked");
+        if (wasLocked) {
+          next.classList.remove("is-unlocked");
+          // reflow to retrigger animation
+          void next.offsetWidth;
+          next.classList.add("is-unlocked");
+        }
+      }
+    }
+  }
+}
+
+function getScore() {
+  return [...answers.values()].filter((item) => item.correct).length;
+}
+
+function animateScore(target) {
   const scoreValue = document.getElementById("scoreValue");
+  const scoreBlock = scoreValue.parentElement;
+  const start = Number(scoreValue.textContent) || 0;
+  if (start === target) {
+    scoreBlock.classList.add("is-pop");
+    return;
+  }
+
+  const duration = 700;
+  const started = performance.now();
+  scoreBlock.classList.remove("is-pop");
+
+  const tick = (now) => {
+    const t = Math.min(1, (now - started) / duration);
+    const eased = 1 - (1 - t) ** 3;
+    scoreValue.textContent = String(Math.round(start + (target - start) * eased));
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      scoreValue.textContent = String(target);
+      scoreBlock.classList.add("is-pop");
+    }
+  };
+
+  requestAnimationFrame(tick);
+}
+
+function updateScore(animate = false) {
+  const score = getScore();
   const title = document.getElementById("finaleTitle");
   const message = document.getElementById("finaleMessage");
-
-  scoreValue.textContent = String(score);
-
   const pack =
     scoreMessages.find((item) => score >= item.min) || scoreMessages.at(-1);
+
   title.textContent = pack.title;
   message.textContent = pack.message;
+
+  if (animate) animateScore(score);
+  else document.getElementById("scoreValue").textContent = String(score);
+}
+
+function applyAnswer(questionId, selected) {
+  const [quarter, index] = questionId.slice(1).split("-").map(Number);
+  const question = quarters[quarter][index];
+  const article = document.querySelector(`[data-id="${questionId}"]`);
+  if (!article) return;
+
+  const correct = question.correct;
+  const feedback = article.querySelector(".question__feedback");
+
+  article.querySelectorAll(".option").forEach((option) => {
+    option.disabled = true;
+    const optionIndex = Number(option.dataset.option);
+    option.classList.toggle("is-correct", optionIndex === correct);
+    option.classList.toggle("is-selected", optionIndex === selected);
+    option.classList.toggle(
+      "is-wrong",
+      optionIndex === selected && optionIndex !== correct
+    );
+  });
+
+  answers.set(questionId, {
+    selected,
+    correct: selected === correct,
+  });
+
+  feedback.hidden = false;
+  feedback.textContent =
+    selected === correct ? question.feedback : `Почти! ${question.feedback}`;
+  feedback.classList.add("is-show");
+
+  saveAnswers();
+  updateQuarterUi();
+  updateScore(true);
 }
 
 function handleOptionClick(event) {
   const button = event.target.closest(".option");
   if (!button || button.disabled) return;
-
-  const questionId = button.dataset.question;
-  const selected = Number(button.dataset.option);
-  const correct = Number(button.dataset.correct);
-  const article = button.closest(".question");
-  const feedback = article.querySelector(".question__feedback");
-  const [quarter, index] = questionId.slice(1).split("-").map(Number);
-  const question = quarters[quarter][index];
-
-  article.querySelectorAll(".option").forEach((option) => {
-    option.disabled = true;
-    const optionIndex = Number(option.dataset.option);
-    if (optionIndex === correct) option.classList.add("is-correct");
-    if (option === button && optionIndex !== correct) {
-      option.classList.add("is-wrong");
-    }
-    if (option === button) option.classList.add("is-selected");
-  });
-
-  answers.set(questionId, selected === correct);
-  feedback.hidden = false;
-  feedback.textContent =
-    selected === correct
-      ? question.feedback
-      : `Почти! ${question.feedback}`;
-
-  updateScore();
+  applyAnswer(button.dataset.question, Number(button.dataset.option));
 }
 
 function observeSections() {
-  const observer = new IntersectionObserver(
+  if (sectionObserver) sectionObserver.disconnect();
+
+  sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -301,7 +428,7 @@ function observeSections() {
   );
 
   document.querySelectorAll(".quarter").forEach((section) => {
-    observer.observe(section);
+    sectionObserver.observe(section);
   });
 }
 
@@ -316,10 +443,121 @@ function bindProgress() {
   onScroll();
 }
 
+function bindDots() {
+  const links = [...document.querySelectorAll(".dots__item")];
+  const sections = links
+    .map((link) => document.getElementById(link.dataset.target))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((link) => {
+          link.classList.toggle(
+            "is-active",
+            link.dataset.target === entry.target.id
+          );
+        });
+      });
+    },
+    { threshold: 0.45 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+function burstConfetti() {
+  const canvas = document.getElementById("confetti");
+  if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+  const resize = () => {
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  };
+  resize();
+
+  const colors = ["#d4a574", "#c45c6a", "#f7ebe3", "#7db88a", "#e8b4b8"];
+  const pieces = Array.from({ length: 70 }, () => ({
+    x: Math.random() * canvas.clientWidth,
+    y: -20 - Math.random() * canvas.clientHeight * 0.4,
+    r: 3 + Math.random() * 4,
+    vy: 1.4 + Math.random() * 2.4,
+    vx: -1 + Math.random() * 2,
+    rot: Math.random() * Math.PI,
+    vr: -0.08 + Math.random() * 0.16,
+    color: colors[Math.floor(Math.random() * colors.length)],
+  }));
+
+  let frames = 0;
+  const draw = () => {
+    frames += 1;
+    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    pieces.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r, -p.r * 0.4, p.r * 2, p.r * 0.8);
+      ctx.restore();
+    });
+    if (frames < 180) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  };
+
+  window.addEventListener("resize", resize, { once: true });
+  requestAnimationFrame(draw);
+}
+
+function bindFinale() {
+  const finale = document.getElementById("finale");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || confettiStarted) return;
+        if (answers.size < 16) return;
+        confettiStarted = true;
+        updateScore(true);
+        burstConfetti();
+      });
+    },
+    { threshold: 0.5 }
+  );
+  observer.observe(finale);
+}
+
+async function shareResult() {
+  const score = getScore();
+  const title = document.getElementById("finaleTitle").textContent;
+  const text = `${title}\nРезультат: ${score}/16\nС праздником, любовь моя 💛`;
+  const btn = document.getElementById("shareBtn");
+
+  try {
+    await navigator.clipboard.writeText(text);
+    const prev = btn.textContent;
+    btn.textContent = "Скопировано";
+    setTimeout(() => {
+      btn.textContent = prev;
+    }, 1600);
+  } catch {
+    btn.textContent = "Не удалось скопировать";
+  }
+}
+
 function restartQuiz() {
   answers.clear();
+  localStorage.removeItem(STORAGE_KEY);
+  confettiStarted = false;
   renderQuizzes();
-  updateScore();
+  updateQuarterUi();
+  updateScore(false);
   document
     .querySelectorAll(".quarter")
     .forEach((section) => section.classList.remove("is-visible"));
@@ -328,13 +566,18 @@ function restartQuiz() {
 }
 
 function init() {
+  loadSaved();
   renderQuizzes();
-  updateScore();
+  updateQuarterUi();
+  updateScore(false);
   observeSections();
   bindProgress();
+  bindDots();
+  bindFinale();
 
   document.addEventListener("click", handleOptionClick);
   document.getElementById("restartBtn").addEventListener("click", restartQuiz);
+  document.getElementById("shareBtn").addEventListener("click", shareResult);
 }
 
 init();
