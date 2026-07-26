@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>С праздником, любовь моя</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Marck+Script&family=Onest:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true">
+      <div class="progress__bar" id="progressBar"></div>
+    </div>
+
+    <header class="hero" id="top">
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/photos/hero.jpg" alt="" />
+      </div>
+      <div class="hero__veil"></div>
+      <div class="hero__content">
+        <p class="hero__brand reveal">С праздником, любовь моя</p>
+        <p class="hero__lead reveal delay-1">
+          Год вместе — четыре сезона воспоминаний. Пройди викторину и вспомни,
+          как всё было.
+        </p>
+        <a class="hero__cta reveal delay-2" href="#quarter-1">Начать путь</a>
+      </div>
+      <a class="scroll-cue" href="#quarter-1" aria-label="Листать вниз">
+        <span></span>
+      </a>
+    </header>
+
+    <main>
+      <section
+        class="quarter"
+        id="quarter-1"
+        style="--bg: url('assets/photos/q1.jpg')"
+        data-quarter="1"
+      >
+        <div class="quarter__bg" aria-hidden="true"></div>
+        <div class="quarter__inner">
+          <p class="quarter__label">Первый квартал</p>
+          <h2 class="quarter__title">Начало нашей истории</h2>
+          <p class="quarter__intro">Четыре вопроса о том, с чего всё началось.</p>
+          <div class="quiz" data-quarter="1"></div>
+          <a class="next-link" href="#quarter-2">Ко второму кварталу</a>
+        </div>
+      </section>
+
+      <section
+        class="quarter"
+        id="quarter-2"
+        style="--bg: url('assets/photos/q2.jpg')"
+        data-quarter="2"
+      >
+        <div class="quarter__bg" aria-hidden="true"></div>
+        <div class="quarter__inner">
+          <p class="quarter__label">Второй квартал</p>
+          <h2 class="quarter__title">Мы привыкаем друг к другу</h2>
+          <p class="quarter__intro">Маленькие привычки, большие чувства.</p>
+          <div class="quiz" data-quarter="2"></div>
+          <a class="next-link" href="#quarter-3">К третьему кварталу</a>
+        </div>
+      </section>
+
+      <section
+        class="quarter"
+        id="quarter-3"
+        style="--bg: url('assets/photos/q3.jpg')"
+        data-quarter="3"
+      >
+        <div class="quarter__bg" aria-hidden="true"></div>
+        <div class="quarter__inner">
+          <p class="quarter__label">Третий квартал</p>
+          <h2 class="quarter__title">Приключения и открытия</h2>
+          <p class="quarter__intro">Что мы успели пережить вместе.</p>
+          <div class="quiz" data-quarter="3"></div>
+          <a class="next-link" href="#quarter-4">К четвёртому кварталу</a>
+        </div>
+      </section>
+
+      <section
+        class="quarter"
+        id="quarter-4"
+        style="--bg: url('assets/photos/q4.jpg')"
+        data-quarter="4"
+      >
+        <div class="quarter__bg" aria-hidden="true"></div>
+        <div class="quarter__inner">
+          <p class="quarter__label">Четвёртый квартал</p>
+          <h2 class="quarter__title">Год, который стал домом</h2>
+          <p class="quarter__intro">Финишная прямая нашей викторины.</p>
+          <div class="quiz" data-quarter="4"></div>
+          <a class="next-link" href="#finale">Узнать результат</a>
+        </div>
+      </section>
+
+      <section class="finale" id="finale">
+        <div class="finale__media" aria-hidden="true">
+          <img src="assets/photos/finale.jpg" alt="" />
+        </div>
+        <div class="finale__veil"></div>
+        <div class="finale__content">
+          <p class="finale__label">Итог</p>
+          <h2 class="finale__title" id="finaleTitle">Ты знаешь нас наизусть</h2>
+          <p class="finale__score">
+            <span id="scoreValue">0</span>
+            <span class="finale__of">/ 16</span>
+          </p>
+          <p class="finale__message" id="finaleMessage">
+            Каждый ответ — ещё одна ниточка нашей истории.
+          </p>
+          <button type="button" class="finale__restart" id="restartBtn">
+            Пройти ещё раз
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/quiz.js"></script>
+  </body>
+</html>
