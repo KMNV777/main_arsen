@@ -1,0 +1,668 @@
+# Описание кандидата
+# Окружение: OCP4_PROD (tr2-authorization — OCP_PROD)
+
+# Путь к образам в Nexus. Параметр определяет проектная команда. Используется при сканировании образов контейнеров
+registry_project_folder = "u250008611"
+
+# Раздел определяет версию ПО, которое планируем запуска по шагам оркестратора. И путь до файла где описаны изменения в версии.
+[release]
+version = "2026.7.1"
+releaseDescriptionFile = "CHANGELOG.md"
+
+[components]
+
+[components.tr2_authorization]
+name = "tr2-authorization"
+description = "Авторизация"
+# Имя образа контейнера с компонентом
+image = "tr2-authorization"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_authorization"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_authorization_migrations]
+name = "tr2-authorization-migrations"
+description = "Миграции авторизации"
+# Имя образа контейнера с компонентом
+image = "tr2-authorization-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_authorization"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_bff]
+name = "tr2-bff"
+description = "Backend for Frontend"
+# Имя образа контейнера с компонентом
+image = "tr2-bff"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_bff"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_businessaudit]
+name = "tr2-businessaudit"
+description = "Бизнес-аудит"
+# Имя образа контейнера с компонентом
+image = "tr2-businessaudit"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_businessaudit"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_businessaudit_migrations]
+name = "tr2-businessaudit-migrations"
+description = "Миграции бизнес-аудита"
+# Имя образа контейнера с компонентом
+image = "tr2-businessaudit-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_businessaudit"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_datacollector]
+name = "tr2-datacollector"
+description = "Сборщик данных"
+# Имя образа контейнера с компонентом
+image = "tr2-datacollector"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_datacollector"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_demechanization]
+name = "tr2-demechanization"
+description = "Демеханизация"
+# Имя образа контейнера с компонентом
+image = "tr2-demechanization"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_demechanization"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_demechanization_migrations]
+name = "tr2-demechanization-migrations"
+description = "Миграции демеханизации"
+# Имя образа контейнера с компонентом
+image = "tr2-demechanization-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_demechanization"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_jobscheduler]
+name = "tr2-jobscheduler"
+description = "Планировщик задач"
+# Имя образа контейнера с компонентом
+image = "tr2-jobscheduler"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_jobscheduler"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_limitations]
+name = "tr2-limitations"
+description = "Ограничения"
+# Имя образа контейнера с компонентом
+image = "tr2-limitations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_limitations"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_mdm]
+name = "tr2-mdm"
+description = "MDM"
+# Имя образа контейнера с компонентом
+image = "tr2-mdm"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_mdm"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_mdm_integration]
+name = "tr2-mdm-integration"
+description = "Интеграция MDM"
+# Имя образа контейнера с компонентом
+image = "tr2-mdm-integration"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_mdm_integration"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_mdm_migrations]
+name = "tr2-mdm-migrations"
+description = "Миграции MDM"
+# Имя образа контейнера с компонентом
+image = "tr2-mdm-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_mdm"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_messagecollector]
+name = "tr2-messagecollector"
+description = "Сборщик сообщений"
+# Имя образа контейнера с компонентом
+image = "tr2-messagecollector"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_messagecollector"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_opt]
+name = "tr2-opt"
+description = "Оптимизация"
+# Имя образа контейнера с компонентом
+image = "tr2-opt"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_opt"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_opt_migrations]
+name = "tr2-opt-migrations"
+description = "Миграции оптимизации"
+# Имя образа контейнера с компонентом
+image = "tr2-opt-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_opt"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_postgres_migrations]
+name = "tr2-postgres-migrations"
+description = "Миграции PostgreSQL"
+# Имя образа контейнера с компонентом
+image = "tr2-postgres-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_postgres"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_pwf]
+name = "tr2-pwf"
+description = "PWF"
+# Имя образа контейнера с компонентом
+image = "tr2-pwf"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_pwf"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_pwf_migrations]
+name = "tr2-pwf-migrations"
+description = "Миграции PWF"
+# Имя образа контейнера с компонентом
+image = "tr2-pwf-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_pwf"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_rabbitmq]
+name = "tr2-rabbitmq"
+description = "RabbitMQ"
+# Имя образа контейнера с компонентом
+image = "tr2-rabbitmq"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_rabbitmq"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "true"
+
+[components.tr2_signalr]
+name = "tr2-signalr"
+description = "SignalR"
+# Имя образа контейнера с компонентом
+image = "tr2-signalr"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_signalr"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_uvch]
+name = "tr2-uvch"
+description = "УВЧ"
+# Имя образа контейнера с компонентом
+image = "tr2-uvch"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_uvch"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_uvch_migrations]
+name = "tr2-uvch-migrations"
+description = "Миграции УВЧ"
+# Имя образа контейнера с компонентом
+image = "tr2-uvch-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_uvch"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_uvch_monitoring]
+name = "tr2-uvch-monitoring"
+description = "Мониторинг УВЧ"
+# Имя образа контейнера с компонентом
+image = "tr2-uvch-monitoring"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_uvch_monitoring"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_uvch_solver]
+name = "tr2-uvch-solver"
+description = "Решатель УВЧ"
+# Имя образа контейнера с компонентом
+image = "tr2-uvch-solver"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_uvch_solver"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_wellmodel]
+name = "tr2-wellmodel"
+description = "Модель скважины"
+# Имя образа контейнера с компонентом
+image = "tr2-wellmodel"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_wellmodel"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_wellmodel_migrations]
+name = "tr2-wellmodel-migrations"
+description = "Миграции модели скважины"
+# Имя образа контейнера с компонентом
+image = "tr2-wellmodel-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_wellmodel"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_wellmodel_preprocessor]
+name = "tr2-wellmodel-preprocessor"
+description = "Препроцессор модели скважины"
+# Имя образа контейнера с компонентом
+image = "tr2-wellmodel-preprocessor"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_wellmodel_preprocessor"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_wellmodel_solver]
+name = "tr2-wellmodel-solver"
+description = "Решатель модели скважины"
+# Имя образа контейнера с компонентом
+image = "tr2-wellmodel-solver"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_wellmodel_solver"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_nonstationary_solver]
+name = "tr2-nonstationary-solver"
+description = "Решатель нестационарной модели"
+# Имя образа контейнера с компонентом
+image = "tr2-nonstationary-solver"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_nonstationary_solver"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.tr2_frontend]
+name = "tr2-frontend"
+description = "Frontend"
+# Имя образа контейнера с компонентом
+image = "tr2-frontend"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/tr2/_git/tr2_frontend"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.hdws_fastapi]
+name = "hdws-fastapi"
+description = "HDWS FastAPI"
+# Имя образа контейнера с компонентом
+image = "hdws-fastapi"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/hdws/_git/hdws_fastapi"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.hdws_worker]
+name = "hdws-worker"
+description = "HDWS Worker"
+# Имя образа контейнера с компонентом
+image = "hdws-worker"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/hdws/_git/hdws_worker"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.hdsw_worker_periodic]
+name = "hdsw-worker-periodic"
+description = "HDWS Worker Periodic"
+# Имя образа контейнера с компонентом
+image = "hdsw-worker-periodic"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/hdws/_git/hdws_worker_periodic"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.hdsw_redis]
+name = "hdsw-redis"
+description = "HDWS Redis"
+# Имя образа контейнера с компонентом
+image = "hdsw-redis"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/hdws/_git/hdsw_redis"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "true"
+
+[components.dt_well_migrations]
+name = "dt-well-migrations"
+description = "Миграции DT Well"
+# Имя образа контейнера с компонентом
+image = "dt-well-migrations"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.dt_well_api_service]
+name = "dt-well-api-service"
+description = "DT Well API сервис"
+# Имя образа контейнера с компонентом
+image = "dt-well-api-service"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well_api_service"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.dt_well_calc_service]
+name = "dt-well-calc-service"
+description = "DT Well Calc сервис"
+# Имя образа контейнера с компонентом
+image = "dt-well-calc-service"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well_calc_service"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.dt_well_tr_integration_service]
+name = "dt-well-tr-integration-service"
+description = "DT Well TR интеграция"
+# Имя образа контейнера с компонентом
+image = "dt-well-tr-integration-service"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well_tr_integration_service"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.dt_well_ws_service]
+name = "dt-well-ws-service"
+description = "DT Well WS сервис"
+# Имя образа контейнера с компонентом
+image = "dt-well-ws-service"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well_ws_service"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
+
+[components.dt_well_frontend]
+name = "dt-well-frontend"
+description = "DT Well Frontend"
+# Имя образа контейнера с компонентом
+image = "dt-well-frontend"
+# Версия образа контейнера с компонентом
+version = "2026.7.1"
+# Путь до GIT репозитория с исходным кодом компонента
+git_url = "ssh://alm-itsk.gazprom-neft.local:8180/TFS/GPN/dt-well/_git/dt_well_frontend"
+# Ветка или тег для GIT репозитория с исходным кодом компонента
+git_branch = "release/2026.7.1"
+# В каком регистри располагается или будет располагаться образ контейнера, по умолчанию "registry.gazprom-neft.local:5000"
+registry = "registry.gazprom-neft.local:5000"
+# В случае если переносимый компонент не обладает исходным кодом (коробочное или инфраструктурное решение) необходимо указать параметр WITHOUT_SOURCE_CODE установить TRUE. Таким образом проверка исходного кода выполняться не будет. По умолчанию значение параметра FALSE.
+without_source_code = "false"
