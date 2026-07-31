@@ -1,0 +1,83 @@
+{
+  "76561199000000007": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "EliteZettaJacket"
+      },
+      {
+        "factory": "VanguardJacketBlue"
+      },
+      {
+        "factory": "MilitiaGridJacketCamo"
+      }
+    ]
+  },
+  "76561199000000008": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "MilitiaGridJacketSand"
+      },
+      {
+        "factory": "GhostJacketGray"
+      },
+      {
+        "factory": "GhostJacketGreen"
+      }
+    ]
+  },
+  "76561199000000009": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "SyndicateCargoPantsBlack"
+      },
+      {
+        "factory": "MercenaryMeshPantsCamo"
+      },
+      {
+        "factory": "VanguardCorePants"
+      }
+    ]
+  },
+  "76561199000000010": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "VanguardPantsBlue"
+      },
+      {
+        "factory": "VanguardPantsGreen"
+      },
+      {
+        "factory": "SyndicatePantsRed"
+      }
+    ]
+  },
+  "76561199000000011": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GhostPantsGray"
+      },
+      {
+        "factory": "GhostPantsSand"
+      },
+      {
+        "factory": "PhantomRunnerBootsGray"
+      }
+    ]
+  },
+  "76561199000000012": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "VanguardCommandoBootsBlue"
+      },
+      {
+        "factory": "EliteChromeBootsGold"
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "76561199000000001": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "ChromoArmorTank"
+      },
+      {
+        "factory": "BioRegeneration"
+      },
+      {
+        "factory": "QuantumJump"
+      }
+    ]
+  },
+  "76561199000000002": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "CyberLimbAccuracy"
+      },
+      {
+        "factory": "EnergyShield"
+      },
+      {
+        "factory": "PhantomModule"
+      }
+    ]
+  },
+  "76561199000000003": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "DataSyncWh"
+      },
+      {
+        "factory": "ZeroFlashProtocol"
+      },
+      {
+        "factory": "ChronoReflexSlowmo"
+      }
+    ]
+  },
+  "76561199000000004": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "ZeroDelaySwitch"
+      },
+      {
+        "factory": "GladiatorChromeHelmetMetal"
+      },
+      {
+        "factory": "ZetViperHelmetNeon"
+      }
+    ]
+  },
+  "76561199000000005": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GladiatorChromeHelmetBlue"
+      },
+      {
+        "factory": "VanguardMeshHelmet"
+      },
+      {
+        "factory": "SyndicateHelmetGray"
+      }
+    ]
+  },
+  "76561199000000006": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "PhantomHelmetBlack"
+      },
+      {
+        "factory": "SyndicateJacketLeather"
+      },
+      {
+        "factory": "GhostMeshJacket"
+      }
+    ]
+  }
+}

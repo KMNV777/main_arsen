@@ -1,0 +1,86 @@
+{
+  "76561198184450067": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "TacticalMeshV1"
+      },
+      {
+        "factory": "EmergencyResetV1"
+      },
+      {
+        "factory": "CreditReaderV1"
+      }
+    ]
+  },
+  "76561198836236005": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "DeactivationProtocolV1"
+      },
+      {
+        "factory": "AccuracyZoneV1"
+      },
+      {
+        "factory": "AccuracyMovementV1"
+      }
+    ]
+  },
+  "76561198302751753": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "AntiCryptHeadV1"
+      },
+      {
+        "factory": "RangefinderV1"
+      },
+      {
+        "factory": "SniperFocusV1"
+      }
+    ]
+  },
+  "76561198804579581": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "FastSwitchV1"
+      },
+      {
+        "factory": "FireProtectionV1"
+      },
+      {
+        "factory": "SmokeControlV1"
+      }
+    ]
+  },
+  "76561199854041664": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "NeuroCollectorHelix"
+      },
+      {
+        "factory": "DataHackSlowdown"
+      },
+      {
+        "factory": "FastNetworkV2"
+      }
+    ]
+  },
+  "76561199159820174": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "DataBeaconTrackingV2"
+      },
+      {
+        "factory": "NeuroFlash"
+      },
+      {
+        "factory": "ChromeEnergyCollector"
+      }
+    ]
+  }
+}
