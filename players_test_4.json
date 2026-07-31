@@ -1,0 +1,83 @@
+{
+  "76561199000000013": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "MilitiaTreadBootsSand"
+      },
+      {
+        "factory": "MilitiaTreadBootsCamo"
+      },
+      {
+        "factory": "GhostSneakerBootsBlack"
+      }
+    ]
+  },
+  "76561199000000014": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "SyndicateRunnerBoots"
+      },
+      {
+        "factory": "PhotoEnergeticNeuromod"
+      },
+      {
+        "factory": "SonarV2Datamod"
+      }
+    ]
+  },
+  "76561199000000015": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "AntiSmokeNeuromod"
+      },
+      {
+        "factory": "PredatorNeurointerface"
+      },
+      {
+        "factory": "ChromeSkullGoliath"
+      }
+    ]
+  },
+  "76561199000000016": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "AntiShockHelmet"
+      },
+      {
+        "factory": "RadarRelayHelmet"
+      },
+      {
+        "factory": "ShadowContourSkeleton"
+      }
+    ]
+  },
+  "76561199000000017": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "SecondBreathImplant"
+      },
+      {
+        "factory": "KevlarAntishockJacket"
+      },
+      {
+        "factory": "SapperJacket"
+      }
+    ]
+  },
+  "76561199000000018": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "PhoenixJacket"
+      },
+      {
+        "factory": "NapalmSynthImplant"
+      }
+    ]
+  }
+}

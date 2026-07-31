@@ -1,0 +1,80 @@
+{
+  "76561199000000019": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "AmbidextrBioArm"
+      },
+      {
+        "factory": "MarkerDustGloves"
+      },
+      {
+        "factory": "GripTechGloves"
+      }
+    ]
+  },
+  "76561199000000020": {
+    "role": "boss",
+    "factories": [
+      {
+        "factory": "SamaritanGloves"
+      },
+      {
+        "factory": "VentilationImplant"
+      },
+      {
+        "factory": "MedicCargoPants"
+      }
+    ]
+  },
+  "76561199000000021": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GhostTechPants"
+      },
+      {
+        "factory": "FocusSpectrumDatamod"
+      },
+      {
+        "factory": "SherlockNeuroAnalyzer"
+      }
+    ]
+  },
+  "76561199000000022": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "EchoLocatorHelmet"
+      },
+      {
+        "factory": "MedicArmorJacket"
+      },
+      {
+        "factory": "MonkBioTendons"
+      }
+    ]
+  },
+  "76561199000000023": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "DefuseTechGloves"
+      },
+      {
+        "factory": "MicroSpikesImplant"
+      }
+    ]
+  },
+  "76561199000000024": {
+    "role": "mercenary",
+    "factories": [
+      {
+        "factory": "GeckoServoFeet"
+      },
+      {
+        "factory": "AbsorberBoots"
+      }
+    ]
+  }
+}
