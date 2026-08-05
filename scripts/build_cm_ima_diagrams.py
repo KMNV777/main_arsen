@@ -180,7 +180,124 @@ def variant3():
     save(fig, "variant3_integration.png")
 
 
+# Рейтинг по критериям (1–5, чем выше — тем лучше)
+RATING_CRITERIA = [
+    "Скорость\nвнедрения",
+    "Экономичность\n(ТРЗ)",
+    "Консолидация\nИТ",
+    "Целевая\nархитектура",
+    "Управление\nрисками",
+    "Гибкость\nэкспертов",
+    "Простота\nсопровождения",
+    "Интеграция\nданных",
+]
+RATING_V1 = [2, 3, 5, 5, 2, 5, 4, 4]  # V1: ТРЗ оценочно (не рассчитан)
+RATING_V2 = [2, 2, 5, 4, 2, 3, 3, 5]
+RATING_V3 = [5, 5, 2, 3, 4, 4, 2, 4]
+
+COL_V1 = "#0070C0"
+COL_V2 = "#E67E22"
+COL_V3 = "#1B7A3A"
+
+
+def rating_analytics():
+    import numpy as np
+
+    labels = RATING_CRITERIA
+    v1, v2, v3 = RATING_V1, RATING_V2, RATING_V3
+    n = len(labels)
+    angles = np.linspace(0, 2 * np.pi, n, endpoint=False).tolist()
+    angles += angles[:1]
+
+    def close(vals):
+        return vals + vals[:1]
+
+    fig = plt.figure(figsize=(14, 7.5), facecolor="#f8fafc")
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.15, 0.85], width_ratios=[1, 1.1], hspace=0.38, wspace=0.22)
+
+    # --- Radar ---
+    ax_radar = fig.add_subplot(gs[0, 0], polar=True)
+    ax_radar.set_facecolor("#ffffff")
+    for vals, color, label in [
+        (v1, COL_V1, "Вариант 1 — перенос"),
+        (v2, COL_V2, "Вариант 2 — ЕАРМ-1"),
+        (v3, COL_V3, "Вариант 3 — ЕАРМ-2"),
+    ]:
+        ax_radar.plot(angles, close(vals), "o-", linewidth=2, color=color, label=label, markersize=5)
+        ax_radar.fill(angles, close(vals), alpha=0.12, color=color)
+    ax_radar.set_xticks(angles[:-1])
+    ax_radar.set_xticklabels(labels, fontsize=8)
+    ax_radar.set_ylim(0, 5)
+    ax_radar.set_yticks([1, 2, 3, 4, 5])
+    ax_radar.set_yticklabels(["1", "2", "3", "4", "5"], fontsize=7, color="#888")
+    ax_radar.set_title("Профиль по критериям (1–5)", fontsize=11, fontweight="bold", color="#003366", pad=16)
+    ax_radar.legend(loc="upper right", bbox_to_anchor=(1.35, 1.12), fontsize=8, frameon=False)
+    ax_radar.grid(color="#ddd", linestyle="--", alpha=0.7)
+
+    # --- Grouped horizontal bars per criterion ---
+    ax_bars = fig.add_subplot(gs[0, 1])
+    ax_bars.set_facecolor("#ffffff")
+    y = np.arange(n)
+    h = 0.25
+    ax_bars.barh(y + h, v1, height=h, color=COL_V1, label="В1", edgecolor="white")
+    ax_bars.barh(y, v2, height=h, color=COL_V2, label="В2", edgecolor="white")
+    ax_bars.barh(y - h, v3, height=h, color=COL_V3, label="В3", edgecolor="white")
+    ax_bars.set_yticks(y)
+    ax_bars.set_yticklabels([l.replace("\n", " ") for l in labels], fontsize=8)
+    ax_bars.set_xlim(0, 5.6)
+    ax_bars.set_xlabel("Балл", fontsize=9)
+    ax_bars.set_title("Детализация рейтинга по критериям", fontsize=11, fontweight="bold", color="#003366")
+    ax_bars.axvline(3, color="#ccc", linestyle=":", linewidth=1)
+    ax_bars.legend(loc="lower right", fontsize=8, ncol=3)
+    for yi, scores in enumerate(zip(v1, v2, v3)):
+        for offset, sc in zip([h, 0, -h], scores):
+            ax_bars.text(sc + 0.08, yi + offset, str(sc), va="center", fontsize=7, color="#444")
+
+    # --- Overall score + scenario fit ---
+    ax_score = fig.add_subplot(gs[1, :])
+    ax_score.set_facecolor("#ffffff")
+    ax_score.axis("off")
+
+    weights = [1.2, 1.5, 1.0, 1.2, 1.3, 0.8, 1.0, 1.0]
+    def weighted(vals):
+        return sum(v * w for v, w in zip(vals, weights)) / sum(weights)
+
+    overall = [
+        ("Вариант 1 — целевой перенос", weighted(v1), COL_V1, "★★★★☆  3,8 / 5"),
+        ("Вариант 2 — встраивание (ЕАРМ-1)", weighted(v2), COL_V2, "★★★☆☆  3,3 / 5"),
+        ("Вариант 3 — интеграция (ЕАРМ-2)", weighted(v3), COL_V3, "★★★★☆  3,7 / 5"),
+    ]
+    ax_score.text(0.02, 0.92, "Итоговый взвешенный рейтинг", fontsize=12, fontweight="bold", color="#003366",
+                  transform=ax_score.transAxes)
+
+    bar_y = [0.62, 0.38, 0.14]
+    for (name, score, color, stars), by in zip(overall, bar_y):
+        ax_score.barh(by, score / 5 * 0.55, height=0.14, left=0.28, color=color, alpha=0.85,
+                      transform=ax_score.transAxes)
+        ax_score.barh(by, 0.55, height=0.14, left=0.28, color="#eee", alpha=0.5, transform=ax_score.transAxes, zorder=0)
+        ax_score.text(0.02, by, name, fontsize=9, va="center", transform=ax_score.transAxes, color="#333")
+        ax_score.text(0.86, by, stars, fontsize=10, va="center", transform=ax_score.transAxes, color=color, fontweight="bold")
+
+    # Scenario badges
+    scenarios = [
+        (0.04, 0.02, "Краткосрочный старт", "Вариант 3", COL_V3),
+        (0.36, 0.02, "Полная консолидация", "Вариант 2", COL_V2),
+        (0.68, 0.02, "Стратегическая цель", "Вариант 1", COL_V1),
+    ]
+    for x, y, title, winner, col in scenarios:
+        ax_score.add_patch(plt.Rectangle((x, y), 0.28, 0.08, transform=ax_score.transAxes,
+                                         facecolor=col, alpha=0.12, edgecolor=col, linewidth=1.2))
+        ax_score.text(x + 0.14, y + 0.055, title, ha="center", fontsize=8, fontweight="bold",
+                      color="#003366", transform=ax_score.transAxes)
+        ax_score.text(x + 0.14, y + 0.02, f"→ {winner}", ha="center", fontsize=8, color=col,
+                      transform=ax_score.transAxes, fontweight="bold")
+
+    fig.suptitle("Сводная аналитика: плюсы и минусы вариантов", fontsize=14, fontweight="bold", color="#003366", y=0.98)
+    save(fig, "rating_analytics.png")
+
+
 if __name__ == "__main__":
     variant1()
     variant2()
     variant3()
+    rating_analytics()
