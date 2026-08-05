@@ -323,8 +323,133 @@ def rating_analytics():
     print(f"Saved {path}")
 
 
+def variants_comparison_charts():
+    """Дашборд: ТРЗ, кольцевая диаграмма, гистограмма критериев, плюсы/минусы."""
+    labels = RATING_CRITERIA_SHORT
+    v1, v2, v3 = RATING_V1, RATING_V2, RATING_V3
+    weights = np.array([1.2, 1.5, 1.0, 1.2, 1.3, 0.8, 1.0, 1.0])
+    wsum = weights.sum()
+    overall = [
+        np.dot(v1, weights) / wsum,
+        np.dot(v2, weights) / wsum,
+        np.dot(v3, weights) / wsum,
+    ]
+    variant_names = ["В1\nперенос", "В2\nЕАРМ-1", "В3\nЕАРМ-2"]
+    sizes = overall
+    colors = [COL_V1, COL_V2, COL_V3]
+
+    # Индексы плюсов / минусов (по критериям рейтинга)
+    pros_idx = [0, 1, 2, 3, 5, 7]   # скорость, экономичность, консолидация…
+    cons_idx = [4, 6]               # риски, сопровождение (низкий балл = больше минусов)
+    pros_scores = [
+        np.mean([v1[i] for i in pros_idx]),
+        np.mean([v2[i] for i in pros_idx]),
+        np.mean([v3[i] for i in pros_idx]),
+    ]
+    cons_scores = [
+        np.mean([5 - v1[i] for i in cons_idx]),
+        np.mean([5 - v2[i] for i in cons_idx]),
+        np.mean([5 - v3[i] for i in cons_idx]),
+    ]
+
+    trz_vals = [0, 281.7, 126.6]  # В1 — не оценивался
+
+    fig = plt.figure(figsize=(12.8, 5.6), facecolor="#F4F6F8")
+    gs = fig.add_gridspec(2, 2, height_ratios=[1, 1.15], width_ratios=[1, 1],
+                          hspace=0.42, wspace=0.32)
+
+    # --- 1. Стоимость (ТРЗ) ---
+    ax_trz = fig.add_subplot(gs[0, 0])
+    ax_trz.set_facecolor("#FFFFFF")
+    x = np.arange(3)
+    bars = ax_trz.bar(x, trz_vals, color=colors, edgecolor="#CCCCCC", width=0.55)
+    bars[0].set_alpha(0.35)
+    bars[0].set_hatch("//")
+    ax_trz.set_xticks(x)
+    ax_trz.set_xticklabels(variant_names, fontsize=9)
+    ax_trz.set_ylabel("ТРЗ, ч/д", fontsize=9)
+    ax_trz.set_title("Стоимость реализации (ТРЗ)", fontsize=10, fontweight="bold", color="#003366")
+    ax_trz.set_ylim(0, 320)
+    for i, val in enumerate(trz_vals):
+        if val > 0:
+            ax_trz.text(i, val + 8, f"{val:.0f}", ha="center", fontsize=9, fontweight="bold", color=colors[i])
+        else:
+            ax_trz.text(i, 12, "н/о", ha="center", fontsize=9, fontweight="bold", color="#888888")
+    ax_trz.text(0.02, 0.95, "В1: не оценивался", transform=ax_trz.transAxes, fontsize=7, color="#666666", va="top")
+    ax_trz.grid(axis="y", linestyle="--", alpha=0.4)
+
+    # --- 2. Кольцевая — итоговый рейтинг ---
+    ax_donut = fig.add_subplot(gs[0, 1])
+    ax_donut.set_facecolor("#FFFFFF")
+
+    def _score_autopct(scores):
+        idx = [0]
+        def fmt(_pct):
+            val = scores[idx[0]]
+            idx[0] += 1
+            return f"{val:.1f}"
+        return fmt
+
+    wedges, texts, autotexts = ax_donut.pie(
+        overall, labels=variant_names, colors=colors, autopct=_score_autopct(overall),
+        startangle=90, pctdistance=0.78, textprops={"fontsize": 8},
+        wedgeprops=dict(width=0.42, edgecolor="white", linewidth=2),
+    )
+    for at in autotexts:
+        at.set_fontsize(9)
+        at.set_fontweight("bold")
+        at.set_color("white")
+    ax_donut.set_title("Итоговый взвешенный рейтинг (из 5)", fontsize=10, fontweight="bold", color="#003366")
+    centre = plt.Circle((0, 0), 0.35, fc="white")
+    ax_donut.add_artist(centre)
+    ax_donut.text(0, 0, f"лидер\nВ3", ha="center", va="center", fontsize=8, fontweight="bold", color="#003366")
+
+    # --- 3. Гистограмма по критериям (особенности) ---
+    ax_hist = fig.add_subplot(gs[1, :])
+    ax_hist.set_facecolor("#FFFFFF")
+    y = np.arange(len(labels))
+    h = 0.25
+    ax_hist.barh(y + h, v1, height=h, color=COL_V1, label="В1 — перенос", edgecolor="white")
+    ax_hist.barh(y, v2, height=h, color=COL_V2, label="В2 — ЕАРМ-1", edgecolor="white")
+    ax_hist.barh(y - h, v3, height=h, color=COL_V3, label="В3 — ЕАРМ-2", edgecolor="white")
+    ax_hist.set_yticks(y)
+    ax_hist.set_yticklabels(labels, fontsize=8)
+    ax_hist.set_xlim(0, 5.8)
+    ax_hist.set_xlabel("Балл (1–5)", fontsize=9)
+    ax_hist.set_title("Оценка по критериям / особенностям", fontsize=10, fontweight="bold", color="#003366")
+    ax_hist.axvline(3, color="#CCCCCC", linestyle=":", linewidth=1)
+    ax_hist.legend(loc="lower right", fontsize=8, ncol=3, framealpha=0.9)
+    for yi, (s1, s2, s3) in enumerate(zip(v1, v2, v3)):
+        for offset, sc in zip([h, 0, -h], [s1, s2, s3]):
+            ax_hist.text(sc + 0.06, yi + offset, str(sc), va="center", fontsize=7, color="#444444")
+
+    # --- 4. Плюсы / минусы — врезка справа внизу (inset axes) ---
+    ax_pc = ax_hist.inset_axes([0.72, 0.08, 0.26, 0.38])
+    ax_pc.set_facecolor("#F8FAFC")
+    xx = np.arange(3)
+    w = 0.35
+    ax_pc.bar(xx - w / 2, pros_scores, w, color="#1B7A3A", label="Плюсы", alpha=0.85)
+    ax_pc.bar(xx + w / 2, cons_scores, w, color="#C00000", label="Минусы", alpha=0.85)
+    ax_pc.set_xticks(xx)
+    ax_pc.set_xticklabels(["В1", "В2", "В3"], fontsize=7)
+    ax_pc.set_ylim(0, 5)
+    ax_pc.set_title("Плюсы / минусы", fontsize=8, fontweight="bold", color="#003366")
+    ax_pc.legend(fontsize=6, loc="upper right")
+    ax_pc.tick_params(labelsize=7)
+    ax_pc.set_ylabel("индекс", fontsize=7)
+
+    fig.suptitle("Сравнение вариантов: стоимость, особенности, плюсы и минусы",
+                 fontsize=12, fontweight="bold", color="#003366", y=0.98)
+
+    path = ASSETS / "variants_comparison_charts.png"
+    fig.savefig(path, dpi=160, bbox_inches="tight", facecolor="#F4F6F8", pad_inches=0.2)
+    plt.close(fig)
+    print(f"Saved {path}")
+
+
 if __name__ == "__main__":
     variant1()
     variant2()
     variant3()
     rating_analytics()
+    variants_comparison_charts()

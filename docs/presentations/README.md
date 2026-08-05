@@ -8,7 +8,7 @@
 | `assets/variant1_transfer.png` | Диаграмма варианта 1 (1-file.feUnSR) |
 | `assets/variant2_embedding.png` | Диаграмма варианта 2 (2_file.OVCeIx) |
 | `assets/variant3_integration.png` | Диаграмма варианта 3 (3_file.ekYFFz) |
-| `assets/rating_analytics.png` | Сводная аналитика с рейтингом вариантов |
+| `assets/variants_comparison_charts.png` | Диаграммы: ТРЗ, рейтинг, критерии, плюсы/минусы |
 
 ## Соответствие источников
 

@@ -186,7 +186,23 @@ class SlideBuilder:
         slide = self.prs.slides.add_slide(self.prs.slide_layouts[6])
         apply_frame(slide, title, pg)
         if path.exists():
-            slide.shapes.add_picture(str(path), Inches(0.45), Inches(1.0), width=Inches(12.4))
+            try:
+                from PIL import Image
+                with Image.open(path) as im:
+                    px_w, px_h = im.size
+            except Exception:
+                px_w, px_h = 16, 9
+            max_w = Inches(12.4)
+            max_h = Inches(5.65)
+            ratio = px_w / px_h
+            if max_w / max_h > ratio:
+                pic_h = max_h
+                pic_w = int(max_h * ratio)
+            else:
+                pic_w = max_w
+                pic_h = int(max_w / ratio)
+            left = int((SLIDE_W - pic_w) / 2)
+            slide.shapes.add_picture(str(path), left, Inches(1.0), width=pic_w, height=pic_h)
         if caption:
             cap = slide.shapes.add_textbox(Inches(0.55), Inches(6.78), Inches(12.2), Inches(0.35))
             cr = cap.text_frame.paragraphs[0].add_run()
@@ -575,6 +591,11 @@ def build_presentation() -> Path:
     s.table_backlog("Бэклог ЕАРМ-2 — детализация ТРЗ", BACKLOG_EAPM2, TOTAL_EAPM2)
 
     s.variants_summary()
+    s.image(
+        "Сравнение вариантов: диаграммы",
+        ASSETS / "variants_comparison_charts.png",
+        "Столбцы — ТРЗ (ч/д) | Кольцевая — итоговый рейтинг | Гистограмма — критерии | Врезка — индексы плюсов/минусов",
+    )
     s.comparison()
     s.rating_analytics()
     s.bullets("Выводы и рекомендации", [
