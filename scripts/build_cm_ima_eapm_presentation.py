@@ -16,6 +16,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from presentation_theme import (  # noqa: E402
     ACCENT,
     BG_LIGHT,
+    COL_V1,
+    COL_V2,
+    COL_V3,
     CONTENT_TOP,
     FONT,
     GREEN,
@@ -30,6 +33,7 @@ from presentation_theme import (  # noqa: E402
     WHITE,
     apply_frame,
     set_font,
+    style_score_cell,
     style_table_cell,
     style_table_header,
 )
@@ -75,6 +79,21 @@ BACKLOG_EAPM2 = [
     ("15", "Документирование", "Инструкции пользователя/администратора", "17,00", "17,90"),
 ]
 TOTAL_EAPM2 = ("126,60", "135,50")
+
+RATING_CRITERIA = [
+    "Скорость внедрения",
+    "Экономичность (ТРЗ)",
+    "Консолидация ИТ",
+    "Целевая архитектура",
+    "Управление рисками",
+    "Гибкость экспертов",
+    "Простота сопровождения",
+    "Интеграция данных",
+]
+RATING_V1 = [2, 3, 5, 5, 2, 5, 4, 4]
+RATING_V2 = [2, 2, 5, 4, 2, 3, 3, 5]
+RATING_V3 = [5, 5, 2, 3, 4, 4, 2, 4]
+RATING_WEIGHTS = [1.2, 1.5, 1.0, 1.2, 1.3, 0.8, 1.0, 1.0]
 
 
 class SlideBuilder:
@@ -223,6 +242,113 @@ class SlideBuilder:
         set_font(nr, 8, color=TEXT_MUTED)
         return slide
 
+    def rating_analytics(self):
+        """Слайд 19: нативная матрица + итоговые баллы + методика (без PNG)."""
+        pg = self._next()
+        slide = self.prs.slides.add_slide(self.prs.slide_layouts[6])
+        apply_frame(slide, "Сводная аналитика: рейтинг вариантов", pg)
+
+        matrix = list(zip(RATING_CRITERIA, RATING_V1, RATING_V2, RATING_V3))
+        n = len(matrix) + 1
+
+        tbl = slide.shapes.add_table(n, 4, Inches(0.4), Inches(1.05), Inches(7.6), Inches(4.35)).table
+        tbl.columns[0].width = Inches(3.4)
+        tbl.columns[1].width = Inches(1.4)
+        tbl.columns[2].width = Inches(1.4)
+        tbl.columns[3].width = Inches(1.4)
+
+        for c, h in enumerate(["Критерий", "В1 — перенос", "В2 — ЕАРМ-1", "В3 — ЕАРМ-2"]):
+            style_table_header(tbl.cell(0, c), h)
+
+        for ri, (crit, s1, s2, s3) in enumerate(matrix, 1):
+            style_table_cell(tbl.cell(ri, 0), crit, alt=(ri % 2 == 0))
+            style_score_cell(tbl.cell(ri, 1), s1)
+            style_score_cell(tbl.cell(ri, 2), s2)
+            style_score_cell(tbl.cell(ri, 3), s3)
+
+        # Шкала под таблицей
+        scale = slide.shapes.add_textbox(Inches(0.45), Inches(5.48), Inches(7.5), Inches(0.28))
+        sr = scale.text_frame.paragraphs[0].add_run()
+        sr.text = "Шкала: 1 — низко  ·  5 — высоко  |  Тёмнее ячейка = выше балл"
+        set_font(sr, 8, color=TEXT_MUTED)
+
+        # Итоговый рейтинг (правая колонка)
+        hdr = slide.shapes.add_textbox(Inches(8.3), Inches(1.05), Inches(4.6), Inches(0.35))
+        hr = hdr.text_frame.paragraphs[0].add_run()
+        hr.text = "Итоговый взвешенный рейтинг"
+        set_font(hr, 13, True, NAVY)
+
+        wsum = sum(RATING_WEIGHTS)
+        overall = [
+            ("В1 — целевой перенос", sum(a * b for a, b in zip(RATING_V1, RATING_WEIGHTS)) / wsum, COL_V1),
+            ("В2 — встраивание", sum(a * b for a, b in zip(RATING_V2, RATING_WEIGHTS)) / wsum, COL_V2),
+            ("В3 — интеграция", sum(a * b for a, b in zip(RATING_V3, RATING_WEIGHTS)) / wsum, COL_V3),
+        ]
+        bar_left = Inches(9.5)
+        bar_max_w = Inches(3.2)
+        for i, (name, score, color) in enumerate(overall):
+            y = Inches(1.55 + i * 0.72)
+            lb = slide.shapes.add_textbox(Inches(8.3), y, Inches(1.1), Inches(0.35))
+            lr = lb.text_frame.paragraphs[0].add_run()
+            lr.text = name
+            set_font(lr, 9, color=TEXT_DARK)
+            bg = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, bar_left, y + Inches(0.05),
+                                        bar_max_w, Inches(0.22))
+            bg.fill.solid()
+            bg.fill.fore_color.rgb = TABLE_ALT
+            bg.line.color.rgb = RGBColor(0xCC, 0xCC, 0xCC)
+            fg = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, bar_left, y + Inches(0.05),
+                                        int(bar_max_w * score / 5), Inches(0.22))
+            fg.fill.solid()
+            fg.fill.fore_color.rgb = color
+            fg.line.fill.background()
+            val = slide.shapes.add_textbox(bar_left + bar_max_w + Inches(0.1), y, Inches(0.9), Inches(0.35))
+            vr = val.text_frame.paragraphs[0].add_run()
+            vr.text = f"{score:.1f}/5"
+            set_font(vr, 10, True, color)
+
+        # Сценарии
+        sc_box = slide.shapes.add_textbox(Inches(8.3), Inches(3.85), Inches(4.6), Inches(1.5))
+        stf = sc_box.text_frame
+        stf.word_wrap = True
+        p0 = stf.paragraphs[0]
+        r0 = p0.add_run()
+        r0.text = "Рекомендуемые сценарии"
+        set_font(r0, 11, True, NAVY)
+        for line in [
+            "Краткосрочный старт → Вариант 3",
+            "Полная консолидация → Вариант 2",
+            "Стратегическая цель → Вариант 1",
+        ]:
+            p = stf.add_paragraph()
+            p.space_before = Pt(4)
+            r = p.add_run()
+            r.text = f"• {line}"
+            set_font(r, 9, color=TEXT_DARK)
+
+        # Методика (нижний блок)
+        meth_bg = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.4), Inches(5.85),
+                                         Inches(12.5), Inches(1.05))
+        meth_bg.fill.solid()
+        meth_bg.fill.fore_color.rgb = TABLE_ALT
+        meth_bg.line.color.rgb = NAVY
+
+        meth = slide.shapes.add_textbox(Inches(0.55), Inches(5.92), Inches(12.2), Inches(0.92))
+        mtf = meth.text_frame
+        mtf.word_wrap = True
+        lines = [
+            "Источник оценок:  ",
+            "Экономичность (ТРЗ) — бэклоги Excel: ЕАРМ-1 = 281,7 ч/д (2_file.OVCeIx), ЕАРМ-2 = 126,6 ч/д (3_file.ekYFFz); В1 — ТРЗ не оценивался, балл 3 (оценочно).  ",
+            "Остальные критерии — экспертная оценка схем 1-file.feUnSR / 2_file.OVCeIx / 3_file.ekYFFz (шкала 1–5).  ",
+            "Итог = взвешенное среднее (экономичность ×1,5; риски ×1,3; скорость ×1,2; архитектура ×1,2).",
+        ]
+        for i, line in enumerate(lines):
+            p = mtf.paragraphs[0] if i == 0 else mtf.add_paragraph()
+            r = p.add_run()
+            r.text = line
+            set_font(r, 8 if i > 0 else 9, bold=(i == 0), color=NAVY if i == 0 else TEXT_DARK)
+        return slide
+
     def save(self) -> Path:
         path = OUT_DIR / "CM_IMA_EAPM_variants_comparison.pptx"
         self.prs.save(path)
@@ -318,11 +444,7 @@ def build_presentation() -> Path:
     s.table_backlog("Бэклог ЕАРМ-2 — детализация ТРЗ", BACKLOG_EAPM2, TOTAL_EAPM2)
 
     s.comparison()
-    s.image(
-        "Сводная аналитика: рейтинг вариантов",
-        ASSETS / "rating_analytics.png",
-        "Методика оценок — на диаграмме (блок «Источник и методика»)",
-    )
+    s.rating_analytics()
     s.bullets("Выводы и рекомендации", [
         "Вариант 1 — стратегическое направление; требуется оценка ТРЗ.",
         "Вариант 2 — полная консолидация с максимальными трудозатратами.",

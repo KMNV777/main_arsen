@@ -20,6 +20,9 @@ RED = RGBColor(0xC0, 0x00, 0x00)
 ORANGE = RGBColor(0xE6, 0x7E, 0x22)
 TABLE_HEADER = NAVY
 TABLE_ALT = RGBColor(0xE8, 0xEE, 0xF4)
+COL_V1 = RGBColor(0x00, 0x70, 0xC0)
+COL_V2 = ORANGE
+COL_V3 = GREEN
 
 FONT = "Calibri"
 SLIDE_W = Inches(13.333)
@@ -120,3 +123,23 @@ def style_table_cell(cell, text: str, *, bold: bool = False, alt: bool = False):
     for p in cell.text_frame.paragraphs:
         for r in p.runs:
             set_font(r, 8, bold, TEXT_DARK)
+
+
+_SCORE_COLORS = {
+    1: RGBColor(0xE8, 0xEE, 0xF4),
+    2: RGBColor(0xC5, 0xD9, 0xED),
+    3: RGBColor(0x7E, 0xB3, 0xDD),
+    4: RGBColor(0x3A, 0x8D, 0xC7),
+    5: RGBColor(0x00, 0x33, 0x66),
+}
+
+
+def style_score_cell(cell, value: int):
+    cell.text = str(value)
+    cell.vertical_anchor = MSO_ANCHOR.MIDDLE
+    cell.fill.solid()
+    cell.fill.fore_color.rgb = _SCORE_COLORS.get(value, TABLE_ALT)
+    for p in cell.text_frame.paragraphs:
+        p.alignment = PP_ALIGN.CENTER
+        for r in p.runs:
+            set_font(r, 11, True, WHITE if value >= 4 else NAVY)
