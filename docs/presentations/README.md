@@ -20,8 +20,13 @@
 
 ## Пересборка
 
+Требуется системный Graphviz (`apt install graphviz` или `brew install graphviz`).
+
 ```bash
-pip install python-pptx matplotlib
+pip install -r requirements.txt
 python3 scripts/build_cm_ima_diagrams.py
 python3 scripts/build_cm_ima_eapm_presentation.py
 ```
+
+Схемы вариантов строятся через **Graphviz** (автоматическая раскладка, ортогональные стрелки).
+График рейтинга использует **adjustText** для разведения подписей.
