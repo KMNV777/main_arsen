@@ -1,5 +1,4 @@
 drawpyo==0.2.5
 matplotlib>=3.7  # статичный SVG/PNG-просмотр для C4-генераторов (scripts/build_*_c4_component.py)
 graphviz>=0.20       # автолейаут архитектурных схем (scripts/build_cm_ima_diagrams.py)
-adjustText>=1.2      # разведение подписей на графиках рейтинга
 python-pptx>=1.0     # генерация презентаций (scripts/build_cm_ima_eapm_presentation.py)

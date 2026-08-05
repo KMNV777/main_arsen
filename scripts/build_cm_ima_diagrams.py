@@ -8,8 +8,8 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-from adjustText import adjust_text
 from graphviz import Digraph
+from matplotlib.colors import LinearSegmentedColormap
 
 ASSETS = Path(__file__).resolve().parents[1] / "docs" / "presentations" / "assets"
 ASSETS.mkdir(parents=True, exist_ok=True)
@@ -28,15 +28,15 @@ COL_V1 = "#0070C0"
 COL_V2 = "#E67E22"
 COL_V3 = "#1B7A3A"
 
-RATING_CRITERIA = [
-    "Скорость\nвнедрения",
-    "Экономичность\n(ТРЗ)",
-    "Консолидация\nИТ",
-    "Целевая\nархитектура",
-    "Управление\nрисками",
-    "Гибкость\nэкспертов",
-    "Простота\nсопровождения",
-    "Интеграция\nданных",
+RATING_CRITERIA_SHORT = [
+    "Скорость внедрения",
+    "Экономичность (ТРЗ)",
+    "Консолидация ИТ",
+    "Целевая архитектура",
+    "Управление рисками",
+    "Гибкость экспертов",
+    "Простота сопровождения",
+    "Интеграция данных",
 ]
 RATING_V1 = [2, 3, 5, 5, 2, 5, 4, 4]
 RATING_V2 = [2, 2, 5, 4, 2, 3, 3, 5]
@@ -242,104 +242,83 @@ def variant3():
 
 
 def rating_analytics():
-    labels = RATING_CRITERIA
+    """Тепловая карта + итоговые баллы + блок методологии (без радара)."""
+    labels = RATING_CRITERIA_SHORT
     v1, v2, v3 = RATING_V1, RATING_V2, RATING_V3
-    n = len(labels)
-    angles = np.linspace(0, 2 * np.pi, n, endpoint=False).tolist()
-    angles += angles[:1]
+    matrix = np.array([v1, v2, v3]).T  # 8 × 3
+    variants = ["Вариант 1\n(перенос)", "Вариант 2\n(ЕАРМ-1)", "Вариант 3\n(ЕАРМ-2)"]
+    colors_list = [COL_V1, COL_V2, COL_V3]
 
-    def close(vals):
-        return vals + vals[:1]
+    weights = np.array([1.2, 1.5, 1.0, 1.2, 1.3, 0.8, 1.0, 1.0])
+    overall = [np.dot(matrix[:, j], weights) / weights.sum() for j in range(3)]
 
-    fig = plt.figure(figsize=(14, 8), facecolor="#f8fafc")
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.15, 0.85], width_ratios=[1, 1.1],
-                          hspace=0.42, wspace=0.28)
+    cmap = LinearSegmentedColormap.from_list("corp", ["#E8EEF4", "#B3D4F0", "#0070C0", "#003366"])
 
-    ax_radar = fig.add_subplot(gs[0, 0], polar=True)
-    ax_radar.set_facecolor("#ffffff")
-    for vals, color, label in [
-        (v1, COL_V1, "Вариант 1 — перенос"),
-        (v2, COL_V2, "Вариант 2 — ЕАРМ-1"),
-        (v3, COL_V3, "Вариант 3 — ЕАРМ-2"),
-    ]:
-        ax_radar.plot(angles, close(vals), "o-", linewidth=2, color=color, label=label, markersize=5)
-        ax_radar.fill(angles, close(vals), alpha=0.12, color=color)
-    ax_radar.set_xticks(angles[:-1])
-    ax_radar.set_xticklabels(labels, fontsize=8)
-    ax_radar.tick_params(pad=18)
-    ax_radar.set_ylim(0, 5)
-    ax_radar.set_yticks([1, 2, 3, 4, 5])
-    ax_radar.set_yticklabels(["1", "2", "3", "4", "5"], fontsize=7, color="#888")
-    ax_radar.set_title("Профиль по критериям (1–5)", fontsize=11, fontweight="bold", color="#003366", pad=22)
-    ax_radar.legend(loc="upper right", bbox_to_anchor=(1.42, 1.15), fontsize=8, frameon=False)
-    ax_radar.grid(color="#ddd", linestyle="--", alpha=0.7)
+    fig = plt.figure(figsize=(13.5, 7.2), facecolor="#F4F6F8")
+    gs = fig.add_gridspec(3, 1, height_ratios=[2.6, 0.9, 1.1], hspace=0.38)
 
-    ax_bars = fig.add_subplot(gs[0, 1])
-    ax_bars.set_facecolor("#ffffff")
-    y = np.arange(n)
-    h = 0.25
-    ax_bars.barh(y + h, v1, height=h, color=COL_V1, label="В1", edgecolor="white")
-    ax_bars.barh(y, v2, height=h, color=COL_V2, label="В2", edgecolor="white")
-    ax_bars.barh(y - h, v3, height=h, color=COL_V3, label="В3", edgecolor="white")
-    ax_bars.set_yticks(y)
-    ax_bars.set_yticklabels([lb.replace("\n", " ") for lb in labels], fontsize=8)
-    ax_bars.set_xlim(0, 6.2)
-    ax_bars.set_xlabel("Балл", fontsize=9)
-    ax_bars.set_title("Детализация рейтинга по критериям", fontsize=11, fontweight="bold", color="#003366")
-    ax_bars.axvline(3, color="#ccc", linestyle=":", linewidth=1)
-    ax_bars.legend(loc="lower right", fontsize=8, ncol=3)
+    # --- Heatmap ---
+    ax_h = fig.add_subplot(gs[0])
+    ax_h.set_facecolor("#FFFFFF")
+    im = ax_h.imshow(matrix, cmap=cmap, vmin=1, vmax=5, aspect="auto")
+    ax_h.set_xticks(range(3))
+    ax_h.set_xticklabels(variants, fontsize=10, fontweight="bold")
+    ax_h.set_yticks(range(len(labels)))
+    ax_h.set_yticklabels(labels, fontsize=9)
+    ax_h.set_title("Сравнительная матрица оценок (шкала 1–5)", fontsize=12,
+                   fontweight="bold", color="#003366", pad=12)
+    for i in range(matrix.shape[0]):
+        for j in range(matrix.shape[1]):
+            val = int(matrix[i, j])
+            txt_color = "white" if val >= 4 else "#003366"
+            ax_h.text(j, i, str(val), ha="center", va="center", fontsize=13,
+                      fontweight="bold", color=txt_color)
+    cbar = fig.colorbar(im, ax=ax_h, fraction=0.025, pad=0.02)
+    cbar.set_label("Балл", fontsize=9)
+    cbar.set_ticks([1, 2, 3, 4, 5])
+    for spine in ax_h.spines.values():
+        spine.set_visible(True)
+        spine.set_color("#CCCCCC")
 
-    texts = []
-    for yi, scores in enumerate(zip(v1, v2, v3)):
-        for offset, sc in zip([h, 0, -h], scores):
-            texts.append(ax_bars.text(sc + 0.05, yi + offset, str(sc), va="center", fontsize=7, color="#444"))
-    adjust_text(texts, ax=ax_bars, only_move={"text": "xy"}, force_text=(0.3, 0.5),
-                expand_points=(1.4, 1.6), arrowprops=dict(arrowstyle="-", color="#ccc", lw=0.5))
+    # --- Overall scores ---
+    ax_o = fig.add_subplot(gs[1])
+    ax_o.set_facecolor("#FFFFFF")
+    ax_o.set_xlim(0, 5.5)
+    ax_o.set_ylim(-0.5, 2.5)
+    ax_o.axis("off")
+    ax_o.text(0, 2.15, "Итоговый взвешенный рейтинг", fontsize=11, fontweight="bold", color="#003366")
+    names = ["В1 — целевой перенос", "В2 — встраивание (ЕАРМ-1)", "В3 — интеграция (ЕАРМ-2)"]
+    for idx, (name, score, col) in enumerate(zip(names, overall, colors_list)):
+        y = 1.5 - idx * 0.65
+        ax_o.barh(y, 5, height=0.38, left=2.8, color="#E8EEF4", edgecolor="#CCCCCC", linewidth=0.5)
+        ax_o.barh(y, score, height=0.38, left=2.8, color=col, alpha=0.9)
+        ax_o.text(0, y, name, va="center", fontsize=9, color="#333333")
+        stars = "★" * round(score) + "☆" * (5 - round(score))
+        ax_o.text(2.8 + score + 0.12, y, f"{stars}  {score:.1f}/5", va="center", fontsize=9,
+                  color=col, fontweight="bold")
 
-    ax_score = fig.add_subplot(gs[1, :])
-    ax_score.set_facecolor("#ffffff")
-    ax_score.axis("off")
+    # --- Methodology ---
+    ax_m = fig.add_subplot(gs[2])
+    ax_m.set_facecolor("#E8EEF4")
+    ax_m.axis("off")
+    ax_m.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax_m.transAxes,
+                                 facecolor="#E8EEF4", edgecolor="#003366", linewidth=1.2))
+    methodology = (
+        "Источник и методика оценок:\n"
+        "• Экономичность (ТРЗ) — из бэклогов Excel: ЕАРМ-1 = 281,7 ч/д (2_file.OVCeIx), "
+        "ЕАРМ-2 = 126,6 ч/д (3_file.ekYFFz); для В1 ТРЗ не оценивался → балл 3 (оценочно).\n"
+        "• Остальные 7 критериев — экспертная оценка архитектурных схем (1-file.feUnSR, "
+        "2_file.OVCeIx, 3_file.ekYFFz) по шкале 1 (низко) … 5 (высоко).\n"
+        "• Итоговый балл = взвешенное среднее (веса: экономичность ×1,5; риски ×1,3; "
+        "скорость ×1,2; архитектура ×1,2; остальные ×1,0).\n"
+        "• Сценарии: краткосрочный старт → В3 | полная консолидация → В2 | стратегическая цель → В1"
+    )
+    ax_m.text(0.02, 0.95, methodology, transform=ax_m.transAxes, fontsize=8.5,
+              color="#003366", va="top", ha="left", linespacing=1.45,
+              bbox=dict(boxstyle="round,pad=0.4", facecolor="#E8EEF4", edgecolor="#003366"))
 
-    weights = [1.2, 1.5, 1.0, 1.2, 1.3, 0.8, 1.0, 1.0]
-
-    def weighted(vals):
-        return sum(v * w for v, w in zip(vals, weights)) / sum(weights)
-
-    overall = [
-        ("Вариант 1 — целевой перенос", weighted(v1), COL_V1, "★★★★☆  3,8 / 5"),
-        ("Вариант 2 — встраивание (ЕАРМ-1)", weighted(v2), COL_V2, "★★★☆☆  3,3 / 5"),
-        ("Вариант 3 — интеграция (ЕАРМ-2)", weighted(v3), COL_V3, "★★★★☆  3,7 / 5"),
-    ]
-    ax_score.text(0.02, 0.92, "Итоговый взвешенный рейтинг", fontsize=12, fontweight="bold",
-                  color="#003366", transform=ax_score.transAxes)
-
-    bar_y = [0.62, 0.38, 0.14]
-    for (name, score, color, stars), by in zip(overall, bar_y):
-        ax_score.barh(by, 0.55, height=0.14, left=0.28, color="#eee", alpha=0.5,
-                      transform=ax_score.transAxes, zorder=0)
-        ax_score.barh(by, score / 5 * 0.55, height=0.14, left=0.28, color=color, alpha=0.85,
-                      transform=ax_score.transAxes, zorder=1)
-        ax_score.text(0.02, by, name, fontsize=9, va="center", transform=ax_score.transAxes, color="#333")
-        ax_score.text(0.86, by, stars, fontsize=10, va="center", transform=ax_score.transAxes,
-                      color=color, fontweight="bold")
-
-    scenarios = [
-        (0.04, 0.02, "Краткосрочный старт", "Вариант 3", COL_V3),
-        (0.36, 0.02, "Полная консолидация", "Вариант 2", COL_V2),
-        (0.68, 0.02, "Стратегическая цель", "Вариант 1", COL_V1),
-    ]
-    for x, y, title, winner, col in scenarios:
-        ax_score.add_patch(plt.Rectangle((x, y), 0.28, 0.08, transform=ax_score.transAxes,
-                                         facecolor=col, alpha=0.12, edgecolor=col, linewidth=1.2))
-        ax_score.text(x + 0.14, y + 0.055, title, ha="center", fontsize=8, fontweight="bold",
-                      color="#003366", transform=ax_score.transAxes)
-        ax_score.text(x + 0.14, y + 0.02, f"→ {winner}", ha="center", fontsize=8, color=col,
-                      transform=ax_score.transAxes, fontweight="bold")
-
-    fig.suptitle("Сводная аналитика: плюсы и минусы вариантов", fontsize=14,
-                 fontweight="bold", color="#003366", y=0.98)
     path = ASSETS / "rating_analytics.png"
-    fig.savefig(path, dpi=160, bbox_inches="tight", facecolor="#f8fafc", pad_inches=0.3)
+    fig.savefig(path, dpi=160, bbox_inches="tight", facecolor="#F4F6F8", pad_inches=0.25)
     plt.close(fig)
     print(f"Saved {path}")
 
