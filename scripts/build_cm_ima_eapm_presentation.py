@@ -242,8 +242,143 @@ class SlideBuilder:
         set_font(nr, 8, color=TEXT_MUTED)
         return slide
 
+    def _fill_variant_column(self, tf, data: dict, source: str, accent: RGBColor):
+        """Заполнить текстовый фрейм колонки сводки по варианту."""
+        sections = [
+            ("ТРЗ", data["trz"], NAVY),
+            ("Особенности", data["feat"], accent),
+            ("Плюсы", data["pros"], GREEN),
+            ("Минусы", data["cons"], RED),
+        ]
+        first = True
+        for label, items, color in sections:
+            p = tf.paragraphs[0] if first else tf.add_paragraph()
+            first = False
+            p.space_before = Pt(5)
+            r = p.add_run()
+            r.text = label
+            set_font(r, 9, True, color)
+            if isinstance(items, str):
+                ip = tf.add_paragraph()
+                ir = ip.add_run()
+                ir.text = items
+                set_font(ir, 8, color=TEXT_DARK)
+            else:
+                for item in items:
+                    bp = tf.add_paragraph()
+                    bp.space_before = Pt(1)
+                    br = bp.add_run()
+                    br.text = f"• {item}"
+                    set_font(br, 8, color=TEXT_DARK)
+        sp = tf.add_paragraph()
+        sp.space_before = Pt(6)
+        sr = sp.add_run()
+        sr.text = f"Источник: {source}"
+        set_font(sr, 7, color=TEXT_MUTED)
+
+    def variants_summary(self):
+        """Сводный слайд: особенности, ТРЗ, плюсы и минусы по всем трём вариантам."""
+        pg = self._next()
+        slide = self.prs.slides.add_slide(self.prs.slide_layouts[6])
+        apply_frame(slide, "Сводка по вариантам: особенности, ТРЗ, плюсы и минусы", pg)
+
+        variants = [
+            ("Вариант 1\nЦелевой перенос", COL_V1, "1-file.feUnSR", {
+                "trz": "Не оценивался",
+                "feat": [
+                    "Оркестрация в Airflow ЕАРМ",
+                    "Песочница MVP для моделей",
+                    "Перенос компонентов из ЦМ ИМА БРД",
+                    "Единая точка входа для ДО",
+                ],
+                "pros": [
+                    "Единая целевая платформа",
+                    "Централизация ТМ и расчётов",
+                    "Соответствие целевому ландшафту",
+                ],
+                "cons": [
+                    "Максимальный объём изменений",
+                    "ТРЗ требует отдельной оценки",
+                    "Длительный переходный период",
+                ],
+            }),
+            ("Вариант 2\nВстраивание (ЕАРМ-1)", COL_V2, "2_file.OVCeIx", {
+                "trz": f"{TOTAL_EAPM1[0]} ч/д (без риска)\n{TOTAL_EAPM1[1]} ч/д (с риском)",
+                "feat": [
+                    "Перенос стека CH, PG, Airflow, NiFi…",
+                    "Миграция дампов и CI/CD",
+                    "Переработка DAG (API, атомарность)",
+                    "Устранение уязвимостей (~134 ч/д)",
+                ],
+                "pros": [
+                    "Полная консолидация в ЕАРМ",
+                    "Контроль ТМ через NiFi (АДКУ)",
+                    "Grafana в frontend ЕАРМ",
+                ],
+                "cons": [
+                    "Максимальные ТРЗ (~282 ч/д)",
+                    "Риски при переносе prod-данных",
+                    "Высокие затраты на миграцию",
+                ],
+            }),
+            ("Вариант 3\nИнтеграция (ЕАРМ-2)", COL_V3, "3_file.ekYFFz", {
+                "trz": f"{TOTAL_EAPM2[0]} ч/д (без риска)\n{TOTAL_EAPM2[1]} ч/д (с риском)",
+                "feat": [
+                    "Вызов расчётов через API AirFlow",
+                    "ТМ: АДКУ → NiFi ЕАРМ → ClickHouse",
+                    "Без переноса стека и дампов",
+                    "ЦМ ИМА — отдельная система",
+                ],
+                "pros": [
+                    "Минимальные ТРЗ (−55% vs В2)",
+                    "Быстрый выход на интеграцию",
+                    "Сохранение экспертизы ЦМ ИМА",
+                ],
+                "cons": [
+                    "Два контура эксплуатации",
+                    "Зависимость от API-контрактов",
+                    "Риск МСЭ OKD→DH",
+                ],
+            }),
+        ]
+
+        col_w = Inches(4.05)
+        gap = Inches(0.12)
+        top = Inches(1.02)
+        col_h = Inches(5.75)
+
+        for i, (title, color, source, data) in enumerate(variants):
+            x = Inches(0.38) + i * (col_w + gap)
+
+            hdr = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, x, top, col_w, Inches(0.55))
+            hdr.fill.solid()
+            hdr.fill.fore_color.rgb = color
+            hdr.line.fill.background()
+            ht = slide.shapes.add_textbox(x, top + Inches(0.06), col_w, Inches(0.45))
+            hp = ht.text_frame.paragraphs[0]
+            hp.alignment = PP_ALIGN.CENTER
+            hr = hp.add_run()
+            hr.text = title
+            set_font(hr, 10, True, WHITE)
+
+            body = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, x, top + Inches(0.55),
+                                          col_w, col_h - Inches(0.55))
+            body.fill.solid()
+            body.fill.fore_color.rgb = WHITE
+            body.line.color.rgb = color
+
+            tx = slide.shapes.add_textbox(x + Inches(0.12), top + Inches(0.62),
+                                          col_w - Inches(0.24), col_h - Inches(0.7))
+            self._fill_variant_column(tx.text_frame, data, source, color)
+
+        foot = slide.shapes.add_textbox(Inches(0.4), Inches(6.82), Inches(12.5), Inches(0.25))
+        fr = foot.text_frame.paragraphs[0].add_run()
+        fr.text = "ТРЗ вариантов 2 и 3 — из бэклогов Excel (листы «Бэклог ЦМ ИМА в ЕАРМ-1» и «ЕАРМ-2»)"
+        set_font(fr, 8, color=TEXT_MUTED)
+        return slide
+
     def rating_analytics(self):
-        """Слайд 19: нативная матрица + итоговые баллы + методика (без PNG)."""
+        """Нативная матрица рейтинга + итоговые баллы + методика."""
         pg = self._next()
         slide = self.prs.slides.add_slide(self.prs.slide_layouts[6])
         apply_frame(slide, "Сводная аналитика: рейтинг вариантов", pg)
@@ -266,13 +401,11 @@ class SlideBuilder:
             style_score_cell(tbl.cell(ri, 2), s2)
             style_score_cell(tbl.cell(ri, 3), s3)
 
-        # Шкала под таблицей
         scale = slide.shapes.add_textbox(Inches(0.45), Inches(5.48), Inches(7.5), Inches(0.28))
         sr = scale.text_frame.paragraphs[0].add_run()
         sr.text = "Шкала: 1 — низко  ·  5 — высоко  |  Тёмнее ячейка = выше балл"
         set_font(sr, 8, color=TEXT_MUTED)
 
-        # Итоговый рейтинг (правая колонка)
         hdr = slide.shapes.add_textbox(Inches(8.3), Inches(1.05), Inches(4.6), Inches(0.35))
         hr = hdr.text_frame.paragraphs[0].add_run()
         hr.text = "Итоговый взвешенный рейтинг"
@@ -307,7 +440,6 @@ class SlideBuilder:
             vr.text = f"{score:.1f}/5"
             set_font(vr, 10, True, color)
 
-        # Сценарии
         sc_box = slide.shapes.add_textbox(Inches(8.3), Inches(3.85), Inches(4.6), Inches(1.5))
         stf = sc_box.text_frame
         stf.word_wrap = True
@@ -326,7 +458,6 @@ class SlideBuilder:
             r.text = f"• {line}"
             set_font(r, 9, color=TEXT_DARK)
 
-        # Методика (нижний блок)
         meth_bg = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.4), Inches(5.85),
                                          Inches(12.5), Inches(1.05))
         meth_bg.fill.solid()
@@ -443,6 +574,7 @@ def build_presentation() -> Path:
     ])
     s.table_backlog("Бэклог ЕАРМ-2 — детализация ТРЗ", BACKLOG_EAPM2, TOTAL_EAPM2)
 
+    s.variants_summary()
     s.comparison()
     s.rating_analytics()
     s.bullets("Выводы и рекомендации", [
