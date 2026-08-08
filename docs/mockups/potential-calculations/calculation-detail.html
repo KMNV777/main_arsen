@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Расчёт от 15.07.2026 — макет</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      ЕАРМ <span>/ Расчёт потенциала / Расчёт от 15.07.2026</span>
+    </header>
+
+    <main class="page">
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Расчёт потенциала</a>
+        <span>/</span>
+        <span>Расчёт от 15.07.2026</span>
+      </nav>
+
+      <section class="card">
+        <div class="page-header">
+          <div>
+            <h1>Расчёт от 15.07.2026</h1>
+            <div class="calc-meta" style="margin-top:0.35rem">Сценарий потенциала · ДО «ГПН-Заполярье»</div>
+          </div>
+          <div class="header-actions">
+            <span class="badge badge-done">Выполнен</span>
+            <button class="btn btn-secondary" type="button">Выгрузить в Excel</button>
+            <button class="btn btn-secondary" type="button">Клонировать</button>
+            <button class="btn btn-secondary" type="button" style="color:#dc2626;border-color:#fecaca">Удалить</button>
+          </div>
+        </div>
+
+        <div class="detail-grid" style="padding:1rem 1.25rem 1.25rem">
+          <article class="card panel" style="box-shadow:none">
+            <h2>Параметры расчёта</h2>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <label>Дата создания</label>
+                <span>15.07.2026, 12:04</span>
+              </div>
+              <div class="meta-item">
+                <label>Дата изменения</label>
+                <span>15.07.2026, 18:47</span>
+              </div>
+              <div class="meta-item">
+                <label>Автор</label>
+                <span>Иванов И.И.</span>
+              </div>
+              <div class="meta-item">
+                <label>Период расчёта</label>
+                <span>01.2026 – 06.2026</span>
+              </div>
+              <div class="meta-item">
+                <label>Модель</label>
+                <span>Потенциал добычи v2.3</span>
+              </div>
+              <div class="meta-item">
+                <label>Источник ТМ</label>
+                <span>ClickHouse / валидированная ТМ</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card panel" style="box-shadow:none">
+            <h2>Хронология</h2>
+            <ul class="timeline">
+              <li>
+                <strong>Расчёт завершён</strong>
+                <time>15.07.2026, 18:47</time>
+              </li>
+              <li>
+                <strong>Запуск расчёта в Airflow</strong>
+                <time>15.07.2026, 12:05</time>
+              </li>
+              <li>
+                <strong>Создан сценарий</strong>
+                <time>15.07.2026, 12:04</time>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="card panel" style="margin-top:1rem">
+        <h2>Результаты (фрагмент)</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+          <thead>
+            <tr style="background:#f8fafc;text-align:left">
+              <th style="padding:0.65rem;border-bottom:1px solid #e2e8f0">Скважина</th>
+              <th style="padding:0.65rem;border-bottom:1px solid #e2e8f0">Потенциал, т/сут</th>
+              <th style="padding:0.65rem;border-bottom:1px solid #e2e8f0">Прирост, %</th>
+              <th style="padding:0.65rem;border-bottom:1px solid #e2e8f0">Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">1021</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">48.2</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">+12.4</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">OK</td>
+            </tr>
+            <tr>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">1045</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">31.7</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">+8.1</td>
+              <td style="padding:0.65rem;border-bottom:1px solid #f1f5f9">OK</td>
+            </tr>
+            <tr>
+              <td style="padding:0.65rem">1088</td>
+              <td style="padding:0.65rem">22.5</td>
+              <td style="padding:0.65rem">+5.3</td>
+              <td style="padding:0.65rem">OK</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <aside class="mock-note">
+        <strong>Макет drill-down.</strong>
+        Страница открывается по клику на название расчёта в списке. Здесь отображаются параметры сценария,
+        хронология событий и фрагмент результатов. Кнопки Excel / клон / удаление дублируют действия из списка.
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
