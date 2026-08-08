@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Расчёт потенциала — макет</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      ЕАРМ <span>/ Расчёт потенциала / Список сценариев</span>
+    </header>
+
+    <main class="page">
+      <section class="card" aria-label="Список расчётов потенциала">
+        <div class="page-header">
+          <h1>Расчёт потенциала</h1>
+          <div class="header-actions">
+            <button class="btn btn-primary" type="button" title="Создать новый расчёт">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Загрузить
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input type="search" placeholder="Поиск по ключевым словам" aria-label="Поиск по ключевым словам">
+          </label>
+          <div class="sort-wrap">
+            <span>Сортировка</span>
+            <select aria-label="Сортировка расчётов">
+              <option selected>Сначала новые</option>
+              <option>Сначала старые</option>
+              <option>По дате изменения (новые)</option>
+              <option>По дате изменения (старые)</option>
+              <option>По дате создания (новые)</option>
+              <option>По дате создания (старые)</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="calc-list">
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 17.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Дата создания: 17.07.2026, 14:32</div>
+            </div>
+            <span class="badge badge-running">Выполняется расчёт</span>
+            <div class="row-actions">
+              <button class="icon-btn cancel" type="button" title="Отменить расчёт" aria-label="Отменить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item is-running">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 16.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Дата создания: 16.07.2026, 09:15</div>
+            </div>
+            <span class="badge badge-running">Выполняется расчёт</span>
+            <div class="row-actions">
+              <button class="icon-btn cancel" type="button" title="Отменить расчёт" aria-label="Отменить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 15.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 15.07.2026, 18:47</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 14.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 14.07.2026, 11:20</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 13.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 13.07.2026, 16:05</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 12.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 12.07.2026, 10:41</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 11.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 11.07.2026, 08:55</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+
+          <li class="calc-item">
+            <div class="calc-main">
+              <a class="calc-link" href="calculation-detail.html">
+                Расчёт от 10.07.2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+              <div class="calc-meta">Изменён: 10.07.2026, 15:18</div>
+            </div>
+            <span class="badge badge-done">Выполнен</span>
+            <div class="row-actions">
+              <button class="icon-btn" type="button" title="Выгрузить в Excel" aria-label="Выгрузить в Excel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              </button>
+              <button class="icon-btn" type="button" title="Клонировать расчёт" aria-label="Клонировать расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button class="icon-btn danger" type="button" title="Удалить расчёт" aria-label="Удалить расчёт">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <footer class="pagination">
+          <span>1 – 8 из 8</span>
+          <div class="pager" aria-label="Пагинация">
+            <button type="button" disabled aria-label="Первая страница">«</button>
+            <button type="button" disabled aria-label="Предыдущая страница">‹</button>
+            <span>Страница 1 из 1</span>
+            <button type="button" disabled aria-label="Следующая страница">›</button>
+            <button type="button" disabled aria-label="Последняя страница">»</button>
+          </div>
+        </footer>
+      </section>
+
+      <aside class="mock-note">
+        <strong>Макет списка сценариев.</strong>
+        Клик по названию расчёта открывает карточку (drill-down).
+        Для завершённых расчётов доступны: выгрузка в Excel, клонирование, удаление.
+        Для выполняющихся — только отмена. Сортировка и поиск работают по дате создания/изменения и ключевым словам.
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
