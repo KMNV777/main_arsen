@@ -884,19 +884,16 @@ def build_instructions(ws) -> None:
     rows = [
         ("Параметр", "Значение"),
         ("Проект", "Dominion — E2E тест-кейсы"),
-        ("Версия", "1.0 / 07.08.2026"),
+        ("Формат", "1 строка Excel = 1 шаг (лист «Steps»)"),
+        ("Версия", "1.1 / 11.08.2026"),
         ("Out of scope", "NFT"),
         ("", ""),
-        ("Лист TestCases", "Одна строка = один тест-кейс (сводка). Колонка Steps_Combined — все шаги в одной ячейке."),
-        ("Лист Steps", "Одна строка = один шаг. Формат: Шаг | Ожидаемый результат. Основной лист для импорта."),
-        ("Лист Сводка", "Количество кейсов по модулям и приоритетам."),
+        ("Лист Steps (основной)", "Каждая строка = один шаг кейса. Колонки: Step (Action) | Expected Result."),
+        ("Лист Сводка", "Количество кейсов и шагов по модулям."),
         ("", ""),
-        ("Импорт TestRail", "Используйте CSV/Excel import: Case ID → Title → Section (Module) → Priority → Preconditions → Steps (Action + Expected)."),
-        ("Импорт Zephyr / Xray", "Лист Steps: Case ID + Step # + Action + Expected Result."),
+        ("Импорт", "Берите лист Steps / CSV Dominion_E2E_Steps_Import.csv — Case ID + Step # + Action + Expected Result."),
         ("Приоритеты", "P0 Blocker | P1 Critical | P2 Major | P3 Minor"),
-        ("Статус (колонка)", "Not Run / Pass / Fail / Blocked — для ручного прогона"),
-        ("", ""),
-        ("Тестовые аккаунты", "U-PRO-LEAD, U-PRO-MEM, U-F2P-LEAD, U-F2P-MEM, U-F2P-BROKEN, U-F2P-MIXED, U-PRO-NOGOLD, U-ADMIN, U-SUPPORT"),
+        ("Статус", "Not Run / Pass / Fail / Blocked"),
         ("Пересборка", "python3 scripts/generate_dominion_e2e_excel.py"),
     ]
     for i, (a, b) in enumerate(rows, 1):
@@ -909,64 +906,8 @@ def build_instructions(ws) -> None:
     style_header(ws, 1, 2)
 
 
-def _steps_combined(steps: list[tuple[str, str]]) -> str:
-    parts = []
-    for i, (action, expected) in enumerate(steps, 1):
-        parts.append(f"{i}. {action}\n   → {expected}")
-    return "\n".join(parts)
-
-
-def build_test_cases(ws) -> None:
-    ws.title = "TestCases"
-    headers = [
-        "Case ID",
-        "Module",
-        "Title",
-        "Priority",
-        "Type",
-        "Preconditions",
-        "Steps Count",
-        "Steps_Combined",
-        "Status",
-        "Assignee",
-        "Comment",
-        "Automation",
-    ]
-    for c, h in enumerate(headers, 1):
-        ws.cell(1, c, h)
-    style_header(ws, 1, len(headers))
-    set_widths(ws, [16, 24, 48, 10, 12, 50, 10, 70, 12, 14, 30, 12])
-
-    status_dv = DataValidation(type="list", formula1='"Not Run,Pass,Fail,Blocked"', allow_blank=True)
-    auto_dv = DataValidation(type="list", formula1='"Manual,To Automate,Automated"', allow_blank=True)
-    ws.add_data_validation(status_dv)
-    ws.add_data_validation(auto_dv)
-
-    for i, (cid, module, title, priority, typ, pre, steps) in enumerate(CASES, 2):
-        ws.cell(i, 1, cid)
-        ws.cell(i, 2, module)
-        ws.cell(i, 3, title)
-        ws.cell(i, 4, priority)
-        ws.cell(i, 5, typ)
-        ws.cell(i, 6, pre)
-        ws.cell(i, 7, len(steps))
-        ws.cell(i, 8, _steps_combined(steps))
-        ws.cell(i, 9, "Not Run")
-        ws.cell(i, 10, "")
-        ws.cell(i, 11, "")
-        ws.cell(i, 12, "Manual")
-        style_row(ws, i, len(headers), priority)
-        ws.row_dimensions[i].height = max(45, 18 * len(steps))
-
-    last = 1 + len(CASES)
-    status_dv.add(f"I2:I{last}")
-    auto_dv.add(f"L2:L{last}")
-    ws.auto_filter.ref = f"A1:L{last}"
-    ws.freeze_panes = "A2"
-
-
 def build_steps(ws) -> None:
-    """Primary import sheet: one row = one step | expected."""
+    """Primary sheet: exactly 1 Excel row = 1 step (Action | Expected Result)."""
     ws.title = "Steps"
     headers = [
         "Case ID",
@@ -984,7 +925,7 @@ def build_steps(ws) -> None:
     for c, h in enumerate(headers, 1):
         ws.cell(1, c, h)
     style_header(ws, 1, len(headers))
-    set_widths(ws, [16, 24, 42, 10, 12, 40, 8, 55, 55, 12, 28])
+    set_widths(ws, [16, 24, 42, 10, 12, 45, 8, 58, 58, 12, 28])
 
     status_dv = DataValidation(type="list", formula1='"Not Run,Pass,Fail,Blocked"', allow_blank=True)
     ws.add_data_validation(status_dv)
@@ -992,18 +933,20 @@ def build_steps(ws) -> None:
     row = 2
     for cid, module, title, priority, typ, pre, steps in CASES:
         for step_no, (action, expected) in enumerate(steps, 1):
+            # метаданные кейса дублируются на КАЖДОЙ строке шага
             ws.cell(row, 1, cid)
             ws.cell(row, 2, module)
             ws.cell(row, 3, title)
             ws.cell(row, 4, priority)
             ws.cell(row, 5, typ)
-            ws.cell(row, 6, pre if step_no == 1 else "")
+            ws.cell(row, 6, pre)
             ws.cell(row, 7, step_no)
             ws.cell(row, 8, action)
             ws.cell(row, 9, expected)
             ws.cell(row, 10, "Not Run")
             ws.cell(row, 11, "")
             style_row(ws, row, len(headers), priority)
+            ws.row_dimensions[row].height = 36
             row += 1
 
     last = row - 1
@@ -1088,17 +1031,18 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
 
     wb = Workbook()
-    # reuse first sheet
-    build_instructions(wb.active)
-    build_test_cases(wb.create_sheet())
-    build_steps(wb.create_sheet())
+    # Основной лист первым: 1 строка = 1 шаг
+    build_steps(wb.active)
+    build_instructions(wb.create_sheet())
     build_summary(wb.create_sheet())
+    # Steps остаётся активным при открытии
+    wb.active = wb["Steps"]
 
     wb.save(out)
     n_cases = len(CASES)
     n_steps = sum(len(c[6]) for c in CASES)
     print(f"Wrote {out}")
-    print(f"Cases: {n_cases} | Steps: {n_steps}")
+    print(f"Cases: {n_cases} | Steps: {n_steps} | Format: 1 row = 1 step")
 
 
 if __name__ == "__main__":
