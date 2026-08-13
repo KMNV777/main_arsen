@@ -1,0 +1,57 @@
+flowchart LR
+    subgraph RP["РП (руководитель проекта)"]
+        direction TB
+        RP1["Создать релизный тикет"]
+        RP2["Завести Story<br/>линк → Релиз"]
+        RP3["Завести Task<br/>линк → Story"]
+        RP4["Контроль готовности релиза"]
+        RP5["Собрать changelog для ИБ"]
+        RP6["Закрыть релиз"]
+        RP1 --> RP2 --> RP3 --> RP4 --> RP5 --> RP6
+    end
+
+    subgraph ANALYTICS["Аналитик"]
+        direction TB
+        A1["Описать Story:<br/>цель, критерии,<br/>влияние на ИБ"]
+        A2["Ревью описания"]
+        A1 --> A2
+    end
+
+    subgraph DEV["Разработчик"]
+        direction TB
+        D1["Взять Task в работу"]
+        D2["Закрыть Task"]
+        D3["Исправить Bug"]
+        D1 --> D2
+        D3 --> D2
+    end
+
+    subgraph QA["Тестировщик"]
+        direction TB
+        Q1["Тестировать Story"]
+        Q2["Завести Bug<br/>линк → Story"]
+        Q3["Верифицировать исправление"]
+        Q1 --> Q2 --> Q3
+    end
+
+    subgraph IB["Специалисты ИБ"]
+        direction TB
+        IB1["Получить changelog"]
+        IB2["Согласовать релиз"]
+        IB1 --> IB2
+    end
+
+    RP2 -.-> A1
+    A2 -.-> RP3
+    RP3 -.-> D1
+    Q1 -.-> Q2
+    Q2 -.-> D3
+    Q3 -.-> RP4
+    RP5 -.-> IB1
+    IB2 -.-> RP6
+
+    style RP fill:#dae8fc,stroke:#6c8ebf
+    style ANALYTICS fill:#d5e8d4,stroke:#82b366
+    style DEV fill:#fff2cc,stroke:#d6b656
+    style QA fill:#f8cecc,stroke:#b85450
+    style IB fill:#e1d5e7,stroke:#9673a6
