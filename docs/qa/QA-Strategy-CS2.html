@@ -267,819 +267,490 @@
 </table>
 <p><strong>Нагрузка.</strong> Постоянной кампании нет. Lead при сборке риск-регресса (шаг 15) решает, меняет ли релиз ёмкость. Если да — Senior или Lead снимает один сценарий в k6: профиль и порог согласует руководитель проекта, вывод «выпускаем / не выпускаем» записывается в задачу релиза. Методика пишется вместе с первым таким прогоном.</p>
 <hr />
-<h2 id="13-kpi">13. Метрики, KPI и риски</h2>
-<p><strong>Статус раздела.</strong> В исходной стратегии метрик четыре, и этот принцип сохранён: на еженедельном синке остаются только они плюс три вспомогательных. Всё остальное — расширенный набор, который смотрят по релизу, спринту и кварталу. Целевые значения ниже — стартовые предложения сводящего, а не факты процесса. Их включают после базовой линии (13.9) и подтверждает Lead (список в 15.1).</p>
-<h3 id="131">13.1 Как устроена система показателей</h3>
-<p>Показатели собраны в четыре уровня: от результата для продукта к тому, что делает команда.</p>
+<h2 id="13">13. Метрики и риски тестирования</h2>
+<h3 id="131">13.1 Метрики</h3>
+<p>Используются только общепринятые метрики тестирования. KPI, веса, карточки ролей и оценка людей по метрикам не применяются: метрики описывают продукт и процесс, а не сравнивают тестировщиков. Ориентиры из регламента (0 открытых Blocker и Critical на выпуске, регресс до конца дня 9, баги старше 30 дней, загрузка не выше 0,8) сохранены. Для остальных метрик цель — тренд от базовой линии (13.2), числовые пороги команда задаёт сама после первых спринтов.</p>
+<p><strong>Ядро синка</strong> — четыре числа из исходной стратегии:</p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Уровень</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Группы</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как часто смотрим</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Можно ли выпускать и что утекло в prod</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A, B</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Синк (A), каждый релиз (B)</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Процесс</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работает ли порядок из регламента</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C, D, E</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Спринт, релиз</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автоматизация и безопасность</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Держится ли повтор критичного пути без рук</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F, G</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Синк, релиз</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Основа</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Хватает ли данных, стендов и людей</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H, I, J</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартал, полгода</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Светофор.</strong> Зелёный — цель выполнена. Жёлтый — между целью и красной границей, наблюдаем. Красный — причина разбирается на ближайшем синке, действие записывается задачей в Jira. Красный два периода подряд — причина выносится руководителю проекта.</p>
-<h3 id="132-a">13.2 A. Ядро синка (исходные четыре метрики)</h3>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Формула</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как читаем</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые Blocker и Critical: число открытых багов Blocker и Critical</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые Blocker и Critical</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число открытых багов этих серьёзностей</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На выпуске 0 / любой открытый на выпуске без записанного риска</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На выпуске 0; иначе выпуск только с записанным риском</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефекты prod мимо релиза: число багов с меткой prod за период</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефекты prod, прошедшие мимо релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число багов с меткой prod</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, метка prod</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет Blocker и Critical / любой Blocker или Critical с меткой prod: разбор и правка чек-листа</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Любой Blocker или Critical с меткой prod — разбор на синке и правка чек-листа; остальные — тренд по релизам</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Длительность риск-регресса: время от заморозки до отчёта к релизу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Длительность риск-регресса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время от заморозки до отчёта к релизу</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">До конца дня 9 (≈ 1 рабочий день) / дольше конца дня 9</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">До конца дня 9; дольше — срез списка по риску (раздел 9)</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke API в CI: результат прогона на сборке кандидата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke API в CI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат прогона на сборке кандидата</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab, Allure</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Зелёный на каждой сборке кандидата, красных без владельца 0 / красный без владельца</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Зелёный на каждой сборке кандидата; красный без владельца недопустим</td>
 </tr>
 </tbody>
 </table>
-<p>Вспомогательные на синке (для повестки из раздела 11): A5 — баги старше 30 дней без движения (цель 0); A6 — красные автотесты без владельца (цель 0); A7 — загрузка команды к плану (C8).</p>
-<h3 id="133-b">13.3 B. Качество релиза</h3>
+<p><strong>Общепринятые метрики по дефектам</strong></p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Формула</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как читаем</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Defect Escape Rate: дефекты с меткой prod за 30 дней после релиза / (дефекты релиза, найденные до выпуска, + дефекты prod)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Defect Leakage (утечка дефектов)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефекты, найденные в prod / (найденные до выпуска + найденные в prod)</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 10% / &gt; 20%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд по релизам; рост говорит о дыре в smoke и регрессе</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Утекшие Blocker и Critical: число за 30 дней после релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Defect Detection Percentage</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Найденные до выпуска / все найденные по релизу</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / ≥ 1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Обратная сторона утечки; смотрим вместе</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Релизы в срок: релизы с решением «выпускаем» к плановой дате / все релизы за квартал</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 80% / &lt; 60%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выпуск с записанным риском: релизы, где рекомендация QA была «с рисками» или «не рекомендую», а в задаче записан риск / все такие релизы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой случай без записи</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Покрытие критериев приёмки: критерии задач релиза с чек-листом или кейсом / все критерии</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 90%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решения по Major: Major релиза с решением владельца продукта к концу дня 9 / все Major релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые дефекты по серьёзности</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число открытых багов по Blocker, Critical, Major, Normal, Minor</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 80%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец продукта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Структура долга перед выпуском</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раннее выявление: дефекты релиза, найденные в спринте до заморозки / все дефекты релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, Regression</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 70% / &lt; 50%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-</tbody>
-</table>
-<h3 id="134-c">13.4 C. Задачи и спринт</h3>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возвраты при передаче: возвраты на шаге 8 / задачи, переданные в тестирование; причины по меткам (критерии, сборка, декомпозиция, оценка)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Распределение дефектов по компонентам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число багов по полю Component</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 15% / &gt; 30%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик и разработчик, смотрит Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Показывает слабые зоны, где усилить проверку</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Декомпозиция: задачи с декомпозицией после груминга / задачи спринта (смотрит Lead раз в месяц)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возраст дефектов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баги старше 30 дней без движения</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Без цели, тренд вниз / рост два месяца подряд</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ориентир регламента: Lead выносит на синк</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи с более чем семью критериями при передаче</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Reopen rate</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Переоткрытые баги / исправленные баги</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / ≥ 1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Рост — повод посмотреть качество фикса и самопроверки</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ожидание взятия: медиана времени от «Готово к тестированию» до «В тестировании»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время исправления</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время от «Открыт» до «Исправлен» по серьёзности</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, история статусов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 1 рабочий день / &gt; 2 дней</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Третий возврат одной задачи: число таких задач</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / ≥ 1 (выносится на синк по регламенту)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выполнение спринта: задачи, дошедшие до «Готово» / задачи спринта</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 85% / &lt; 70%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Точность оценки: доля задач, где ошибка оценки тестирования в коридоре грейда исполнителя (Junior+ до 2×, Middle до 75%, Senior до 25%, Lead до 10%)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira: «Оценка тестирования» и факт</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 80% / &lt; 60%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель, смотрит Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C8</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Загрузка: оценённый тест-объём в человеко-часах / доступные часы спринта</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, план ёмкости</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 0,8 / &gt; 1,0</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C9</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доля подзадач [QA] от трудозатрат: часы подзадач [QA] / часы тестирования</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Информативная, тренд / нет подзадач на куски более полдня</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд; срок фикса для Blocker и Critical разработчик пишет комментарием</td>
 </tr>
 </tbody>
 </table>
-<h3 id="135-d">13.5 D. Дефекты</h3>
+<p><strong>Общепринятые метрики по выполнению и покрытию</strong></p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Формула</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как читаем</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Эскалация в срок: Blocker (30 минут) и Critical (2 часа, в регрессе 30 минут) с эскалацией в срок / все Blocker и Critical</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, комментарии</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 95% / &lt; 80%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нашедший, смотрит Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Фикс в заявленный срок: Blocker и Critical, исправленные в срок, который разработчик написал комментарием / все Blocker и Critical</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 90% / &lt; 70%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик зоны</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Переоткрытия: переоткрытые баги / исправленные баги</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 10% / &gt; 20%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик (самопроверка)</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Старые баги: баги старше 30 дней без движения</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / &gt; 5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Полнота баг-репортов: в месячной выборке из 10 багов доля с серьёзностью, сборкой и вложениями</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 90%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубликаты: баги, закрытые как дубль / все заведённые</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 5% / &gt; 10% (показывает, что поиск по открытым не делают)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Бэклог с решением: Major в бэклоге с комментарием владельца продукта, Normal и Minor — владельца зоны / все баги в бэклоге</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 90%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец продукта, владелец зоны</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">D8</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Карта дефектов: распределение по компонентам и серьёзности за квартал</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Без цели, показывает слабые зоны</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-</tbody>
-</table>
-<h3 id="136-e-smoke">13.6 E. Регресс и smoke</h3>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выполнение плана регресса: выполненные блоки / запланированные; невыполненное названо в отчёте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выполнение тестов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выполненные кейсы или пункты чек-листа / запланированные</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% с названным остатком / остаток без названия</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец блока</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В регрессе — выполнение плана блока; невыполненное названо в отчёте</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блоки с владельцем: блоки риск-регресса с фамилией / все блоки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой без фамилии</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пересборки кандидата: число новых кандидатов на релиз после фиксов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 1 / ≥ 3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ответственный за выкладку</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke кандидата: время от номера кандидата до результата</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps, задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В тот же день, до середины дня 8 / не закрыт к концу дня 8</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Blocker и Critical, найденные в регрессе, на релиз</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, Regression = Да</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд (признак качества разработки, не QA) / рост три релиза подряд</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Найдено на smoke prod: дефекты, найденные на шаге 30</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд / Blocker на prod после выкладки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">E7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс общего куска: запуски с итогом-комментарием в задаче изменения / все такие запуски</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-</tbody>
-</table>
-<h3 id="137-f">13.7 F. Автоматизация</h3>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Pass rate smoke API: зелёные прогоны / все прогоны, красные по инфре исключаются и считаются отдельно (F6)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab, Allure</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 90% / &lt; 75%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красные с решением: красные прогоны с решением (продукт, тест, инфра) в тот же день / все красные</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Allure, GitLab</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 95% / &lt; 80%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Flaky rate: тесты, менявшие результат без изменений кода за 14 дней / все автотесты</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Allure история</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 2% / &gt; 5%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автоматизация критичного пути: шаги чек-листа smoke, закрытые автотестом API / все шаги</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Pass rate</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пройденные / выполненные (пройдено, провалено, заблокировано)</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps, Allure</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовое значение + 10 п. п. за квартал / падение</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доля заблокированных показывает проблемы со сборкой или стендом</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрытие дорогих повторов: повторы, ставшие задачей автоматизации в следующем спринте / дорогие повторы (трижды за спринт или &gt; 4 ч)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 70%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Покрытие требований</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии приёмки, закрытые проверкой / все критерии</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, TestOps</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На выпуске каждый критерий закрыт минимум одной проверкой</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Инфра-падения: красные прогоны по инфре / все прогоны</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 5% / &gt; 10%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дисциплина TestOps: кейсы, помеченные автоматизированными после зелёного прогона / все помеченные</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой помеченный без прогона</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead (ревью)</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F8</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время smoke API в CI</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не выше базового значения + 20% / выше + 50%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">F9</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ревью автотестов: merge request автотестов с ревью Lead / все merge request</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой без ревью</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раннее выявление</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефекты релиза, найденные в спринте до заморозки / все дефекты релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, Regression</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд вверх — проверка сдвигается влево</td>
 </tr>
 </tbody>
 </table>
-<h3 id="138-g-h">13.8 G. Нагрузка и безопасность; H. Документы, стенды и данные</h3>
+<p><strong>Общепринятые метрики по автоматизации</strong></p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Формула</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как читаем</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">G1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нагрузка выполнена там, где нужна: релизы с решением «нужна нагрузка» (шаг 15) и выполненным сценарием / все такие релизы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior или Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Pass rate автотестов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Зелёные прогоны / все прогоны (инфра-падения считаем отдельно)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab, Allure</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд; красный без владельца недопустим</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">G2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вывод по нагрузке записан в задачу релиза: профиль, порог, вывод</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой без вывода</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior или Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Flaky rate</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тесты, меняющие результат без изменений кода / все автотесты</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Allure история</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Рост подрывает доверие к CI</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">G3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Доступ» выполнен там, где нужен: релизы, где релиз трогает вход, роли или веб-форму, с пройденным блоком / все такие релизы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps, задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец блока «Доступ»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доля автоматизации критичного пути</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги чек-листа smoke, закрытые автотестом API / все шаги</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps, Allure</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд вверх по задачам автоматизации</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">G4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пропущенные дефекты доступа в prod (авторизация, XSS, CSRF)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, метка prod</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / ≥ 1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">G5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Реакция на пропуск: пропущенные дефекты доступа, ставшие пунктом чек-листа к следующему синку / все пропущенные</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчёт к релизу: релизы с отчётом по шаблону и рекомендацией QA / все релизы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой без отчёта</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Артефакты задачи релиза: ссылки на регресс, отчёт, решение и номер кандидата / все релизы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Готовность стенда и данных: блоки с отметкой до заморозки (день 7) / все блоки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 90% / &lt; 70%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок не стартовал из-за стенда или данных: число случаев на релиз</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 1 / ≥ 3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нестабильные сборки: сборки с Blocker на сборку / сборки кандидатов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 10% / &gt; 25%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">H6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">След эскалации: эскалации с комментарием «что сделали и как не повторить» / все эскалации</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Эскалирующий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время прогона</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Длительность smoke API в CI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не должно расти без причины</td>
 </tr>
 </tbody>
 </table>
-<h3 id="139-i-j">13.9 I. Люди и развитие, J. Эффективность</h3>
-<p>Показатели группы I относятся к команде QA и служат разговору на 1:1 и предложению грейда. Они не сравнивают людей между собой и не используются как формула премии.</p>
+<p><strong>Общепринятые метрики по процессу и ёмкости</strong></p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика и формула</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Формула</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Зелёный / красный</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как читаем</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Покрытие ИПР: тестировщики с планом не старше шести месяцев / все тестировщики</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Страницы планов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / &lt; 100%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Точность оценки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">(Факт − оценка) / оценка по задаче</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, поле «Оценка тестирования»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сравнивается с коридором грейда из матрицы компетенций</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регулярность 1:1: проведённые / плановые (раз в две недели)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Календарь 1:1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 90% / &lt; 70%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Загрузка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценённый тест-объём в человеко-часах / доступные часы спринта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, план ёмкости</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не выше 0,8 (регламент)</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги ИПР в срок: подзадачи [ИПР], принятые в плановый месяц / все плановые</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время цикла тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">От «В тестировании» до «Готово»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, история статусов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд; рост — повод посмотреть очередь и возвраты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возвраты при передаче</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи, вернувшиеся на шаге 8 / задачи, переданные в тестирование</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 80% / &lt; 60%</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестировщик, принимает Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Принято с первого раза: артефакты, принятые без возврата / все артефакты</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Без цели, тренд вверх / три возврата подряд по одному шагу</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Плюсы с доказательством: плюсы листа матрицы со ссылкой на артефакт / все плюсы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лист матрицы</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% / любой без ссылки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I6</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрытие дыр: дыры матрицы, закрытые за полгода, из трёх выбранных</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лист матрицы, переоценка</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≥ 2 из 3 / 0 из 3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестировщик</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Взаимозаменяемость: зоны, где блок регресса может провести как минимум двое / все зоны</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План ёмкости</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">100% к концу квартала (старт: 50%) / зона с одним человеком</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I8</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нагрузка людей: человек с загрузкой &gt; 1,0 два спринта подряд</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План ёмкости</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">0 / ≥ 1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I9</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Заместитель Lead: назначен в квартальном плане, решения отмечены в задаче релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План ёмкости</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да / нет заместителя</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I10</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ввод в работу: время до первого самостоятельного блока регресса у нового тестировщика</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">≤ 2 месяца / &gt; 3 месяцев</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Часы релизной проверки: часы QA на релиз (smoke, регресс, отчёт, нагрузка)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, подзадачи [QA]</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд вниз при стабильном B1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной регресс: часы ручного прогона за релиз</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">TestOps</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд вниз по мере роста F4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дорогие повторы: число за спринт</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренд вниз / ≥ 3 за спринт</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Причины: критерии, сборка, декомпозиция</td>
 </tr>
 </tbody>
 </table>
-<h3 id="1310-kpi">13.10 KPI команды и роли</h3>
-<p>Карточка команды. Вес показывает долю при общей оценке квартала и служит основанием для разговора, а не прямой формулой оплаты. Значение группы — доля её метрик в зелёной зоне.</p>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Группа</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрики</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вес</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Качество релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A1, A2, B1, B2, B4, B5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">30</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Процесс задач и дефектов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C1, C3, C7, C8, D1, D3, D4, D5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">20</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс и релизная дисциплина</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A3, E1, E2, E3, E4, H1, H3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">15</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автоматизация и безопасность</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A4, F1, F2, F3, F5, G1, G3, G4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">20</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Люди</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">I1, I2, I3, I5, I7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">15</td>
-</tr>
-</tbody>
-</table>
-<p>Оценка квартала: ≥ 85 — зелёный, 70–84 — жёлтый, &lt; 70 — красный.</p>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Роль</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Свои метрики (на что влияет напрямую)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A1–A3, B1, B2, B7, C5, C8, D4, E2, E7, F7, F9, H1, I1, I2, I7, I8, I9</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A4, F1, F3, F4, F8, G1, G2, G3 (после шага ИПР месяца 4), качество ревью-замечаний</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель и владелец блока</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B5, C4, C7, D5, D6, E1, E4, F2 (своя зона), H3</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка (смежные метрики, смотрят вместе)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C1, D2, D3, E3, E5, H5</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1311">13.11 Чего не меряем</h3>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Не метрика</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Почему</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число заведённых багов на тестировщика</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подталкивает дробить баги и заводить мелочь; важна серьёзность, а не число</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число прогнанных кейсов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поощряет объём вместо рисков; регресс режется по риску</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Процент покрытия кода</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не отвечает на вопрос «утекло ли в prod»</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Скорость закрытия бага тестировщиком</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрывает по ретесту, но не должен спешить</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Число автотестов и строк кода</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Растёт стоимость поддержки; правило — «Сначала API», один критичный UI-путь</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Рейтинг людей по багам и оценкам</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Метрики командные; личный разговор идёт через ИПР и матрицу</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1312">13.12 Сбор данных и ритм</h3>
-<p><strong>Что нужно в Jira и TestOps</strong> (передать администратору Jira, см. 15.1): метки и поля Severity, Regression, Component, Sprint, prod, backlog (из раздела 8); поле «Оценка тестирования» и фактические часы по задаче; даты в задаче релиза — заморозка, номер кандидата, отчёт, решение, выкладка; история переходов статусов для C4 и E4; в TestOps — фамилия на блоке и статусы прогонов; в GitLab и Allure — история прогонов для F1–F3.</p>
+<h3 id="132">13.2 Сбор данных и ритм</h3>
+<p>Что нужно в Jira, TestOps и GitLab (передать администратору Jira, см. 15.1): метки и поля Severity, Regression, Component, Sprint, prod, backlog (раздел 8); поле «Оценка тестирования» и фактические часы по задаче; даты в задаче релиза — заморозка, номер кандидата, отчёт, решение, выкладка; история переходов статусов; в TestOps — фамилия на блоке и статусы прогонов; в GitLab и Allure — история прогонов.</p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ритм</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что смотрим</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Синк, раз в неделю, 30 минут</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">A1–A4, A5, A6, A7</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ядро синка, баги старше 30 дней, красные автотесты без владельца, загрузка</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Спринт, на ретро</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">C1, C4, C6, C7, D3, D5, F5</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вся команда QA</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конец спринта (ретро)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возвраты при передаче, время цикла, точность оценки, reopen rate, автотесты</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Релиз, в отчёте к релизу</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Цифры релиза»: A1, A3, B5, B7, E1, E3, E5, F1, G1, G3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчёт к релизу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые Blocker и Critical, длительность регресса, выполнение плана регресса, покрытие требований, раннее выявление, pass rate автотестов</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Через 30 дней после релиза</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">B1, B2, B3, G4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Defect Leakage и Defect Detection Percentage</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартал</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Все группы, пересмотр порогов, карточка команды</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead и руководитель проекта</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Полгода</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Группа I, переоценка по матрице</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тренды всех метрик, распределение дефектов по компонентам, пересмотр ориентиров</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Блок «Цифры релиза» в отчёте к релизу</strong> (добавляется к существующему отчёту): открытые Blocker и Critical; длительность регресса; покрытие критериев; доля дефектов, найденных до заморозки; выполнение плана регресса; пересборки; найденные в регрессе Blocker и Critical; pass rate smoke API; нагрузка и доступ выполнены или не требовались.</p>
-<p><strong>Базовая линия.</strong> Первые два спринта после ввода метрики только измеряются, без светофора. Со спринта 3 включаются пороги из таблиц. Значения со словами «базовое значение» берутся из этих двух спринтов. Пороги пересматривает Lead раз в квартал и согласует с руководителем проекта.</p>
-<h3 id="1313">13.13 Риски</h3>
+<p><strong>Базовая линия.</strong> Первые два спринта после ввода метрики только измеряются. По ним Lead и руководитель проекта выбирают ориентиры для метрик без числового порога и пересматривают их раз в квартал. Метрика, для которой нет источника данных, не вводится.</p>
+<h3 id="133">13.3 Риски тестирования</h3>
+<p>Оценки вероятности и влияния — предложение сводящего, Lead уточняет их при первом пересмотре реестра. Приоритет: высокая вероятность и высокое влияние — высокий; одно из двух высокое — средний; остальное — низкий.</p>
+<p><strong>Продуктовые риски</strong> (что может не быть найдено или утечь)</p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Риск</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вероятность</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Влияние</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Приоритет</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Признак</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В требованиях нельзя сказать «готово»</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача не берётся в разработку без ответов на вопросы груминга</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект критичного пути уходит в prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Рост Defect Leakage, багов prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke критичного пути на каждой сборке, риск-регресс, smoke на stage и prod, правка чек-листа после каждого пропуска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет стабильной сборки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke не начинается, эскалация по регламенту</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регрессия в зонах, не попавших в срез регресса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баги prod в зонах, названных «за бортом»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Срез по риску с названием остатка в отчёте, включение зоны в следующий регресс</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Очередь на сборку</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Приоритет ставит руководитель проекта, QA не держит очередь молча</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сбой интеграции клиент, сервисы, данные, очереди при изменении контракта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Изменение контракта или общего сервиса в диффе</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Интеграции критичного пути в очереди 3, контракт и доступ у владельца сервиса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец блока</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead — единственная точка решений</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Заместитель в квартальном плане ёмкости</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Просадка производительности при релизе, который меняет ёмкость</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Низкая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Релиз меняет ёмкость или тяжёлый сценарий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решение о нагрузке в шаге 15, сценарий в k6, профиль и порог согласует руководитель проекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Senior или QA Lead</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дорогой ручной повтор</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Одна задача автоматизации на следующий спринт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Уязвимость доступа: авторизация, XSS, CSRF</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Низкая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Релиз трогает вход, роли или веб-форму</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Доступ» в риск-регрессе, новый пункт после пропущенного бага</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Метрики превращаются в самоцель</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 13.11, командные метрики, пороги пересматриваются; метрики не формула премии</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект нельзя воспроизвести без сборки и стенда</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг без номера сборки или стенда</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Серьёзность, сборка и вложения обязательны в баг-репорте; проверка модуля без сборки вне контура</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет данных для метрики</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Метрика не вводится, пока источник не заведён; до тех пор её нет на синке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">P7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Мажорный релиз: меняется протокол клиент-сервер или схема данных</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Низкая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решение Lead в задаче релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Полный прогон библиотеки кейсов по решению Lead и разработки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, разработка</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Проектные и процессные риски</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">ID</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Риск</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вероятность</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Влияние</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Приоритет</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Признак</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В требованиях нельзя сказать «готово»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопросы груминга без ответов, возвраты на шаге 8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача не берётся в разработку без ответов на вопросы груминга; критерии не больше семи</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет стабильной сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Blocker на сборку, красный smoke</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke не начинается, эскалация по регламенту</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Очередь на сборку</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи простаивают в «Готово к тестированию»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Приоритет ставит руководитель проекта, QA не держит очередь молча</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead — единственная точка решений</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решения ждут Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Заместитель Lead в квартальном плане ёмкости, границы полномочий в разделе 3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дорогой ручной повтор</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Повтор трижды за спринт или больше четырёх часов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Одна задача автоматизации на следующий спринт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Перегрузка команды из трёх человек, отсутствие по болезни или отпуску</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Загрузка выше 0,8, зона на одном человеке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Единая картина загрузки у Lead, приоритеты: кандидат, потом демо, потом задачи; взаимозаменяемость по зонам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стенд или данные не готовы к регрессу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет отметки готовности на день 7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 5.1: владелец зоны готовит данные, регресс блока не стартует без отметки, Lead решает про перенос</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс не укладывается в день 9, давление на выпуск</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс не закрыт к середине дня 9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Срез по риску, затем решение Lead и руководителя проекта; выпуск против рекомендации QA только с записью риска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красные или нестабильные автотесты без владельца подрывают доверие к CI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красные прогоны без решения, рост flaky</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста в тот же день, инфра — Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R10</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет отдельного SDET и нагрузочника: автоматизация и нагрузка держатся на Senior и Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи автоматизации и нагрузки откладываются</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача автоматизации в каждом спринте, второй человек запускает тест без автора, развитие по ИПР</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R11</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Зависимость от чужого сервиса или контракта вне поставки команды</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект в чужом сервисе, нет контракта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Эскалация за 1 час владельцу сервиса, запись риска, не баг продукта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R12</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поздние изменения кода или требований после заморозки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокое</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пересборки кандидата, повторные проходы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Фикс только в релизную ветку, новая сборка кандидата, повтор smoke и ретест; пройденные блоки не перезапускаются, если Lead не сказал иначе</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ответственный за выкладку</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R13</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знания по нагрузке, XSS и CSRF сосредоточены у Senior и Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средняя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Средний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Доступ» и нагрузка не проведены</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Планы Senior→Lead и Lead по матрице, второй человек для каждого блока</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">R14</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решения TO BE не подтверждены</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Среднее</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решения из раздела 15 без отметки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подтверждение у ответственных, до этого — проект решений</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, руководитель проекта</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Как работаем с реестром.</strong> Реестр смотрит Lead на квартальном пересмотре и добавляет новый риск, когда он проявился или о нём сказали на синке. У каждого риска с высоким приоритетом есть владелец и записанное действие. Если риск реализовался, действует эскалация из раздела 11, а в задаче записывается, что сделали и как не повторить.</p>
 </body></html>
