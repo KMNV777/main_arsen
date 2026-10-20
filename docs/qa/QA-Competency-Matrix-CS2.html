@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Матрица компетенций QA CS2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="qa-cs2-to-be">Матрица компетенций QA CS2 — TO BE</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Версия TO BE от 16.10.2026. Часть набора: стратегия и регламент, матрица компетенций, индивидуальные планы развития.</p>
+<h2 id="_1">Правила матрицы</h2>
+<p>Основа — матрица Недры (EARM, ТР, СППР, PDF EARM-233530252 от 14.10.2026). Всего 118 компетенций, изменено относительно Недры 13. Грейды: Junior, Junior+, Middle-, Middle, Middle+, Senior, Lead. Норма по грейдам (накопительно): 18, 36, 44, 62, 85, 104, 118.</p>
+<p><strong>Как читать плюс.</strong> «+» стоит на грейде, с которого компетенция обязательна, и на всех грейдах правее. Плюс человеку ставится только при артефакте на проекте: ссылка на задачу, прогон, merge request или отчёт. Инструмент из скобок «засчитывается» — опыт на нём закрывает строку, но на CS2 работа идёт на стеке, указанном первым.</p>
+<p><strong>Как пользуемся:</strong> самооценка, затем оценка Lead по артефактам — при выходе в команду и раз в полгода. Из дыр относительно грейда собирается индивидуальный план. Смену грейда предлагает Lead, утверждает руководитель проекта.
+<strong>Как меняем:</strong> правку строки или порога предлагает Senior или Lead с примером из проекта. Lead вносит правку раз в квартал и пишет, что изменилось. Пороги, выведенные из склеенного PDF Недры, сверяются с исходником при первой правке блока.</p>
+<p>Полный перечень с минимальным грейдом по каждой компетенции — в разделе «Перечень компетенций» ниже.</p>
+<p><strong>Строка «Опыт руководства командой (5+ человек)».</strong> Пока в команде три тестировщика, строка проверяется на фактической команде и не блокирует предложение грейда Lead; найм входит в план вместе со ставкой.</p>
+<p><strong>Изменения относительно Недры (13)</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Строка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что изменено</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование игрового клиента: номер сборки, видео, лог, консоль</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новая строка, клиент — основной объект проверки CS2 (Junior)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка тестовой документации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: ПМТ, протокол ПСИ — сняты регламентом CS2; теперь отчёт к релизу и протокол по запросу заказчика</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таск-трекер и база знаний</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: Jira и Confluence; теперь Jira и общее пространство проекта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование распределённой системы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: порог «10+ сервисов» — не про контур CS2; теперь клиент, сервисы, данные, очереди</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">UI-, REST-фреймворки, CI/CD</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Указан стек CS2: Selenium 4, REST Assured, GitLab CI; аналоги засчитываются</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Инструмент нагрузки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: JMeter и Gatling; теперь k6 (JMeter, Gatling засчитываются)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Публикация в Kubernetes</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубль из блока Docker с порогом Senior удалён, оставлен порог Middle</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Основы оркестрации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: только Lead, в блоке Docker; сдвинуто к опыту работы с Kubernetes</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с Kubernetes</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубль из блока Docker удалён</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Журналы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Было: Graylog / Kibana, блок назывался ELK-стек; теперь Grafana (Graylog, Kibana засчитываются)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">Перечень компетенций: минимальный грейд</h2>
+<p>Грейд — первый, с которого компетенция обязательна (J — Junior, J+ — Junior+, M- — Middle-, M — Middle, M+ — Middle+, S — Senior, L — Lead). Правее плюс стоит на всех грейдах. Итого 118.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Блок</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Компетенция</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">С грейда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование (11)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание теории тестирования и техник тест-дизайна</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт выполнения ручного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования web-приложений</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования игрового клиента: номер сборки, видео, лог, консоль</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения интеграционного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт локализации ошибок</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения регрессионного и smoke-тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования usability</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования требований и документации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Анализ клиентских инцидентов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования по макетам (pixel perfect)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Документация (6)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание видов тестовой документации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт написания тест-кейсов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт составления отчётов о дефектах</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка тестовой документации (отчёт к релизу; протокол по запросу заказчика)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт составления тест-плана</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт составления тестовой стратегии</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Интеграции / API (8)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание, что такое API, и знание протоколов Web API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание HTTP: заголовки, статус-коды, состав запроса и ответа</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования REST API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основ работы брокеров сообщений</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с брокерами сообщений (Kafka, RabbitMQ)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание интеграции систем через WebSocket</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Продвинутое понимание REST API: client-side, server-side и CDN caching</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования WebSocket</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с инструментами (6)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с DevTools</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с Postman</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с таск-трекером и базой знаний (Jira, общее пространство проекта)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с TMS (Allure TestOps)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с клиентами БД (DBeaver / DataGrip)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы со Swagger</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с базами данных (5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовое понимание СУБД</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание различий между реляционными и нереляционными базами</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание назначения первичного и внешнего ключа</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования БД</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание принципов БД</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с SQL (5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основ SQL</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт использования SELECT и WHERE</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт использования JOIN, LEFT JOIN, RIGHT JOIN</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт использования GROUP BY и HAVING</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт построения запросов с объединением и подзапросов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Архитектура (5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовое понимание монолитной архитектуры</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовое понимание микросервисной архитектуры</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт тестирования распределённой системы: клиент, сервисы, данные, очереди</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Продвинутое понимание монолитной архитектуры</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Продвинутое понимание микросервисной архитектуры</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с VCS (5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание назначения VCS</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с системами контроля версий (Git, SVN, HG)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовые команды: commit, push, pull</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Уверенное владение: branch, merge request</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Свободное владение: rebase, cherry-pick</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Программирование (4)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание работы frontend (JS / TS)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание принципов формирования JSON</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание языков программирования, frontend и backend</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание языка программирования (Java / Python / JS) на уровне ревью кода тестов; для написания автотестов достаточно строки «Опыт написания автотестов» (M+)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автоматизация тестирования (14)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основ автоматизации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание принципов ООП</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание XPath</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт написания автотестов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с UI-фреймворками (Selenium 4; Selenide, Playwright засчитываются)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с REST-фреймворками (REST Assured; Postman + Newman засчитываются)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с mock (Postman / Wireshark)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт настройки и анализа отчётности по прогонам (Allure)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с CI/CD (GitLab CI; TeamCity, Jenkins засчитываются)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт настройки CI: запуск автотестов по расписанию, триггеру или после сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт настройки тестовой инфраструктуры (Selenium Grid, Selenoid)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт построения архитектуры тестового фреймворка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание принципов SOLID, IoC, DI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание архитектурных принципов KISS, DRY, YAGNI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нагрузочное тестирование (11)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание теории нагрузочного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание видов нагрузочного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание методологий анализа производительности (TSA / USE)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с инструментом нагрузки (k6; JMeter, Gatling засчитываются)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт расчёта нагрузки и создания сценариев</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт разработки методики нагрузочного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт подготовки отчётов нагрузочного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения нагрузочного тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание назначения снифферов трафика</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы со снифферами web-трафика (Fiddler, Charles Proxy)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование производительности</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование безопасности (7)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основ тестирования безопасности</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проверки аутентификации и авторизации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание TLS/SSL и работы сертификатов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основ криптографии: симметричное, асимметричное и комбинированное шифрование</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проверки на инъекции</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проверки XSS</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проверки CSRF</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с Docker (3)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание базовых принципов работы Docker-контейнеров</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с Docker</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание основных команд Docker</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Kubernetes и оркестрация (3)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание публикации контейнеризованных приложений в Kubernetes</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание основных концепций оркестрации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с Kubernetes</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с серверами (5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание теории сетей (MAC, TCP/UDP, IP, HTTP)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с удалённым подключением (SSH, SCP, FTP)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M-</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт работы с UNIX-системами</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с SSH-клиентом (PuTTY, MobaXterm, WinSCP, Termius)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Знание Bash</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с журналами (2)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Базовое понимание принципов работы систем журналов (Grafana, Graylog, Kibana)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт анализа журналов стенда (Grafana; Graylog, Kibana засчитываются)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка задач, ТРЗ (6)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в оценке тестирования до 2× — допустимая погрешность ТРЗ на задачу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в оценке тестирования до 75%</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка тестирования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка трудозатрат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в оценке тестирования до 25%</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в оценке тестирования до 10%</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с командой (9)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт участия в планировании спринтов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">J+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт наставничества</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения code review</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">M+</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения собеседований</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт доработки индивидуальных планов развития на проекте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт проведения 1:1 на проекте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт составления индивидуальных планов развития с нуля</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт руководства командой (5+ человек одной специализации)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт ресурсного планирования на проекте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">L</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работа с матрицей компетенций (3)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Понимание принципов формирования матрицы компетенций</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт доработки матрицы компетенций</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;"></td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Опыт разработки матрицы компетенций с нуля</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">S</td>
+</tr>
+</tbody>
+</table>
+<p>Проверка итогов: по числу компетенций с минимальным грейдом ≤ Junior / J+ / M- / M / M+ / S / L получается 18 / 36 / 44 / 62 / 85 / 104 / 118, что совпадает с нормой в исходной матрице.</p>
+</body></html>

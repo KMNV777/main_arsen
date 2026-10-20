@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Индивидуальные планы развития QA CS2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="qa-cs2-to-be">Индивидуальные планы развития QA CS2 — TO BE</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Версия TO BE от 16.10.2026. Часть набора: стратегия и регламент, матрица компетенций, индивидуальные планы развития. Планы строятся по документу «Матрица компетенций QA CS2»; регламент и метрики — в документе «Стратегия и регламент тестирования».</p>
+<h2 id="_1">Цикл ИПР и планы по грейдам</h2>
+<p>Горизонт — шесть месяцев. Стек: Java 17, JUnit 5, REST Assured, Selenium 4, GitLab CI, Allure, k6. Шаг закрывается артефактом на проекте, курс сам по себе шаг не закрывает. Личные темы 1:1 в план компетенций не попадают.</p>
+<p><strong>Цикл (одинаков для всех грейдов)</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">№</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Готово, когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценить человека по матрице: самооценка, затем оценка Lead по артефактам проекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выход в команду, затем раз в полгода</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лист матрицы с плюсами и ссылкой на доказательство у каждого плюса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выбрать три дыры относительно грейда и собрать план на шесть месяцев</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В течение двух недель после оценки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Страница плана в общем пространстве проекта, шаги — подзадачи [ИПР] в Jira</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Согласовать план с человеком на 1:1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестировщик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Первая 1:1 после шага 2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Комментарий «согласовано» на странице плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Делать практику и прикладывать артефакт к подзадаче [ИПР]</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестировщик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Месяц по плану</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ссылка на артефакт в подзадаче</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Принять или вернуть артефакт с замечанием</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ближайшая 1:1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подзадача закрыта или возвращена с названным пробелом</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сверить результат месяца с таблицей плана</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1:1 раз в две недели, итог — последняя 1:1 месяца</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Заметка 1:1: что сделано, что мешает, какое решение</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Переоценить по матрице и предложить грейд</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конец шестого месяца</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новый лист матрицы и предложение по грейду</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Утвердить смену грейда или оставить текущий с новым планом</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Две недели после шага 7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решение записано на странице плана</td>
+</tr>
+</tbody>
+</table>
+<p>Для Junior, Middle-, Middle и Middle+ готового плана нет: Lead собирает его по тому же шаблону — три дыры матрицы, практика на проекте CS2, артефакт и место, где его смотреть.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Если</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг плана сорван на месяц</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead и тестировщик на 1:1 меняют практику или срок, правка видна на странице плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Практики нет на проекте CS2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг заменяется на ближайший по матрице, который можно доказать на проекте; опыт не придумывается</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead и тестировщик не сошлись в оценке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Плюс ставится только при артефакте; спор фиксируется на странице плана и решается на переоценке</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead недоступен</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1:1 и приёмку артефактов ведёт заместитель из квартального плана ёмкости</td>
+</tr>
+</tbody>
+</table>
+<p><strong>План Junior+ → Middle (10 шагов)</strong>
+Итог: человек сам собирает тест-план фичи, читает данные через SQL, объясняет контур сервисов и поднимает один API-тест, который запускает кто-то другой; погрешность оценки тестирования — в пределах 75%.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Мес.</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Компетенция</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Практика на проекте</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Артефакт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование требований и документации</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На четырёх задачах на груминге оставить комментарием вопросы, без которых нельзя сказать «готово»; после ответа аналитика проверить, что критерии приёмки поправлены</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопросы к требованиям до кода</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Usability и проверка по макету</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один экран сверить с макетом; в баге ожидаемый результат — из макета, не из вкуса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сверка одного экрана с макетом</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест-план</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План на одну фичу: что входит, что сознательно не входит, какие риски, какой билд, когда останавливаемся</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест-план фичи (страница, ссылка в Epic)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Анализ клиентских инцидентов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Три инцидента довести до слоя (клиент, сервис, данные или интеграция); к каждому — какой регресс добавить</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Три инцидента, доведённые до слоя</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">SQL: JOIN, GROUP BY, ключи, ограничения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пять запросов к базе проекта: связь двух таблиц, агрегат, проверка внешнего ключа; запрос в задаче, разработчик понимает его без созвона</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пять SQL-запросов в задачах</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Очереди и контур сервисов CS2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Схема одной операции критичного пути: клиент, сервисы, база, очередь; одно сообщение проследить от отправителя до получателя; схема по фактическому контуру CS2 лежит рядом со схемой разработки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Схема контура и одно прослеженное сообщение</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Git, SSH, TLS</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Своя ветка: commit, push, pull; по SSH забрать лог со стенда; объяснить, зачем стенду сертификат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лог со стенда, снятый по SSH</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Основы автоматизации и ООП</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один тест на JUnit 5 и REST Assured к уже существующему endpoint; второй человек запускает его без автора; это учебный тест, не каркас фреймворка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один API-тест, запущенный другим человеком</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Принципы Docker, UNIX, журналы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поднять контейнер из официального руководства; десять команд в шелле; свой баг найти в логах стенда в Grafana и приложить ссылку</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Локально поднятый контейнер; ссылка на лог в Grafana в баге</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка тестирования и наставничество</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пять задач оценить до работы и сверить с фактом (погрешность не хуже 75%); один разбор чужого баг-репорта: что поправить и почему</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таблица «задача, оценка, факт, отклонение» и один разбор</td>
+</tr>
+</tbody>
+</table>
+<p>Границы плана: написание автотестов как норма Middle+, Selenium Grid, методика нагрузки, XSS/CSRF и индивидуальные планы команды — порог следующих грейдов.</p>
+<p><strong>План Senior → Lead (7 шагов)</strong>
+Итог: есть стратегия одного контура, отчёт по нагрузке, проверки XSS и CSRF на критичном сценарии, автотесты в CI по триггеру и черновик индивидуального плана на одного человека.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Мес.</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Компетенция</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Практика на проекте</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Артефакт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестовая стратегия и матрица компетенций</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На одну страницу: что закрывает API, что — узкий UI, что остаётся руками и почему; один блок матрицы поправить по фактам команды, без плюсов «на глаз»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стратегия одной страницей и правка блока матрицы</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нагрузка: сценарий, методика, отчёт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один сценарий в k6 на критичный API CS2; профиль и порог согласованы руководителем проекта; в задаче релиза — что мерили, вывод, можно ли выпускать; рядом короткий разбор по USE: ресурс, утилизация, насыщение, ошибки; это первая версия методики проекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Скрипт k6 в репозитории и вывод в задаче релиза</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Снифферы, WebSocket, кэш REST</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Одну сессию снять в Fiddler или Charles; на одном сценарии показать, где ответ кэшируется и как ведёт себя WebSocket, если он есть в контуре</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сессия сниффера и разбор кэша или WebSocket</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">XSS и CSRF</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Собрать блок «Доступ» риск-регресса в TestOps на один критичный сценарий: авторизация, отражённый и сохранённый XSS, CSRF на изменяющем запросе; пройти на одном релизе; найденное уходит багом, не заметкой в личном файле</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Доступ» в TestOps и заведённые баги либо явная запись «не воспроизводится»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Архитектура тестов, SOLID, KISS, DRY, YAGNI, Java</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Небольшой модуль в репозитории автотестов CS2: API-тесты на JUnit 5 и REST Assured, один критичный UI-путь на Selenium 4; ревью у QA Lead; в коде видно, зачем класс, и нет второго фреймворка «на вырост»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Модуль тестов</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">CI по триггеру, Allure, Grid или Selenoid</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пайплайн GitLab запускает тесты после сборки и по кнопке на кандидата; отчёт Allure открывается без локального прогона; для UI один узел Selenium Grid или Selenoid, не кластер</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пайплайн и отчёт Allure</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка до 10%, 1:1, план развития, ёмкость</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Восемь задач: сначала удержать коридор Senior в 25%, к концу месяца разобрать, что мешает коридору 10%; два разговора 1:1 и черновик плана развития на одного тестировщика по дырам матрицы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Восемь оценок, два 1:1 и черновик плана на одного человека</td>
+</tr>
+</tbody>
+</table>
+<p>Граница плана: он не требует вести команду из пяти человек и ресурсный план квартала — это норма Lead.</p>
+<p><strong>План Lead → «норма Lead держится на команде» (8 шагов)</strong>
+Итог: у каждого тестировщика есть план из дыр матрицы; раз в две недели проходит 1:1; автотесты запускаются после сборки, у красного прогона есть владелец; на десяти задачах оценка тестирования укладывается в 10%, промахи разобраны.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Мес.</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Компетенция</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Практика на проекте</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Артефакт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ресурсное планирование</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План на квартал: люди, зоны, отпуска, что команда не тянет; ёмкость следующего месяца считается до планирования спринта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартальная раскладка людей и зон</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1–2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Индивидуальный план с нуля</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На каждого человека: три дыры относительно его грейда в матрице, практика на проекте, доказательство; план на шесть месяцев, не список курсов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План развития на каждого</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1:1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раз в две недели с каждым; в заметке три строки: что сделано, что мешает, какое решение; личные темы в план компетенций не попадают</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Календарь 1:1 и заметки</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">CI: запуск после сборки и владелец падения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Правило регламента держится на практике: пайплайн связан со сборкой, красный прогон в тот же день разбирает владелец зоны теста, инфра-падения — Lead; за месяц ни одного красного прогона без решения: продукт, тест или инфра</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пайплайн после сборки и владелец красного прогона</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3–4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Архитектура фреймворка, SOLID, ревью кода тестов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Одна страница: слои, что считается падением, чего во фреймворке нет специально; раз в неделю ревью одного PR с тестами на Java; замечание ссылается на эту страницу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Страница архитектуры тестов и ревью PR</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">XSS и CSRF на релизе</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Доступ» включается в риск-регресс каждого релиза, который трогает вход, роли или веб-форму; новый пункт появляется только после пропущенного бага</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист XSS/CSRF в релизе</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оркестрация: где выполняются тесты</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Схема: сборка, образ, где стартует прогон, кто смотрит логи; цель — объяснить контур, не администрировать кластер</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Схема контура тестов</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка в коридоре 10%</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Десять задач подряд: оценка тестирования до работы и факт; каждый промах больше 10% — отдельная причина, не «задача раздулась»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Десять строк: план, факт, причина промаха</td>
+</tr>
+</tbody>
+</table>
+<p>Граница плана: в матрице у Lead есть руководство пятью и более людьми одной специализации. Пока людей меньше, те же практики ведутся на фактическую команду. Найм входит в план вместе со ставкой, не как отдельный курс.</p>
+</body></html>
