@@ -1,0 +1,55 @@
+---
+name: preview
+description: "Stand up the project's live app and hand it to the user to try a change firsthand, then act on their verdict once they reply. Use when the user asks to \"preview the change\", \"let me try it\", \"spin up the app so I can test it\", \"set it up so I can poke at it\", or before finalizing a UI/UX change that needs human eyes."
+---
+
+# Preview
+
+Bring up the running app and let the user drive it themselves to judge the change, then act on their verdict.
+
+## Step 1: Determine Scope
+
+Resolve what to preview using the first match:
+
+1. **User-specified** — the user says what to look at. Use that.
+2. **PR** — a PR URL or number is provided. Fetch its details and read the changed code.
+3. **Conversation context** — prior conversation contains recent work. Extract what changed, where it lives, and the expected behavior.
+4. **App-level discovery** — fresh context with no prior work. Examine entry points, routes, and the README to identify the app's core user-facing flows.
+
+If the resolved scope has no user-visible surface to try (a CLI-only change, a library with no entry point, backend work with no UI to look at), present this message: "Nothing to preview — <one-line reason>." Then use the TaskList tool and proceed to any remaining task.
+
+## Step 2: Determine Launch Approach
+
+Check for a project-specific skill or MCP tool that launches the app, and use it if present. Otherwise use the fallback for the surface type:
+
+- **Web app** → start the dev server; the access point is the local URL and port
+- **Desktop/native app** → build and launch the app so its window is open
+
+## Step 3: Bring Up the Stack
+
+Start backend services and frontend together — a frontend-only change still needs the backend running to be exercised. When a service runs at an address other than its default, find the settings elsewhere in the stack that name that default, such as allowed origins and sign-in callback URLs, and bring each in line through runtime overrides, leaving the working tree unchanged: add the new address beside the default in a list, and replace the default only where no process outside this skill reads the setting. Build first if the project requires a build step.
+
+Start long-running processes with the Bash tool (`run_in_background: true`, `timeout: 7200000`) and wait until each reports ready. Leave a trailing `&` off a `run_in_background` call: backgrounding twice reports success within seconds while the servers are either dead with the wrapper or orphaned still holding the port. Confirm each process bound to its port before sending it traffic, since a readiness probe passes just as well against an orphan from an earlier attempt. Capture each process's PID and stop it by that PID and its process group, rather than by port or command-line pattern, which also match a concurrent agent's server. Tail their logs with the Monitor tool so backend errors and warnings surface while the user is trying the app.
+
+If a required service cannot be stood up in this session (missing auth provider, external dependency, seed data), or a process fails to start or never reports ready, use `AskUserQuestion` to surface the blocker and let the user choose how to proceed.
+
+## Step 4: Point the User at the Running App
+
+Output as text:
+
+- The access point — the local URL and port for a web app, or confirmation that the window is open for a native app
+- When the surface sits behind a sign-in, each account to use with its password and the role that account holds, plus every key or code generated while bringing up the stack that the app requests during or after sign-in, such as on a new browser
+- What changed
+- Each scenario worth trying, as many as the change needs: numbered steps naming the exact controls and inputs, the result to expect after each step, and the judgment the user is being asked to make. Write each scenario so one person can perform it at one device, one action after another. Start it from the state the user finds at the access point, and give everything else a later step relies on, whether something that must exist, be selected, or hold focus, a step of its own that produces it. When a scenario depends on a state the user would not reach in ordinary use, open it with what that state is in the user's own terms and why it is worth looking at
+- Each case left out of the scenarios because one person cannot perform it that way
+- When a verification pass preceded this hand-over, what it could not cover: paths needing real credentials, external services, or state unavailable in this session
+- How to reply once they have tried it: say it looks good, adding whether to keep the app running or shut it down, or describe what needs changing
+
+Then end the turn, leaving every process this skill started running.
+
+## Step 5: Act on the User's Reply
+
+- **Needs changes** — make the change the user describes, then rebuild or refresh the running app so it is live. When the reply or session context surfaces further open issues, fix and re-verify each. Once no known issue remains, output what changed and the scenarios worth retrying, close with Step 4's reply guidance, and end the turn again.
+- **Looks good** — when the user asks to shut the app down, stop every process this skill started, and revert every override this skill made in a service that keeps running. Otherwise leave everything running.
+
+Then use the TaskList tool and proceed to any remaining task.

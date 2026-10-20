@@ -1,0 +1,65 @@
+---
+name: prototype
+description: "Build a self-contained local prototype at .turbo/prototypes/<slug>.html, drive it, and hand it to the user to settle unknowns that prose cannot answer. Use when the user asks to \"prototype this\", \"build a prototype\", \"mock this up\", \"show me what it would look like\", \"let me try the interaction first\", or when a decision waits on seeing a surface or using it firsthand."
+---
+
+# Prototype
+
+Build a throwaway prototype that answers named unknowns, operate it, and hand it to the user for judgment.
+
+## Step 1: Name What the Prototype Must Settle
+
+Take the open unknowns from what was passed in. When nothing was passed in, derive them from the current work: the questions whose answers in prose would still leave the user guessing, such as what a surface looks like or whether an interaction pattern makes sense in the hand.
+
+State each unknown as a question the user answers by using the prototype rather than by reading a description. When the work that prompted the prototype already named competing alternatives, state the unknown as a comparison between them. Output that list as text before building, and keep anything outside it out of the prototype.
+
+## Step 2: Resolve the Prototype Path
+
+Reuse the slug of the plan that governs the work when there is one. Honor an explicit slug or output path the user passed in. Otherwise generate a slug from the task title:
+
+- Lowercase
+- Replace non-alphanumeric characters with hyphens
+- Collapse consecutive hyphens
+- Trim leading and trailing hyphens
+- Truncate to 40 characters at a word boundary
+
+Write to `.turbo/prototypes/<slug>.html`, creating the directory when it does not exist. State the resolved path before writing. Later rounds of the same prototype rewrite that same file. When the path holds a prototype of a different subject, append `-2`, `-3`, and so on until the path is free.
+
+## Step 3: Build It
+
+Write one self-contained `.html` file at the resolved path, with markup, styles, script, and sample data inline. It runs from `file://` with no build step, no package install, and no dependency on the real application. Start the styles with `[hidden] { display: none !important; }`: an element whose own CSS sets any `display` value otherwise ignores the `hidden` attribute and paints anyway.
+
+Build only what the Step 1 questions require. Hardcode the data behind them, stub anything that would cross a network boundary, and leave persistence out. When the prototype hardcodes real records and the real change would ship that same selection, choose them by one rule and apply it to every candidate alike. In a later round, keep each record the user added or removed as their exception to that rule. Where answering a Step 1 question takes surroundings that question does not put under test, such as panels, controls, or affordances, match how the real application presents them.
+
+When a Step 1 question compares alternatives, build every alternative into the same file behind a header toggle, kept visually separate from the design as prototype chrome, so the user compares them in place rather than across descriptions. Label each position of the toggle by what the user will see or feel differ. When the user could not see or feel two alternatives differ, build one of them, leave the other out of the prototype, and say so when handing it over. Keep that chrome in normal document flow rather than `position: sticky` or `fixed`, where it covers the controls scrolled beneath it.
+
+## Step 4: Operate It
+
+Open the file and drive it yourself before handing it over. If `/agent-browser` is available, run the `/agent-browser` skill. Otherwise, use `claude-in-chrome` MCP.
+
+Exercise every control and flow that the Step 1 questions depend on, and confirm each one is reachable and responds. Fix whatever does not work and drive it again. A render or a screenshot leaves the controls untested, so it does not establish that the user can reach what they are being asked to judge.
+
+When the prototype carries a comparison toggle, drive each position under the conditions its Step 1 question names, such as a viewport width, and confirm the positions differ there in what the user will see or feel. When two do not, apply Step 3's rule for alternatives the user could not tell apart and drive the prototype again.
+
+When a Step 1 question turns on how an interaction feels, such as a drag, scrub, or resize, drive the gesture as one continuous sequence of many small pointer moves. After each move, record the position of every element that should stay put and the moved element's offset from the pointer. Treat any change between consecutive moves that the interaction does not call for as broken, fix it, and drive the sequence again.
+
+## Step 5: Hand It Over
+
+Give the user the file path, the Step 1 questions the prototype answers, and what to try for each. Name what the user might look for and not find, and where what they see or feel differs from how the real change will behave, as outside what the prototype asks them to judge. When Step 3 chose the hardcoded records by one rule, state that rule and the user's exceptions to it, name the candidates it left out, and ask the user to judge the selection as well. For a gesture driven move by move in Step 4, also give the largest change between consecutive moves in the values it recorded. Keep the prototype a local file the user opens themselves rather than publishing it through the Artifact tool. Close with how to reply once they have tried it: say it settled the questions, or describe what to change.
+
+Then end the turn.
+
+## Step 6: Act on the User's Reply
+
+- **Needs changes** — return to Step 3 with the changes the user describes and continue from there, so every later round is driven in Step 4 before it reaches the user. Make those changes to what the prototype already holds, adding to it only what the user asks for.
+- **Settled** — continue to Step 7.
+
+## Step 7: Record What It Settled
+
+Delete from the prototype file every approach it disproved, so that nothing which failed survives in the file as apparent implementation. Remove any comparison toggle along with the alternatives it switched between. Keep what the settled answers rest on.
+
+Then state each Step 1 question with the answer the prototype produced, and name separately anything it disproved. Carry these answers into the work that prompted the prototype. Then use the TaskList tool and proceed to any remaining task.
+
+## Rules
+
+- The prototype file is the only output. Application code stays untouched.
