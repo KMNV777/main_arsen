@@ -1,0 +1,92 @@
+---
+name: review-code
+description: "Review code for bugs, security vulnerabilities, API misuse, consistency issues, simplicity problems, or test coverage gaps and low-value tests by running internal reviews and a peer review in parallel and returning combined findings. Single-concern with a type argument, or full review with no argument. Use when the user asks to \"review my code\", \"full code review\", \"review my changes\", \"check for bugs\", \"scan for bugs\", \"review correctness\", \"security audit\", \"find vulnerabilities\", \"review security\", \"check API usage\", \"verify against docs\", \"check for cross-file duplication\", \"review consistency\", \"check for code reuse\", \"review simplicity\", \"find untested code\", \"find redundant tests\", or \"review test coverage\"."
+---
+
+# Review Code
+
+Review code against type-specific criteria. Runs internal reviews and `/peer-review` in parallel by default. Returns combined structured findings.
+
+**Types:** `correctness`, `security`, `api-usage`, `consistency`, `simplicity`, `coverage`
+
+With a type argument, runs a single-concern internal review plus the peer review. With no type argument, runs all six internal reviews plus the peer review.
+
+## Step 1: Determine the Scope
+
+Determine what to review:
+
+- If a specific **diff command** was provided (e.g., `git diff --cached`, `git diff origin/main...HEAD`), use that.
+- If a **file list or directory** was provided, review those files directly (read the full files, not a diff).
+- If **neither** was provided, default to diffing against the repository's default branch (detect via `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`). If there are no changes against the default branch, stop and state that there is nothing to review.
+
+State the resolved file list before continuing: add `--name-only` to a diff command, or list the files for a file or directory scope. When the scope is a staged diff, also state how many further files `git diff HEAD --name-only` reports, so a scope narrower than intended stays visible before fanning out.
+
+## Step 2: Run Reviews in Parallel
+
+Each active type maps to a criteria reference file:
+
+- **Correctness** — [references/correctness-review.md](references/correctness-review.md)
+- **Security** — [references/security-review.md](references/security-review.md)
+- **API usage** — [references/api-usage-review.md](references/api-usage-review.md)
+- **Consistency** — [references/consistency-review.md](references/consistency-review.md)
+- **Simplicity** — [references/simplicity-review.md](references/simplicity-review.md)
+- **Coverage** — [references/coverage-review.md](references/coverage-review.md)
+
+Full review activates all six types; a single-concern argument activates one. Skip peer review when instructed (e.g., "without peer review", "no peer", "internal only").
+
+Before dispatching, read the project's test configuration and CI workflow to identify any test tier that resets a shared external resource between tests, such as a database, a fixed port, or a cache. Such tiers have no cross-process interlock, so agents running them concurrently wipe each other's state and return failures indistinguishable from defects in the change. Name any such tier to every agent as off-limits when the review does not depend on running it. When the change under review is what that tier exists to exercise, so that judging it at all requires running the tier, direct each agent instead to provision its own isolated instance of the resource, prepare it through the project's own setup path, run against it, and tear it down afterward. One shared instance carrying an instruction to run a single agent at a time is not sufficient, since nothing enforces that across agents. When an agent's own instance cannot be provisioned, the tier is left unrun and reported as such.
+
+Direct every agent that runs a test suite to redirect the runner's output to a file in its own scratch directory and read the file. Piping a runner to `head`, `tail`, or another command that closes the stream early returns while the runner is still going, so an agent that believes its run finished leaves one live to overlap the next agent's.
+
+When the scope contains a guard whose safety rests on an assumption stated in the conversation, in a plan file, or in a code comment, give every agent that assumption as the claim to refute rather than as background.
+
+When the scope contains content that a build or render transform rewrites before it ships — markup compiled to components, template expansion, code generation, translation extraction — build the project before dispatching, in an isolated `git worktree` under `$TMPDIR` when the build writes to tracked files or reaches the shared install through a package-manager wrapper, and name the emitted files as part of the scope every agent receives, so each type judges the emitted artifact rather than the source. Refer to that worktree by absolute path in every command and join chained steps with `&&`, so a failed step cannot leave the rest running in the shared checkout. Once every agent has reported, remove that worktree as a command of its own and confirm that `git worktree list` no longer shows it and its path no longer exists. Name a worktree that could not be removed in the output.
+
+Confine each agent's prompt to what to review, plus the conventions and factual properties that bear on it. A statement that tells an agent what verdict to reach about a property of the existing code binds it to accept the very property the review exists to assess.
+
+When this session edited an instruction file or a file one imports, name it in every agent's prompt and direct the agent to read it from disk before judging anything against it: the copy loaded into an agent's context can predate the edit.
+
+When a list of already-adjudicated findings was supplied (one line each: the finding, its verdict, and the recorded reason), include it in every agent's prompt, internal and peer, labeled as decisions already reached on proposed changes rather than as established properties of the code. Direct each agent to treat a finding as listed when it matches one on both location and substance, to raise such a finding again only on evidence its recorded reason does not already account for, and to judge any other finding at the same location on its own merits.
+
+Emit all Agent tool calls below in one assistant message. Each Agent call uses `model: "opus"` and no `name`. Wait for every agent to report before continuing. Do not begin the next step on a partial set, and do not relaunch an agent that has not yet reported. For full review that is seven Agent tool calls (six internal + one peer); for single-concern it is two (one internal + one peer). Every agent's prompt must direct it to omit `name` on any Agent tool call it makes itself. Every agent's prompt must also direct it to treat the shared working tree and its git index as read-only and to assess findings by reading and reasoning. Each agent keeps the scratch files it writes, such as its starting `git status` snapshot, probes, and logs, in a scratch directory of its own, uniquely named under the session scratchpad directory, and refers to it by absolute path. HEAD stays where it is: read other refs with `git show <ref>:<path>` rather than `git checkout` or `git switch`. For a check that requires mutating code, the agent works in an isolated `git worktree` created under `$TMPDIR` and discarded afterward. In a repository with no commit yet, where a worktree has nothing to check out, an export of the index stands in for one: the agent runs `git checkout-index -a --prefix=<dir>/` from the repository's top level, with `<dir>` under `$TMPDIR`, then `git init` and `git add -A -f` in that directory, so `git diff` there shows a mutation. Every rule here that names the worktree applies to that directory, and the agent verifies afterward that the directory is gone. Refer to that worktree by absolute path in every command and join chained steps with `&&`, so a failed step cannot leave the rest running in the shared checkout. Run teardown and verification as their own commands. Give that worktree its own dependency install rather than reaching the shared tree's install by any route: removing a worktree deletes through symlinks, and a redirected suite writes into the shared install. When its own install is not possible, the check is left unrun and reported as such. A check that runs in the shared checkout invokes an already-installed runner directly wherever a package-manager wrapper would front it, since such a wrapper reads as read-only while reconciling the shared install before it runs. Confine dependency installs and reconciliation to an isolated worktree. Every test runner the agent starts, in a worktree or in the shared checkout, runs in its own process group under a timeout enforced from outside the runner. Before teardown, the agent stops the process group of every runner it started, since stopping a runner can leave the processes it spawned alive. Afterward the agent verifies that `git worktree list` no longer shows the worktree, that `git status --short` shows what it showed at the start, and that HEAD is still on the branch it started on. It also confirms that no process from those groups, and none whose command line names the worktree path, if any, is still running, and reports by PID any process it could not stop. When it cannot list processes, it reports that check as unrun and names those process groups and the worktree path, if any. After any check, in a worktree or in the shared checkout, it verifies that the shared tree's dependency directory still resolves (a destroyed install leaves `git status` unchanged, since it is gitignored). Damage the agent cannot repair is reported with the exact repair command in place of findings.
+
+- **Internal Agent (one per active type):** Launch a separate Agent tool call for each active type. The subagent's prompt must include the scope, the path to the type's reference file (`~/.claude/skills/review-code/references/<type>-review.md`), the output format below, and this directive: read that reference file directly, apply its determination criteria as the bar for a real finding, then report every finding that clears that bar tagged with its priority. Coverage is the goal at this stage, so surface everything that qualifies and let the priority tags convey severity. The subagent must also return the Overall Verdict block for its type, using the verdict label from the reference file it read.
+- **Peer review Agent (unless skipping):** Launch an Agent tool call whose prompt instructs the subagent to invoke `/peer-review` via the Skill tool with a request describing: (a) the scope to review; (b) all active types covered in one single-pass review run that evaluates every dimension, each judged independently against its criteria file, rather than a per-dimension parallel fan-out; (c) for each dimension, the criteria live in `~/.claude/skills/review-code/references/<type>-review.md` — the reviewer should read that file directly, use its priority scale and verdict label, and include any extra metadata fields it specifies; (d) the output format below, including the `**Failure scenario:**` line; (e) the already-adjudicated findings list when one was supplied, framed as described above. The prompt must also state explicitly that the subagent's final assistant message must contain the verbatim findings text `/peer-review` produced.
+
+Aggregate the findings and per-type verdicts the subagents return, with attribution (reviewer: "internal" or "peer"; type; file path). Present them in the output format below.
+
+Then use the TaskList tool and proceed to any remaining task.
+
+## Output Format
+
+Format each finding as:
+
+```
+### [P<N>] <title (imperative, ≤80 chars)>
+
+**File:** `<file path>` (lines <start>-<end>)
+**Reviewer:** <internal | peer> (<type>)
+**Failure scenario:** <concrete trigger → the consequence>
+
+<one paragraph explaining the issue and its impact>
+```
+
+For `**Failure scenario:**`, state the consequence a user or maintainer would observe: an error, wrong output, or data loss; for the non-correctness types, the concrete cost — what breaks on the next change, what is duplicated, what goes untested, which stated rule is violated. An intermediate state ("the cached value goes stale", "the collection keeps growing") stops short of a consequence; carry it through to what that state causes.
+
+The reference file may specify additional metadata fields (e.g., `**Category:**`, `**Library:**`, `**Docs:**`). Include them between the `**Reviewer:**` line and the `**Failure scenario:**` line.
+
+After all findings, place the Overall Verdict block each internal subagent returned for its type (each uses the verdict label from its reference file). For single-concern, that is one verdict block; for full review, six. After the per-type verdicts, add a single combined `## Peer Review Verdict` block summarizing what the peer review returned.
+
+```
+## Overall Verdict — <type>
+
+**<Verdict Label>:** <status>
+
+<1-3 sentence assessment>
+```
+
+If there are no qualifying findings for a type, state so under that type's verdict block and explain briefly.
+
+## Rules
+
+- Present findings grouped by priority in single-concern mode, and in file order in full review mode to minimize context switching.

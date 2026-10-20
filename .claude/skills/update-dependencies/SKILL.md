@@ -1,0 +1,204 @@
+---
+name: update-dependencies
+description: "Upgrade project dependencies with breaking change research for major version updates. Use when the user asks to \"update dependencies\", \"upgrade packages\", \"upgrade dependencies\", \"update deps\", \"upgrade deps\", \"update npm deps\", \"update Swift packages\", \"cargo update\", \"go get updates\", \"bundle update\", \"pip upgrade\", or \"update GitHub Actions\"."
+---
+
+# Update Dependencies
+
+Upgrade project dependencies, researching breaking changes for major version updates.
+
+Optional filter: `$ARGUMENTS` (e.g., `react`, `Alamofire`, `serde tokio`)
+
+## Task Tracking
+
+At the start, use `TaskCreate` to create a task for each phase:
+
+1. Run `/review-dependencies` skill
+2. User strategy selection
+3. Research breaking changes
+4. User confirmation
+5. Execute upgrades
+6. Apply migrations
+7. Run `/run-checks` skill
+8. Exercise upgraded schema against the real store
+9. Report results
+10. Recommend next steps
+
+## Phase 1: Review Dependencies
+
+Run the `/review-dependencies` skill to detect package managers and discover available updates. If no updates are available, stop.
+
+## Phase 2: User Strategy Selection
+
+Before summarizing, set aside packages whose version tracks a pinned runtime or platform rather than the newest release, such as runtime type definitions and platform SDKs. Find the pin the project declares (version manager file, `engines` field, container base image, CI setup step) and hold any version beyond it until the pin moves.
+
+A package whose newer releases raise their own declared runtime or platform minimum above the project's is not set aside on that basis.
+
+Present a summary showing:
+- Count and list of major updates (with current → target versions)
+- Count of minor updates
+- Count of patch updates
+- Packages set aside, each with the pin that governs it
+- Packages whose newer releases need a higher runtime or platform minimum, each with the minimum they need
+
+Before the strategy question, use AskUserQuestion to ask for each package that needs a higher minimum whether to raise the project's minimum, naming the versions or devices that lose support and the dependents that must raise theirs in lockstep, or to cap the package at the last release the current minimum admits. Add a **Get a second opinion** option, which runs the `/consult-codex` skill for what each option commits to and what reversing it costs. Then resolve the choice with that answer in hand, re-asking when it stays the user's. Apply a raise only when the package is upgraded.
+
+Use AskUserQuestion for upgrade strategy:
+
+**Header**: "Strategy"
+**Options**:
+- **Cautious** — Upgrade minor/patch first, then major one-by-one with research
+- **All at once** — Research all major changes, then upgrade everything together
+- **Skip major** — Only upgrade minor and patch versions
+- **Interactive** — Ask for each major update individually
+
+When a major upgrade would force a migration that is costly to reverse, present a **Get a second opinion** option in place of **Interactive**, keeping the question at four options. It runs the `/consult-codex` skill for which strategy the breaking changes warrant. Then resolve the strategy with that answer in hand, re-asking when the choice stays the user's. A freeform answer asking to decide each major update individually selects the Interactive strategy.
+
+## Phase 3: Research Breaking Changes
+
+For **each package or CI action with a major version update**:
+
+### Step 1: Calculate Version Gap
+
+Identify all major versions between current and target. For example:
+- `react: 17.0.2 → 19.0.0` → research v18 AND v19 breaking changes
+- `Alamofire: 4.9.1 → 6.0.0` → research v5 AND v6 breaking changes
+
+### Step 2: Research Each Major Version
+
+Search for migration documentation:
+
+```
+WebSearch: "[package-name] v[X] migration guide"
+WebSearch: "[package-name] v[X] breaking changes"
+```
+
+Common sources: GitHub releases page, official docs, changelog files.
+
+### Step 3: Extract Key Breaking Changes
+
+Identify: API changes (renamed/removed functions), configuration changes, peer/transitive dependency requirements, behavioral changes, deprecated features now removed.
+
+### Step 4: Search Codebase for Affected Code
+
+Use Grep to find usage of deprecated or changed APIs. Document which files are affected and what changes are needed.
+
+Then check the package's installed consumers: read their declared peer or compatibility ranges and flag any range that excludes the target version. Toolchain consumers such as linters, type checkers, and build tooling can block a major even when the project's own code and configuration are clean. Carry each one into Phase 4 as a blocker.
+
+A CI action that installs or runs the package counts as such a consumer. When a newer release of it supports the target, pair that bump with the package instead of carrying a blocker: Phase 4 presents the two together, and they are upgraded or skipped together.
+
+## Phase 4: User Confirmation
+
+For each major update, present:
+- Package name and version transition
+- Breaking changes found (summarized)
+- Files potentially affected (count and list)
+- Consumers whose declared ranges block the upgrade, and CI action bumps paired with it, when Phase 3 found any
+
+Use AskUserQuestion to confirm:
+
+**Header**: "Confirm"
+**Options**:
+- **Proceed** — Continue with upgrades and migrations
+- **Show details** — Display detailed breaking changes for review
+- **Skip package** — Exclude a specific package from upgrade
+- **Abort** — Cancel the upgrade process
+
+If "Show details" selected, display full migration research, then ask again.
+
+## Phase 5: Execute Upgrades
+
+Bump each outdated CI action ref in the file that declares it, under the chosen strategy. For a ref pinned to a commit SHA, resolve the target release tag to the commit it points to (for an annotated tag, follow the tag to its commit) and update the trailing version comment to match. For a tag ref, keep the ref's precision when the action publishes a tag at that precision for the target, otherwise use the full release tag.
+
+After every install command in this phase, run both checks below before any tests and before Phase 6.
+
+1. **Confirm the installed tree moved** — spot-check the resolved version of one or two upgraded packages in the installed dependency tree against the manifest. An install can record the new versions while leaving the installed packages on their old ones, which makes every later check report on the pre-upgrade tree. When the two disagree, force a clean resolve: use the package manager's lockfile-respecting install where it has one, otherwise clear the installed tree and install again. Re-check afterward.
+2. **Diff the package-manager configuration** — inspect the package-manager config files for entries the tool wrote on its own. A tool enforcing a safety guard, such as a minimum age before a release is installable or a provenance requirement, may record a per-package exclusion rather than refusing. Treat such an entry as the guard being bypassed: revert it and lower the manifest constraint to the newest version the guard admits. When the lowered range still admits the rejected version, an existing lockfile keeps it: restore the lockfile from git (delete it when git does not track it), re-run the resolving install and any semver-respecting update command this phase already ran, and diff the configuration again.
+
+### Cautious Strategy
+
+First upgrade minor and patch only using the package manager's semver-respecting update command, then run tests. If the test command exits nonzero, stop before proceeding with major upgrades.
+
+### Major Version Upgrades
+
+Update the manifest file (version constraint) and run the install/resolve command. For package managers with a dedicated upgrade command, use it. For others (Swift PM, Maven, Gradle), edit the manifest directly.
+
+## Phase 6: Apply Migrations
+
+### Step 1: Run Codemods (if Available)
+
+Some ecosystems provide automated migration tools:
+
+| Ecosystem | Migration tools |
+|---|---|
+| React | `npx react-codemod [transform]` |
+| Next.js | `npx @next/codemod [transform]` |
+| Jest | `npx jest-codemods` |
+| Angular | `npx ng update` |
+| Rust | `cargo fix` for edition migrations |
+| Python | `pyupgrade`, `python-modernize` |
+
+### Step 2: Manual Code Changes
+
+For changes requiring manual intervention:
+1. Read the affected file
+2. Apply the necessary transformation using Edit
+3. Show the user what changed
+
+### Step 3: Raise Manifest Floors
+
+When migrated code adopts an API that first shipped after the lower bound the manifest declares for that package, raise the constraint to the earliest release that provides every API the migrated code uses, confirmed against the package's tagged source or changelog, then re-run the install so any lockfile records the raised constraint. Passing checks do not clear a stale floor, since they build against the resolved release rather than the floor.
+
+### Step 4: Update Configuration Files
+
+If configuration format changed, read current config, transform to new format, write updated config.
+
+### Step 5: Sync Version-Pinned CI/Container References
+
+Some packages pin their version outside the manifest, beyond the package manager's reach, so a green local run hides the drift. For every upgraded package (major, minor, or patch), search CI and container configs for the old version string with the Grep tool (across `.github/`, `Dockerfile*`, `docker-compose*`, and `.devcontainer/`) and bump it in lockstep:
+
+- CI container images whose tag must track the package — e.g. a Playwright image tag kept in lockstep with the installed `@playwright/test` version.
+- Base images and tool versions in `Dockerfile`, `.devcontainer/`, and `docker-compose.yml`.
+- Pinned tool versions in CI setup steps (`actions/setup-node` `node-version`, `setup-python`, toolchain files).
+
+## Phase 7: Verification
+
+### Step 1: Run `/run-checks` Skill
+
+Run the `/run-checks` skill to execute the project's verification gate.
+
+### Step 2: Exercise Upgraded Schema Against the Real Store
+
+When an upgraded package owns persisted schema, run the test tiers that exercise the real backing store rather than the default command alone. A tier that substitutes test doubles for the store passes on a schema the upgraded package no longer accepts. Diff the schema the package now generates against the one the project has migrated to; when they differ, return to Phase 6 for the migration the difference calls for, then run the `/run-checks` skill again and re-run the tiers.
+
+### Step 3: Report Results
+
+Summarize: packages upgraded (count), CI action refs bumped (count, unverified until the next CI run), breaking changes addressed (count), files modified (count), test results, remaining manual tasks.
+
+### Step 4: Recommend Next Steps
+
+If any migrations could not be automated:
+- List specific changes the user needs to review
+- Highlight deprecated patterns that need attention
+- Note any runtime behavior changes to watch for
+
+## Error Handling
+
+### Discovery Tool Not Available
+
+If the discovery tool is not installed, `/review-dependencies` will note it. Fall back to manual version checking via WebSearch.
+
+### Network Errors During Research
+
+If WebSearch/WebFetch fails: retry with alternative search terms, provide manual research links, proceed with caution warning that migration research may be incomplete.
+
+### Test Failures After Upgrade
+
+Phase 7's gate diagnoses a failing test and applies a fix. When it stops without a root cause:
+
+- Identify which package likely caused the failure
+- Suggest rollback: restore manifest and lockfile from git, then reinstall
+
+### Migration Research Incomplete
+
+If official migration docs are not found: check the package's repository for issues and discussions, note as "migration research incomplete — proceed with caution."

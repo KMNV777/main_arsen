@@ -1,0 +1,164 @@
+---
+name: consult-codex
+description: "Multi-turn consultation with Codex CLI for second opinions, brainstorming, or collaborative problem-solving. Use when the user asks to \"consult codex\", \"ask codex\", \"get codex's opinion\", \"brainstorm with codex\", \"discuss with codex\", or \"chat with codex\"."
+---
+
+# Consult Codex
+
+Multi-turn consultation with Codex CLI. Maintains a conversation across multiple turns using session persistence.
+
+## Step 1: Gather Context
+
+Identify the 2-5 files most relevant to the problem. Formulate a clear, specific question. Include what has been tried and relevant constraints.
+
+## Step 2: Start Session
+
+Run `codex exec` with `-o` to capture the response cleanly. Default to `-s read-only` for safety. Use `-s workspace-write` when the consultation requires running code, inspecting an artifact passed by path, or reading files outside the workspace, and tell Codex to keep any scratch files it writes under `.turbo/`. Pass the same `-s` value on every resume turn of the consultation: a resume turn takes its sandbox from its own command line, and without the flag it falls back to the codex config, where a trusted project runs workspace-write.
+
+Omit `-m`, leaving the consultation on codex's configured model. When the user named a model for this consultation, add `-m <model>` to every `codex exec` command in this skill, resume turns included, and pass the name verbatim.
+
+**All `codex` Bash calls require `dangerouslyDisableSandbox: true`** (network access to OpenAI API). Use `.turbo/` as the temp directory — it is in the working directory (sandbox-writable), gitignored, and avoids `$TMPDIR` path mismatches between sandbox and non-sandbox mode.
+
+**Every `codex exec` invocation requires `--skip-git-repo-check`**, resume turns included. Outside a git repository codex aborts before doing any work, printing `Not inside a trusted directory and --skip-git-repo-check was not specified.`, and never writes the `-o` file.
+
+**Non-piped `codex exec` invocations require `< /dev/null`** to avoid hanging on stdin. Codex reads from stdin whenever stdin is non-TTY, and in subprocess contexts the harness leaves stdin connected to a pipe that never EOFs — codex blocks forever, printing only `Reading additional input from stdin...`. The piped form (`cat file | codex exec "..."`) is safe — `cat` closes the pipe after the file.
+
+Generate a random session tag at the start to keep files unique for parallel use, and print the absolute path prefix it produces:
+
+```bash
+CODEX_TAG=$(head -c 4 /dev/urandom | xxd -p) && mkdir -p "$PWD/.turbo/codex" && echo "$PWD/.turbo/codex/$CODEX_TAG"
+```
+
+Substitute the printed value for `<prefix>` in every later command of this consultation. Shell variables do not survive between Bash tool calls, and an earlier `cd` in a compound command leaves the session in a different directory, so a relative path resolves against that directory instead.
+
+Number the `-o` file by turn — `<prefix>-1.txt` for the first, `<prefix>-2.txt` for the next, and so on. A turn that reuses the previous turn's path finds that turn's complete answer waiting there, so a read landing before the current turn finishes returns the wrong answer with nothing to mark it as stale.
+
+```bash
+codex exec --skip-git-repo-check -s read-only -o "<prefix>-1.txt" "<question>" < /dev/null
+```
+
+### Prompt Shaping
+
+Structure the question using XML tags for clearer Codex responses:
+
+- `<task>`: The concrete question and relevant context.
+- `<compact_output_contract>`: Desired output shape and brevity requirements.
+- `<structured_output_contract>`: Same purpose but for structured/schema responses.
+- `<grounding_rules>`: When claims must be evidence-based (review, research, root-cause analysis).
+- `<dig_deeper_nudge>`: Push past surface-level findings to check for second-order failures.
+- `<verification_loop>`: When correctness matters — ask Codex to verify before finalizing.
+- `<merit_only>`: When a recommendation is wanted, bar answers that appeal to scope.
+- `<verdict_line>`: When the consultation runs until Codex approves, fix the line that ends every response and terminates the loop.
+- `<style_constraints>`: When the answer must follow a house style, name the shapes that style forbids.
+
+Example prompt for a diagnosis question:
+
+```
+<task>Diagnose why the auth middleware rejects valid tokens after the session refactor.</task>
+<compact_output_contract>Return: (1) most likely root cause, (2) evidence, (3) smallest safe next step.</compact_output_contract>
+<grounding_rules>Ground every claim in the provided context or tool outputs. Label hypotheses explicitly.</grounding_rules>
+```
+
+For correctness-critical questions, add `<verification_loop>` asking Codex to verify its answer before finalizing.
+
+When Codex must judge claims against a source, state in `<grounding_rules>` whether the material provided is the complete source or an excerpt. When a verdict can turn on something being absent, provide the complete relevant sections: given an excerpt, Codex reports what the excerpt leaves out as unverifiable or missing. Pass the complete source, or its path for Codex to read, whenever it fits. When an excerpt is unavoidable, confirm before running that every passage the claims under judgment rest on made it into the material provided.
+
+When the consultation concerns an artifact Codex can inspect itself, pass its path and let Codex choose how to inspect it, rather than attaching excerpts or other material extracted from it.
+
+When a recommendation is wanted, add `<merit_only>`: state that "out of scope" or "leave it alone" is not an acceptable argument on its own, and that recommending no change must be justified on technical merit. Pair it with `<compact_output_contract>` demanding one pick per decision, the reasoning, and the strongest counterargument to that pick, with hedging across options ruled out. When the question lists options, state in that contract that the pick may be a named alternative outside the list when it is sounder than every listed option.
+
+When the consultation runs until Codex approves, add `<verdict_line>`: require every response to end with exactly one fixed line stating the verdict, in a designated positive or negative form, carrying nothing else, and require the response to state before that line what the verdict rests on: the artifacts, sources, and checks inspected. Terminate the loop when that line reaches the positive form with that evidence stated, so a politely worded answer does not end it early and agreement does not go unrecognized. Pair it with `<compact_output_contract>` demanding that each finding ship a ready-to-paste replacement rather than an instruction, which keeps a round cheap enough to iterate.
+
+When the consultation is a prose rewrite bound by a house style, add `<style_constraints>` naming the shapes that style forbids in the first prompt, so they do not have to be corrected across follow-up turns. Common ones: prefixing a summary with a grammatical subject the convention omits, expanding a pronoun to its full noun phrase at every occurrence, and splitting a sentence so a condition is restated in both halves.
+
+Instruct Codex to answer the consultation itself rather than delegating to a peer review or consultation skill that crosses back to Claude. The prompt has already crossed the tool boundary; a further crossing that fails mid-flight leaves this run holding a question instead of an answer.
+
+Keep prompts compact, with tight output contracts. One clear task per Codex turn.
+
+For context that does not belong in the argument, write a context file with the Write tool and pipe it via stdin. The prompt stays as the argument, context pipes in as `<stdin>` automatically:
+
+```bash
+cat "<prefix>-ctx.txt" | codex exec --skip-git-repo-check -s read-only -o "<prefix>-1.txt" "<question>"
+```
+
+A `cat` that fails does not stop the run: codex executes on the bare prompt, burns the full timeout, and returns nothing. Read the stderr chrome for the `cat` error rather than waiting on the `-o` file.
+
+Route text you did not author through this channel whatever its size — a diff, file contents, a code comment, a plan or spec, third-party feedback, command output. Write the context file with the Write tool so nothing is interpreted on the way in. Keep backticks, `$`, and straight double quotes out of the quoted argument even in text you wrote: the first two stay live inside it, and a double quote ends it. When the prompt itself must carry any of them, as when it quotes a title or a passage, write the whole prompt and its context to one file with the Write tool and pass `-`, so stdin is the entire prompt:
+
+```bash
+cat "<prefix>-prompt.txt" | codex exec --skip-git-repo-check -s read-only -o "<prefix>-1.txt" -
+```
+
+Parse the `session id:` line from the CLI output. This UUID is needed for follow-up turns.
+
+The `session id:` line appears only in the stderr chrome, never on stdout and never in the `-o` file. When a follow-up turn may be needed, do not discard stderr with `2>/dev/null` or capture stdout alone — either silently drops the session id and makes `resume` impossible. If output must be truncated, `2>&1 | grep` for `session id:` so the id is always retained. Use a filter that reads the stream to its end: one that exits early, such as `grep -m` or a trailing `head`, closes the pipe and kills the run.
+
+A grep filter also hides startup failures, whose messages carry neither `session id:` nor the word `error`, leaving a missing `-o` file as the only symptom. When the `-o` file is absent and the call returned promptly with neither a task ID nor a `Command timed out` error, codex aborted at startup: re-run with unfiltered stderr before diagnosing anything else.
+
+Run via the Bash tool as a foreground call (`timeout: 600000`, the foreground maximum; do not set `run_in_background`) per turn. A larger timeout is not honored: the harness backgrounds the call immediately and hard-kills codex at 600s, truncating its output. A consult that outlives a valid timeout is normally force-backgrounded: the result carries a task ID and the run continues to completion, so recover the answer by reading the current turn's `-o` file, then reading it again once the `<task-notification>` reports completion. For a backgrounded run the `session id:` is in the task's output file rather than the immediate tool result, so `grep` that file for it when a follow-up turn is needed. An over-max timeout also returns a task ID but truncates the output at 600s, so check that file for a complete answer rather than assuming the run finished. Rarely the result is an error exit (code 143) reading `Command timed out after <duration>` with no task ID; codex was hard-killed and the `-o` file was never written, so `resume` the session id from Step 2 with the next turn's `-o` path and an instruction to answer immediately, rather than re-running the consult from scratch. Never wait with `Monitor`, and never return the task ID or an interim file snapshot as the result — each is a false-empty return.
+
+## Step 3: Read and Evaluate Response
+
+The `-o` file contains only Codex's response (cleaner than stdout, which includes CLI chrome and tool-use logs). Read the current turn's `-o` file. If the output is too large for the Read tool, read stdout from the Bash tool result instead. When the file holds a question put to you rather than an answer, codex halted to ask for input: resume the session with the answer and the original output contract, rather than re-running the consultation from scratch.
+
+Assess whether:
+- The answer is sufficient and actionable
+- Follow-up questions would improve the answer
+- The response contradicts known project facts (verify before accepting)
+- The recommendation would violate a documented constraint (follow up rather than discarding or adopting it)
+- The recommendation is conditional on a check not yet run that you can run yourself (run it before refining anything that depends on it, and open any follow-up with its result)
+
+If no follow-up is needed, skip to the Synthesize step.
+
+## Step 4: Follow Up
+
+Resume the session with the parsed session ID (not `--last`, which is unsafe for parallel use). `<turn>` continues the count from Step 2, so the first follow-up writes `<prefix>-2.txt`:
+
+```bash
+codex exec --skip-git-repo-check -s read-only -o "<prefix>-<turn>.txt" resume <session-id> "<follow-up question>" < /dev/null
+```
+
+When the follow-up carries text you did not author, or backticks, `$`, or straight double quotes, write it to a file with the Write tool and pass `-` so the prompt is read from stdin instead:
+
+```bash
+cat "<prefix>-followup.txt" | codex exec --skip-git-repo-check -s read-only -o "<prefix>-<turn>.txt" resume <session-id> -
+```
+
+With `-`, stdin is the whole prompt rather than a `<stdin>` block appended to an argument, so instruction and context share the one file. Leave off `< /dev/null` here — the pipe supplies stdin, and `cat` sends EOF.
+
+Carry the consultation's `-s` value on each resume turn, ahead of the `resume` subcommand, which does not accept the flag after it.
+
+When the consultation runs until Codex approves, open each resume turn by listing what was already applied, so Codex judges the current state rather than re-reporting findings that are already fixed. When a positive verdict arrives without stating what it rests on, resume to ask what was inspected and to inspect anything the verdict depends on that it has not yet checked, then apply the `<verdict_line>` termination rule to the verdict that follows. The 5-turn cap still binds: when it is reached without a positive verdict that states its evidence, carry the outstanding findings into Step 5 as unresolved and state that the consultation ended without approval.
+
+When the recommendation would violate a documented constraint, quote the constraint back and ask Codex to argue it out: whether the constraint is sound or was set without the problem Codex identified in view, whether that problem is reachable given code Codex may not have accounted for, and what the best fix that respects the constraint is. Ask it to quantify the exposure rather than assert it, and say that reversing its prior recommendation is acceptable.
+
+When Codex marks a point as not verifiable from the material provided, check the complete source before replying, and quote the passage that settles it in the resume turn rather than arguing the point. When no passage settles it, the point stands.
+
+Return to Step 3. Cap at 5 turns to prevent runaway conversations.
+
+## Step 5: Synthesize
+
+Summarize the key insights from the consultation. Cross-reference suggestions with project documentation and conventions before applying. Codex suggestions are starting points, not guaranteed solutions.
+
+When the consultation rewrote prose rather than answering a question, check the rewrite against the source yourself before adopting it. Treat its own report that the rewrite is faithful as a claim awaiting verification. Verify the source's own factual claims against what they describe, since a rewrite can be faithful to a source that was itself wrong. Read for these drift shapes in the rewrite:
+
+- a tense change that promotes a capability into an event
+- a compression that promotes a hedge into a fact, or flattens out the reasoning that made a sentence worth keeping
+- a rule promoted into an enforcement claim
+- a narrowing that recasts an absence of information as a limitation of what it describes
+- a figure or claim re-attributed to a different subject than the source gave it, the predicate left intact
+- a claim with no counterpart in the source, asserted as if it were there
+- an inverted direction in a described mapping
+- a term renamed in prose, drifting from the identifier it documents
+- a precise word swapped for a vaguer one, or a dropped modifier that carried the argument
+- dropped markup or function words, articles included
+- a split that separates clauses whose relationship is the point
+- a split that strands a pronoun on the wrong noun
+
+Take the plainer sentences and keep the load-bearing why.
+
+Check separately whether the supporting material in a proposed replacement is already in use. The consultation sees only the files and excerpts the prompt showed it, so a replacement that introduces new material such as a citation, an example, or a quotation can reuse something the document already relies on elsewhere. Search the whole target document for that material before adopting it, and either discard the replacement or mark the reuse in the text.
+
+When an adopted pick's strongest counterargument names a case the pick leaves uncovered, record that case as a known limit of the pick wherever the pick is recorded in a plan or another artifact that governs the work.
+
+When the consultation was opened from a pending question, resolve that question with the answer in hand, re-asking the user when the choice stays theirs. Then use the TaskList tool and proceed to any remaining task.

@@ -1,0 +1,99 @@
+---
+name: implement
+description: "Load code-style and task-specific skills, make the change described by the current context, then run post-implementation QA. Use for ad-hoc changes when no plan file or improvements backlog governs the work, and when the user asks to \"just implement\", \"implement directly\", \"implement without a plan\", or \"apply the change\"."
+---
+
+# Implement
+
+Standard implementation flow: load style rules, make the change, run post-implementation QA.
+
+## Task Tracking
+
+At the start, use `TaskCreate` to create a task for each step:
+
+1. Run `/code-style` skill
+2. Load task-specific skills
+3. Make the change
+4. Run verification
+5. Run `/smoke-test` skill for UI/UX changes
+6. Run `/preview` skill for UI/UX changes
+7. Post-implementation QA
+
+## Step 1: Run `/code-style` Skill
+
+Run the `/code-style` skill to load existence, reuse, mirror, and symmetry rules before editing.
+
+## Step 2: Load Task-Specific Skills
+
+Scan the work for types that match available skills, matching against the richest context available: a plan's **Implementation Steps** if a plan is in conversation context, otherwise the user request, a prior skill's task description, or an improvement entry. For each unambiguous match, run the skill via the Skill tool. For example, if the work includes "add a Drizzle migration" and a skill exists whose triggers reference Drizzle migrations, load it. If a work type has no matching skill trigger, do not load a generic skill.
+
+If unsure, do not load.
+
+## Step 3: Make the Change
+
+**Unless one subagent per step was settled on for a plan that governs the work**, apply the change described by the current context — the user request, a prior skill's task description, or an improvement entry. Keep the edit scoped to what the context describes.
+
+When the fix changes how a value is constructed, grep for every other site that constructs it and fix the ones carrying the same defect; treat these siblings as part of the same change. If the scope balloons beyond what the context specified, stop and confirm scope before continuing.
+
+**When a plan governs the work and one subagent per step was settled on for it**, the Implementation Steps go to subagents, and this session reviews what each one returns. Use `TaskCreate` to create a task for each Implementation Step, then take them in order, one at a time.
+
+Before each spawn, capture `git status --short` and run `git stash create`, which snapshots the working tree without changing it and prints nothing when the tree is clean.
+
+Spawn a single subagent (`model: "opus"`, no `name`). Wait for it to report before continuing; do not relaunch it if it has not yet reported. Its prompt directs it to read [references/step-implementer.md](references/step-implementer.md), and gives:
+
+- The plan's path and the Implementation Step to implement
+- What earlier Implementation Steps changed that this one builds on
+- The task-specific skills from Step 2 that this Implementation Step's work matches
+- The checks it must pass
+- A cap on any verification whose count the plan leaves open, such as mutation runs
+
+When it reports, review what it changed against the plan: `git diff <snapshot>`, or `git diff HEAD` when the tree was clean, shows its changes to tracked files, and `git status --short` compared with the capture shows the files it added. Run the checks the prompt named. Then settle everything the report leaves open before the next Implementation Step starts:
+
+- Make a small correction in this session.
+- Give larger rework, or a block this session can clear, to a new subagent for the same Implementation Step, passing along what the first one reported.
+- Take a block or a deviation that changes what the plan delivers to the user with `AskUserQuestion`, and carry out the answer through one of the two routes above.
+
+Mark the Implementation Step's task completed once nothing is left open.
+
+When the user asks how a running subagent is doing, read its progress from the same comparison against the capture. When the user asks to change its course, message it with the SendMessage tool. After a subagent has reported, changes go through the routes above.
+
+## Step 4: Run Verification
+
+Before this step starts or uses a process that runs until it is stopped, such as a server or a watcher, run the `/test-run-rules` skill. Its rules verify without modifying code, so act on a failed check as this step directs.
+
+If a Verification section is in conversation context (e.g., from a plan file), execute the commands, smoke checks, or MCP tool invocations it specifies. If a check fails, run the `/investigate` skill. If a check is blocked by a dependency, unclear requirement, or environmental issue, use `AskUserQuestion` to surface the blocker and let the user choose how to proceed. If no Verification section is in context, go straight to the configuration check below.
+
+When the Verification section lists both checks that can force code edits, such as a formatter or a linter, and a slow run, such as an integration suite, finish the edit-forcing checks and the edits they force before starting the slow run. When an edit lands after a slow run started, re-run it; when re-running is not practical in this session, state which part of the verification the final code did not get.
+
+When the change adds or documents a configuration override — an environment variable, build flag, or any setting a reader is told to set — prove that a supported path delivers it: set the value, run the build or process meant to consume it, and confirm the output changed. When no supported path delivers it, fix the path or drop the documentation before this step completes. Restore the setting afterwards, and rebuild or discard any output produced with the non-default value. Passing checks are no evidence here, since a default that matches the value already in use keeps a broken override invisible to every run that never asks for a different one.
+
+## Step 5: Run `/smoke-test` Skill for UI/UX Changes
+
+If the change touches a user-facing surface (UI components, styles, templates, markup, user-facing routes or screens), run the `/smoke-test` skill. When that is unclear, use `AskUserQuestion` to ask whether the change is user-facing rather than skipping silently. Skip this step for changes with no user-facing surface (backend-only, CLI, library, build or config).
+
+`/smoke-test` verifies without modifying code, so act on what it reports here: fix each failure and re-run it. When the same failure survives a fix attempt, run the `/investigate` skill; if investigation finds no root cause, stop and report with its findings. When a blocker cannot be cleared in this session (a path needing real credentials, an external service, or state unavailable here), carry it into Step 6 rather than treating it as a failure. When a fix made here edited code, re-run the Step 4 checks it could affect once no failure remains; when re-running is not practical in this session, state which part of the verification the final code did not get.
+
+## Step 6: Run `/preview` Skill for UI/UX Changes
+
+If Step 5 determined the change is user-facing, run the `/preview` skill so the user can try it firsthand before QA. Skip this step otherwise. Pass along any blocker Step 5 could not clear, so the hand-over names the cases still left to the user.
+
+## Step 7: Post-Implementation QA
+
+When a plan file governs the work, hold this step until every Implementation Step has been applied, and continue to the next Implementation Step at every earlier boundary.
+
+**Before starting QA, check for a context signal.** Call the `mcp__context-level__read` tool: a reading of 50% or less remaining is one. A request from the user to compact, arriving since the session last compacted, is the other. When the reading is 50% or less and the user has not asked to compact, use `AskUserQuestion` to ask whether to compact before QA: "Handoff, then compact", marked recommended, or keep going in this session. On "Handoff, then compact", or when the user asked to compact, run the `/create-handoff` skill, or, when this session already wrote a handoff, edit that file. Point its next step at what follows here: the `/finalize` skill when a plan file governs the work, naming the plan's path, and the choice among full QA, a quick close, and stopping otherwise. Use `TaskUpdate` to set this step's task description to that same next step, leave the task in progress, and end the turn in place of the TaskList call that closes this step, telling the user to run `/compact` and then reply "continue".
+
+When a plan file governs the work, run the `/finalize` skill.
+
+When no plan file governs the work, use `AskUserQuestion` to offer three options:
+
+- **Full QA** — run the `/finalize` skill
+- **Quick close** — run the `/quick-finalize` skill
+- **Stop here** — leave the change as-is
+
+Then use the TaskList tool and proceed to any remaining task.
+
+## Rules
+
+- Defer `git commit`, `git push`, and PR creation to Step 7.
+- Don't reference `.turbo/` content (filenames, acceptance criteria, step numbers, headings) in code or comments. `.turbo/` is gitignored, so these references would be opaque to anyone reading without local copies.

@@ -1,0 +1,62 @@
+# Coverage Review Reference
+
+## Review Instructions
+
+1. Skip non-testable code (config, documentation, CI files, SKILL.md files, markdown).
+2. Search for existing test files covering the target code.
+3. Identify the project's test framework and conventions by reading existing test files.
+
+### Verifying Pin Claims
+
+Before asserting that a behavior is unpinned, or that a new test pins one, verify it by mutation: in an isolated `git worktree` created under `$TMPDIR`, invert or remove the line at issue, run the suite in its own process group under a timeout enforced from outside the runner, and check whether a test fails. In a repository with no commit yet, where a worktree has nothing to check out, an export of the index stands in for one: run `git checkout-index -a --prefix=<dir>/` from the repository's top level, with `<dir>` under `$TMPDIR`, then `git init` and `git add -A -f` in that directory. Every rule here that names the worktree applies to that directory, and afterward you verify that the directory is gone. Refer to the worktree by absolute path in every command and join chained steps with `&&`, so a failed step cannot leave the rest running in the shared checkout. Run teardown and verification as their own commands. Leave HEAD where it is: read other refs with `git show <ref>:<path>` rather than `git checkout` or `git switch`. A test that passes against a behavior-changing mutation does not pin the behavior. Before discarding the worktree, stop the process group of every suite run you started, since stopping a runner can leave the processes it spawned alive. After discarding the worktree, verify that `git worktree list` no longer shows it, that `git status --short` shows what it showed at the start, that HEAD is still on the branch it started on, and that the shared tree's dependency directory still resolves (a destroyed install leaves `git status` unchanged, since it is gitignored). Also confirm that no process from those groups, and none whose command line names the worktree path, is still running, and report by PID any process you could not stop. When you cannot list processes, report that check as unrun and name those process groups and the worktree path. Report damage you cannot repair, with the exact repair command, in place of findings. Cite the mutation and its result as evidence in the finding's paragraph; the `**Failure scenario:**` line still reads trigger → consequence: for a gap, the unguarded path and what shipping it lets through; for a redundant test, the next change that must update it although another test already guards the behavior.
+
+This covers any claim that a specific behavior is or is not guarded, including "tests exist but miss this path" — target the unguarded path. It also covers a claim that a test is redundant: for each behavior the candidate test asserts, mutate that behavior and confirm the candidate fails, then delete the candidate and confirm the test you name as still guarding the behavior fails against the same mutation. Settle "this module has no tests at all" by inspection.
+
+A surviving mutation proves a gap only when the mutated code behaves differently from the original for some reachable input. Name that input in the finding. When none can be named, the finding is void.
+
+Before running the suite, confirm the mutation landed: `git diff` in the worktree shows the intended change to each mutated file. An edit whose match pattern missed leaves the file untouched. Count the behavior as pinned only when the suite reports a failing test, not when the mutation command or a step chained before the suite exited nonzero.
+
+A failing test proves the behavior is pinned only when the mutation landed in the branch under review. Name that branch and the original behavior the mutation reproduces before running it, then re-read the mutated lines: a mutation placed a statement away fails for a reason unrelated to the gap, and voiding the finding on that evidence hides it with nothing to show the check went wrong.
+
+Skip the mutation when a fresh checkout cannot run the suite cheaply: it needs an install or build step, there is no runnable test command, or the suite depends on state outside the tree such as fixed ports, shared databases, caches, untracked local configuration, or external services. Needing an install is itself a skip trigger here, whether or not that install would succeed. Skip it as well when the line at issue bounds a loop, a retry, or a wait and the suite cannot run under a timeout enforced from outside the test process — the mutation hangs instead of failing, and a per-test timeout can depend on the test cooperating. Run the suite only against dependencies inside the worktree. Reaching the shared tree's install by any route, whether a link, a copy, a mount, or an environment variable redirecting resolution, is not a substitute, since removing a worktree deletes through symlinks and a redirected suite writes into the shared install. When skipping, say in the finding's paragraph that the claim rests on inspection alone.
+
+### Reviewing a Boundary Served by a Double
+
+When a test double is the only executor of an external boundary, a green tier is evidence about the double and not about production. Enumerate in the finding what the double cannot prove: which behaviors of the real dependency it fails to reproduce, and which passing tests are vacuous as a result. A double more permissive, more informative, or more forgiving than the real dependency is itself the defect, so report it against the double. When the changed code is exercised only through the double, the finding concerns that code's coverage in diff mode, naming the double as the reason the coverage is illusory.
+
+## What to Review
+
+- **No test coverage** — functions or modules with no corresponding tests
+- **Missing edge cases** — tests exist but miss critical paths (error handling, boundary conditions, empty inputs, concurrent access)
+- **Test efficacy** — tests that cannot fail when the behavior they guard breaks (no assertion when the guarded behavior is more than not throwing, an expected value computed by the code under test, a name that promises more than the input exercises, the assertion reads a surface the code under test does not write, or a mechanism other than the one under test produces the same observable)
+- **Double fidelity** — a test double more permissive, more informative, or more forgiving than the dependency it stands in for, so tests passing against it say nothing about production
+- **Test value** — tests that cost maintenance without independent protection: a scenario already pinned by a test at a stronger boundary, or replayed at every layer it crosses; assertions on implementation (source text, import or export lists, private call shapes) that break under a behavior-preserving refactor; a production export, flag, or hook that no production caller uses and exists only for a test
+- **Risk-level mismatch** — high-risk code (auth, data handling, financial logic) with only basic happy-path tests
+- **Convention gaps** — tests not following the project's established testing patterns, except a pattern of test-only production seams
+
+## Determination Criteria
+
+Flag an issue other than test value only when ALL of these hold:
+
+1. The code performs meaningful logic worth testing (not pure configuration, boilerplate, or generated code)
+2. The gap is discrete and actionable (a specific function or module, not "needs more tests generally")
+3. The missing coverage creates real risk proportional to the code's criticality
+
+Flag a test-value issue only when ALL of these hold:
+
+1. The proposed action leaves no behavior, credible regression, or independent contract unguarded. Name the test that guards it afterward. Public API, protocol, persisted format, migration, security, and platform contracts count, and a source-text check that is the cheapest guard on a user-facing name, key, or path guards one.
+2. The finding names one action: delete the test, fold it into an existing test's cases, move it to the boundary that owns the behavior, rewrite its assertions against observable behavior, or remove the test-only seam from production code.
+
+## Priority Levels
+
+- **P0** — Critical code with no tests (auth, data mutation, payment processing)
+- **P1** — Important code with no tests or high-risk code with only happy-path tests
+- **P2** — Code with tests but missing significant edge cases, or a production seam kept alive only by tests
+- **P3** — Minor coverage gaps, convention mismatches, or redundant or implementation-coupled tests
+
+## What to Ignore
+
+- Non-testable code (config, documentation, CI files, SKILL.md files, markdown)
+- Generated code or trivial getters/setters with no logic
+
+**Verdict label:** `Test Coverage: <adequate | issues found>`

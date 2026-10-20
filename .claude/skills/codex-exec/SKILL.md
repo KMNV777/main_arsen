@@ -1,0 +1,117 @@
+---
+name: codex-exec
+description: "Run autonomous task execution using the codex CLI. Use when the user asks to \"codex exec\", \"run codex exec\", \"execute a task with codex\", or \"delegate to codex\"."
+---
+
+# Codex Exec
+
+Autonomous task execution via the codex CLI. Runs non-interactively. Progress streams to stderr; final result on stdout.
+
+```bash
+codex exec --skip-git-repo-check "task description" < /dev/null
+```
+
+For large context, pipe it via stdin. The prompt stays as the argument, context is passed as `<stdin>` automatically:
+
+```bash
+cat context.txt | codex exec --skip-git-repo-check "question about the context"
+```
+
+Route text you did not author through this channel whatever its size — a diff, file contents, a code comment, a plan or spec, third-party feedback, command output. Write the context file with the Write tool so nothing is interpreted on the way in. Keep backticks, `$`, and straight double quotes out of the quoted argument even in text you wrote: the first two stay live inside it, and a double quote ends it. When the prompt itself must carry any of them, as when it quotes a title or a passage, write the whole prompt and its context to one file with the Write tool and pass `-`, so stdin is the entire prompt:
+
+```bash
+cat prompt.txt | codex exec --skip-git-repo-check -
+```
+
+## Sandbox
+
+**All `codex` Bash calls require `dangerouslyDisableSandbox: true`** (network access to OpenAI API). Without it, codex crashes with an `Operation not permitted` panic from the `system-configuration` crate before the model runs.
+
+## Git Repository Check
+
+**Every `codex exec` invocation requires `--skip-git-repo-check`**, resume turns included. Outside a git repository codex aborts before doing any work, printing `Not inside a trusted directory and --skip-git-repo-check was not specified.`, and never writes the `-o` file.
+
+## Stdin Gotcha
+
+Codex reads from stdin whenever stdin is non-TTY (per `codex exec --help`: "If stdin is piped and a prompt is also provided, stdin is appended as a `<stdin>` block"). In subagent and subprocess contexts the harness leaves stdin connected to a pipe that never EOFs, so a bare `codex exec "..."` hangs forever, printing only `Reading additional input from stdin...`.
+
+Always redirect stdin on non-piped invocations:
+
+```bash
+codex exec --skip-git-repo-check "task description" < /dev/null
+```
+
+The piped form (`cat context.txt | codex exec "..."`) is safe — `cat` closes the pipe after the file, sending EOF.
+
+## Synchronous Execution
+
+Run codex via the Bash tool as a foreground call (do not set `run_in_background`). Set `timeout: 600000`, the foreground maximum. A larger value is not honored: the harness backgrounds the call immediately and hard-kills codex at 600s, truncating its output. Within a valid timeout, codex runs foreground and returns its result synchronously when it finishes in time.
+
+Capture the `session id:` from the run's stderr chrome as it starts; it never appears in the `-o` file, and recovery depends on it. When filtering the run's output for it, use a filter that reads the stream to its end: one that exits early, such as `grep -m` or a trailing `head`, closes the pipe and kills the run. Do not pass `--ephemeral` when the run may need recovery, since it persists no session files.
+
+Give every run its own absolute `-o` path, named with a random tag so that runs spawned concurrently and successive runs in an iteration loop cannot collide on a path each derived independently. Pass it absolute: a relative path resolves against a working directory that drifts over a session, so the run does its work and exits having written no final message (`Failed to write last message file "<path>": No such file or directory`). A reused path holds the prior run's complete output until the current run exits, so an early read returns well-formed output from the wrong run; a fresh path turns that same read into a detectable empty one. Treat content in the `-o` file as final only once the run has exited.
+
+A run that outlives the timeout is normally **force-backgrounded**: the result carries a task ID and an output file path, and the run continues to completion. Recover it by reading the output file: `Read` the path, then `Read` it again once the `<task-notification>` reports completion.
+
+Rarely the run is **hard-killed** instead, giving an error exit (code 143) reading `Command timed out after <duration>` with no task ID and no `-o` file. Do not re-run the prompt from scratch; that discards the work already done and hits the same ceiling. Resume the session with a fresh output path, asking for the findings as the final message rather than as a file write:
+
+```bash
+codex exec --skip-git-repo-check --sandbox <original-sandbox> -o <fresh-output-path> resume <session-id> \
+  "Reply now with your complete findings as your final message." < /dev/null
+```
+
+A resume turn takes its sandbox from its own command line rather than from the session, so pass the original run's `--sandbox` value again, ahead of the `resume` subcommand, which does not accept the flag after it. When the kill left no session id in hand, recover it from the newest `~/.codex/sessions/<YYYY>/<MM>/<DD>/rollout-<timestamp>-<session-id>.jsonl` (the id is the UUID in the filename), listing a single day directory so the ordering is right. `--last` in place of `<session-id>` also works when no other codex run is in flight. Do not consult `~/.codex/session_index.jsonl`; it lags behind the rollout files.
+
+A run can also exit 0 within the timeout without completing the task, its final message **asking for authorization** to take an approach its own instructions require it to clear first. Read the final message before treating the run as finished: the exit code and the well-formed message both read as success. Resume the session with the authorization as the prompt, per the form above, passing the `--sandbox` value the authorized approach needs. Do not re-run the original prompt; it reaches the same gate.
+
+Never wait with `Monitor` (it returns immediately, and events that arrive after your final text are dropped), and never return the task ID, an interim file snapshot, or `"Waiting for codex to finish"` as the result — each is a false-empty return.
+
+## Transient Crash Retry
+
+Re-run the command once when the Bash call returned an error exit with no stdout and no task ID. A timeout is not a crash: when the error text reads `Command timed out after <duration>`, resume the session per Synchronous Execution rather than re-running. An aborted git-repo check is not a crash either: when the error text reads `Not inside a trusted directory and --skip-git-repo-check was not specified.`, add the flag per Git Repository Check and run again. Recover a force-backgrounded run per Synchronous Execution rather than retrying it. Keep the same prompt. Treat a second failure as final.
+
+Treat models-manager and cache-TTL errors as non-fatal warnings. Read the error text for usage-limit and authentication signatures and report those without retrying.
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-m <model>` | Model for the run |
+| `--sandbox read-only` | Analysis, code reading, generating reports |
+| `--sandbox workspace-write` | Editing files within the project |
+| `--sandbox danger-full-access` | Installing packages, running tests, system operations |
+| `--json` | JSON Lines output (progress + final message) |
+| `-o <path>` | Write final message to a file |
+| `--output-schema <path>` | Enforce JSON Schema on the output |
+| `--ephemeral` | No persisted session files |
+| `--skip-git-repo-check` | Bypass git repository requirement |
+
+For fix or implementation tasks, default to `--sandbox workspace-write` so Codex can edit files. Use `--sandbox read-only` for analysis or research tasks. Pass `--sandbox` and no other permission flag. Omitting `--sandbox` falls back to the codex config and project trust level (trusted projects run workspace-write), so always pass the flag explicitly.
+
+Omit `-m`, leaving the run on codex's configured model. When the user named a model for this run, add `-m <model>` to every `codex exec` command in this skill, resume turns included, and pass the name verbatim.
+
+## Prompt Shaping
+
+Codex uses XML tags in its own context scaffolding, so the model parses them natively. Structure prompts with XML tags for clearer responses:
+
+- `<task>`: The concrete job and relevant context.
+- `<structured_output_contract>`: Required output shape, ordering, and format.
+- `<compact_output_contract>`: Same purpose but for concise prose responses.
+- `<grounding_rules>`: When claims must be evidence-based.
+- `<dig_deeper_nudge>`: Push past surface-level findings to check for second-order failures.
+- `<verification_loop>`: When correctness matters — ask Codex to verify before finalizing.
+
+Instruct codex to carry out the task itself rather than delegating to a peer review or consultation skill that crosses back to Claude. The prompt has already crossed the tool boundary; a further crossing that fails mid-flight leaves this run holding a question instead of an answer.
+
+Keep prompts compact, with tight output contracts. One clear task per exec call. For a large scope, instruct codex to report findings as it goes rather than verifying exhaustively before reporting, so a run that hits the timeout ceiling still yields usable output.
+
+## Parallel Execution
+
+Codex supports parallel sub-agents via `spawn_agent` / `wait_agent`. The model will not fan out unless the prompt explicitly requests it. See [references/parallel-execution.md](references/parallel-execution.md) for patterns and limitations.
+
+## Interpreting Results
+
+- Exec output is a starting point, not a guaranteed solution
+- Cross-reference suggestions with project documentation and conventions
+- Test incrementally rather than applying all changes at once
+- For file-editing tasks, always review the diff before committing

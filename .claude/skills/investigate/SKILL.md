@@ -1,0 +1,184 @@
+---
+name: investigate
+description: "Systematically investigate bugs, test failures, build errors, performance issues, or unexpected behavior by cycling through characterize-isolate-hypothesize-test steps. Use when the user asks to \"investigate this bug\", \"debug this\", \"figure out why this fails\", \"find the root cause\", \"why is this broken\", \"troubleshoot this\", \"diagnose the issue\", \"what's causing this error\", \"look into this failure\", \"why is this test failing\", or \"track down this bug\"."
+---
+
+# Investigate
+
+Systematic methodology for finding the root cause of bugs, failures, and unexpected behavior. Cycle through characterize-isolate-hypothesize-test steps, with oracle escalation for hard problems. Diagnose the root cause — do not apply fixes.
+
+Optional: `$ARGUMENTS` contains the problem description or error message.
+
+## Step 1: Characterize
+
+Gather the symptom and establish what is actually happening:
+
+1. **Collect evidence** — error message, stack trace, test output, log entries, or user description of unexpected behavior
+2. **Classify the problem type**:
+
+| Signal | Type |
+|--------|------|
+| Stack trace / exception | Runtime error |
+| Test assertion failure | Test failure |
+| Compilation / bundler / build error | Build failure |
+| Type checker error (tsc, mypy, pyright) | Type error |
+| Slow response / high CPU / memory growth | Performance |
+| "It does X instead of Y" / no error | Unexpected behavior |
+
+3. **Establish reproduction** — run the failing command, test, or operation. If the problem cannot be reproduced (intermittent, environment-specific), document the constraints and proceed with historical evidence.
+
+Record the exact reproduction command and its output for verification. For intermittent or long-running reproductions, use the Monitor tool to tail logs filtered for relevant signals (errors, stack traces, specific identifiers) so failures surface live while you work.
+
+## Step 2: Isolate
+
+Narrow from "something is wrong" to "the problem is in this area." Read [references/problem-type-playbooks.md](references/problem-type-playbooks.md) for type-specific first moves and tool sequences.
+
+### Git Archeology
+
+For all problem types, check what changed recently near the failure point:
+
+```bash
+git log --oneline -20 -- <file>
+git blame -L <start>,<end> <file>
+```
+
+If a known-good state exists (e.g., "this worked yesterday"), consider `git bisect` to pinpoint the breaking commit.
+
+When the problem description names a version, tag, or build that differs from the ref under investigation, resolve it to a ref and read what changed on the failing path between the two before generating hypotheses:
+
+```bash
+git diff <reported-ref>..HEAD -- <failing-path-files>
+```
+
+Read the full diff rather than its `--stat` summary. Carry each difference that could produce the symptom forward as a ranked hypothesis.
+
+### Upstream Issue Search
+
+When the failure surfaces inside a third-party dependency, search its issue tracker for a distinctive string from the error before reading deeper into the dependency's code. An issue whose symptom matches often names the cause and the fix outright. Carry a match forward as a ranked hypothesis and test it.
+
+### Scope Narrowing
+
+- **Stack traces**: Read the throwing function and its callers — full functions, not just the flagged line
+- **Test failures**: Read both the test and the system under test
+- **Build errors**: Read the config file and the referenced source
+- **Unexpected behavior**: Trace the data flow from input to the unexpected output
+
+Before treating a record, file, or build artifact as evidence of the system's behavior, confirm the system under test produced it: check creator, source metadata, or generation time. Suspect imported, seeded, hand-edited, and leftover data from an earlier run, which reads identically to generated output. A checkout of another repository is the same trap: confirm it is current before reading it as evidence, since a stale one reads identically to the authoritative source.
+
+## Step 3: Hypothesize
+
+Before forming a hypothesis about the machinery around a failure, such as a toolchain version, a configuration policy, or an environment difference, read the failing line, identify every path, package, symbol, or resource it names, and confirm each one resolves. Error text often names the site that consumed a missing input rather than the input itself, so the surrounding machinery looks responsible when it is not. Rank a machinery hypothesis only after every named reference checks out.
+
+Once every named reference resolves and the operation has never once succeeded, rank a refusal ahead of any race or resource-exhaustion hypothesis: a denied permission, a firewall rule, an allowlist, an expired or missing credential. Intermittent failure is what a race or a contended resource usually looks like, so a run of attempts with zero successes ranks both below a refusal. Carry the hard blocks on the failing path into Step 4 as the first hypotheses to test, ahead of any measurement or instrumentation.
+
+Generate 2-4 hypotheses ranked by likelihood. Each hypothesis must be **falsifiable** — specify what evidence would confirm or refute it.
+
+Format:
+
+```
+H1 (most likely): [description] — confirmed if [X], refuted if [Y]
+H2: [description] — confirmed if [X], refuted if [Y]
+H3: [description] — confirmed if [X], refuted if [Y]
+```
+
+Check that the observed case can discriminate: when confirming and refuting evidence would look identical in it, the case is degenerate and any verdict drawn from it is inconclusive. Degenerate cases hide the difference they are supposed to reveal, such as a scaling factor of 1, a single-element collection, or an identity transform. Find a non-degenerate case, or construct one as a Step 4 experiment.
+
+### Parallel Investigation
+
+For complex problems with 3+ hypotheses and a non-obvious root cause, spawn parallel investigators simultaneously.
+
+**Spawn condition**: 3+ hypotheses AND the problem is not a simple typo, missing import, or syntax error.
+
+**Skip** when 1-2 hypotheses are obvious (e.g., stack trace points directly to the bug).
+
+Before dispatching, read the project's test configuration and CI workflow to identify any test tier that resets a shared external resource between tests, such as a database, a fixed port, or a cache. Such tiers have no cross-process interlock, so agents running them concurrently wipe each other's state and return failures that look like real defects. Name any such tier to every agent as off-limits.
+
+When the evidence lives in a repository other than this one, including a submodule or a vendored clone with its own remote, establish the authoritative ref before dispatching and bring it up to date, fetching it or reading it through the forge API. A local checkout may be behind its remote, and an agent reading a stale one returns findings the current code has already resolved. Name that ref and how to read it in every agent prompt, including the text the Codex Agent forwards.
+
+Emit all Agent tool calls below in one assistant message. Each Agent call uses `model: "opus"` and no `name`. Wait for every agent to report before continuing. Do not begin the next step on a partial set, and do not relaunch an agent that has not yet reported. Expect (one Agent per hypothesis + one Codex Agent) total. State the count explicitly when emitting the calls. Every agent's prompt must direct it to treat the shared working tree and its git index as read-only and to gather evidence by reading and reasoning; experiments that mutate code wait for Step 4, where they run one at a time. HEAD stays where it is: read other refs with `git show <ref>:<path>` rather than `git checkout` or `git switch`.
+
+- **Hypothesis Agent (one per hypothesis):** Each receives the hypothesis, relevant file paths, what evidence to look for, and instructions to report **confirmed** / **refuted** / **inconclusive** with evidence. Budget: max 5 tool calls per subagent.
+- **Codex Agent:** Launch one Agent whose prompt instructs the subagent to invoke `/consult-codex` via the Skill tool with a focused prompt describing the problem, reproduction, and files examined. The multi-turn conversation allows it to dig deeper into patterns the hypothesis-driven subagents miss. Run the `/evaluate-findings` skill on its output after the Agent returns.
+
+One exception to the wait: when every Hypothesis Agent has reported and only the Codex Agent has not, run the Step 4 actions that change nothing in the working tree, its git index, or anything the Codex Agent's prompt points it at, and state each result as it lands. The merge, every other Step 4 action, the Iteration decision, and the Investigation Report wait for the Codex Agent's report.
+
+Merge the investigators' results. Codex findings that overlap with a subagent's confirmed hypothesis reinforce confidence. Novel codex findings become additional hypotheses to test in Step 4.
+
+## Step 4: Test
+
+Verify each hypothesis with minimal, targeted actions:
+
+| Action Type | Tool |
+|-------------|------|
+| Find usage or pattern | Grep |
+| Read surrounding code | Read |
+| Check recent changes | Bash (`git log`, `git blame`, `git diff`) |
+| Run isolated test | Bash (specific test command) |
+| Check dependency version | Bash (`npm ls`, `pip3 show`, etc.) |
+| Inspect runtime state | Bash (add temporary logging, run, check output) |
+| Vary one suspected variable | Bash (construct a throwaway fixture, run, compare) |
+
+When read-only evidence cannot discriminate, construct minimal throwaway fixtures that vary one suspected variable at a time. Exercise the system's inputs, and leave the working tree and its git index unchanged. Label each fixture clearly, delete them once the experiment concludes, and report anything that could not be deleted. When a check edits a tracked file instead, such as adding temporary logging, remove the edit once the check concludes and confirm with `git diff -- <file>` that the file is back to its pre-check state before recording the result. Write to an external or live system only after explicit user approval via `AskUserQuestion`, stating the target system, every record the write will touch including those reached through triggers, cascades, and hooks, and the cleanup plan.
+
+Record each result:
+
+| Hypothesis | Verdict | Evidence |
+|------------|---------|----------|
+| H1 | confirmed / refuted / inconclusive | [what was found] |
+| H2 | confirmed / refuted / inconclusive | [what was found] |
+
+### Iteration
+
+If all hypotheses are refuted or inconclusive:
+
+1. Document what was learned — each refuted hypothesis eliminates a possibility and narrows the search
+2. Return to Step 2 with the new information to re-isolate
+3. Generate new hypotheses in Step 3 based on updated understanding
+
+**Cycle budget**: maximum 2 full cycles (hypothesize → test → learn → repeat) before escalating.
+
+## Escalation
+
+After 2 failed hypothesis cycles, offer escalation to `/consult-oracle` via `AskUserQuestion`:
+
+```
+Investigation stalled after [N] hypothesis cycles.
+
+Tested: [summary of hypotheses and evidence]
+Remaining unknowns: [what is still unclear]
+
+Escalate to Oracle? (consults external model with full context)
+```
+
+Proceed only if the user approves.
+
+## Investigation Report
+
+Output results as text:
+
+```
+Investigation Report:
+
+Problem: [one-line description]
+Type: [runtime error | test failure | build failure | type error | performance | unexpected behavior]
+Root cause: [confirmed cause, or "unresolved" with best hypothesis]
+
+Evidence:
+- [what confirmed the root cause]
+
+Suggested fix: [description of what to change, or "needs further investigation"]
+Reproduction command: [command to verify the fix once applied]
+
+Hypotheses tested:
+1. [hypothesis] — [confirmed/refuted/inconclusive] — [evidence]
+2. [hypothesis] — [confirmed/refuted/inconclusive] — [evidence]
+
+Escalation: [none | oracle]
+```
+
+Then use the TaskList tool and proceed to any remaining task.
+
+## Rules
+
+- If the problem turns out to be environmental (wrong language runtime version, a declared dependency not installed locally, OS-specific), report that clearly — it may not require a code fix. A dependency the project never declared is a manifest defect, so report that as a code fix instead.
+- If the problem is in a dependency (not the project's code), document the dependency issue and suggest the options that leave the dependency's code unmodified: workarounds, and a report upstream unless an existing issue covers the defect or the dependency's latest release no longer has it.
