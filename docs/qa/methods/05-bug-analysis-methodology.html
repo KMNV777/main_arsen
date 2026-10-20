@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Методика анализа багов — CS2, F2F (TO BE)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="cs2-f2f-to-be">Методика анализа багов — CS2, F2F (TO BE)</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Статус: проект методики, подтверждает QA Lead. Порядок работы, роли, серьёзность и статусы задаёт документ «Регламент тестирования»; ссылки вида «Регламент, раздел 8» указывают на него. Метрики и реестр рисков — в документе «Стратегия тестирования».</p>
+<h2 id="1">1. Назначение и границы</h2>
+<p>Методика описывает, как исполнитель и Lead разбирают дефект от момента обнаружения до выводов по команде: локализация, оформление, триаж, ретест, анализ причин пропуска и анализ трендов.</p>
+<p>Шаблон баг-репорта, серьёзность, статусы, сроки эскалации и правило «баг старше 30 дней» живут в регламенте и здесь только применяются.</p>
+<h2 id="2">2. Уровни анализа</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Уровень</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1. Локализация</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что сломано, где и при каких условиях</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">При обнаружении</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2. Оформление и триаж</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Как серьёзно, чей, чинить ли сейчас</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель, владелец зоны, владелец продукта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">При заведении и на груминге</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3. Ретест и анализ фикса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исправлено ли, не сломали ли вокруг</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статус «Исправлен»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4. Анализ пропуска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Почему дефект дошёл до prod или регресса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект prod, Blocker или Critical вне регресса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5. Анализ трендов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Где и почему дефектов больше</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Спринт, релиз, квартал</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-1">3. Уровень 1: локализация</h2>
+<h3 id="31">3.1 Порядок</h3>
+<ol>
+<li><strong>Воспроизвести.</strong> Повторить минимум дважды. Если не воспроизводится — записать условия и число попыток.</li>
+<li><strong>Минимизировать шаги.</strong> Убрать всё лишнее, оставить кратчайший путь к дефекту.</li>
+<li><strong>Зафиксировать условия.</strong> Сборка, стенд, роль, данные, браузер или устройство, время.</li>
+<li><strong>Определить слой.</strong> Клиент, сервис, данные, интеграция (очередь, чужой сервис), окружение.</li>
+<li><strong>Собрать вложения.</strong> Видео или скрин, лог клиента, консоль, лог сервиса, запрос и ответ.</li>
+<li><strong>Проверить границы.</strong> Зависит ли от роли, данных, сборки, стенда; воспроизводится ли на другой сборке (до или после).</li>
+<li><strong>Искать среди открытых.</strong> Перед заведением — поиск дублей по зоне и симптому.</li>
+</ol>
+<h3 id="32">3.2 Куда смотреть по симптому</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Симптом</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Первое, что проверить</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Инструмент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Клиент не загружается или зависает</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Номер сборки, консоль браузера, статус-коды ресурсов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">DevTools: Console, Network</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Действие не выполняется</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Запрос и ответ сервера, код ответа</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">DevTools: Network, Postman, Swagger</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка 4xx</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Параметры запроса, права, авторизация</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Postman, ответ сервиса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка 5xx</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лог сервиса в момент запроса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Grafana, если журнал стенда подключён</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные не совпадают</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что лежит в базе и что показывает клиент</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">SQL-клиент (DBeaver, DataGrip), SELECT с JOIN</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сообщение не дошло</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Прохождение по очереди: отправитель, брокер, получатель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Логи, брокер сообщений (Kafka, RabbitMQ)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Работает у одной роли, не работает у другой</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Права и конфигурация ролей</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сравнение запросов под разными ролями</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Только на одном стенде</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Версия сборки, конфигурация, данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сравнение стендов</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не воспроизводится стабильно</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Гонки, таймауты, зависимость от данных, сеть</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Повтор с логами, сниффер (Fiddler, Charles)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс: раньше работало</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Какая сборка последняя «хорошая»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сборка до и после, список изменений</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 Вложения</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Тип</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда обязателен</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Видео или скрин</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Всегда для клиента</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лог клиента или консоль</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибки клиента</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Запрос и ответ</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибки API</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лог сервиса или ссылка на Grafana</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подозрение на сервис</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Номер сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Всегда для клиента</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-2">4. Уровень 2: оформление и триаж</h2>
+<h3 id="41-">4.1 Баг-репорт</h3>
+<p>Поля по регламенту, раздел 8: Summary, Description, Вложения, Environment, Sprint, Regression, Component, Severity.</p>
+<p><strong>Формула Summary:</strong> «Зона. Что сломано, где, на каком действии». Пример (условный): «Формы. Не сохраняется значение «Название» в карточке записи при нажатии «Сохранить»».</p>
+<p><strong>Формула Description:</strong></p>
+<ol>
+<li>Шаги воспроизведения, пронумерованные.</li>
+<li>Ожидаемый результат (из критерия приёмки, требования или макета, а не «из вкуса»).</li>
+<li>Фактический результат.</li>
+<li>Условия: сборка, стенд, роль, данные.</li>
+<li>Кто нашёл, когда.</li>
+<li>Как часто воспроизводится.</li>
+</ol>
+<p><strong>Плохой баг-репорт</strong> (условный): «Форма не работает. Проверьте». Нет зоны, шагов, результата, сборки.</p>
+<p><strong>Хороший баг-репорт</strong> (условный):</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Поле</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Summary</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Формы. Не сохраняется «Название» в карточке записи при нажатии «Сохранить»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Description</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1. Авторизоваться как «Редактор». 2. Открыть запись №1. 3. Изменить «Название», нажать «Сохранить». Ожидал: значение сохранено (критерий 2 STORY-123). Получил: интерфейс показывает успех, при повторном открытии старое значение. Воспроизводится 3 из 3</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вложения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Видео, запрос и ответ (PUT вернул 200 без изменения), лог сервиса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Environment</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">test, сборка 1234</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Component</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Формы</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Regression</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Severity</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Major</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42">4.2 Серьёзность и приоритет</h3>
+<p>Серьёзность определяется по таблице регламента (Blocker, Critical, Major, Normal, Minor). Исполнитель не подстраивает серьёзность под приоритет: серьёзность — свойство дефекта, приоритет после создания может сменить владелец продукта.</p>
+<p>Алгоритм выбора серьёзности:</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ответ</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Серьёзность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Можно ли пройти критичный путь или открывается ключевой модуль?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Blocker</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сломан ли рабочий сценарий без обхода?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Critical</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сломан ли сценарий, но есть обход?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Major</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект есть, но под правила выше не подходит?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Normal</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Портит удобство, сценарий не ломает?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Minor</td>
+</tr>
+</tbody>
+</table>
+<p>Пограничные случаи: сомнение между двумя серьёзностями решается в сторону большей; спор фиксируется комментарием, решение принимает QA Lead.</p>
+<h3 id="43">4.3 Дубли и связанные дефекты</h3>
+<ul>
+<li>Перед заведением ищем по зоне, симптому и тексту ошибки.</li>
+<li>Дубль закрывается ссылкой на основной баг.</li>
+<li>Баг с общей причиной связывается ссылкой related.</li>
+<li>Метка Regression = Да ставится, если сценарий раньше работал, входит в регресс или найден в регрессе.</li>
+</ul>
+<h3 id="44">4.4 Триаж</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто принимает</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чиним в спринте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны (Normal, Minor), владелец продукта (Major)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг в спринте, срок фикса комментарием</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В бэклог</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Те же</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Метка backlog и решение комментарием</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не баг</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрыт с объяснением</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блокер или Critical</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нашедший эскалирует за 30 минут (Blocker) или 2 часа (Critical, в регрессе — 30 минут)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик зоны и QA Lead</td>
+</tr>
+</tbody>
+</table>
+<p>Блок «Выход из проверки» регламента: Major в бэклоге — с комментарием владельца продукта, Normal и Minor — владельца зоны.</p>
+<h2 id="5-3">5. Уровень 3: ретест и анализ фикса</h2>
+<ol>
+<li>Разработчик делает самопроверку и ставит «Исправлен» с номером сборки.</li>
+<li>Исполнитель проверяет, что сборка содержит фикс.</li>
+<li>Повторяет шаги из баг-репорта.</li>
+<li>Проверяет граничные варианты и соседние сценарии («проход вокруг»).</li>
+<li>Принимает решение:</li>
+</ol>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Результат</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг не воспроизводится, вокруг чисто</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статус «Закрыт» (Blocker закрывается после ретеста исполнителем; Critical — с согласия нашедшего и QA Lead)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тот же сценарий и та же причина воспроизводятся</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">«Переоткрыт»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Найден другой дефект или другая причина</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новая задача со связью related, исходный баг закрывается</td>
+</tr>
+</tbody>
+</table>
+<p>Анализ фикса: фикс закрыл симптом или причину? Добавлена ли воспроизводящая проверка (кейс или автотест) для Blocker, Critical и Major — см. подход test-first, раздел 8.</p>
+<h2 id="6-4">6. Уровень 4: анализ пропуска</h2>
+<p>Запускается для: дефекта с меткой prod; Blocker или Critical, найденного вне регресса; дефекта, который прошёл через регресс.</p>
+<h3 id="61">6.1 Вопросы</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Варианты ответа</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Где дефект должен был быть найден?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Требования и критерии, ревью кода, функциональная проверка, smoke, регресс, автотест, stage или демо</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Почему не найден?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет критерия; нет кейса; кейс был, но не вошёл в срез; кейс был нестабильным; стенд или данные отличались; не было сборки; проверка не доехала по времени</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что в нашей зоне контроля?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист smoke, кейсы регресса, автотесты, критерии, данные</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что меняем?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пункт в smoke; кейс в регресс; критерий в DoR; автотест; правило отбора регресса; данные или стенд</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кто и к какому сроку?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец и срок</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62">6.2 Шаблон записи</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Поле</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что писать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ссылка</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Описание</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Одно предложение: что случилось у пользователя</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Где пропущен</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Этап процесса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Почему пропущен</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Причина по классификатору (раздел 8)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Корректирующее действие</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что меняем</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец и срок</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Фамилия, дата</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Как проверим, что действие сработало</td>
+</tr>
+</tbody>
+</table>
+<p>Запись делает QA Lead на синке и оставляет в баге комментарием. Правка чек-листа smoke или регресса (Регламент, раздел 11) входит в корректирующее действие.</p>
+<h3 id="63">6.3 Метод «пять почему»</h3>
+<p>Для дефектов с высоким влиянием на синке разбираем цепочку: симптом → почему не поймали → почему не было проверки → почему не было критерия или кейса → что меняем в процессе. Цель — действие, а не виновник.</p>
+<h2 id="7-5">7. Уровень 5: анализ трендов</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Срез</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Метрика</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По компонентам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Где дефектов больше всего</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Распределение дефектов по компонентам</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По серьёзности</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Растёт ли доля серьёзных</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые дефекты по серьёзности</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По причинам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откуда берутся дефекты</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Классификатор причин (раздел 8)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По этапу обнаружения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что мы ловим раньше, что позже</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раннее выявление, Defect Detection Percentage</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По утечке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сколько дошло до prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Defect Leakage</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По переоткрытиям</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Качество фиксов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Reopen rate</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По возрасту</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что висит в бэклоге</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баги старше 30 дней</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По времени</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Как быстро чиним</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время исправления</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">Ритм</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Период</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Синк (раз в неделю)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открытые Blocker и Critical, баги старше 30 дней, дефекты prod; для каждого — решение</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конец спринта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Reopen rate, распределение по компонентам, самые частые причины</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Релиз</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефекты регресса, утекшие, найденные в спринте до заморозки</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартал</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчёт по дефектам (структура ниже), изменения в чек-листах и регрессе</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">Структура квартального отчёта по дефектам</h3>
+<ol>
+<li>Сводка: число дефектов по серьёзности, доля prod.</li>
+<li>Топ-3 компонента по числу дефектов и по серьёзности.</li>
+<li>Топ причин по классификатору.</li>
+<li>Пропуски: что и почему прошло, какие действия выполнены.</li>
+<li>Тренды: Defect Leakage, reopen rate, время исправления.</li>
+<li>Что меняем в smoke, регрессе, критериях, автотестах.</li>
+</ol>
+<h2 id="8">8. Классификатор причин дефектов</h2>
+<p>Причина записывается в баге после исправления (поле или метка в Jira; решение на подтверждение).</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Причина</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Требования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет, неполные или противоречивые требования и критерии</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Реализация</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в коде зоны</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Интеграция</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Несогласованность клиента, сервисов, очереди, контракта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные и миграции</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные в нужном состоянии отсутствуют или миграция сломала</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конфигурация и окружение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Настройки, стенд, версии</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сборка и выкладка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сборка не та, не раскатана, неполная</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доступ и права</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Роли, авторизация, формы</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автотест или кейс</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ошибка в самом тесте, а не в продукте</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чужой сервис</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект вне поставки команды</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не воспроизводится или не баг</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрыт без исправления</td>
+</tr>
+</tbody>
+</table>
+<p>Причина «Автотест или кейс» и «Не баг» не считаются в утечку и метриках дефектов продукта.</p>
+<h2 id="9">9. Бэклог и старые баги</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ситуация</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг в бэклоге старше 30 дней без движения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead выносит на синк: закрыть, починить или явно оставить</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг не воспроизводится месяц</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрываем с комментарием «не воспроизводится»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нескольких багов общая причина</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Связать related, взять в одну задачу</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Major в бэклоге</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Комментарий владельца продукта обязателен</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10">10. Роли</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Роль</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Локализует, оформляет, проверяет фикс, закрывает; не подстраивает серьёзность под приоритет</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исправляет, самопроверяет, пишет срок фикса для Blocker и Critical</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решает по Normal и Minor, разбирает красные автотесты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец продукта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решает по Major, приоритет</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ведёт анализ пропусков и трендов, правит чек-листы, выносит старые баги на синк</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Руководитель проекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решает по срокам при угрозе дате</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11">11. Типичные ошибки</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ошибка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Чем плохо</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как исправить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баг без шагов и результата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не воспроизводится</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаблон Description</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Серьёзность «под приоритет»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Искажаются метрики и решения</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Алгоритм раздела 4.2</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубли без поиска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шум, путаница</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поиск по открытым перед заведением</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Переоткрытие вместо нового дефекта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Смешиваются причины</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Правило раздела 5</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Анализ пропуска ради виноватого</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Люди скрывают пропуски</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Цель — корректирующее действие</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет причины после фикса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нечего анализировать в трендах</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Классификатор причин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баги висят в бэклоге</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Теряется доверие</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Просмотр на синке, 30 дней</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-">12. Чек-лист качества баг-репорта</h2>
+<ul>
+<li>☐ Summary в формате «Зона. Что сломано, где, на каком действии»</li>
+<li>☐ Есть поиск по открытым, дублей нет</li>
+<li>☐ Шаги нумерованы, воспроизводятся без автора</li>
+<li>☐ Ожидаемый результат ссылается на критерий, требование или макет</li>
+<li>☐ Фактический результат описан без оценок</li>
+<li>☐ Указаны сборка, стенд, роль, данные</li>
+<li>☐ Вложения: видео или скрин, лог, запрос и ответ</li>
+<li>☐ Серьёзность по алгоритму, Component одна, Regression указан</li>
+<li>☐ Для Blocker и Critical есть эскалация в срок</li>
+</ul>
+<h2 id="13">13. Метрики и связь с регламентом</h2>
+<p>Используются стандартные метрики стратегии: Defect Leakage, Defect Detection Percentage, открытые дефекты по серьёзности, распределение дефектов по компонентам, возраст дефектов, reopen rate, время исправления. KPI по багам на человека не применяются.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где в регламенте</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Серьёзность, поля баг-репорта, новые дефекты на ретесте</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 8</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Эскалация Blocker и Critical</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 11</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статусы бага</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 7.1</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект в prod после выпуска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 11 (исключения)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Баги старше 30 дней</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 8, синк</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14">14. Решения на подтверждение</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто подтверждает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Классификатор причин дефектов и поле или метка в Jira</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, администратор Jira</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаблон записи анализа пропуска и разбор на синке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартальный отчёт по дефектам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, руководитель проекта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таблица быстрой локализации по симптомам (раздел 3.2) как стандарт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+</tbody>
+</table>
+</body></html>

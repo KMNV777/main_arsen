@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Методика составления Smoke-проверок — CS2, F2F (TO BE)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="smoke-cs2-f2f-to-be">Методика составления Smoke-проверок — CS2, F2F (TO BE)</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Статус: проект методики, подтверждает QA Lead. Порядок работы, роли и статусы задаёт документ «Регламент тестирования»; ссылки вида «Регламент, раздел 9» указывают на него. Слои проверки и инструменты — в документе «Стратегия тестирования».</p>
+<h2 id="1">1. Назначение и границы</h2>
+<p>Smoke — короткий проход критичного пути, который отвечает на один вопрос: пригодна ли сборка для дальнейшей проверки и выпуска. Результат бинарный: годна или не годна.</p>
+<p>Smoke не ищет все дефекты, не заменяет функциональную проверку задач и регресс. Он быстро показывает, что сборка не сломана на самом важном.</p>
+<h2 id="2-smoke">2. Где smoke встречается в процессе</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Smoke</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что запускается</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Регламент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke сборки клиента</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Каждая сборка, раскатанная на test, stage или prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной клиент по чек-листу smoke в TestOps; CI smoke API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 7</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke кандидата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Номер кандидата известен</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной клиент и CI smoke API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 19, очередь 1 регресса</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke после фикса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новая сборка кандидата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">CI smoke API и короткий ручной smoke</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 9</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke критичного пути на stage</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кандидат на stage</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель из задачи релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист smoke, критичный путь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 25</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke критичного пути на prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выкладка завершена</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель из задачи релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист smoke, безопасное подмножество</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 30</td>
+</tr>
+</tbody>
+</table>
+<p>Результат фиксируется закрытым прогоном в TestOps и записью в задаче релиза (для stage и prod).</p>
+<h2 id="3">3. Принципы</h2>
+<ol>
+<li><strong>Критичный путь.</strong> В smoke входит то, без чего продукт не пригоден: доступ, ключевое действие, запись результата, связь клиента и сервисов.</li>
+<li><strong>Коротко.</strong> Ручной smoke укладывается в 15–30 минут, автоматический smoke API — в минуты (ориентир, фиксируется по базовой линии).</li>
+<li><strong>Стабильность.</strong> Smoke не содержит нестабильных шагов. Нестабильный шаг лечим или выводим из smoke: красный smoke должен означать дефект, а не шум.</li>
+<li><strong>Бинарный итог.</strong> Любой красный шаг делает сборку не годной. Решение «частично годна» не принимаем.</li>
+<li><strong>Один набор — разные окружения.</strong> Набор общий для test, кандидата, stage и prod; для prod используется безопасное подмножество (раздел 8).</li>
+<li><strong>Автоматизируем API.</strong> Повтор критичного пути не должен зависеть от рук: smoke API запускается из GitLab после сборки.</li>
+<li><strong>Растёт только по делу.</strong> Новый пункт появляется после пропущенного бага или изменения критичного пути (правило чек-листа доступа и дыр smoke).</li>
+</ol>
+<h2 id="4-smoke">4. Как составить чек-лист smoke</h2>
+<p>Чек-лист smoke хранится в Allure TestOps со ссылкой на схему разработки (Регламент, раздел 4: «критичный путь со ссылкой на схему разработки»).</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Взять схему критичного пути у разработки: клиент, сервисы, данные, очередь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Список узлов пути</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Записать ключевые пользовательские сценарии: вход, главное действие, получение результата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сквозной сценарий</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разложить сценарий на проверки по узлам: клиент открывается, авторизация, ключевой вызов сервиса, запись данных, отображение результата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кандидаты в smoke</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценить каждого кандидата (раздел 5): влияние, вероятность поломки, стоимость пропуска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ранжированный список</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отобрать минимально достаточный набор в рамках лимита времени</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Черновик чек-листа</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Назвать входной контроль: версия сборки, доступность стенда, учётные записи</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел «Перед началом»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задать результат для каждой проверки: что видим, какой код ответа</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ожидаемые результаты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отметить слой: ручной клиент, API в CI, один критичный UI-путь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Колонка «Слой»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отметить окружения: test, stage, prod; для prod — безопасно ли</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Колонка «Окружения»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">10</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Согласовать с разработкой и владельцами зон; ревью Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Активный чек-лист</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-smoke">5. Отбор проверок в smoke</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Критерий</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вес</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Влияние</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что теряет пользователь, если шаг сломан?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокий, если путь блокируется</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вероятность поломки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Как часто здесь были дефекты при выкладке?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выше, если были дефекты prod</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стоимость пропуска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сколько стоит дефект на prod?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выше для данных, денег, доступа</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Время</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сколько занимает проверка?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дорогие проверки в smoke не включаем</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стабильность</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Можно ли выполнять без шума?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нестабильные не включаем</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Независимость</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не дублирует ли другой шаг?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубли убираем</td>
+</tr>
+</tbody>
+</table>
+<p>Шаг входит в smoke, если влияние высокое и проверка быстрая и стабильная. Остальное — в риск-регресс или функциональную проверку.</p>
+<h2 id="6-smoke">6. Шаблон чек-листа smoke</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">№</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Узел критичного пути</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Проверка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ожидаемый результат</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Слой</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">test</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">stage</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">prod</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Автоматизация</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Время</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доступность</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Клиент открывается по адресу стенда, виден номер сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Страница загружена, номер сборки совпадает с задачей</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной клиент</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доступ</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вход пользователя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вход выполнен, роль отображается</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API и ручной</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да (API)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ключевое действие</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Главный пользовательский сценарий</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сценарий выполнен, результат виден пользователю</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной клиент</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Только чтение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кандидат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сервисы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ключевой вызов сервиса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Код ответа 200, поля по контракту</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат записан</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Запись есть в таблице или в админке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной и API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Только чтение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Частично</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Админка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Административный раздел открывается</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел доступен, данные отображаются</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ручной</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2 мин</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Очередь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сообщение дошло от отправителя до получателя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Получатель обработал сообщение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кандидат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2 мин</td>
+</tr>
+</tbody>
+</table>
+<p>Это условный шаблон. Реальный состав определяет Lead с разработкой по схеме критичного пути. Пункты 3, 5 и 7 для prod ограничиваются чтением: smoke на prod не должен создавать мусор в данных.</p>
+<p><strong>Адреса окружений</strong> (из раздела 5.1 регламента):</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Стенд</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Клиент</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Админка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">test</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">https://app.test.ftfw.club/play/</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">https://internal-admin.test.ftfw.club/</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">https://app.f2f.vin/</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">https://internal-admin.f2f.vin/matches</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-smoke">7. Проведение smoke</h2>
+<ol>
+<li><strong>Входной контроль.</strong> Исполнитель сверяет номер сборки с задачей и убеждается, что стенд доступен. Нет сборки или она не по задаче — это возврат по шагу 8 регламента, не результат smoke.</li>
+<li><strong>Прогон.</strong> Шаги по порядку. Каждая проверка отмечается в прогоне TestOps: пройдено, провалено, заблокировано.</li>
+<li><strong>Фиксация.</strong> Прогон закрывается в TestOps. Результат smoke кандидата, stage и prod записывается в задаче релиза.</li>
+<li><strong>Красный шаг.</strong> Заводится Blocker на сборку (регламент: нестабильная сборка), эскалация за 30 минут разработчику зоны и Lead; дальнейшая проверка этой сборки не продолжается.</li>
+<li><strong>Новая сборка.</strong> После фикса повторяются CI smoke API и короткий ручной smoke; пройденные блоки риск-регресса не перезапускаются, если Lead не сказал иначе.</li>
+</ol>
+<p>Результат smoke одним предложением: «Сборка N на test: годна» или «Сборка N на test: не годна, Blocker BUG-123 на шаге 3».</p>
+<h2 id="8-smoke-stage-prod">8. Smoke на stage и prod</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Требование</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Stage</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Prod</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Набор проверок</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критичный путь целиком</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Безопасное подмножество</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Создание данных</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Допускается с тестовыми учётками</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет, либо только выделенная тестовая учётка по решению Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Изменение данных</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Допускается</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Закрытый прогон в TestOps</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат в задаче релиза, задача релиза закрыта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красный результат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выпуск не согласуется</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откат или исправление по решению руководителя проекта; баг с меткой prod, Lead правит чек-лист</td>
+</tr>
+</tbody>
+</table>
+<p>Безопасное подмножество для prod согласуется Lead с руководителем проекта и разработкой до первого использования.</p>
+<h2 id="9-smoke-api">9. Автоматический smoke API</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Правило</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Запуск</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">GitLab CI после сборки и по кнопке на кандидата</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Состав</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ключевые вызовы критичного пути: авторизация, ключевой сервис, запись</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Инструмент</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Java 17, JUnit 5, REST Assured, Maven</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчёт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Allure на каждый прогон</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красный прогон</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста в тот же день: продукт — баг, тест — фикс теста, инфра — Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ревью</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead; кейс отмечается автоматизированным после зелёного прогона</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стабильность</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не допускаются ожидания по времени без явных условий и зависимость от порядка</td>
+</tr>
+</tbody>
+</table>
+<p>Автотест smoke не заменяет ручной smoke клиента, а дополняет его: клиент проверяется человеком, API — машиной.</p>
+<h2 id="10">10. Сопровождение</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Событие</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дефект prod прошёл мимо релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На синке Lead находит дыру в smoke или регрессе и правит чек-лист (Регламент, раздел 11)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Изменился критичный путь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны обновляет проверки; ревью Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка стала нестабильной</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лечим причину, пока лечим — выводим из smoke и записываем в бэклог</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke растёт и перестал помещаться во время</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Убираем пункты с низким влиянием, переносим в регресс</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раз в квартал</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Lead просматривает чек-лист: дубли, устаревшие шаги, время</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11">11. Типичные ошибки</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ошибка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Чем плохо</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как исправить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke растёт как регресс</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Теряется скорость</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отбор по разделу 5, лимит времени</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нестабильные шаги в smoke</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красный без дефекта, потеря доверия</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лечить или выводить</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет ожидаемых результатов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат зависит от исполнителя</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат по каждой проверке</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke на prod меняет данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Мусор и риск</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Безопасное подмножество, чтение</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke без входного контроля сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверяем не ту сборку</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сверка номера сборки с задачей</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет владельца красного прогона</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красное живёт неделями</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны теста в тот же день</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12">12. Метрики и связь с регламентом</h2>
+<p>Используются стандартные метрики стратегии: Smoke API в CI (результат на сборке кандидата), pass rate автотестов, flaky rate, время прогона, дефекты prod, прошедшие мимо релиза, длительность smoke кандидата.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где в регламенте</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист smoke как артефакт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 4</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke на шагах 7, 19, 25, 30</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 12</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блокер на сборку, эскалация</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разделы 9, 11</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke API в CI, красный прогон</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 6</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-">13. Ревью чек-листа</h2>
+<ul>
+<li>☐ Каждый пункт связан с узлом критичного пути на схеме разработки</li>
+<li>☐ Для каждого пункта задан ожидаемый результат</li>
+<li>☐ Ручной smoke укладывается в лимит времени</li>
+<li>☐ Нет нестабильных шагов</li>
+<li>☐ Для prod указано безопасное подмножество</li>
+<li>☐ Для каждого автоматизированного пункта есть зелёный прогон в CI</li>
+<li>☐ Есть входной контроль сборки и стенда</li>
+<li>☐ У чек-листа есть владелец и дата последнего пересмотра</li>
+</ul>
+<h2 id="14">14. Решения на подтверждение</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто подтверждает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Состав чек-листа smoke по схеме критичного пути и лимит времени ручного smoke</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, разработка</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Безопасное подмножество smoke для prod</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, руководитель проекта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерий отбора проверок в smoke (раздел 5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Правило «нестабильный шаг выводится из smoke»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+</tbody>
+</table>
+</body></html>

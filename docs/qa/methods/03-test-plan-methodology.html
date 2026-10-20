@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Методика составления тест-планов — CS2, F2F (TO BE)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="-cs2-f2f-to-be">Методика составления тест-планов — CS2, F2F (TO BE)</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Статус: проект методики, подтверждает QA Lead. Порядок работы, роли и статусы задаёт документ «Регламент тестирования»; ссылки вида «Регламент, раздел 9» указывают на него. Карта качества и слои проверки — в документе «Стратегия тестирования».</p>
+<h2 id="1">1. Назначение и границы</h2>
+<p>Тест-план отвечает на вопрос «что, как, кем и когда мы проверяем и когда останавливаемся». На CS2 есть два вида тест-планов с разными владельцами и местом хранения.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вид</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Владелец</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где живёт</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда создаётся</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Срок жизни</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест-план фичи</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Общее пространство проекта, ссылка в Epic</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">До взятия фичи в тестирование</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пока фича в разработке и тестировании</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест-план риск-регресса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Allure TestOps, ссылка в задаче релиза</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 15 регламента, дни 6–7 релизного спринта</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На один релиз</td>
+</tr>
+</tbody>
+</table>
+<p>Стратегия тестирования (одна на контур) в тест-план не копируется: план ссылается на стратегию и берёт из неё слои и инструменты.</p>
+<p>Регресс общего куска (без кандидата) отдельного плана не требует: набор фиксируется комментарием в задаче изменения (Регламент, раздел 9).</p>
+<h2 id="2">2. Принципы</h2>
+<ol>
+<li>План описывает решения, а не пересказывает требования.</li>
+<li>В плане есть то, что сознательно не проверяем, и причина.</li>
+<li>Каждое утверждение проверяемо: «проверяем слои X и Y на сборке N на стенде test».</li>
+<li>План короткий: страница, которую можно прочитать за пять минут. Подробности — в кейсах и чек-листах.</li>
+<li>План живой: меняется при изменении объёма, сборки или рисков; изменения видны в истории страницы.</li>
+</ol>
+<h2 id="3-">3. Тест-план фичи</h2>
+<h3 id="31">3.1 Шаблон страницы</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">№</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Раздел</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что писать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Контекст и цель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Название фичи, Epic, цель в одной-двух фразах, ссылки на требования, макет, схему разработки</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Объём</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что проверяем: функции, критерии приёмки, интеграции, роли</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вне объёма</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что сознательно не проверяем и почему; чьё это решение</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Слои и виды</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Из таблицы стратегии: функциональное, интеграционное, smoke, регресс, нагрузка, доступ</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подход</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Техники дизайна проверок, что идёт в автотест, что остаётся ручным</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Окружение и данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стенд, сборка, роли, тестовые данные, владелец данных; ссылка на раздел 5.1 регламента</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Риски</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Продуктовые и проектные риски фичи по реестру стратегии, действие по каждому</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка и ресурсы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка тестирования в часах, исполнитель, загрузка</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">График</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дни спринта: груминг, передача, проверка, регресс, если фича в релизе</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">10</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии входа</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что должно быть готово до начала (DoR, сборка, стенд)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">11</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Условия остановки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Когда прекращаем или приостанавливаем проверку, когда возобновляем</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">12</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии выхода</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Когда проверка закончена (DoD)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">13</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчётность</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Где и что фиксируем: прогон в TestOps, статус в Story, итог в задаче релиза</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">14</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Допущения и зависимости</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чужие сервисы, миграции, настройки, ожидаемые решения</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">15</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">История</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что и когда меняли в плане</td>
+</tr>
+</tbody>
+</table>
+<p>Обязательный минимум регламента: объём, вне объёма, риски, сборка, условие остановки. Остальные разделы заполняются по необходимости: для маленькой фичи достаточно разделов 1, 2, 3, 6, 7, 11 и 12.</p>
+<h3 id="32">3.2 Как составлять</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Прочитать требования и критерии, собрать вопросы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопросы комментарием в задаче</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Определить объём по критериям и затронутым зонам</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 2 плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Определить вне объёма и причину</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 3 плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценить риски фичи (раздел 4 ниже)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 7 плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выбрать слои, подход, автоматизацию</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны, Senior</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разделы 4 и 5 плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Назвать стенд, сборку, данные, владельца данных</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 6 плана</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценить трудозатраты в часах</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 8 плана, поле «Оценка тестирования»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Согласовать с аналитиком и разработчиком</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Комментарий «согласовано» в Epic</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Обновлять при изменении объёма и сборки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">История страницы</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. Оценка рисков фичи</h2>
+<p>Риск фичи оценивается по двум осям: вероятность дефекта и последствия для критичного пути.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Фактор</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Больше риска, если</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новизна</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новый код или правка старого?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новый код, большая правка</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сложность</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сколько условий и ветвей?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Много состояний, расчёты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Влияние на критичный путь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Затрагивает ли фича вход, ключевое действие, запись данных?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Интеграции</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Меняется ли контракт, очередь, чужой сервис?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">История</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Были ли дефекты prod в этой зоне?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Есть ли миграции или изменение схемы?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Доступ</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Затрагивает ли вход, роли, веб-форму?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нагрузка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Меняется ли ёмкость или тяжёлый сценарий?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+</tr>
+</tbody>
+</table>
+<p>Итог: низкий, средний или высокий риск. Он определяет глубину проверки: для высокого риска — интеграции, регресс, возможно блок «Доступ» и нагрузка; для низкого — проверка по критериям и smoke. Продуктовые и проектные риски записываются в раздел 7 плана с ссылкой на реестр рисков стратегии (P1–P7, R1–R14).</p>
+<h2 id="5">5. Условия остановки, приостановки и возобновления</h2>
+<p>Условие остановки — обязательный пункт плана. Заполняется конкретно, формулой, а не «когда всё готово».</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Тип</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Примеры формулировок</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Остановка успешная</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выполнен чек-лист или кейсы по всем критериям; нет открытых Blocker и Critical; Major имеют решение владельца продукта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Приостановка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открыт Blocker на сборку; нестабильная сборка; стенд или данные недоступны</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возобновление</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Новая стабильная сборка; стенд и данные готовы; Blocker закрыт после ретеста</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Остановка по риску срока</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс не закрыт к середине дня 9: срез по риску и решение Lead и руководителя проекта</td>
+</tr>
+</tbody>
+</table>
+<p>Действия при приостановке и эскалации — по разделу 11 регламента.</p>
+<h2 id="6-">6. Тест-план риск-регресса</h2>
+<h3 id="61">6.1 Вход</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Условие</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Источник</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Есть задача релиза с датой кандидата</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регламент, шаг 14</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи кандидата в «Готово», дефекты заведены</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регламент, раздел 9</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Список изменений (дифф) релизной ветки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработка</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Старые Critical и зоны риска</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Jira, история дефектов</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ёмкость команды на дни 8–9</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План ёмкости</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62">6.2 Как собираем</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Выписать затронутые зоны из диффа и задач кандидата</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Для каждой зоны оценить риск по таблице раздела 4</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разложить проверки по очереди запуска: 1 smoke кандидата, 2 задачи кандидата коротко по критериям, 3 критичный путь и интеграции из диффа (и блок «Доступ», если релиз трогает вход, роли или веб-форму), 4 нагрузка, если релиз меняет ёмкость</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Решить про нагрузку и блок «Доступ» (шаг 15 регламента)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разбить на блоки; на каждый блок поставить владельца (фамилия)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">6</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверить бюджет: регресс закрывается до конца дня 9, загрузка не выше 0,8</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">7</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Если не помещается — срез по риску; что осталось за бортом, записать в отчёт к релизу</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">8</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Привязать план к задаче релиза</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-testops">6.3 Структура плана в TestOps</h3>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Элемент</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Содержание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Название</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">«Релиз [дата/номер]: риск-регресс»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блоки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По зонам и очередям запуска</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец блока</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Фамилия на каждом блоке</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейсы</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейсы TestOps со статусом «активный»; старые Critical включены</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Условия остановки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Из раздела 5</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отчёт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В комментарии задачи релиза</td>
+</tr>
+</tbody>
+</table>
+<h3 id="64">6.4 Правила отбора</h3>
+<ol>
+<li>В регресс входят задачи кандидата, критичный путь затронутых зон, интеграции из диффа, старые Critical.</li>
+<li>Полный прогон библиотеки кейсов не делаем (стратегия: вне контура); исключение — мажорный релиз по решению Lead.</li>
+<li>Один кейс — в одном блоке.</li>
+<li>Кейс без ссылки на критерий в регресс не включается.</li>
+<li>После фикса в регрессе пройденные блоки не перезапускаются, если Lead не сказал иначе.</li>
+</ol>
+<h2 id="7">7. Оценка трудозатрат</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Способ</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Когда</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По критериям</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Типовая задача</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Часы на каждый критерий: подготовка, выполнение, дефекты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Три точки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Неопределённость высокая</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оптимистичная, ожидаемая, пессимистичная; берём взвешенное среднее</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По аналогии</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Есть прошлые похожие задачи</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Берём факт и корректируем</td>
+</tr>
+</tbody>
+</table>
+<p>Оценка записывается в поле «Оценка тестирования» в часах. Погрешность оценивается по коридору грейда из матрицы компетенций: Junior+ до 2×, Middle до 75%, Senior до 25%, Lead до 10%. Загрузка команды считается в человеко-часах против доступных часов спринта и не выше 0,8.</p>
+<h2 id="8">8. Пример (условный)</h2>
+<p><strong>Тест-план фичи «Редактирование формы»</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Раздел</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Содержание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Контекст</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Epic FORM-10, цель: пользователь с правом редактирует запись формы</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Объём</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сохранение формы с правом и без права; повторное открытие; запись в таблице</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вне объёма</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Массовое редактирование (в другой Epic); нагрузка (релиз не меняет ёмкость)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Слои</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Функциональное API, интеграция с таблицей данных, smoke сборки</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подход</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автотест API на 403 и 200; ручная проверка отображения</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Окружение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стенд test, сборка из задачи, роли «Редактор» и «Читатель», данные подготовил владелец зоны</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Риски</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Высокая новизна правок прав (P5): проверить роли; интеграция с таблицей (P3)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">10 часов, исполнитель А</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Условия остановки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Приостанавливаем при Blocker на сборку; останавливаем, когда закрыты все критерии и нет открытых Blocker и Critical</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии выхода</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">DoD из регламента, раздел 7.5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-">9. Ревью тест-плана</h2>
+<p>Ревью проводит QA Lead или Senior до начала проверки.</p>
+<ul>
+<li>☐ Есть объём, вне объёма и причина</li>
+<li>☐ Каждый критерий приёмки отражён в объёме</li>
+<li>☐ Указаны сборка, стенд, роли и данные, у данных есть владелец</li>
+<li>☐ Риски описаны и у высоких есть действие</li>
+<li>☐ Условие остановки сформулировано конкретно</li>
+<li>☐ Оценка в часах и совпадает с полем задачи</li>
+<li>☐ План помещается в одну страницу</li>
+<li>☐ У каждого блока риск-регресса есть фамилия</li>
+</ul>
+<h2 id="10">10. Типичные ошибки</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ошибка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Чем плохо</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как исправить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План копирует требования</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дублирует источник</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ссылки на требования, в плане решения</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет вне объёма</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Скрытые ожидания</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Назвать, что не проверяем, и почему</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">«Остановка: когда всё готово»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нельзя проверить</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конкретное условие по разделу 5</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План не обновляют</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Теряется доверие</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">История изменений и ревью</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Регресс без владельцев блоков</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красные прогоны без хозяина</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Фамилия на каждом блоке</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один план на всё</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нечитаем</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">План фичи и план риск-регресса отдельно</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11">11. Метрики и связь с регламентом</h2>
+<p>Используются стандартные метрики стратегии: выполнение тестов, покрытие требований, длительность риск-регресса, точность оценки, загрузка.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где в регламенте</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Артефакт «Тест-план фичи», «Риск-регресс»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 4</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Состав регресса, очередь, правила прогона</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 9</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги 14–23</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 12</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Оценка тестирования и ёмкость</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разделы 7.4, 11</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12">12. Решения на подтверждение</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто подтверждает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаблон страницы тест-плана фичи из раздела 3.1, минимальный состав</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таблица факторов риска фичи (раздел 4)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Формулировки условий остановки (раздел 5)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, руководитель проекта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Название и структура плана риск-регресса в TestOps</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+</tbody>
+</table>
+</body></html>

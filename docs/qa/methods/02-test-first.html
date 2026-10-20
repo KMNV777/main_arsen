@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Подход test-first — CS2, F2F (TO BE)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
+.toc ul{margin:0 0 0 18px}</style></head><body>
+<p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
+<h1 id="test-first-cs2-f2f-to-be">Подход test-first — CS2, F2F (TO BE)</h1>
+<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Статус: проект подхода, подтверждает QA Lead. Порядок работы, роли и статусы задаёт документ «Регламент тестирования»; ссылки вида «Регламент, раздел 7» указывают на него.</p>
+<h2 id="1-test-first-cs2">1. Что такое test-first на CS2</h2>
+<p>Test-first — это порядок работы, при котором проверка задачи проектируется до реализации, а не после неё. На CS2 подход ограничен тремя уровнями, каждый следующий добавляется только там, где он окупается.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Уровень</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что появляется до кода</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Обязательность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1. Проверяемые критерии</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии приёмки в форме «дано, действие, результат», каждый можно проверить</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик, вопросы — владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Всегда (уже требует регламент)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2. Тестовые идеи и скелет проверок</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Список проверок по критериям: чек-лист или черновики кейсов</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Для каждой задачи спринта</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3. Автотест до функции</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красный API-тест по контракту, который становится зелёным, когда функция готова</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автор автотестов API (Middle+ или Senior)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Для задач с API и расчётами, где есть контракт</td>
+</tr>
+</tbody>
+</table>
+<p>Подход не заменяет юнит-тесты разработчиков и не делает из тестировщика разработчика: тестировщик не пишет код продукта, а задаёт проверяемое определение готовности.</p>
+<h2 id="2">2. Зачем</h2>
+<ul>
+<li>Критерий, который нельзя проверить, находят до разработки, а не на шаге 8 передачи (в регламенте такая задача возвращается аналитику).</li>
+<li>Разработчик видит, чем задача будет проверяться, и делает самопроверку по тем же критериям.</li>
+<li>Меньше возвратов на передаче и меньше переоткрытых багов.</li>
+<li>Проверка не подстраивается под готовую реализацию: тест не пишется «под то, что получилось».</li>
+</ul>
+<h2 id="3">3. Когда применять, когда нет</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Применяем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Не применяем или упрощаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Изменение API или контракта сервиса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Правки вёрстки без логики (достаточно уровня 1 и сверки с макетом)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Расчёты, правила, проверка прав</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исследовательские задачи без критериев (сначала спайк)</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исправление бага: воспроизводящий тест до фикса</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разовые правки конфигурации стенда</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи критичного пути</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задачи, где нет стабильного контракта или стенда для автотеста</td>
+</tr>
+</tbody>
+</table>
+<p>Для UI-логики на клиенте достаточно уровней 1 и 2. Автотест UI до функции не пишем: UI в автоматизации — один критичный путь на Selenium 4.</p>
+<h2 id="4">4. Процесс по шагам</h2>
+<p>Шаги привязаны к нумерации регламента (Регламент, раздел 12).</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делаем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 3 регламента</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик пишет критерии приёмки по шаблону «дано, действие, результат», до семи критериев</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задача по шаблону DoR</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестирование требований</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель проверяет критерии по списку вопросов из раздела 5</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопросы комментарием в задаче</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 4 регламента (груминг)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны задаёт вопросы к критериям; ответы фиксируются в задаче</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопросов нет или все отвечены</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 5 регламента (после груминга)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель составляет тестовые идеи по критериям и оценивает проверку</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Список проверок в Story, оценка в поле «Оценка тестирования»</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Уровень 3 (для API-задач)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автор автотестов пишет API-тест по контракту (Swagger, требования); тест красный</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автор автотестов API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Merge request с красным тестом, ссылка в задаче</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаг 6 регламента</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик реализует функцию, прогоняет свой тест и самопроверку, ставит «Готово к тестированию»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Зелёный тест, сборка на test</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги 7–10 регламента</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Smoke сборки, проверка по списку проверок, дефекты</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист или кейсы закрыты</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Оценка.</strong> Работа по уровням 2 и 3 входит в «Оценку тестирования» задачи. Для задач с автотестом до функции оценка выделяется в подзадачу [QA] (Регламент, раздел 7.4).</p>
+<h2 id="5-1">5. Уровень 1: проверка требований</h2>
+<p>Список вопросов, который исполнитель применяет к каждому критерию.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Вопрос</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Если ответ «нет»</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерий однозначен: два человека поймут одинаково?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос аналитику комментарием</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Есть начальное состояние («дано»)?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос: в каком состоянии система и данные</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Есть конкретное действие?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос: что делает пользователь или система</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Результат наблюдаем: что видит пользователь, что вернул сервис, что лежит в таблице?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос: как проверить</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерий можно закрыть одной проверкой?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Предложить разбить</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии не противоречат друг другу и требованиям?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос с указанием пары</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Учтены роли и права, включая отказ?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос: что видит пользователь без права</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Учтены граничные значения и ошибки?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос: что при пустом, максимальном, неверном значении</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Описаны зависимости и миграции?</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос разработчику</td>
+</tr>
+</tbody>
+</table>
+<p>Критерий, который нельзя проверить, возвращает задачу (Регламент, раздел 7.3). Пример переформулировки:</p>
+<ul>
+<li>Было: «Кнопка работает правильно».</li>
+<li>Стало: «Пользователь с правом редактирования сохраняет форму. Запись появляется в названной таблице. Повторное открытие показывает те же значения. Пользователь без права сохранение не выполняет: интерфейс показывает отказ, сервис отвечает 403».</li>
+</ul>
+<h2 id="6-2">6. Уровень 2: тестовые идеи</h2>
+<p>Исполнитель после груминга оформляет в Story блок «Проверки»: по каждому критерию одна или несколько строк.</p>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Критерий</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Проверка</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Тип</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Слой</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Автоматизация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сохранение формы пользователем с правом</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Позитив</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да, до функции</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сохранение формы пользователем без права: 403, значение не изменилось</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Негатив</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да, до функции</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Граничные значения поля «Название»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Граничные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кандидат</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отображение результата на экране</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сверка с макетом</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">UI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+</tr>
+</tbody>
+</table>
+<p>Блок «Проверки» затем превращается в чек-лист Story или в кейсы TestOps по методике оформления тест-кейсов. Блок согласуется с аналитиком, если вопросы к критериям остались.</p>
+<p>Для техник выбора проверок см. методику оформления тест-кейсов, раздел 5.</p>
+<h2 id="7-3">7. Уровень 3: автотест до функции</h2>
+<p>Условия: есть контракт (Swagger или описание в требованиях), стенд test, автор автотестов с грейдом Middle+ или Senior, ревью QA Lead.</p>
+<ol>
+<li>Автор пишет тест на JUnit 5 и REST Assured по критерию. Тест вызывает endpoint по контракту и проверяет код ответа и поля ответа.</li>
+<li>Тест запускается на стенде и красный: функции ещё нет или она не по контракту.</li>
+<li>Автор прикладывает merge request и ссылку на тест к задаче; кейс в TestOps остаётся в статусе «на ревью» или «активный» без отметки «автоматизирован».</li>
+<li>Разработчик реализует функцию, прогоняет тест локально и на test в рамках самопроверки.</li>
+<li>Тест становится зелёным в CI. Только после этого кейс помечается автоматизированным (правило регламента, раздел 6).</li>
+<li>Если контракт изменился при реализации, меняются и критерий, и тест; изменение фиксируется комментарием в задаче.</li>
+</ol>
+<p>Пример заготовки (условный):</p>
+<pre style="background:#f6f6f6;border:1px solid #ddd;padding:8px;overflow:auto;"><code class="language-java">@AllureId(&quot;1234&quot;)
+@DisplayName(&quot;Редактирование формы: пользователь без права получает 403&quot;)
+@Epic(&quot;Формы&quot;)
+@Feature(&quot;Редактирование&quot;)
+@Severity(SeverityLevel.CRITICAL)
+@Tag(&quot;api&quot;)
+@Test
+void viewerCannotSaveForm() {
+    given().auth().oauth2(viewerToken())
+        .body(updateBody(&quot;Новое название&quot;))
+        .when().put(&quot;/forms/{id}&quot;, formId)
+        .then().statusCode(403);
+}
+</code></pre>
+<p>Красный тест на этом шаге ожидаем. Он не блокирует сборку кандидата, потому что живёт в ветке задачи и не входит в CI smoke до готовности функции.</p>
+<h2 id="8-test-first">8. Багфикс test-first</h2>
+<ol>
+<li>Баг воспроизводится на сборке; шаги и условия записаны в баг-репорте.</li>
+<li>Исполнитель или автор автотестов оформляет воспроизводящую проверку: кейс или автотест, который красный на сборке с багом.</li>
+<li>Разработчик исправляет, проверка становится зелёной, статус «Исправлен» с номером сборки.</li>
+<li>Исполнитель делает ретест и короткий проход вокруг. Проверка остаётся в наборе: она ловит повтор бага.</li>
+</ol>
+<p>Для Blocker и Critical воспроизводящая проверка добавляется в риск-регресс (если баг найден в регрессе) или в блок зоны (если вне регресса).</p>
+<h2 id="9">9. Роли и ответственность</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Роль</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делает в test-first</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Аналитик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пишет проверяемые критерии, отвечает на вопросы до разработки</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Задаёт вопросы к критериям на груминге</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверяет критерии, составляет тестовые идеи и оценку</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автор автотестов API</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пишет красный тест до функции</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разработчик</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Реализует функцию, прогоняет тесты, делает самопроверку</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ревьюит автотесты, ведёт метрики подхода, решает, где подход применять</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-">10. Анти-паттерны</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Анти-паттерн</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Почему плохо</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что делать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест пишется по готовой функции «как получилось»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Теряется смысл независимой проверки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Писать по критерию и контракту</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии «внутри головы» аналитика</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нельзя проверить</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вопрос в задаче, возврат на шаг 3</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Красный тест в общей ветке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ломает CI</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест в ветке задачи, включение в CI после зелёного прогона</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест на каждую мелочь до функции</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздувает сопровождение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Только критерии с API-контрактом и расчёты</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тест-идеи не согласованы с аналитиком</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Расхождение в понимании</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Показать блок «Проверки» аналитику</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Подход ради подхода на всех задачах</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тормозит спринт</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 3 про применимость</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11">11. Метрики подхода</h2>
+<p>Используются стандартные метрики стратегии: возвраты при передаче, покрытие требований (критерии, закрытые проверкой), reopen rate, раннее выявление дефектов, точность оценки.</p>
+<p>Дополнительно на пилоте считаются: доля задач спринта с блоком «Проверки» до «Готово к тестированию»; доля API-задач с автотестом до функции; число критериев, переформулированных на тестировании требований.</p>
+<h2 id="12">12. Внедрение</h2>
+<ol>
+<li><strong>Пилот на два спринта.</strong> Выбрать две-три API-задачи и одну задачу без API. Уровни 1 и 2 — на всех задачах пилота; уровень 3 — на API-задачах.</li>
+<li><strong>Измерить.</strong> Возвраты на шаге 8, reopen rate, время от «Готово к тестированию» до «Готово», затраты на подготовку.</li>
+<li><strong>Решить на синке.</strong> Расширить на все API-задачи, оставить только уровни 1 и 2 или отказаться от уровня 3.</li>
+<li><strong>Зафиксировать в регламенте.</strong> После подтверждения добавить шаг «Проверки до кода» в процесс по шагам.</li>
+</ol>
+<h2 id="13">13. Связь с регламентом</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где в регламенте</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерии приёмки, форма и ограничение до семи</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 7.3</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Definition of Ready и передача</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разделы 4, 7.2</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автотесты API, ревью, статус «автоматизирован»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 6</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги 3–6, 8, 12</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 12</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Возвраты и третий возврат</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 12.2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14">14. Решения на подтверждение</h2>
+<table style="border-collapse:collapse;width:100%;margin:8px 0;">
+<thead>
+<tr>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто подтверждает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Три уровня test-first и их применимость по разделу 3</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Блок «Проверки» в Story как артефакт после груминга</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, аналитик</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автотест до функции для API-задач, автор — Middle+ или Senior</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
+</tr>
+<tr>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Пилот на два спринта, затем решение на синке</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead, руководитель проекта</td>
+</tr>
+</tbody>
+</table>
+</body></html>
