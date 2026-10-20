@@ -1,229 +1,130 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8">
-<title>Методика оформления тест-кейсов — CS2, F2F (TO BE)</title>
+<title>Методика написания тест-кейсов</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;line-height:1.45;color:#222}
 .toc ul{margin:0 0 0 18px}</style></head><body>
 <p style="background:#fff8e1;border:1px solid #e6d58a;padding:8px;">Как вставить в Яндекс Вики: откройте файл в браузере, выделите всё (Ctrl+A / Cmd+A), скопируйте и вставьте в страницу Вики в режиме WYSIWYG. Этот блок удалите.</p>
-<h1 id="-cs2-f2f-to-be">Методика оформления тест-кейсов — CS2, F2F (TO BE)</h1>
-<p>Проект CS2, F2F. Команда: QA Lead и три тестировщика. Статус: проект методики, подтверждает QA Lead. Порядок работы, роли и статусы задают документ «Регламент тестирования»; ссылки вида «Регламент, раздел 7» указывают на него.</p>
-<h2 id="1">1. Назначение и границы</h2>
-<p>Методика отвечает на три вопроса: что оформлять кейсом, а что чек-листом; как писать кейс, чтобы его мог выполнить другой человек без автора; как держать набор кейсов в TestOps живым.</p>
-<p>Методика не описывает порядок взятия задачи в тестирование (Регламент, раздел 7), составление тест-плана (методика тест-планов) и оформление баг-репортов (методика анализа багов).</p>
+<h1 id="-">Методика написания тест-кейсов</h1>
+<h2 id="1">1. Зачем</h2>
+<p>Тест-кейс — описание одной проверки, которую другой человек выполнит так же, как автор, и получит тот же результат.</p>
 <h2 id="2-">2. Кейс или чек-лист</h2>
-<p>Исходное правило регламента: чек-лист живёт внутри Story в Jira, кейсы живут в Allure TestOps, в задаче стоит ссылка на прогон. Выбор между ними делается по таблице.</p>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Признак</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Чек-лист в Story</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кейс в TestOps</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ситуация</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что использовать</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка нужна один раз, под конкретную задачу</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка разовая, под одну задачу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист: короткие пункты</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка повторяется в smoke или риск-регрессе</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка повторяется (smoke, регресс)</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверку будут автоматизировать</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверку выполняет не автор (другой исполнитель, владелец блока)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Лучше кейс</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка нужна для критерия приёмки, который потом войдёт в регресс</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Начать с чек-листа, после закрытия задачи перенести в кейс</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверка короткая, без предусловий и данных</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не нужно</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Проверку выполнит не автор</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс</td>
 </tr>
 </tbody>
 </table>
-<p>Если сомневаетесь, оформляйте кейсом: кейс всегда можно свернуть в строку чек-листа, обратное стоит дороже.</p>
-<p><strong>Правило покрытия.</strong> Каждый критерий приёмки закрыт минимум одной проверкой (Регламент, раздел 7.4). В чек-листе или кейсе проверка подписана номером критерия.</p>
+<p>Сомневаетесь — пишите кейс: его легко сократить до пункта чек-листа.</p>
 <h2 id="3">3. Структура кейса</h2>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Поле</th>
 <th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что писать</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Обязательно</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Идентификатор</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">AllureId; у автотеста совпадает с аннотацией в коде</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Название</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">По шаблону: «Зона. Действие. Условие → ожидаемый результат»</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерий приёмки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ссылка на Story и номер критерия</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Слой</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">API, UI, клиент, интеграция, данные</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тип прогона</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">smoke, регресс, функциональный, нагрузка, доступ</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Важность</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Blocker, Critical, Major, Normal, Minor по той же шкале, что серьёзность бага</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">«Зона. Действие. Условие → результат»</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Предусловия</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стенд, версия сборки, роль, состояние данных, настройки</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Стенд, версия сборки, роль, состояние данных</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Тестовые данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Конкретные значения или ссылка на набор</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Если нужны</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаги</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нумерованные, одно действие в шаге</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ожидаемый результат</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">К каждому шагу, где есть наблюдаемый результат; итоговый в конце</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что именно видим или получаем</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Постусловия</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Что вернуть в исходное состояние</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Если меняются данные</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Связь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ссылка на требование или критерий приёмки</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны, ответственный за актуальность</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статус</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Черновик, на ревью, активный, устарел</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автоматизация</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не автоматизируется, кандидат, автоматизирован</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Теги</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Слой и тип прогона, как в аннотациях автотестов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Да</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Метки</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Слой (API, UI), тип (smoke, регресс), важность</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Шаблон названия.</strong> «Редактирование формы. Пользователь с правом редактирования сохраняет форму → запись появляется в таблице» (условный пример). Название читается без открытия кейса: по нему понятно, что и зачем проверяем.</p>
-<h2 id="4">4. Правила написания</h2>
+<h2 id="4">4. Правила</h2>
 <ol>
-<li><strong>Одна цель на кейс.</strong> Если в названии появляется «и», это два кейса.</li>
-<li><strong>Один шаг — одно действие.</strong> Один шаг — один результат, который можно увидеть или измерить.</li>
-<li><strong>Ожидаемый результат наблюдаем.</strong> Не «работает правильно», а что именно видит пользователь, что возвращает сервис (код ответа, поле), что лежит в таблице.</li>
-<li><strong>Независимость.</strong> Кейс не зависит от результата соседнего. Нужное состояние создаётся предусловием.</li>
-<li><strong>Воспроизводимость.</strong> Данные, роль, стенд и сборка названы явно. Незаполненное предусловие — повод вернуть кейс.</li>
-<li><strong>Компактность.</strong> До десяти шагов. Длиннее — делим на кейсы или выносим подготовку в предусловия.</li>
-<li><strong>Без дублей.</strong> Перед созданием кейса ищем по зоне и ключевым словам в TestOps.</li>
-<li><strong>Негатив и границы — отдельные кейсы</strong>, а не продолжение позитивного.</li>
-<li><strong>Язык:</strong> действия в повелительном наклонении («Нажмите», «Откройте»), результаты в изъявительном («Отображается», «Сервис возвращает 403»), без «должен», «примерно», «нормально».</li>
-<li><strong>Данные не секретны.</strong> Пароли, токены и персональные данные в кейсе не пишем; даём ссылку на учётную запись или набор данных.</li>
+<li>Одна цель — один кейс. Если в названии есть «и», это два кейса.</li>
+<li>Один шаг — одно действие и один проверяемый результат.</li>
+<li>Результат наблюдаем: не «работает правильно», а «отображается сообщение об успехе», «сервис возвращает 403».</li>
+<li>Кейс независим: нужное состояние создаётся предусловиями, а не результатом другого кейса.</li>
+<li>Данные, роль и стенд названы явно.</li>
+<li>До десяти шагов; больше — делите.</li>
+<li>Негативные и граничные проверки — отдельные кейсы.</li>
+<li>Перед созданием ищите дубли.</li>
+<li>Пишите действие в повелительном наклонении («Нажмите»), результат — в изъявительном («Отображается»). Без слов «должен», «примерно», «нормально».</li>
+<li>Пароли, токены и персональные данные в кейс не пишем.</li>
 </ol>
-<h2 id="5-">5. Выбор проверок: техники тест-дизайна</h2>
+<h2 id="5">5. Что проверять</h2>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
 <tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ситуация</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Техника</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что получается</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что проверяем</th>
+<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Приём</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поле или параметр принимает диапазон значений</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Эквивалентные классы и граничные значения</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейсы на каждый класс и каждую границу</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поле или параметр с диапазоном</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Классы значений и границы: допустимое, недопустимое, минимум, максимум</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Несколько условий вместе определяют результат</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таблица решений</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс на каждую значимую комбинацию</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Несколько условий вместе</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Таблица комбинаций, кейс на каждую значимую</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Объект меняет состояния (заказ, матч, сессия)</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Диаграмма переходов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейсы на допустимые и недопустимые переходы</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Много параметров с небольшим числом значений</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Попарное тестирование</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Минимальный набор комбинаций</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Объект с состояниями</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Допустимые и недопустимые переходы</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Роли и права</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Матрица ролей и действий</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс на каждую пару «роль → действие» с критичным результатом, включая 403</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс на каждую пару «роль → действие», включая отказ</td>
 </tr>
 <tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критичный пользовательский сценарий</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сценарий по критичному пути</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Сквозной кейс, кандидат в smoke</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ключевой пользовательский путь</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Один сквозной кейс</td>
 </tr>
 </tbody>
 </table>
-<p>Выбранная техника записывается в описании кейса или в тест-плане фичи одной строкой.</p>
 <h2 id="6">6. Пример</h2>
-<p><strong>Плохой кейс</strong> (условный):</p>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Шаг</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Действие</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ожидаемый результат</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Открыть форму и проверить, что всё работает</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Всё работает</td>
-</tr>
-</tbody>
-</table>
-<p>Что не так: две цели в одном шаге, нет роли, стенда и данных, результат не наблюдаем.</p>
-<p><strong>Хороший кейс</strong> (условный):</p>
+<p><strong>Плохо:</strong> «Открыть форму и проверить, что всё работает → Всё работает». Две цели, нет роли и данных, результат не проверить.</p>
+<p><strong>Хорошо:</strong></p>
 <ul>
 <li><strong>Название:</strong> Редактирование формы. Пользователь с правом редактирования сохраняет форму → запись есть в таблице</li>
-<li><strong>Критерий:</strong> STORY-123, критерий 2</li>
-<li><strong>Слой и тип:</strong> API, функциональный</li>
-<li><strong>Предусловия:</strong> стенд test, сборка из задачи, пользователь с ролью «Редактор», запись №1 в состоянии «Черновик»</li>
+<li><strong>Предусловия:</strong> стенд test, сборка 1234, пользователь с ролью «Редактор», запись №1 в состоянии «Черновик»</li>
 </ul>
 <table style="border-collapse:collapse;width:100%;margin:8px 0;">
 <thead>
@@ -236,179 +137,37 @@
 <tbody>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">1</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Авторизуйтесь как «Редактор»</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Авторизация проходит</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Войдите как «Редактор»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Вход выполнен</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">2</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откройте форму записи №1</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откройте запись №1</td>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поля заполнены текущими значениями</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Измените поле «Название», нажмите «Сохранить»</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Интерфейс показывает успех; сервис отвечает 200</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Измените «Название», нажмите «Сохранить»</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Отображается сообщение об успехе</td>
 </tr>
 <tr>
 <td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">4</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откройте форму повторно</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Поле «Название» содержит новое значение</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Откройте запись повторно</td>
+<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">В поле «Название» новое значение</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Связанный негативный кейс:</strong> «Пользователь без права сохраняет форму → отказ». Результат: интерфейс показывает отказ, сервис отвечает 403, значение в таблице не изменилось.</p>
-<h2 id="7">7. Автоматизированные кейсы</h2>
-<p>Правила регламента: сначала API, основание — кейс в статусе «активный», ревью у QA Lead, кейс помечается автоматизированным только после зелёного прогона в CI.</p>
-<p>Аннотации в коде автотеста (Java 17, JUnit 5, REST Assured, Allure):</p>
-<pre style="background:#f6f6f6;border:1px solid #ddd;padding:8px;overflow:auto;"><code class="language-java">@AllureId(&quot;1234&quot;)
-@DisplayName(&quot;Редактирование формы: пользователь с правом редактирования сохраняет форму&quot;)
-@Epic(&quot;Формы&quot;)
-@Feature(&quot;Редактирование&quot;)
-@Severity(SeverityLevel.CRITICAL)
-@Tag(&quot;api&quot;)
-@Tag(&quot;regress&quot;)
-@Test
-void editorSavesForm() { /* ... */ }
-</code></pre>
-<p>Соответствие: AllureId = идентификатор кейса, DisplayName = название, Epic и Feature = зона, Severity = важность, Tag = слой и тип прогона. Шаги в коде повторяют шаги кейса, чтобы отчёт Allure читался как кейс.</p>
-<h2 id="8">8. Жизненный цикл кейса</h2>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Статус</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что значит</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто переводит</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Черновик</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автор пишет кейс</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">На ревью</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс готов к проверке коллегой</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Исполнитель</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Активный</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс принят, годится для прогонов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны после ревью</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Устарел</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Критерий или поведение изменились, кейс не выполняется</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Владелец зоны</td>
-</tr>
-</tbody>
-</table>
-<p>Когда обновляем кейс: изменился критерий приёмки; найден баг, который кейс не поймал; кейс падает без дефекта продукта; изменился интерфейс или контракт. Когда создаём новый кейс: пропущенный баг в регрессе или prod (правка чек-листа и кейсов после синка); новая функциональность.</p>
-<p>Раз в квартал владелец зоны просматривает кейсы своей зоны: дубли, устаревшие, кейсы без критерия, кейсы с нестабильными шагами. Итог записывается комментарием в страницу зоны.</p>
-<h2 id="9">9. Ревью кейса</h2>
-<p>Ревью проводит владелец зоны или второй исполнитель.</p>
+<p><strong>Парный негативный кейс:</strong> тот же путь под ролью без права редактирования → интерфейс показывает отказ, сервис отвечает 403, значение не изменилось.</p>
+<h2 id="7">7. Поддержка</h2>
+<p>Обновляйте кейс, когда изменились требования или интерфейс, когда кейс падает без дефекта продукта или когда баг прошёл мимо него. Раз в квартал просматривайте набор: убирайте дубли и устаревшие кейсы.</p>
+<h2 id="8-">8. Чек-лист самопроверки</h2>
 <ul>
-<li>☐ Название читается без открытия кейса и соответствует шаблону</li>
-<li>☐ Есть ссылка на критерий приёмки</li>
-<li>☐ Предусловия полны: стенд, сборка, роль, данные</li>
-<li>☐ Один шаг — одно действие; в каждом шаге с результатом есть ожидаемый результат</li>
-<li>☐ Результаты наблюдаемы и проверяемы без автора</li>
-<li>☐ Кейс не дублирует существующий</li>
-<li>☐ Указаны слой, тип прогона, важность, владелец</li>
-<li>☐ Данные не содержат секретов</li>
-<li>☐ Для автоматизируемого кейса указан статус автоматизации</li>
+<li>☐ По названию понятно, что и зачем проверяется</li>
+<li>☐ Предусловия и данные заполнены</li>
+<li>☐ Один шаг — одно действие</li>
+<li>☐ Результат наблюдаем, проверяется без автора</li>
+<li>☐ Нет дубля среди существующих кейсов</li>
+<li>☐ Указана связь с требованием и метки</li>
+<li>☐ В кейсе нет секретов</li>
 </ul>
-<h2 id="10">10. Типичные ошибки</h2>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Ошибка</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Чем плохо</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Как исправить</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">«Проверить, что работает»</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нельзя проверить</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Описать наблюдаемый результат</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейс из десятков шагов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Невозможно разобрать падение</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разбить на кейсы</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Копия критерия приёмки в качестве кейса</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Нет шагов и данных</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Добавить действия, роль, данные</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Кейсы-двойники в разных зонах</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Дубли в регрессе</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Искать по TestOps перед созданием</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Автотест помечен автоматизированным без зелёного прогона</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Ложное покрытие</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статус только после прогона в CI</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные «из головы» автора</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Не воспроизводится</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Данные в предусловиях или набор</td>
-</tr>
-</tbody>
-</table>
-<h2 id="11">11. Метрики и связь с регламентом</h2>
-<p>Используются стандартные метрики стратегии: покрытие требований (критерии, закрытые проверкой), выполнение тестов, pass rate, доля автоматизации критичного пути, flaky rate. Отдельных KPI у методики нет.</p>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Что</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Где в регламенте</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист и кейсы, покрытие критериев</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Разделы 4, 7.4, 7.5</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статус «активный», ссылка на прогон</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 4, артефакт «Тест-кейс»</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Правила автотестов</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Раздел 6</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Чек-лист smoke</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Методика составления smoke-проверок</td>
-</tr>
-</tbody>
-</table>
-<h2 id="12">12. Решения на подтверждение</h2>
-<table style="border-collapse:collapse;width:100%;margin:8px 0;">
-<thead>
-<tr>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Решение</th>
-<th style="border:1px solid #bbb;padding:4px 8px;background:#f0f0f0;text-align:left;vertical-align:top;">Кто подтверждает</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Шаблон названия кейса и обязательные поля из раздела 3</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Статусы кейса «Черновик, на ревью, активный, устарел» и ревью владельцем зоны</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-<tr>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">Квартальный просмотр кейсов зоны</td>
-<td style="border:1px solid #bbb;padding:4px 8px;vertical-align:top;">QA Lead</td>
-</tr>
-</tbody>
-</table>
 </body></html>
