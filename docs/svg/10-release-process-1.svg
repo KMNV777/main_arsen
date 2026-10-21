@@ -105,7 +105,7 @@
 <rect x="1335" y="600" width="145" height="62" rx="8" fill="#FFF2CC" stroke="#6C8EBF" stroke-width="1.2"/>
 <text x="1407.5" y="620.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">2.1  Устранение</text>
 <text x="1407.5" y="633.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">уязвимостей</text>
-<text x="1407.5" y="647.25" font-size="8.5" fill="#666666" text-anchor="middle">DEV · B · эт. 2</text>
+<text x="1407.5" y="647.25" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · B · эт. 2</text>
 <rect x="1335" y="1080" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2"/>
 <text x="1407.5" y="1100.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">2.2  Gate ИБ:</text>
 <text x="1407.5" y="1113.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">уязвимости</text>
@@ -123,10 +123,10 @@
 <text x="2127.5" y="400.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">G1 Код-фриз</text>
 <text x="2127.5" y="413.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">(AND-join)</text>
 <text x="2127.5" y="426.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">hash</text>
-<rect x="2235" y="1270" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#82B366" stroke-width="1.2"/>
-<text x="2307.5" y="1290.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">5.1  Запуск аудита</text>
-<text x="2307.5" y="1303.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">через Релиз-борд</text>
-<text x="2307.5" y="1317.25" font-size="8.5" fill="#666666" text-anchor="middle">REL · эт. 5</text>
+<rect x="2235" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2"/>
+<text x="2307.5" y="510.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">5.1  Запуск аудита</text>
+<text x="2307.5" y="523.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">через Релиз-борд</text>
+<text x="2307.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">РИ · эт. 5</text>
 <rect x="2415" y="990" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2"/>
 <text x="2487.5" y="1010.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">5.2  Аудит кода</text>
 <text x="2487.5" y="1023.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">(портал ББ)</text>
@@ -284,13 +284,13 @@
 <polyline points="1587.5,772 1587.5,1170" fill="none" stroke="#222222" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m0)"/>
 <polyline points="1660,1201 1947.5,1201 1947.5,442" fill="none" stroke="#222222" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m0)"/>
 <polyline points="2020,411 2062.5,411" fill="none" stroke="#222222" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m0)"/>
-<polyline points="2192.5,411 2213.75,411 2213.75,1301 2235,1301" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="2192.5,411 2213.75,411 2213.75,521 2235,521" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="2192.5,411 2213.75,411 2213.75,206 2235,206" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
-<polyline points="2380,1301 2487.5,1301 2487.5,1052" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="2380,521 2458.5,521 2458.5,990" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="2560,1021 2595,1021" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
-<polyline points="2487.5,990 2487.5,631 1767.5,631 1767.5,552" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
-<rect x="2080.74" y="623" width="95.6" height="16" fill="#FFFFFF"/>
-<text x="2128.54" y="635" font-size="10" fill="#C0392B" text-anchor="middle">замечания аудита</text>
+<polyline points="2523.75,990 2523.75,631 1767.5,631 1767.5,552" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
+<rect x="2094.51" y="623" width="95.6" height="16" fill="#FFFFFF"/>
+<text x="2142.32" y="635" font-size="10" fill="#C0392B" text-anchor="middle">замечания аудита</text>
 <polyline points="2487.5,1052 2487.5,1111 2891,1111 2891,552" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
 <rect x="2854.4" y="1054.75" width="73.2" height="16" fill="#FFFFFF"/>
 <text x="2891" y="1066.75" font-size="10" fill="#7F7F7F" text-anchor="middle">ПТЗ не нужен</text>

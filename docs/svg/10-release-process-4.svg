@@ -222,35 +222,35 @@
 <rect x="20" y="1066" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="1080.5" font-size="10" fill="#222222" text-anchor="start">ПСИ + ПТЗ</text>
 <rect x="220" y="1066" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1080.5" font-size="10" fill="#222222" text-anchor="start">38</text>
+<text x="225" y="1080.5" font-size="10" fill="#222222" text-anchor="start">42</text>
 <rect x="320" y="1066" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1080.5" font-size="10" fill="#222222" text-anchor="start">7.6</text>
+<text x="325" y="1080.5" font-size="10" fill="#222222" text-anchor="start">8.4</text>
 <rect x="420" y="1066" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1080.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<text x="425" y="1080.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
 <rect x="20" y="1090" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="1104.5" font-size="10" fill="#222222" text-anchor="start">только ПСИ</text>
 <rect x="220" y="1090" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1104.5" font-size="10" fill="#222222" text-anchor="start">35</text>
+<text x="225" y="1104.5" font-size="10" fill="#222222" text-anchor="start">37</text>
 <rect x="320" y="1090" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1104.5" font-size="10" fill="#222222" text-anchor="start">7.0</text>
+<text x="325" y="1104.5" font-size="10" fill="#222222" text-anchor="start">7.4</text>
 <rect x="420" y="1090" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1104.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<text x="425" y="1104.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
 <rect x="20" y="1114" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="1128.5" font-size="10" fill="#222222" text-anchor="start">только ПТЗ</text>
 <rect x="220" y="1114" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1128.5" font-size="10" fill="#222222" text-anchor="start">38</text>
+<text x="225" y="1128.5" font-size="10" fill="#222222" text-anchor="start">42</text>
 <rect x="320" y="1114" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1128.5" font-size="10" fill="#222222" text-anchor="start">7.6</text>
+<text x="325" y="1128.5" font-size="10" fill="#222222" text-anchor="start">8.4</text>
 <rect x="420" y="1114" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1128.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<text x="425" y="1128.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
 <rect x="20" y="1138" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="1152.5" font-size="10" fill="#222222" text-anchor="start">без ПСИ и ПТЗ</text>
 <rect x="220" y="1138" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1152.5" font-size="10" fill="#222222" text-anchor="start">35</text>
+<text x="225" y="1152.5" font-size="10" fill="#222222" text-anchor="start">37</text>
 <rect x="320" y="1138" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1152.5" font-size="10" fill="#222222" text-anchor="start">7.0</text>
+<text x="325" y="1152.5" font-size="10" fill="#222222" text-anchor="start">7.4</text>
 <rect x="420" y="1138" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1152.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<text x="425" y="1152.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
 <polyline points="380,149 440,149" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <rect x="379" y="141" width="62" height="16" fill="#FFFFFF"/>
 <text x="410" y="153" font-size="10" fill="#222222" text-anchor="middle">по релизам</text>

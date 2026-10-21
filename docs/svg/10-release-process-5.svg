@@ -173,8 +173,9 @@
 <rect x="1020" y="500" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1025" y="527.5" font-size="10" fill="#222222" text-anchor="start">Часть реальных шагов и ЗО невидима → нет данных по ним.</text>
 <rect x="1500" y="500" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="521" font-size="10" fill="#222222" text-anchor="start">✔ Решено: Юрченко Д. — релиз-инженер НЕДРА; БД — администратор БД; брокеры — администратор брокеров</text>
-<text x="1505" y="534" font-size="10" fill="#222222" text-anchor="start">(шаги 9.2/9.3, 12.2/12.3 разделены). Все шаги эталона добавлены; в эталон и ДК нужно внести роли.</text>
+<text x="1505" y="514.5" font-size="10" fill="#222222" text-anchor="start">✔ Решено: Юрченко Д. — релиз-инженер НЕДРА; за ним уязвимости, аудит, релиз-борд (§14.1 эталона</text>
+<text x="1505" y="527.5" font-size="10" fill="#222222" text-anchor="start">отдаёт запуск аудита Приходько В. — расхождение); БД — Ибрагимов, брокеры — Степуляк (шаги 9.2/9.3,</text>
+<text x="1505" y="540.5" font-size="10" fill="#222222" text-anchor="start">12.2/12.3 разделены). Роли нужно внести в эталон и ДК.</text>
 <rect x="20" y="550" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="570.5" font-size="10" fill="#222222" text-anchor="start">F12</text>
 <rect x="60" y="550" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
@@ -236,18 +237,20 @@
 <rect x="60" y="694" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
 <text x="65" y="721.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
 <rect x="130" y="694" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="715" font-size="10" fill="#222222" text-anchor="start">SLA 1–5 дн (решение владельца)</text>
-<text x="135" y="728" font-size="10" fill="#222222" text-anchor="start">vs Эталон §13 (таблица B)</text>
+<text x="135" y="708.5" font-size="10" fill="#222222" text-anchor="start">SLA 1–5 дн, ИБ — 5 дн на шаг</text>
+<text x="135" y="721.5" font-size="10" fill="#222222" text-anchor="start">(решение владельца) vs Эталон</text>
+<text x="135" y="734.5" font-size="10" fill="#222222" text-anchor="start">§13 (таблица B)</text>
 <rect x="320" y="694" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="708.5" font-size="10" fill="#222222" text-anchor="start">Если каждый шаг использует свой потолок SLA (1–5 дн), путь от rc до закрытия — 35–38 рабочих дней (≈ 7–7,6 нед.), тогда</text>
-<text x="325" y="721.5" font-size="10" fill="#222222" text-anchor="start">как календарь эталона закладывает ≈ 15 рабочих дней (T−3 нед → T). Цепочка ИБ-gates 5.1–8.1 по SLA — 10–13 дней, в</text>
-<text x="325" y="734.5" font-size="10" fill="#222222" text-anchor="start">календаре — 7 (T−10…T−3 дн).</text>
+<text x="325" y="708.5" font-size="10" fill="#222222" text-anchor="start">Если каждый шаг использует свой потолок SLA, путь от rc до закрытия — 37–42 рабочих дней (≈ 7–8.4 нед.), тогда как</text>
+<text x="325" y="721.5" font-size="10" fill="#222222" text-anchor="start">календарь эталона закладывает ≈ 15 рабочих дней (T−3 нед → T). Цепочка 5.1–8.1 (аудит → ПТЗ → трансфер) по SLA — 12–17</text>
+<text x="325" y="734.5" font-size="10" fill="#222222" text-anchor="start">рабочих дней (из них шаги самой ИБ — 10–15), в календаре — 7 календарных дней (≈ 5 рабочих, T−10…T−3 дн).</text>
 <rect x="1020" y="694" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="715" font-size="10" fill="#222222" text-anchor="start">Релиз либо систематически «сдвигается», либо SLA — только потолок, а не норма: без</text>
-<text x="1025" y="728" font-size="10" fill="#222222" text-anchor="start">этого M9 и светофор календаря будут расходиться.</text>
+<text x="1025" y="715" font-size="10" fill="#222222" text-anchor="start">Релиз либо систематически «сдвигается», либо SLA — только потолок, а не норма;</text>
+<text x="1025" y="728" font-size="10" fill="#222222" text-anchor="start">светофор календаря и метрика M9 будут расходиться.</text>
 <rect x="1500" y="694" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="715" font-size="10" fill="#222222" text-anchor="start">SLA в схеме — потолок на шаг; нужно утвердить целевые значения (медианы) и пересобрать календарь по</text>
-<text x="1505" y="728" font-size="10" fill="#222222" text-anchor="start">критическому пути (стр. 4, блок E).</text>
+<text x="1505" y="708.5" font-size="10" fill="#222222" text-anchor="start">SLA в схеме — потолок на шаг; нужно утвердить целевые значения (медианы) и пересобрать календарь по</text>
+<text x="1505" y="721.5" font-size="10" fill="#222222" text-anchor="start">критическому пути (стр. 4, блок E). ИБ-шаги по 5 дней сами дают основной вклад — проверяем метриками</text>
+<text x="1505" y="734.5" font-size="10" fill="#222222" text-anchor="start">M2/M9.</text>
 <rect x="20" y="744" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="758.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
 <rect x="60" y="744" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
