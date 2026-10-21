@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="748" viewBox="0 0 2100 748" font-family="Helvetica, Arial, sans-serif">
+<rect width="2100" height="748" fill="#FFFFFF"/>
+<defs>
+</defs>
+<rect x="10" y="6" width="2080" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<text x="15" y="28" font-size="15" fill="#222222" text-anchor="start" font-weight="bold">Релиз-процесс ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩ · Fix Version ⟨27.x.y⟩   |   ревью: расхождения и пробелы между эталоном ЕАРМ, «Менеджментом команд» и прежней схемой</text>
+<text x="25" y="72.5" font-size="10" fill="#222222" text-anchor="start">Источники: Confluence «Эталонный процесс выпуска релиза» (Э), презентация «Менеджмент команд разработки» (М), прежняя схема процесса (С). Подробнее — docs/release-process-review.md.</text>
+<rect x="20" y="100" width="40" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="25" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">ID</text>
+<rect x="60" y="100" width="70" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="65" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Важность</text>
+<rect x="130" y="100" width="190" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="135" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Где</text>
+<rect x="320" y="100" width="700" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="325" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Находка</text>
+<rect x="1020" y="100" width="480" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="1025" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Влияние</text>
+<rect x="1500" y="100" width="580" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="1505" y="114.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Что сделано / предложение</text>
+<rect x="20" y="124" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="151.5" font-size="10" fill="#222222" text-anchor="start">F1</text>
+<rect x="60" y="124" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="151.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="124" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="151.5" font-size="10" fill="#222222" text-anchor="start">Эталон §2, §13; Приложение 2</text>
+<rect x="320" y="124" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="138.5" font-size="10" fill="#222222" text-anchor="start">master в эталоне не упоминается; релизная ветка создаётся в начале каждого спринта, hotfix идёт «по предыдущей релизной</text>
+<text x="325" y="151.5" font-size="10" fill="#222222" text-anchor="start">ветке». Релиз раз в ~4 недели, а цикл T−6 нед → всегда ≥ 2 релиза в работе: ветка N+1 режется до выката N, правила</text>
+<text x="325" y="164.5" font-size="10" fill="#222222" text-anchor="start">переноса нет.</text>
+<rect x="1020" y="124" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="151.5" font-size="10" fill="#222222" text-anchor="start">Потеря фиксов при переносе, ветки расходятся, hotfix не попадает в следующий релиз.</text>
+<rect x="1500" y="124" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="145" font-size="10" fill="#222222" text-anchor="start">master = состояние Прода; cut от master; 12.4: merge release → master и перенос в открытые release;</text>
+<text x="1505" y="158" font-size="10" fill="#222222" text-anchor="start">hotfix — от ветки Прода (= master после 12.4).</text>
+<rect x="20" y="174" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="194.5" font-size="10" fill="#222222" text-anchor="start">F2</text>
+<rect x="60" y="174" width="70" height="36" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="194.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="174" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="194.5" font-size="10" fill="#222222" text-anchor="start">Эталон §4 (этапы 2, 4, 5, 6–12)</text>
+<rect x="320" y="174" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="188" font-size="10" fill="#222222" text-anchor="start">Нигде не сказано, что скан (2), регресс (4), аудит (5), ПТЗ (6), трансфер (7–8), PreProd (9) и Prod (12) относятся к</text>
+<text x="325" y="201" font-size="10" fill="#222222" text-anchor="start">одному и тому же коду/образу. Скан идёт до исправлений UAT, аудит — после.</text>
+<rect x="1020" y="174" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="194.5" font-size="10" fill="#222222" text-anchor="start">В Прод может уйти код, который не сканировали и не аудировали.</text>
+<rect x="1500" y="174" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="188" font-size="10" fill="#222222" text-anchor="start">Шлюз G1 «Код-фриз» фиксирует hash/образ; 5.1, 7.2, 9.1, 12.1 сверяют его; после 4.3 — повторный скан</text>
+<text x="1505" y="201" font-size="10" fill="#222222" text-anchor="start">в CI.</text>
+<rect x="20" y="210" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="230.5" font-size="10" fill="#222222" text-anchor="start">F3</text>
+<rect x="60" y="210" width="70" height="36" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="230.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="210" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="224" font-size="10" fill="#222222" text-anchor="start">Эталон §5; Менеджмент (Релизный</text>
+<text x="135" y="237" font-size="10" fill="#222222" text-anchor="start">Epic)</text>
+<rect x="320" y="210" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="224" font-size="10" fill="#222222" text-anchor="start">В Релизном Epic всего 5 работ: «уязвимости и слияние веток» — один Enabler, «регресс PreProd и деплой на прод» — один</text>
+<text x="325" y="237" font-size="10" fill="#222222" text-anchor="start">Task. Время этапов 1/2 и 10/12 неразделимо.</text>
+<rect x="1020" y="210" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="230.5" font-size="10" fill="#222222" text-anchor="start">Нельзя посчитать время и ошибки по каждому этапу (цель ревью).</text>
+<rect x="1500" y="210" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="230.5" font-size="10" fill="#222222" text-anchor="start">Задача Jira на каждый шаг реестра (ID шага), под-задача на каждый сервис там, где работа по сервису.</text>
+<rect x="20" y="246" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="266.5" font-size="10" fill="#222222" text-anchor="start">F4</text>
+<rect x="60" y="246" width="70" height="36" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="266.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="246" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="260" font-size="10" fill="#222222" text-anchor="start">Менеджмент (сущности Jira);</text>
+<text x="135" y="273" font-size="10" fill="#222222" text-anchor="start">Эталон §14.1</text>
+<rect x="320" y="246" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="260" font-size="10" fill="#222222" text-anchor="start">Исполнение ведут мейнтейнеры сервисов, но в Jira нет сущности «Сервис» на релизных работах: Epic — на команду/квартал,</text>
+<text x="325" y="273" font-size="10" fill="#222222" text-anchor="start">Component — бизнес-функциональность.</text>
+<rect x="1020" y="246" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="266.5" font-size="10" fill="#222222" text-anchor="start">Нельзя оценить качество прохождения этапов по каждому сервису.</text>
+<rect x="1500" y="246" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="260" font-size="10" fill="#222222" text-anchor="start">Поле «Сервис» (список из таблицы «Статус развёртывания инфраструктуры ЕАРМ») на каждой релизной</text>
+<text x="1505" y="273" font-size="10" fill="#222222" text-anchor="start">под-задаче; матрица «сервис × этап» (стр. 3).</text>
+<rect x="20" y="282" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="302.5" font-size="10" fill="#222222" text-anchor="start">F5</text>
+<rect x="60" y="282" width="70" height="36" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="302.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="282" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="296" font-size="10" fill="#222222" text-anchor="start">Эталон §8 «Причина сдвига и</text>
+<text x="135" y="309" font-size="10" fill="#222222" text-anchor="start">риск»</text>
+<rect x="320" y="282" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="296" font-size="10" fill="#222222" text-anchor="start">5 категорий ([Качество], [Согласование], [ПСИ], [Инфра], [Зависимость]) ставятся на уровне релиза, без шага, сервиса и</text>
+<text x="325" y="309" font-size="10" fill="#222222" text-anchor="start">исполнителя. Нет категорий для ошибок скоупа и оценки, нарушений регламента, внесения дефекта.</text>
+<rect x="1020" y="282" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="296" font-size="10" fill="#222222" text-anchor="start">Нельзя ответить, где, кем и на каком шаге допущена ошибка и где систематически</text>
+<text x="1025" y="309" font-size="10" fill="#222222" text-anchor="start">ошибаемся в оценке.</text>
+<rect x="1500" y="282" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="296" font-size="10" fill="#222222" text-anchor="start">Две оси: категория календаря (как есть) + код E1–E7 на каждом возврате; в карточке — этап внесения и</text>
+<text x="1505" y="309" font-size="10" fill="#222222" text-anchor="start">этап обнаружения.</text>
+<rect x="20" y="318" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="345.5" font-size="10" fill="#222222" text-anchor="start">F6</text>
+<rect x="60" y="318" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="345.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="318" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="345.5" font-size="10" fill="#222222" text-anchor="start">Эталон §16 (RACI) vs §14.1</text>
+<rect x="320" y="318" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="332.5" font-size="10" fill="#222222" text-anchor="start">Этап 3: два A (ИБ и ВНП) — нарушено собственное правило «один A». Этап 12: A = Сервис, Release owner = I, а §14.1 ставит</text>
+<text x="325" y="345.5" font-size="10" fill="#222222" text-anchor="start">деплой на Release owner + релиз-инженера. Этапы 1–2: R = DevOps/РП, а §14.1 — мейнтейнеры (роли «Мейнтейнер» в RACI нет).</text>
+<text x="325" y="358.5" font-size="10" fill="#222222" text-anchor="start">Этап 4: A = РП, отчёт — у подрядчика.</text>
+<rect x="1020" y="318" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="345.5" font-size="10" fill="#222222" text-anchor="start">Не ясно, кто отвечает за результат этапа; спор «чей это шаг» срывает сроки.</text>
+<rect x="1500" y="318" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="339" font-size="10" fill="#222222" text-anchor="start">ЗО шагов взяты из §14.1; в RACI предлагается добавить роли «Мейнтейнер» и «Релиз-инженер», по одному</text>
+<text x="1505" y="352" font-size="10" fill="#222222" text-anchor="start">A на этап (ПСИ: A = ВНП, ИБ — gate 3b).</text>
+<rect x="20" y="368" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="388.5" font-size="10" fill="#222222" text-anchor="start">F7</text>
+<rect x="60" y="368" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="388.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="368" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="382" font-size="10" fill="#222222" text-anchor="start">Прежняя схема (BPMN) vs Эталон</text>
+<text x="135" y="395" font-size="10" fill="#222222" text-anchor="start">§4</text>
+<rect x="320" y="368" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="388.5" font-size="10" fill="#222222" text-anchor="start">ПТЗ: на схеме «при необходимости», в эталоне — обязательный gate (6), без него трансфер не стартует.</text>
+<rect x="1020" y="368" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="382" font-size="10" fill="#222222" text-anchor="start">Разный критический путь; можно ждать согласование, которое не нужно (или пропустить</text>
+<text x="1025" y="395" font-size="10" fill="#222222" text-anchor="start">обязательное).</text>
+<rect x="1500" y="368" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="388.5" font-size="10" fill="#222222" text-anchor="start">На схеме ПТЗ обязателен (по эталону). Нужно подтвердить у ИБ.</text>
+<rect x="20" y="404" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="424.5" font-size="10" fill="#222222" text-anchor="start">F8</text>
+<rect x="60" y="404" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="424.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="404" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="424.5" font-size="10" fill="#222222" text-anchor="start">Прежняя схема vs Эталон §4</text>
+<rect x="320" y="404" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="418" font-size="10" fill="#222222" text-anchor="start">ПСИ на прежней схеме целиком на стороне ИБ. По эталону: ПМТ готовит разработка (3a), ИБ только согласует (3b), ПСИ</text>
+<text x="325" y="431" font-size="10" fill="#222222" text-anchor="start">проводят QA + бизнес (3c, gate бизнес).</text>
+<rect x="1020" y="404" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="424.5" font-size="10" fill="#222222" text-anchor="start">Ложная ЗО: время бизнеса/QA записывалось бы на ИБ.</text>
+<rect x="1500" y="404" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="424.5" font-size="10" fill="#222222" text-anchor="start">Исправлено: ПСИ — трек C с тремя шагами и своими ЗО.</text>
+<rect x="20" y="440" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="454.5" font-size="10" fill="#222222" text-anchor="start">F9</text>
+<rect x="60" y="440" width="70" height="24" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="454.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="440" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="454.5" font-size="10" fill="#222222" text-anchor="start">Эталон §4 vs §13 (таблица B)</text>
+<rect x="320" y="440" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="454.5" font-size="10" fill="#222222" text-anchor="start">§4 ставит этапы последовательно (1 → 2 → 4 → 5), таблица B перекрывает их (4 и 5 — оба T−10…7 дн; 2 и 3 — оба T−2 нед).</text>
+<rect x="1020" y="440" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="454.5" font-size="10" fill="#222222" text-anchor="start">Неясно, что можно делать параллельно; критический путь не определён.</text>
+<rect x="1500" y="440" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="454.5" font-size="10" fill="#222222" text-anchor="start">Явный параллельный блок P (треки A QA, B уязвимости, C ПСИ) со стыком на G1; аудит — строго после G1.</text>
+<rect x="20" y="464" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="484.5" font-size="10" fill="#222222" text-anchor="start">F10</text>
+<rect x="60" y="464" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="484.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="464" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="484.5" font-size="10" fill="#222222" text-anchor="start">Эталон §1, §10, §2; Менеджмент</text>
+<rect x="320" y="464" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="478" font-size="10" fill="#222222" text-anchor="start">Ритм назван по-разному: «до трёх релизов в квартал», «плановый месячный», страница «2-недельные релизы», спринты по 2</text>
+<text x="325" y="491" font-size="10" fill="#222222" text-anchor="start">недели.</text>
+<rect x="1020" y="464" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="484.5" font-size="10" fill="#222222" text-anchor="start">Разные ожидания по длительности цикла и срокам этапов.</text>
+<rect x="1500" y="464" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="484.5" font-size="10" fill="#222222" text-anchor="start">Нужно утвердить ритм; в схеме цикл показан как один релиз, пересечение циклов — в F1.</text>
+<rect x="20" y="500" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="527.5" font-size="10" fill="#222222" text-anchor="start">F11</text>
+<rect x="60" y="500" width="70" height="50" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="527.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="500" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="521" font-size="10" fill="#222222" text-anchor="start">Прежняя схема vs Эталон §4,</text>
+<text x="135" y="534" font-size="10" fill="#222222" text-anchor="start">§14.1</text>
+<rect x="320" y="500" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="514.5" font-size="10" fill="#222222" text-anchor="start">На схеме нет: Gate по уязвимостям (2), TOML, трансфера (7–8), уведомления (11), импорта тест-плана в ТестОпс ГПН-ЦР. Есть</text>
+<text x="325" y="527.5" font-size="10" fill="#222222" text-anchor="start">то, чего нет в эталоне: «БД и брокеры». «Загрузка в релиз-борд» у Юрченко Д., а в эталоне запуск аудита через Релиз-борд —</text>
+<text x="325" y="540.5" font-size="10" fill="#222222" text-anchor="start">у Приходько В. Юрченко Д. нет ни в §14, ни в §15.</text>
+<rect x="1020" y="500" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="527.5" font-size="10" fill="#222222" text-anchor="start">Часть реальных шагов и ЗО невидима → нет данных по ним.</text>
+<rect x="1500" y="500" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="521" font-size="10" fill="#222222" text-anchor="start">Все шаги эталона добавлены; «БД и брокеры» оставлены (mark «sch»); ЗО Юрченко Д. и БД/брокеров нужно</text>
+<text x="1505" y="534" font-size="10" fill="#222222" text-anchor="start">подтвердить.</text>
+<rect x="20" y="550" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="570.5" font-size="10" fill="#222222" text-anchor="start">F12</text>
+<rect x="60" y="550" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="570.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="550" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="570.5" font-size="10" fill="#222222" text-anchor="start">Эталон §4 (этапы 0, 1), §2 п. 4</text>
+<rect x="320" y="550" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="564" font-size="10" fill="#222222" text-anchor="start">Scope freeze — этап 0, слияние PR — этап 1, а ветка создаётся в начале спринта. Порядок «заморозили состав → влили»</text>
+<text x="325" y="577" font-size="10" fill="#222222" text-anchor="start">противоречит «ветка живёт весь спринт».</text>
+<rect x="1020" y="550" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="570.5" font-size="10" fill="#222222" text-anchor="start">Задачи вливаются после «заморозки» либо заморозка не работает.</text>
+<rect x="1500" y="550" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="564" font-size="10" fill="#222222" text-anchor="start">Принято: ветка — в начале спринта (0.2), приём PR (1.1), затем Scope freeze (1.2); после него —</text>
+<text x="1505" y="577" font-size="10" fill="#222222" text-anchor="start">только change control.</text>
+<rect x="20" y="586" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="606.5" font-size="10" fill="#222222" text-anchor="start">F13</text>
+<rect x="60" y="586" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="606.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="586" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="606.5" font-size="10" fill="#222222" text-anchor="start">Эталон §10 (hotfix)</text>
+<rect x="320" y="586" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="600" font-size="10" fill="#222222" text-anchor="start">Паспорт hotfix — этапы 1–2, 9–12; аудит, ПТЗ и согласование трансфера (5–8) пропущены, хотя образ всё равно переносится в</text>
+<text x="325" y="613" font-size="10" fill="#222222" text-anchor="start">ПРОД-сегмент.</text>
+<rect x="1020" y="586" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="606.5" font-size="10" fill="#222222" text-anchor="start">Либо обход ИБ-gates, либо недокументированное исключение.</text>
+<rect x="1500" y="586" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="606.5" font-size="10" fill="#222222" text-anchor="start">На схеме hotfix возвращается на 9.1 → G2; нужно решение ИБ: какие gates обязательны для hotfix.</text>
+<rect x="20" y="622" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="642.5" font-size="10" fill="#222222" text-anchor="start">F14</text>
+<rect x="60" y="622" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="642.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="622" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="636" font-size="10" fill="#222222" text-anchor="start">Эталон §6; Менеджмент (дорожная</text>
+<text x="135" y="649" font-size="10" fill="#222222" text-anchor="start">карта)</text>
+<rect x="320" y="622" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="636" font-size="10" fill="#222222" text-anchor="start">Календарь и паспорт ведутся вручную (≥ раз в неделю); списание времени в Jira — только этап 3 дорожной карты (I кв. 2027).</text>
+<text x="325" y="649" font-size="10" fill="#222222" text-anchor="start">Метрик времени/ожидания в эталоне нет — только светофор план/прогноз/факт.</text>
+<rect x="1020" y="622" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="642.5" font-size="10" fill="#222222" text-anchor="start">Данные для метрик из Confluence недостоверны; факта по этапам пока нет.</text>
+<rect x="1500" y="622" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="636" font-size="10" fill="#222222" text-anchor="start">Источник метрик — Jira (переходы статусов и оценки); worklog — когда внедрят списание. Календарь —</text>
+<text x="1505" y="649" font-size="10" fill="#222222" text-anchor="start">витрина, не источник.</text>
+<rect x="20" y="658" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="678.5" font-size="10" fill="#222222" text-anchor="start">F15</text>
+<rect x="60" y="658" width="70" height="36" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="678.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="658" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="678.5" font-size="10" fill="#222222" text-anchor="start">Эталон §4</text>
+<rect x="320" y="658" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="672" font-size="10" fill="#222222" text-anchor="start">Нет явных шагов после выката: merge в master, перенос в ветки, закрытие релиза, ретро; нет шага повторной проверки после</text>
+<text x="325" y="685" font-size="10" fill="#222222" text-anchor="start">исправлений UAT.</text>
+<rect x="1020" y="658" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="678.5" font-size="10" fill="#222222" text-anchor="start">Расхождение веток и потеря знаний между релизами.</text>
+<rect x="1500" y="658" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="678.5" font-size="10" fill="#222222" text-anchor="start">Добавлены 4.4, 12.4, 12.5 (mark «new»).</text>
+<rect x="20" y="694" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="708.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
+<rect x="60" y="694" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="708.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="694" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="708.5" font-size="10" fill="#222222" text-anchor="start">Эталон §18, §17</text>
+<rect x="320" y="694" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="708.5" font-size="10" fill="#222222" text-anchor="start">Блокеры по доступам уже сопоставлены с этапами, но в метриках не учитываются.</text>
+<rect x="1020" y="694" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="708.5" font-size="10" fill="#222222" text-anchor="start">«Ждём доступ» растворяется в общем ожидании.</text>
+<rect x="1500" y="694" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="708.5" font-size="10" fill="#222222" text-anchor="start">«Нет доступа» — подкод E5/E6 с привязкой к этапу (из §18).</text>
+</svg>
