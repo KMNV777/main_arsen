@@ -412,7 +412,7 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     import sections as S
     from html import escape as e
 
-    titles = ["1. Процесс", "2. Ветки", "3. Дорожная карта", "4. Jira и метрики"]
+    titles = ["1. Процесс", "2. Ветки", "3. Дорожная карта", "4. Jira и метрики", "5. Дорожная карта релизов", "6. Стратегическое планирование", "7. Экономика и ресурсы"]
     figs = []
     for i, pg in enumerate(pages, 1):
         sv = page_svg(pg)
@@ -456,7 +456,10 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
 
 
 def main() -> None:
-    pages = [page_process(), page_branches(), page_roadmap(), page_jira()]
+    import plan_pages as PP
+    import planning as PL
+    rels = PL.releases()
+    pages = [page_process(), page_branches(), page_roadmap(), page_jira(), PP.page_release_roadmap(header, rels), PP.page_strategy(header, rels), PP.page_econ(header)]
     DRAWIO.parent.mkdir(parents=True, exist_ok=True)
     write_drawio(pages, str(DRAWIO))
     SVG_DIR.mkdir(parents=True, exist_ok=True)
