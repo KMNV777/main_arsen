@@ -13,6 +13,8 @@ from pathlib import Path
 
 import build_confluence as C
 import build_release_process as B
+import process_data as D
+import sections as S
 import trz_model as T
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,7 +22,7 @@ OUT = ROOT / "docs" / "release-process-full.html"
 
 
 def calc_html() -> str:
-    name = {s[0]: s[3] for s in B.STEPS}
+    name = D.STEP_NAME
     data = {
         "params": {k: v[0] for k, v in T.PARAMS.items()},
         "notes": {k: v[1] for k, v in T.PARAMS.items()},
@@ -32,25 +34,24 @@ def calc_html() -> str:
 (function(){
  var D=__DATA__, P=Object.assign({},D.params), H=D.hours.map(function(x){return x.slice()}), RATE={};
  var el=document.getElementById('calc');
- var labels={N:'Число сервисов N',R:'Релизов в год',HF:'Hotfix в год',HF_F:'Доля фикс. части для hotfix',P_PSI:'Доля релизов с ПСИ',P_PTZ:'Доля релизов с ПТЗ',H_DAY:'Часов в день',D_YEAR:'Рабочих дней в году',LOAD:'Плановая загрузка'};
- function k(c){return c==='psi'?P.P_PSI:(c==='ptz'?P.P_PTZ:1)}
+ var labels={N:'Число сервисов N',R:'Релизов в год',HF:'Hotfix в год',HF_F:'Доля фикс. части для hotfix',P_PSI:'Доля релизов с ПСИ',H_DAY:'Часов в день',D_YEAR:'Рабочих дней в году',LOAD:'Плановая загрузка'};
+ function k(c){return c==='psi'?P.P_PSI:1}
  function calc(){
   var out={};D.roles.forEach(function(r){out[r[0]]={F:0,S:0}});
   H.forEach(function(h){var kk=k(h[5]);out[h[2]].F+=h[3]*kk;out[h[2]].S+=h[4]*kk});
   var avail=P.H_DAY*P.D_YEAR*P.LOAD,full=P.H_DAY*P.D_YEAR,tot={rel:0,yr:0,fte:0,cost:0,cur:0,has:false};
   var rows=D.roles.map(function(r){var o=out[r[0]];var rel=o.F+o.S*P.N,hf=o.F*P.HF_F+o.S,yr=rel*P.R+hf*P.HF,fte=yr/avail;
-   var rate=parseFloat(RATE[r[0]]),cost=isNaN(rate)?null:yr*rate,curc=isNaN(rate)?null:D.current*full*rate;
-   tot.rel+=rel;tot.yr+=yr;tot.fte+=fte;tot.cur+=D.current;if(cost!==null){tot.has=true;tot.cost+=cost}
-   return '<tr><td>'+r[1]+'</td><td>'+rel.toFixed(0)+'</td><td>'+yr.toFixed(0)+'</td><td><b>'+fte.toFixed(2)+'</b></td><td>'+D.current.toFixed(0)+'</td><td>'+(D.current-fte>=0?'+':'')+(D.current-fte).toFixed(2)+'</td>'
-   +'<td><input class="rate" data-r="'+r[0]+'" value="'+(RATE[r[0]]||'')+'" placeholder="₽/ч" size="6"></td><td>'+(cost===null?'':Math.round(cost).toLocaleString('ru-RU'))+'</td><td>'+(curc===null?'':Math.round(curc).toLocaleString('ru-RU'))+'</td></tr>'});
-  rows.push('<tr class="tot"><td><b>Итого</b></td><td><b>'+tot.rel.toFixed(0)+'</b></td><td><b>'+tot.yr.toFixed(0)+'</b></td><td><b>'+tot.fte.toFixed(2)+'</b></td><td><b>'+tot.cur.toFixed(0)+'</b></td><td><b>'+(tot.cur-tot.fte>=0?'+':'')+(tot.cur-tot.fte).toFixed(2)+'</b></td><td></td><td>'+(tot.has?Math.round(tot.cost).toLocaleString('ru-RU'):'')+'</td><td></td></tr>');
-  document.getElementById('calc-out').innerHTML='<div class="tw"><table><thead><tr><th>Роль</th><th>ТРЗ на релиз, ч</th><th>ТРЗ в год, ч</th><th>FTE по ТРЗ</th><th>Сейчас, FTE</th><th>Разница</th><th>Ставка, ₽/ч</th><th>Стоимость ТРЗ в год, ₽</th><th>Стоимость текущего списания, ₽</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';
-  document.querySelectorAll('#calc-out .rate').forEach(function(i){i.onchange=function(){RATE[i.dataset.r]=i.value;calc()}});
+   var rate=parseFloat(RATE[r[0]]),cost=isNaN(rate)?null:yr*rate;
+   tot.fte+=fte;if(cost!==null){tot.has=true;tot.cost+=cost}
+   return '<tr><td>'+r[1]+'</td><td><b>'+fte.toFixed(2)+'</b></td><td>'+(cost===null?'введите ставку':Math.round(cost).toLocaleString('ru-RU')+' ₽/год')+'</td></tr>'});
+  rows.push('<tr class="tot"><td><b>Итого</b></td><td><b>'+tot.fte.toFixed(2)+'</b></td><td><b>'+(tot.has?Math.round(tot.cost).toLocaleString('ru-RU')+' ₽/год':'')+'</b></td></tr>');
+  document.getElementById('calc-out').innerHTML='<div class="tw"><table><thead><tr><th>Роль</th><th>FTE</th><th>Стоимость</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';
  }
  var pf=Object.keys(P).map(function(key){return '<label>'+labels[key]+'<input type="number" step="any" data-k="'+key+'" value="'+P[key]+'" title="'+D.notes[key].replace(/"/g,'')+'"></label>'}).join('');
  var hr=H.map(function(h,i){return '<tr><td>'+h[0]+'</td><td>'+h[1]+'</td><td>'+h[2]+'</td><td><input type="number" step="any" data-i="'+i+'" data-c="3" value="'+h[3]+'"></td><td><input type="number" step="any" data-i="'+i+'" data-c="4" value="'+h[4]+'"></td><td>'+h[5]+'</td></tr>'}).join('');
- el.innerHTML='<div class="calc-p">'+pf+'</div><div id="calc-out"></div><details><summary>Часы по шагам (F — на релиз, S — на сервис): редактируются</summary><div class="tw"><table><thead><tr><th>Шаг</th><th>Название</th><th>Роль</th><th>F, ч</th><th>S, ч</th><th>Условие</th></tr></thead><tbody>'+hr+'</tbody></table></div></details><p><button id="calc-reset">Сбросить к значениям по умолчанию</button></p>';
- el.querySelectorAll('.calc-p input').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;calc()}});
+ el.innerHTML='<div id="calc-out"></div><details><summary>Параметры расчёта (число сервисов, релизов в год…)</summary><div class="calc-p">'+pf+'</div></details><details><summary>Ставки по ролям, ₽/ч</summary><div class="calc-p">'+D.roles.map(function(r){return '<label>'+r[1]+'<input class="rate" type="number" step="any" data-r="'+r[0]+'" placeholder="₽/ч"></label>'}).join('')+'</div></details><details><summary>Часы по шагам (F — на релиз, S — на сервис): редактируются</summary><div class="tw"><table><thead><tr><th>Шаг</th><th>Название</th><th>Роль</th><th>F, ч</th><th>S, ч</th><th>Условие</th></tr></thead><tbody>'+hr+'</tbody></table></div></details><p><button id="calc-reset">Сбросить к значениям по умолчанию</button></p>';
+ el.querySelectorAll('.calc-p input[data-k]').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;calc()}});
+ el.querySelectorAll('input.rate').forEach(function(i){i.oninput=function(){RATE[i.dataset.r]=i.value;calc()}});
  el.querySelectorAll('details input').forEach(function(i){i.oninput=function(){H[+i.dataset.i][+i.dataset.c]=parseFloat(i.value)||0;calc()}});
  document.getElementById('calc-reset').onclick=function(){location.reload()};
  calc();
@@ -66,7 +67,7 @@ def downloads_html() -> str:
         kb = path.stat().st_size // 1024
         return f'<li><a download="{fname}" href="data:{mime};base64,{b64}">{label}</a> <span class="muted">({kb} КБ)</span></li>'
     items = [
-        link(ROOT / "docs/drawio/10-release-process.drawio", "Схема процесса (draw.io, 5 страниц) — редактируемый источник", "application/xml", "10-release-process.drawio"),
+        link(ROOT / "docs/drawio/10-release-process.drawio", "Схема процесса (draw.io, 4 страницы) — редактируемый источник", "application/xml", "10-release-process.drawio"),
         link(ROOT / "docs/release-trz-fte.xlsx", "Модель ТРЗ и FTE по ролям (Excel, живые формулы)", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "release-trz-fte.xlsx"),
     ]
     return ("<p>Файлы встроены в эту страницу — скачиваются без интернета.</p><ul>" + "".join(items) + "</ul>"
@@ -94,10 +95,10 @@ details{margin:10px 0}summary{cursor:pointer;color:var(--ind);font-weight:600}
 
 
 def main() -> None:
-    pages = [B.page_process(), B.page_branches(), B.page_matrix(), B.page_jira(), B.page_review()]
+    pages = [B.page_process(), B.page_branches(), B.page_roadmap(), B.page_jira()]
     extra = []
     for i, t, fn in C.PAGES:
-        if i in ("trz", "review", "roles"):
+        if i in ("trz",):
             continue
         extra.append((f"cf-{i}", f"Confluence · {t}",
                       f'<div class="tools"><button onclick="cpBlock(\'cf-{i}\',this)">Копировать блок для Confluence</button></div>'

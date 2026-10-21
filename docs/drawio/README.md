@@ -16,7 +16,7 @@
 | [`it-landscape-emg-general.drawio`](it-landscape-emg-general.drawio) | ландшафт | То же, что `06` (для [`it-landscape-emg.md`](../it-landscape-emg.md)) | Та же бизнес-картина в альтернативном файле для основного обзорного документа. |
 | [`07-it-landscape-mermaid-detailed.drawio`](07-it-landscape-mermaid-detailed.drawio) | ландшафт | Детальная версия из `it-landscape-emg.mmd` | Используется, когда нужно перейти от общей картины к конкретным интеграционным потокам. |
 | [`09-emg-c4-component.drawio`](09-emg-c4-component.drawio) | §9 | **Единая C4 Component диаграмма ЭМГ** (генератор `scripts/build_emg_c4_component.py`) | Одна компонентная схема всего цифрового контура ЭМГ со всеми интеграциями из матрицы 19 систем (протоколы, форматы, направления). |
-| [`10-release-process.drawio`](10-release-process.drawio) | процесс | **Процесс ведения релиза** (5 страниц: процесс по ЗО эталона ЕАРМ с параллельным блоком и git-дорожкой; ветки и отбор задач; матрица «сервис × этап»; Jira-модель и метрики; ревью процессов). Генератор `scripts/build_release_process.py`, регламент — [`../release-process.md`](../release-process.md) | Показывает, кто, что и в какой последовательности делает в релизе, и откуда брать метрики времени и ошибок по каждому сервису и шагу. |
+| [`10-release-process.drawio`](10-release-process.drawio) | процесс | **Процесс ведения релиза** (4 страницы: последовательность и параллельность по зонам ответственности — 32 этапа; ведение релизных веток; дорожная карта с ответственными и SLA; Jira и метрики). Генератор: `scripts/build_release_process.py`, данные: `scripts/process_data.py` |
 
 ## C4 Component диаграмма ЭМГ (отдельный генератор)
 

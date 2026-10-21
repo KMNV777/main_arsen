@@ -1,317 +1,145 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1370" viewBox="0 0 2100 1370" font-family="Helvetica, Arial, sans-serif">
-<rect width="2100" height="1370" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="712" viewBox="0 0 1500 712" font-family="Helvetica, Arial, sans-serif">
+<rect width="1500" height="712" fill="#FFFFFF"/>
 <defs>
 <marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1B1B3A"/></marker>
-<marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D64545"/></marker>
 </defs>
-<rect x="10" y="6" width="2080" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
-<text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Релиз-процесс ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩ · Fix Version ⟨27.x.y⟩   |   Jira / Confluence, метрики и таксономия ошибок</text>
-<text x="25" y="67.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">A. Модель данных (как стыкуется с эталоном и «Менеджментом команд»)</text>
-<rect x="20" y="84" width="360" height="130" rx="8" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
+<rect x="10" y="6" width="1480" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Процесс выпуска релиза ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩   |   учёт в Jira и метрики релиза</text>
+<text x="25" y="67.5" font-size="14" fill="#140093" text-anchor="start" font-weight="bold">Как этапы ложатся в Jira</text>
+<rect x="20" y="84" width="320" height="120" rx="8" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="25" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Релизный Epic (квартал)</text>
-<text x="25" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">Обязательный объём спринтов; уже есть в эталоне. Не</text>
-<text x="25" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">содержит Task BE/FE/QA фич.</text>
-<rect x="440" y="84" width="400" height="130" rx="8" fill="#FFE9D2" stroke="#FDAB64" stroke-width="1"/>
-<text x="445" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Fix Version (релиз)</text>
-<text x="445" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">Состав = Story/Bug с версией; источник changelog и строки</text>
-<text x="445" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">календаря. Паспорт REL-XXX и календарь в Confluence — витрина.</text>
-<rect x="900" y="84" width="540" height="130" rx="8" fill="#FFD2A6" stroke="#FF7500" stroke-width="2"/>
-<text x="905" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Задача шага (Enabler/Task) в Релизном Epic с fixVersion — НОВОЕ</text>
-<text x="905" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">Одна на каждый шаг реестра (ID 0.1…12.6, G1, G2). Поля: ID шага*, Роль/ЗО, Оценка*,</text>
-<text x="905" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">Исполнитель, Результат (✓/↩/✗), код E, этап внесения, «Возврат из».</text>
-<rect x="1500" y="84" width="540" height="130" rx="8" fill="#FFD2A6" stroke="#FF7500" stroke-width="2"/>
-<text x="1505" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Под-задача сервиса — НОВОЕ</text>
-<text x="1505" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">Для шагов по сервису (0.2, 1.1, 1.3, 2.1, 4.3, 9.1, 12.x). Поле «Сервис»*</text>
-<text x="1505" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">(мейнтейнеры из таблицы ЕАРМ), оценка, исполнитель.</text>
-<rect x="20" y="290" width="150" height="56" rx="8" fill="#F5F5F5" stroke="#999999" stroke-width="1"/>
-<text x="95" y="321" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Ожидает</text>
-<rect x="250" y="290" width="150" height="56" rx="8" fill="#FFE9D2" stroke="#FDAB64" stroke-width="1"/>
-<text x="325" y="321" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">В работе</text>
-<rect x="480" y="290" width="150" height="56" rx="8" fill="#CFF85E" stroke="#6E9400" stroke-width="1"/>
-<text x="555" y="321" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Готово</text>
-<text x="25" y="275.5" font-size="12" fill="#1B1B3A" text-anchor="start" font-weight="bold">Workflow задачи шага (старт/финиш = источник метрик M1, M2)</text>
-<rect x="250" y="400" width="150" height="56" rx="8" fill="#FBE0E0" stroke="#D64545" stroke-width="1"/>
-<text x="325" y="424" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Возврат</text>
-<text x="325" y="438" font-size="9" fill="#666666" text-anchor="middle">новая задача того же шага</text>
-<text x="765" y="275.5" font-size="12" fill="#1B1B3A" text-anchor="start" font-weight="bold">Что НЕ используем как источник метрик</text>
-<text x="765" y="362.5" font-size="10" fill="#1B1B3A" text-anchor="start">• Календарь и паспорт Confluence — обновляются вручную раз в неделю; это витрина для менеджмента.</text>
-<text x="765" y="375.5" font-size="10" fill="#1B1B3A" text-anchor="start">• Категорию «Причина сдвига» ([Качество] / [Согласование] / [ПСИ] / [Инфра] / [Зависимость]) оставляем, но она ставится на релиз; ошибка по шагу и сервису фиксируется кодом E1–E7 в Jira.</text>
-<text x="765" y="388.5" font-size="10" fill="#1B1B3A" text-anchor="start">• Факт времени: до внедрения списания (этап 3 дорожной карты менеджмента, I кв. 2027) — переходы статусов; после — списание на задачу шага.</text>
-<text x="25" y="505.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">B. Метрики</text>
-<rect x="20" y="518" width="50" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="25" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">№</text>
-<rect x="70" y="518" width="230" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="75" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Метрика</text>
-<rect x="300" y="518" width="480" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="305" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Расчёт</text>
-<rect x="780" y="518" width="250" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="785" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Срезы</text>
-<rect x="20" y="542" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">M1</text>
-<rect x="70" y="542" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">Время работы шага</text>
-<rect x="300" y="542" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">Готово − Старт (рабочие часы)</text>
-<rect x="780" y="542" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг · сервис · исполнитель</text>
-<rect x="20" y="566" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">M2</text>
-<rect x="70" y="566" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">Ожидание перед шагом</text>
-<rect x="300" y="566" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">Старт − max(Готово предшественников); для P — от fork</text>
-<rect x="780" y="566" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг · ЗО · сервис</text>
-<rect x="20" y="590" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">M3</text>
-<rect x="70" y="590" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">Длительность релиза и критический путь</text>
-<rect x="300" y="590" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">Σ(работа + ожидание) по самой длинной цепочке; доля по ЗО (НЕДРА / ИБ ГПН / ГПН-ЦР)</text>
-<rect x="780" y="590" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">сервис · релиз</text>
-<rect x="20" y="614" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">M4</text>
-<rect x="70" y="614" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">Точность оценки</text>
-<rect x="300" y="614" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">(Факт − Оценка) / Оценка; смещение = медиана по роли и шагу</text>
-<rect x="780" y="614" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">роль · шаг · сервис</text>
-<rect x="20" y="638" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">M5</text>
-<rect x="70" y="638" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">FPY — с первого раза</text>
-<rect x="300" y="638" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">доля шагов без возврата</text>
-<rect x="780" y="638" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг · сервис</text>
-<rect x="20" y="662" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">M6</text>
-<rect x="70" y="662" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">Возвраты</text>
-<rect x="300" y="662" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">число и время повторов; матрица «внесено на X → найдено на Y»</text>
-<rect x="780" y="662" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг-источник · шаг-приёмник</text>
-<rect x="20" y="686" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">M7</text>
-<rect x="70" y="686" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">Нарушения требований</text>
-<rect x="300" y="686" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">число E3; невыполненные критерии входа/выхода и правила §2</text>
-<rect x="780" y="686" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг · сервис · исполнитель</text>
-<rect x="20" y="710" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="724.5" font-size="10" fill="#1B1B3A" text-anchor="start">M9</text>
-<rect x="70" y="710" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="724.5" font-size="10" fill="#1B1B3A" text-anchor="start">Соблюдение SLA</text>
-<rect x="300" y="710" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="724.5" font-size="10" fill="#1B1B3A" text-anchor="start">доля шагов, где (работа + ожидание) ≤ SLA (1–5 раб. дн); превышение → код E6 / E7</text>
-<rect x="780" y="710" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="724.5" font-size="10" fill="#1B1B3A" text-anchor="start">шаг · ЗО · сервис</text>
-<rect x="20" y="734" width="50" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="754.5" font-size="10" fill="#1B1B3A" text-anchor="start">M10</text>
-<rect x="70" y="734" width="230" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="754.5" font-size="10" fill="#1B1B3A" text-anchor="start">FTE роли в релизном цикле</text>
-<rect x="300" y="734" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="748" font-size="10" fill="#1B1B3A" text-anchor="start">Σ ТРЗ роли по задачам шагов за период / (рабочие часы периода × плановая загрузка</text>
-<text x="305" y="761" font-size="10" fill="#1B1B3A" text-anchor="start">80 %); сравнивается с текущим списанием 1 FTE</text>
-<rect x="780" y="734" width="250" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="754.5" font-size="10" fill="#1B1B3A" text-anchor="start">роль · период · число сервисов</text>
-<rect x="20" y="770" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="784.5" font-size="10" fill="#1B1B3A" text-anchor="start">M11</text>
-<rect x="70" y="770" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="784.5" font-size="10" fill="#1B1B3A" text-anchor="start">Частотность релизов</text>
-<rect x="300" y="770" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="784.5" font-size="10" fill="#1B1B3A" text-anchor="start">число релизов за период (KPI DevOps-инженера)</text>
-<rect x="780" y="770" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="784.5" font-size="10" fill="#1B1B3A" text-anchor="start">направление · контур</text>
-<rect x="20" y="794" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="808.5" font-size="10" fill="#1B1B3A" text-anchor="start">M12</text>
-<rect x="70" y="794" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="808.5" font-size="10" fill="#1B1B3A" text-anchor="start">Время развёртывания релиза</text>
-<rect x="300" y="794" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="808.5" font-size="10" fill="#1B1B3A" text-anchor="start">Готово 12.1 − Старт 12.1 (KPI DevOps-инженера)</text>
-<rect x="780" y="794" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="808.5" font-size="10" fill="#1B1B3A" text-anchor="start">сервис · релиз</text>
-<rect x="20" y="818" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="832.5" font-size="10" fill="#1B1B3A" text-anchor="start">M13</text>
-<rect x="70" y="818" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="832.5" font-size="10" fill="#1B1B3A" text-anchor="start">Доля релизов со сбоями</text>
-<rect x="300" y="818" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="832.5" font-size="10" fill="#1B1B3A" text-anchor="start">релизы с инцидентом или откатом / все релизы (KPI DevOps-инженера и SRE)</text>
-<rect x="780" y="818" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="832.5" font-size="10" fill="#1B1B3A" text-anchor="start">сервис · период</text>
-<rect x="20" y="842" width="50" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="862.5" font-size="10" fill="#1B1B3A" text-anchor="start">M14</text>
-<rect x="70" y="842" width="230" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="856" font-size="10" fill="#1B1B3A" text-anchor="start">Доля дефектов, найденных до</text>
-<text x="75" y="869" font-size="10" fill="#1B1B3A" text-anchor="start">эксплуатации</text>
-<rect x="300" y="842" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="862.5" font-size="10" fill="#1B1B3A" text-anchor="start">дефекты, найденные на 4.x и 10.x / все дефекты релиза (KPI тестировщика)</text>
-<rect x="780" y="842" width="250" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="862.5" font-size="10" fill="#1B1B3A" text-anchor="start">сервис · релиз</text>
-<rect x="20" y="878" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="892.5" font-size="10" fill="#1B1B3A" text-anchor="start">M8</text>
-<rect x="70" y="878" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="892.5" font-size="10" fill="#1B1B3A" text-anchor="start">Churn скоупа</text>
-<rect x="300" y="878" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="892.5" font-size="10" fill="#1B1B3A" text-anchor="start">доля задач, добавленных после freeze / исключённых из релиза</text>
-<rect x="780" y="878" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="892.5" font-size="10" fill="#1B1B3A" text-anchor="start">сервис · релиз</text>
-<text x="1105" y="505.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">C. Таксономия ошибок (код причины в задаче шага)</text>
-<rect x="1100" y="518" width="50" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="1105" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Код</text>
-<rect x="1150" y="518" width="200" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="1155" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Тип</text>
-<rect x="1350" y="518" width="740" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="1355" y="532.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Что фиксируем</text>
-<rect x="1100" y="542" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">E1</text>
-<rect x="1150" y="542" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">Ошибка скоупа</text>
-<rect x="1350" y="542" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="556.5" font-size="10" fill="#1B1B3A" text-anchor="start">Задача включена/исключена неверно; добавлена после freeze; расхождение Fix Version ↔ ветка</text>
-<rect x="1100" y="566" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">E2</text>
-<rect x="1150" y="566" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">Ошибка оценки</text>
-<rect x="1350" y="566" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="580.5" font-size="10" fill="#1B1B3A" text-anchor="start">Факт отличается от оценки более чем на порог (предлагается 25 %); недооценён регресс или фиксы</text>
-<rect x="1100" y="590" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">E3</text>
-<rect x="1150" y="590" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">Нарушение регламента</text>
-<rect x="1350" y="590" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="604.5" font-size="10" fill="#1B1B3A" text-anchor="start">Пропущен шаг, не выполнен критерий входа/выхода или правило §2; нет данных в Jira/паспорте</text>
-<rect x="1100" y="614" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">E4</text>
-<rect x="1150" y="614" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">Дефект кода</text>
-<rect x="1350" y="614" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="628.5" font-size="10" fill="#1B1B3A" text-anchor="start">Дефект внесён на этапе X, найден на этапе Y (фиксируем оба)</text>
-<rect x="1100" y="638" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">E5</text>
-<rect x="1150" y="638" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">Окружение / сборка / доступ</text>
-<rect x="1350" y="638" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="652.5" font-size="10" fill="#1B1B3A" text-anchor="start">Сбой стенда, CI, миграции, деплоя; нет доступа (подкоды из эталона §18)</text>
-<rect x="1100" y="662" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">E6</text>
-<rect x="1150" y="662" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">Простой / ожидание</text>
-<rect x="1350" y="662" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="676.5" font-size="10" fill="#1B1B3A" text-anchor="start">Ожидание ответа, ресурса или решения сверх норматива шага</text>
-<rect x="1100" y="686" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1105" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">E7</text>
-<rect x="1150" y="686" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1155" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">Внешняя зависимость</text>
-<rect x="1350" y="686" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1355" y="700.5" font-size="10" fill="#1B1B3A" text-anchor="start">Время и возвраты на стороне ИБ ГПН / ГПН-ЦР — фиксируем фактами</text>
-<text x="25" y="947.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">D. Вопросы, на которые схема должна отвечать данными Jira</text>
-<rect x="20" y="960" width="420" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="25" y="974.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Вопрос</text>
-<rect x="440" y="960" width="160" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="445" y="974.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Метрики</text>
-<rect x="600" y="960" width="1100" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="605" y="974.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Как смотреть</text>
-<rect x="20" y="984" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="998.5" font-size="10" fill="#1B1B3A" text-anchor="start">На каком шаге и кем допущены ошибки?</text>
-<rect x="440" y="984" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="998.5" font-size="10" fill="#1B1B3A" text-anchor="start">M5, M6, M7</text>
-<rect x="600" y="984" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="998.5" font-size="10" fill="#1B1B3A" text-anchor="start">возвраты и E3 в разрезе шаг × исполнитель × сервис; этап внесения ≠ этап обнаружения</text>
-<rect x="20" y="1008" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1022.5" font-size="10" fill="#1B1B3A" text-anchor="start">Где систематически ошибаемся в оценке?</text>
-<rect x="440" y="1008" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="1022.5" font-size="10" fill="#1B1B3A" text-anchor="start">M4</text>
-<rect x="600" y="1008" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="1022.5" font-size="10" fill="#1B1B3A" text-anchor="start">медиана смещения по роли и шагу; E2</text>
-<rect x="20" y="1032" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1046.5" font-size="10" fill="#1B1B3A" text-anchor="start">Где нарушаются требования?</text>
-<rect x="440" y="1032" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="1046.5" font-size="10" fill="#1B1B3A" text-anchor="start">M7</text>
-<rect x="600" y="1032" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="1046.5" font-size="10" fill="#1B1B3A" text-anchor="start">невыполненные критерии входа/выхода; правила §2 эталона</text>
-<rect x="20" y="1056" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1070.5" font-size="10" fill="#1B1B3A" text-anchor="start">Правда ли, что тормозит ИБ?</text>
-<rect x="440" y="1056" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="1070.5" font-size="10" fill="#1B1B3A" text-anchor="start">M2, M3, E7</text>
-<rect x="600" y="1056" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="1070.5" font-size="10" fill="#1B1B3A" text-anchor="start">доля ЗО на критическом пути; ожидание перед шагами ИБ (2.2, 3.2, 5.2, 6.1, 8.1) против шагов НЕДРА</text>
-<rect x="20" y="1080" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1094.5" font-size="10" fill="#1B1B3A" text-anchor="start">Какие сервисы проблемные?</text>
-<rect x="440" y="1080" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="1094.5" font-size="10" fill="#1B1B3A" text-anchor="start">все</text>
-<rect x="600" y="1080" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="1094.5" font-size="10" fill="#1B1B3A" text-anchor="start">строки матрицы (стр. 3): шаги с ↩ / ✗ по сервису</text>
-<rect x="20" y="1104" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1118.5" font-size="10" fill="#1B1B3A" text-anchor="start">Хорошо ли держим скоуп?</text>
-<rect x="440" y="1104" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="1118.5" font-size="10" fill="#1B1B3A" text-anchor="start">M8, E1</text>
-<rect x="600" y="1104" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="1118.5" font-size="10" fill="#1B1B3A" text-anchor="start">добавлено после Scope freeze, расхождение Fix Version ↔ ветка</text>
-<text x="25" y="1173.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">E. Критический путь по SLA (от rc до закрытия, рабочие дни; приём PR 1.1 идёт спринт и не входит)</text>
-<rect x="20" y="1186" width="200" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="25" y="1200.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Сценарий</text>
-<rect x="220" y="1186" width="100" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="225" y="1200.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Раб. дней</text>
-<rect x="320" y="1186" width="100" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="325" y="1200.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Недель</text>
-<rect x="420" y="1186" width="1480" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="425" y="1200.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Критический путь</text>
-<rect x="20" y="1210" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1224.5" font-size="10" fill="#1B1B3A" text-anchor="start">ПСИ + ПТЗ</text>
-<rect x="220" y="1210" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1224.5" font-size="10" fill="#1B1B3A" text-anchor="start">43</text>
-<rect x="320" y="1210" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1224.5" font-size="10" fill="#1B1B3A" text-anchor="start">8.6</text>
-<rect x="420" y="1210" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1224.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.4b → 12.6</text>
-<rect x="20" y="1234" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1248.5" font-size="10" fill="#1B1B3A" text-anchor="start">только ПСИ</text>
-<rect x="220" y="1234" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1248.5" font-size="10" fill="#1B1B3A" text-anchor="start">38</text>
-<rect x="320" y="1234" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1248.5" font-size="10" fill="#1B1B3A" text-anchor="start">7.6</text>
-<rect x="420" y="1234" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1248.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.4b → 12.6</text>
-<rect x="20" y="1258" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1272.5" font-size="10" fill="#1B1B3A" text-anchor="start">только ПТЗ</text>
-<rect x="220" y="1258" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1272.5" font-size="10" fill="#1B1B3A" text-anchor="start">43</text>
-<rect x="320" y="1258" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1272.5" font-size="10" fill="#1B1B3A" text-anchor="start">8.6</text>
-<rect x="420" y="1258" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1272.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.4b → 12.6</text>
-<rect x="20" y="1282" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="1296.5" font-size="10" fill="#1B1B3A" text-anchor="start">без ПСИ и ПТЗ</text>
-<rect x="220" y="1282" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="225" y="1296.5" font-size="10" fill="#1B1B3A" text-anchor="start">38</text>
-<rect x="320" y="1282" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="1296.5" font-size="10" fill="#1B1B3A" text-anchor="start">7.6</text>
-<rect x="420" y="1282" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="425" y="1296.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.3 → 2.1 → 2.2 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.4b → 12.6</text>
-<polyline points="380,149 440,149" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
-<rect x="379" y="141" width="62" height="16" fill="#FFFFFF"/>
-<text x="410" y="153" font-size="10" fill="#1B1B3A" text-anchor="middle">по релизам</text>
-<polyline points="840,149 900,149" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
-<rect x="850.2" y="141" width="39.6" height="16" fill="#FFFFFF"/>
-<text x="870" y="153" font-size="10" fill="#1B1B3A" text-anchor="middle">фильтр</text>
-<polyline points="1440,149 1500,149" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
-<rect x="1436.2" y="141" width="67.6" height="16" fill="#FFFFFF"/>
-<text x="1470" y="153" font-size="10" fill="#1B1B3A" text-anchor="middle">по сервисам</text>
-<polyline points="170,318 250,318" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
-<rect x="193" y="310" width="34" height="16" fill="#FFFFFF"/>
-<text x="210" y="322" font-size="10" fill="#1B1B3A" text-anchor="middle">Старт</text>
-<polyline points="400,318 480,318" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
-<rect x="423" y="310" width="34" height="16" fill="#FFFFFF"/>
-<text x="440" y="322" font-size="10" fill="#1B1B3A" text-anchor="middle">Финиш</text>
-<polyline points="555,346 555,428 400,428" fill="none" stroke="#D64545" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
-<rect x="512.8" y="409.1" width="84.4" height="16" fill="#FFFFFF"/>
-<text x="555" y="421.1" font-size="10" fill="#D64545" text-anchor="middle">дефект / отказ</text>
-<polyline points="250,428 95,428 95,346" fill="none" stroke="#D64545" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
-<rect x="66.9" y="420" width="129.2" height="16" fill="#FFFFFF"/>
-<text x="131.5" y="432" font-size="10" fill="#D64545" text-anchor="middle">+ код E, этап внесения</text>
+<text x="25" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">обязательный объём спринтов; в нём — релизные</text>
+<text x="25" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">работы</text>
+<rect x="400" y="84" width="320" height="120" rx="8" fill="#FFE9D2" stroke="#FDAB64" stroke-width="1"/>
+<text x="405" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Fix Version (релиз)</text>
+<text x="405" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">состав релиза: только Story и Bug; источник строки</text>
+<text x="405" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">календаря</text>
+<rect x="780" y="84" width="340" height="120" rx="8" fill="#F0FBD0" stroke="#8AB800" stroke-width="1"/>
+<text x="785" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Задача этапа</text>
+<text x="785" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">по одной на каждый этап (1–32): оценка, исполнитель,</text>
+<text x="785" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">результат; возврат — новая задача</text>
+<rect x="1180" y="84" width="300" height="120" rx="8" fill="#E6F0FB" stroke="#4895EB" stroke-width="1"/>
+<text x="1185" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Подзадача сервиса</text>
+<text x="1185" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">поле «Сервис» — для этапов по сервису</text>
+<rect x="20" y="250" width="150" height="50" rx="8" fill="#F4F6FB" stroke="#7F7F8F" stroke-width="1"/>
+<text x="95" y="278" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Ожидает</text>
+<rect x="250" y="250" width="150" height="50" rx="8" fill="#FFE9D2" stroke="#FDAB64" stroke-width="1"/>
+<text x="325" y="278" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">В работе</text>
+<rect x="480" y="250" width="150" height="50" rx="8" fill="#F0FBD0" stroke="#8AB800" stroke-width="1"/>
+<text x="555" y="278" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Готово</text>
+<text x="745" y="279.5" font-size="10" fill="#1B1B3A" text-anchor="start">Старт и финиш задачи этапа — источник времени этапа и ожидания. Календарь и паспорт в Confluence — витрина, не источник метрик.</text>
+<text x="25" y="345.5" font-size="14" fill="#140093" text-anchor="start" font-weight="bold">Метрики</text>
+<rect x="20" y="360" width="300" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="25" y="375" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Метрика</text>
+<rect x="320" y="360" width="380" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="325" y="375" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Влияние</text>
+<rect x="700" y="360" width="520" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="705" y="375" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Формула</text>
+<rect x="1220" y="360" width="260" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="1225" y="375" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Ответственный</text>
+<rect x="20" y="384" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="399" font-size="11" fill="#1B1B3A" text-anchor="start">Время этапа</text>
+<rect x="320" y="384" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="399" font-size="11" fill="#1B1B3A" text-anchor="start">Показывает, где тратится время релиза</text>
+<rect x="700" y="384" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="399" font-size="11" fill="#1B1B3A" text-anchor="start">Готово − Старт задачи этапа</text>
+<rect x="1220" y="384" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="399" font-size="11" fill="#1B1B3A" text-anchor="start">Ответственный за этап</text>
+<rect x="20" y="408" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="423" font-size="11" fill="#1B1B3A" text-anchor="start">Ожидание перед этапом</text>
+<rect x="320" y="408" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="423" font-size="11" fill="#1B1B3A" text-anchor="start">Показывает простои между этапами и на стороне ИБ</text>
+<rect x="700" y="408" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="423" font-size="11" fill="#1B1B3A" text-anchor="start">Старт этапа − Готово предыдущего этапа</text>
+<rect x="1220" y="408" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="423" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<rect x="20" y="432" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Длительность релиза</text>
+<rect x="320" y="432" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Соблюдение срока выпуска</text>
+<rect x="700" y="432" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Дата деплоя в Прод − дата старта сбора тикета; сравнение с суммой SLA</text>
+<rect x="1220" y="432" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<rect x="20" y="456" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="471" font-size="11" fill="#1B1B3A" text-anchor="start">Соблюдение SLA этапа</text>
+<rect x="320" y="456" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="471" font-size="11" fill="#1B1B3A" text-anchor="start">Видно, какие этапы систематически выбиваются из SLA</text>
+<rect x="700" y="456" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="471" font-size="11" fill="#1B1B3A" text-anchor="start">Доля этапов, где время + ожидание ≤ SLA</text>
+<rect x="1220" y="456" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="471" font-size="11" fill="#1B1B3A" text-anchor="start">Ответственный за этап</text>
+<rect x="20" y="480" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="495" font-size="11" fill="#1B1B3A" text-anchor="start">Точность оценки</text>
+<rect x="320" y="480" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="495" font-size="11" fill="#1B1B3A" text-anchor="start">Качество планирования и оценок</text>
+<rect x="700" y="480" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="495" font-size="11" fill="#1B1B3A" text-anchor="start">(Факт − Оценка) / Оценка по задачам этапа</text>
+<rect x="1220" y="480" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="495" font-size="11" fill="#1B1B3A" text-anchor="start">РП направления</text>
+<rect x="20" y="504" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="519" font-size="11" fill="#1B1B3A" text-anchor="start">Возвраты</text>
+<rect x="320" y="504" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="519" font-size="11" fill="#1B1B3A" text-anchor="start">Качество этапа: сколько работы сделано заново</text>
+<rect x="700" y="504" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="519" font-size="11" fill="#1B1B3A" text-anchor="start">Число возвратов на этап (баги UAT, замечания аудита)</text>
+<rect x="1220" y="504" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="519" font-size="11" fill="#1B1B3A" text-anchor="start">Ответственный за этап</text>
+<rect x="20" y="528" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Задачи, перенесённые в следующий релиз</text>
+<rect x="320" y="528" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Точность планирования спринта и приёмки</text>
+<rect x="700" y="528" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Не принятые и не успевшие задачи / все задачи релиза</text>
+<rect x="1220" y="528" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">ВНП и РП направления</text>
+<rect x="20" y="552" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Критические дефекты после PreProd (hotfix)</text>
+<rect x="320" y="552" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Качество релиза</text>
+<rect x="700" y="552" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Число hotfix на релиз</text>
+<rect x="1220" y="552" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<rect x="20" y="576" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Доля релизов со сбоями</text>
+<rect x="320" y="576" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Надёжность выкатки</text>
+<rect x="700" y="576" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Релизы с инцидентом или откатом / все релизы</text>
+<rect x="1220" y="576" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">DevOps и сервис ГПН-ЦР</text>
+<rect x="20" y="600" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Частота релизов</text>
+<rect x="320" y="600" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Ритм поставки</text>
+<rect x="700" y="600" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Число релизов за период</text>
+<rect x="1220" y="600" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<rect x="20" y="624" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Время деплоя</text>
+<rect x="320" y="624" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Скорость выкатки</text>
+<rect x="700" y="624" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Готово деплоя − Старт деплоя</text>
+<rect x="1220" y="624" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Релиз-инженер сервиса</text>
+<rect x="20" y="648" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">FTE ролей релизного цикла</text>
+<rect x="320" y="648" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Загрузка ролей и экономика релиза</text>
+<rect x="700" y="648" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">ТРЗ роли за период / (рабочие часы × 0,8)</text>
+<rect x="1220" y="648" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Администратор проекта</text>
+<polyline points="340,144 400,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="720,144 780,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="1120,144 1180,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="170,275 250,275" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<rect x="193" y="267" width="34" height="16" fill="#FFFFFF"/>
+<text x="210" y="279" font-size="10" fill="#1B1B3A" text-anchor="middle">старт</text>
+<polyline points="400,275 480,275" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<rect x="423" y="267" width="34" height="16" fill="#FFFFFF"/>
+<text x="440" y="279" font-size="10" fill="#1B1B3A" text-anchor="middle">финиш</text>
 </svg>

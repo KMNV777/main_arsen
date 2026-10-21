@@ -1,170 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1180" viewBox="0 0 1900 1180" font-family="Helvetica, Arial, sans-serif">
-<rect width="1900" height="1180" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1000" viewBox="0 0 2200 1000" font-family="Helvetica, Arial, sans-serif">
+<rect width="2200" height="1000" fill="#FFFFFF"/>
 <defs>
-<marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1B1B3A"/></marker>
-<marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4895EB"/></marker>
-<marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7F7F8F"/></marker>
-<marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C25A00"/></marker>
-<marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D64545"/></marker>
+<marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#019390"/></marker>
+<marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#140093"/></marker>
+<marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4895EB"/></marker>
+<marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D64545"/></marker>
+<marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF7500"/></marker>
 </defs>
-<rect x="10" y="6" width="1880" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
-<text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Релиз-процесс ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩ · Fix Version ⟨27.x.y⟩   |   git-модель релиза и правила отбора задач</text>
-<text x="25" y="67.5" font-size="14" fill="#1B1B3A" text-anchor="start" font-weight="bold">A. Git-модель релиза сервиса: master → release/&lt;сервис&gt;/&lt;версия&gt; (ветка спринта)</text>
-<text x="65" y="178" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">master — состояние Прода (в эталоне не описан, предлагается ревью F1). Прямые коммиты запрещены</text>
-<ellipse cx="492" cy="420" rx="8" ry="8" fill="#FFFFFF" stroke="#7F7F8F" stroke-width="1"/>
-<text x="492" y="422" font-size="9" fill="#1B1B3A" text-anchor="middle" font-weight="bold">✗</text>
-<text x="65" y="360.5" font-size="10" fill="#4895EB" text-anchor="start">feature/* → PR: Story/Bug из Fix Version, есть тест-кейсы, CI ✓, код-ревью ✓</text>
-<text x="65" y="410.5" font-size="10" fill="#7F7F8F" text-anchor="start">feature/* вне Fix Version или без тест-кейсов → следующий релиз</text>
-<text x="605" y="310" font-size="11" fill="#C25A00" text-anchor="start" font-weight="bold">release/&lt;сервис&gt;/&lt;версия&gt; — создаётся в начале спринта, живёт до выката</text>
-<text x="1220" y="96.5" font-size="10" fill="#D64545" text-anchor="start" font-weight="bold">hotfix/* — от ветки Прода (предыдущий release = master); процесс тот же</text>
-<ellipse cx="395" cy="190" rx="11" ry="11" fill="#FFFFFF" stroke="#222222" stroke-width="2"/>
-<text x="395" y="192.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1</text>
-<ellipse cx="560" cy="290" rx="11" ry="11" fill="#FFFFFF" stroke="#222222" stroke-width="2"/>
-<text x="560" y="292.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">2</text>
-<ellipse cx="700" cy="290" rx="11" ry="11" fill="#FFFFFF" stroke="#D64545" stroke-width="2"/>
-<text x="700" y="292.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3</text>
-<ellipse cx="800" cy="290" rx="11" ry="11" fill="#FFFFFF" stroke="#D64545" stroke-width="2"/>
-<text x="800" y="292.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4</text>
-<ellipse cx="940" cy="290" rx="11" ry="11" fill="#FFFFFF" stroke="#222222" stroke-width="2"/>
-<text x="940" y="292.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">5</text>
-<ellipse cx="1080" cy="290" rx="11" ry="11" fill="#FFFFFF" stroke="#D64545" stroke-width="2"/>
-<text x="1080" y="292.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">6</text>
-<ellipse cx="1575" cy="190" rx="11" ry="11" fill="#FFFFFF" stroke="#222222" stroke-width="2"/>
-<text x="1575" y="192.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">7</text>
-<ellipse cx="1315" cy="120" rx="11" ry="11" fill="#FFFFFF" stroke="#D64545" stroke-width="2"/>
-<text x="1315" y="122.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">8</text>
-<text x="25" y="485" font-size="13" fill="#1B1B3A" text-anchor="start" font-weight="bold">B. Что означает каждая отметка (шаг → ответственный → правило)</text>
-<rect x="20" y="498" width="40" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="25" y="512.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">№</text>
-<rect x="60" y="498" width="150" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="65" y="512.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Шаг</text>
-<rect x="210" y="498" width="170" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="215" y="512.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Отв.</text>
-<rect x="380" y="498" width="750" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="385" y="512.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Правило</text>
-<rect x="20" y="522" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="542.5" font-size="10" fill="#1B1B3A" text-anchor="start">1</text>
-<rect x="60" y="522" width="150" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="542.5" font-size="10" fill="#1B1B3A" text-anchor="start">0.2 Ветка</text>
-<rect x="210" y="522" width="170" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="536" font-size="10" fill="#1B1B3A" text-anchor="start">Релиз-инженер НЕДРА +</text>
-<text x="215" y="549" font-size="10" fill="#1B1B3A" text-anchor="start">мейнтейнер</text>
-<rect x="380" y="522" width="750" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="542.5" font-size="10" fill="#1B1B3A" text-anchor="start">Режется в начале спринта от master; SHA в паспорте. Имя: release/&lt;сервис&gt;/&lt;версия&gt;. Один сервис — одна ветка на релиз.</text>
-<rect x="20" y="558" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="578.5" font-size="10" fill="#1B1B3A" text-anchor="start">2</text>
-<rect x="60" y="558" width="150" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="578.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.1 Слияние PR</text>
-<rect x="210" y="558" width="170" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="578.5" font-size="10" fill="#1B1B3A" text-anchor="start">Мейнтейнер</text>
-<rect x="380" y="558" width="750" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="572" font-size="10" fill="#1B1B3A" text-anchor="start">В ветку идёт только Story/Bug с fixVersion, тест-кейсами, оценкой и traceability PR → ключ Story. Без тест-кейсов — не вливается</text>
-<text x="385" y="585" font-size="10" fill="#1B1B3A" text-anchor="start">(исключение: Release owner + QA).</text>
-<rect x="20" y="594" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="608.5" font-size="10" fill="#1B1B3A" text-anchor="start">3</text>
-<rect x="60" y="594" width="150" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="608.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.2 Scope freeze</text>
-<rect x="210" y="594" width="170" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="608.5" font-size="10" fill="#1B1B3A" text-anchor="start">Release owner</text>
-<rect x="380" y="594" width="750" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="608.5" font-size="10" fill="#1B1B3A" text-anchor="start">После freeze Fix Version блокируется; новый состав — только через change control с записью причины (код E1).</text>
-<rect x="20" y="618" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="632.5" font-size="10" fill="#1B1B3A" text-anchor="start">4</text>
-<rect x="60" y="618" width="150" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="632.5" font-size="10" fill="#1B1B3A" text-anchor="start">1.3 Freeze ветки</text>
-<rect x="210" y="618" width="170" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="632.5" font-size="10" fill="#1B1B3A" text-anchor="start">Мейнтейнер</text>
-<rect x="380" y="618" width="750" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="632.5" font-size="10" fill="#1B1B3A" text-anchor="start">Ветка заморожена, сборка rc на UAT; тест-планы UAT — в ТестОпс НЕДРА.</text>
-<rect x="20" y="642" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="656.5" font-size="10" fill="#1B1B3A" text-anchor="start">5</text>
-<rect x="60" y="642" width="150" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="656.5" font-size="10" fill="#1B1B3A" text-anchor="start">4.3 Фиксы UAT</text>
-<rect x="210" y="642" width="170" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="656.5" font-size="10" fill="#1B1B3A" text-anchor="start">Фича-команды</text>
-<rect x="380" y="642" width="750" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="656.5" font-size="10" fill="#1B1B3A" text-anchor="start">Только коммиты по заведённым Bug и замечаниям ИБ; после последнего фикса — повторный скан в CI.</text>
-<rect x="20" y="666" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="680.5" font-size="10" fill="#1B1B3A" text-anchor="start">6</text>
-<rect x="60" y="666" width="150" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="680.5" font-size="10" fill="#1B1B3A" text-anchor="start">G1 Код-фриз</text>
-<rect x="210" y="666" width="170" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="680.5" font-size="10" fill="#1B1B3A" text-anchor="start">Release owner</text>
-<rect x="380" y="666" width="750" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="680.5" font-size="10" fill="#1B1B3A" text-anchor="start">Фиксируется hash/образ. Аудит (5.x), ПТЗ, трансфер, PreProd и Прод работают с этим же hash; иначе возврат на 4.3 и повтор G1.</text>
-<rect x="20" y="690" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="710.5" font-size="10" fill="#1B1B3A" text-anchor="start">7</text>
-<rect x="60" y="690" width="150" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="710.5" font-size="10" fill="#1B1B3A" text-anchor="start">12.5 Тег и merge</text>
-<rect x="210" y="690" width="170" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="704" font-size="10" fill="#1B1B3A" text-anchor="start">Релиз-инженер НЕДРА +</text>
-<text x="215" y="717" font-size="10" fill="#1B1B3A" text-anchor="start">мейнтейнер</text>
-<rect x="380" y="690" width="750" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="710.5" font-size="10" fill="#1B1B3A" text-anchor="start">После стабильного Прода: тег v&lt;версия&gt;, release → master, перенос в открытые release/* (следующий релиз уже в работе).</text>
-<rect x="20" y="726" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="746.5" font-size="10" fill="#1B1B3A" text-anchor="start">8</text>
-<rect x="60" y="726" width="150" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="746.5" font-size="10" fill="#1B1B3A" text-anchor="start">HF Hotfix</text>
-<rect x="210" y="726" width="170" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="215" y="746.5" font-size="10" fill="#1B1B3A" text-anchor="start">Релиз-инженер НЕДРА + сервис</text>
-<rect x="380" y="726" width="750" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="385" y="740" font-size="10" fill="#1B1B3A" text-anchor="start">Bug «Высокий» → ВНП (блокирующий) → РП (внеплановая). Fix на hotfix/* от ветки Прода; дальше — тот же процесс, что у планового</text>
-<text x="385" y="753" font-size="10" fill="#1B1B3A" text-anchor="start">релиза (все этапы и ИБ-gates); после выката — перенос в текущую release.</text>
-<text x="1205" y="485" font-size="13" fill="#1B1B3A" text-anchor="start" font-weight="bold">C. Отбор задач в релиз (шаги 0.1 → 1.2)</text>
-<rect x="1200" y="498" width="320" height="220" fill="#F0FBD0" stroke="#6E9400" stroke-width="1"/>
-<text x="1205" y="512" font-size="10" fill="#1B1B3A" text-anchor="start">ВКЛЮЧАЕМ, если выполнены ВСЕ условия:</text>
-<text x="1205" y="525" font-size="10" fill="#1B1B3A" text-anchor="start">• это Story или Bug с fixVersion (Task QA/BE/FE в</text>
-<text x="1205" y="538" font-size="10" fill="#1B1B3A" text-anchor="start">состав не входят);</text>
-<text x="1205" y="551" font-size="10" fill="#1B1B3A" text-anchor="start">• есть оценка (задач без оценки в спринте нет);</text>
-<text x="1205" y="564" font-size="10" fill="#1B1B3A" text-anchor="start">• привязаны тест-кейсы (или исключение RO + QA);</text>
-<text x="1205" y="577" font-size="10" fill="#1B1B3A" text-anchor="start">• есть кодовый инкремент: PR → ключ Story;</text>
-<text x="1205" y="590" font-size="10" fill="#1B1B3A" text-anchor="start">• приложены скрипты миграции (БД / конфигурация);</text>
-<text x="1205" y="603" font-size="10" fill="#1B1B3A" text-anchor="start">• уязвимости по сервису закрыты по ходу спринта;</text>
-<text x="1205" y="616" font-size="10" fill="#1B1B3A" text-anchor="start">• при ПСИ — ПМТ покрывает изменение.</text>
-<rect x="1540" y="498" width="320" height="220" fill="#FBE0E0" stroke="#D64545" stroke-width="1"/>
-<text x="1545" y="512" font-size="10" fill="#1B1B3A" text-anchor="start">НЕ ВКЛЮЧАЕМ, если:</text>
-<text x="1545" y="525" font-size="10" fill="#1B1B3A" text-anchor="start">• нет тест-кейсов без согласованного исключения;</text>
-<text x="1545" y="538" font-size="10" fill="#1B1B3A" text-anchor="start">• нет оценки или не прикреплён кодовый инкремент;</text>
-<text x="1545" y="551" font-size="10" fill="#1B1B3A" text-anchor="start">• нет скриптов миграции там, где они нужны;</text>
-<text x="1545" y="564" font-size="10" fill="#1B1B3A" text-anchor="start">• зависит от задачи вне Fix Version;</text>
-<text x="1545" y="577" font-size="10" fill="#1B1B3A" text-anchor="start">• приём после Scope freeze без change control;</text>
-<text x="1545" y="590" font-size="10" fill="#1B1B3A" text-anchor="start">• нужен ПСИ, но нет ПМТ.</text>
-<rect x="1200" y="740" width="250" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="1205" y="754.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Вопрос</text>
-<rect x="1450" y="740" width="410" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
-<text x="1455" y="754.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">Решение</text>
-<rect x="1200" y="764" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="778.5" font-size="10" fill="#1B1B3A" text-anchor="start">Кто собирает состав релиза</text>
-<rect x="1450" y="764" width="410" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="778.5" font-size="10" fill="#1B1B3A" text-anchor="start">Release owner (Акманов А.) с РП команд</text>
-<rect x="1200" y="788" width="250" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="808.5" font-size="10" fill="#1B1B3A" text-anchor="start">Кто подтверждает техготовность</text>
-<rect x="1450" y="788" width="410" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="802" font-size="10" fill="#1B1B3A" text-anchor="start">Мейнтейнеры сервисов (по таблице «Статус развёртывания инфраструктуры</text>
-<text x="1455" y="815" font-size="10" fill="#1B1B3A" text-anchor="start">ЕАРМ»)</text>
-<rect x="1200" y="824" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="838.5" font-size="10" fill="#1B1B3A" text-anchor="start">Кто принимает по функционалу</text>
-<rect x="1450" y="824" width="410" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="838.5" font-size="10" fill="#1B1B3A" text-anchor="start">ВНП направления (go/no-go по функционалу)</text>
-<rect x="1200" y="848" width="250" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="868.5" font-size="10" fill="#1B1B3A" text-anchor="start">Где фиксируется состав</text>
-<rect x="1450" y="848" width="410" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="862" font-size="10" fill="#1B1B3A" text-anchor="start">Fix Version в Jira — единственный источник; календарь и паспорт —</text>
-<text x="1455" y="875" font-size="10" fill="#1B1B3A" text-anchor="start">витрина</text>
-<rect x="1200" y="884" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="898.5" font-size="10" fill="#1B1B3A" text-anchor="start">Изменение состава после freeze</text>
-<rect x="1450" y="884" width="410" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="898.5" font-size="10" fill="#1B1B3A" text-anchor="start">Только change control: решение RO + причина (код E1) в Jira</text>
-<rect x="1200" y="908" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1205" y="922.5" font-size="10" fill="#1B1B3A" text-anchor="start">Отложенные задачи</text>
-<rect x="1450" y="908" width="410" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1455" y="922.5" font-size="10" fill="#1B1B3A" text-anchor="start">Следующий Fix Version сервиса с причиной переноса</text>
-<text x="25" y="1069.5" font-size="10" fill="#1B1B3A" text-anchor="start" font-weight="bold">Открытый риск F1 — пересечение циклов</text>
-<text x="25" y="1082.5" font-size="10" fill="#1B1B3A" text-anchor="start">Релиз выходит примерно раз в 4 недели, а цикл (T−6 нед … T+2 дн) длиннее: ветка следующего релиза режется в начале спринта, когда предыдущий ещё не в Проде. Правило: ветка N+1 режется от master;</text>
-<text x="25" y="1095.5" font-size="10" fill="#1B1B3A" text-anchor="start">после 12.5 релиза N его изменения вливаются в release N+1 (и в master). До утверждения этого правила в эталоне и ДК hotfix и перенос фиксов остаются рисками потери кода.</text>
-<polyline points="60,190 1840,190" fill="none" stroke="#1B1B3A" stroke-width="3.5"/>
-<polyline points="60,370 500,370 560,290" fill="none" stroke="#4895EB" stroke-width="2" marker-end="url(#m1)"/>
-<polyline points="60,420 480,420" fill="none" stroke="#7F7F8F" stroke-width="2" stroke-dasharray="6 3"/>
-<polyline points="380,190 410,290 1560,290 1590,190" fill="none" stroke="#C25A00" stroke-width="3.5" marker-end="url(#m3)"/>
-<polyline points="1180,190 1210,120 1420,120 1450,190" fill="none" stroke="#D64545" stroke-width="3" marker-end="url(#m4)"/>
+<rect x="10" y="6" width="2180" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Процесс выпуска релиза ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩   |   ведение релизных веток: от старта спринта до фича-фриза</text>
+<rect x="180" y="56" width="600" height="34" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="480" y="76.5" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Спринт N · 2 недели</text>
+<rect x="180" y="90" width="600" height="520" fill="#ECEAF9" stroke="#C9D2E6" stroke-width="1"/>
+<rect x="780" y="56" width="600" height="34" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1080" y="76.5" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Спринт N+1 · 2 недели</text>
+<rect x="780" y="90" width="600" height="520" fill="#F4F6FB" stroke="#C9D2E6" stroke-width="1"/>
+<rect x="1380" y="56" width="600" height="34" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1680" y="76.5" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Спринт N+2 · 2 недели</text>
+<rect x="1380" y="90" width="600" height="520" fill="#ECEAF9" stroke="#C9D2E6" stroke-width="1"/>
+<text x="25" y="142" font-size="13" fill="#140093" text-anchor="start" font-weight="bold">master</text>
+<ellipse cx="210" cy="250" rx="8" ry="8" fill="#FFFFFF" stroke="#140093" stroke-width="2"/>
+<ellipse cx="340" cy="250" rx="5" ry="5" fill="#140093" stroke="#140093" stroke-width="1"/>
+<ellipse cx="440" cy="250" rx="5" ry="5" fill="#140093" stroke="#140093" stroke-width="1"/>
+<ellipse cx="540" cy="250" rx="5" ry="5" fill="#140093" stroke="#140093" stroke-width="1"/>
+<ellipse cx="640" cy="250" rx="5" ry="5" fill="#140093" stroke="#140093" stroke-width="1"/>
+<rect x="766" y="232" width="8" height="36" fill="#D64545" stroke="#D64545" stroke-width="1"/>
+<ellipse cx="1621" cy="250" rx="15" ry="15" fill="#CFF85E" stroke="#140093" stroke-width="2"/>
+<text x="1621" y="251.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Прод</text>
+<text x="255" y="226" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">release/&lt;сервис&gt;/N</text>
+<ellipse cx="810" cy="400" rx="8" ry="8" fill="#FFFFFF" stroke="#019390" stroke-width="2"/>
+<ellipse cx="940" cy="400" rx="5" ry="5" fill="#019390" stroke="#019390" stroke-width="1"/>
+<ellipse cx="1040" cy="400" rx="5" ry="5" fill="#019390" stroke="#019390" stroke-width="1"/>
+<ellipse cx="1140" cy="400" rx="5" ry="5" fill="#019390" stroke="#019390" stroke-width="1"/>
+<ellipse cx="1240" cy="400" rx="5" ry="5" fill="#019390" stroke="#019390" stroke-width="1"/>
+<rect x="1366" y="382" width="8" height="36" fill="#D64545" stroke="#D64545" stroke-width="1"/>
+<ellipse cx="2071" cy="400" rx="15" ry="15" fill="#CFF85E" stroke="#140093" stroke-width="2"/>
+<text x="2071" y="401.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Прод</text>
+<text x="855" y="376" font-size="11" fill="#019390" text-anchor="start" font-weight="bold">release/&lt;сервис&gt;/N+1</text>
+<ellipse cx="1410" cy="550" rx="8" ry="8" fill="#FFFFFF" stroke="#4895EB" stroke-width="2"/>
+<ellipse cx="1540" cy="550" rx="5" ry="5" fill="#4895EB" stroke="#4895EB" stroke-width="1"/>
+<ellipse cx="1640" cy="550" rx="5" ry="5" fill="#4895EB" stroke="#4895EB" stroke-width="1"/>
+<ellipse cx="1740" cy="550" rx="5" ry="5" fill="#4895EB" stroke="#4895EB" stroke-width="1"/>
+<ellipse cx="1840" cy="550" rx="5" ry="5" fill="#4895EB" stroke="#4895EB" stroke-width="1"/>
+<rect x="1966" y="532" width="8" height="36" fill="#D64545" stroke="#D64545" stroke-width="1"/>
+<ellipse cx="2171" cy="550" rx="15" ry="15" fill="#CFF85E" stroke="#140093" stroke-width="2"/>
+<text x="2171" y="551.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Прод</text>
+<text x="1455" y="526" font-size="11" fill="#4895EB" text-anchor="start" font-weight="bold">release/&lt;сервис&gt;/N+2</text>
+<text x="190" y="283" font-size="9" fill="#1B1B3A" text-anchor="start">старт спринта: сбор</text>
+<text x="190" y="295" font-size="9" fill="#1B1B3A" text-anchor="start">ветки</text>
+<text x="305" y="283" font-size="9" fill="#1B1B3A" text-anchor="start">влитие задач</text>
+<text x="485" y="283" font-size="9" fill="#1B1B3A" text-anchor="start">тестирование и демо (QA · ВНП)</text>
+<text x="695" y="203" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">фича-фриз</text>
+<text x="695" y="215" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">(конец спринта)</text>
+<text x="805" y="275" font-size="9" fill="#1B1B3A" text-anchor="start">стабилизация и выкат: регресс UAT → устранение → Smoke UAT → релиз-борд → PreProd → деплой в Прод</text>
+<text x="813" y="316" font-size="10" fill="#B85500" text-anchor="start" font-weight="bold">не принято и не успели →</text>
+<text x="813" y="329" font-size="10" fill="#B85500" text-anchor="start" font-weight="bold">следующий релиз (= следующий спринт)</text>
+<text x="1413" y="466" font-size="10" fill="#B85500" text-anchor="start" font-weight="bold">не принято и не успели →</text>
+<text x="1413" y="479" font-size="10" fill="#B85500" text-anchor="start" font-weight="bold">следующий релиз (= следующий спринт)</text>
+<text x="1655" y="589.5" font-size="10" fill="#D64545" text-anchor="start" font-weight="bold">hotfix/* — от ветки Прода; тот же процесс</text>
+<text x="185" y="638" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">Допускается вести несколько релизных веток параллельно: ветка N+1 создаётся на старте следующего спринта, пока ветка N проходит стабилизацию и выкат.</text>
+<text x="185" y="667.5" font-size="10" fill="#1B1B3A" text-anchor="start">Соответствие этапам схемы 1:  3 — сбор ветки · 4 — влитие задач · 5 — тестирование · 6 — демо и приёмка · 7 — фича-фриз · 8–14 — стабилизация на UAT · 15–19 — релиз-борд · 20–25 — PreProd · 27 — деплой в Прод</text>
+<rect x="20" y="700" width="220" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="25" y="715" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Шаг</text>
+<rect x="240" y="700" width="1700" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
+<text x="245" y="715" font-size="11" fill="#FFFFFF" text-anchor="start" font-weight="bold">Правило</text>
+<rect x="20" y="724" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="739" font-size="11" fill="#1B1B3A" text-anchor="start">Старт спринта</text>
+<rect x="240" y="724" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="739" font-size="11" fill="#1B1B3A" text-anchor="start">В первый день спринта релиз-инженер НЕДРА вместе с мейнтейнерами создаёт релизную ветку каждого сервиса от master. Имя: release/&lt;сервис&gt;/&lt;версия&gt;.</text>
+<rect x="20" y="748" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="763" font-size="11" fill="#1B1B3A" text-anchor="start">Влитие задач</text>
+<rect x="240" y="748" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="763" font-size="11" fill="#1B1B3A" text-anchor="start">Только Story и Bug из релизного тикета: с оценкой, тест-кейсами, кодовым инкрементом (PR со ссылкой на ключ Story) и скриптами миграции.</text>
+<rect x="20" y="772" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="787" font-size="11" fill="#1B1B3A" text-anchor="start">Тестирование и демо</text>
+<rect x="240" y="772" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="787" font-size="11" fill="#1B1B3A" text-anchor="start">QA тестирует влитые задачи и проводит демо, ВНП принимает. Не принятые задачи остаются в разработке.</text>
+<rect x="20" y="796" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="811" font-size="11" fill="#1B1B3A" text-anchor="start">Фича-фриз</text>
+<rect x="240" y="796" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="811" font-size="11" fill="#1B1B3A" text-anchor="start">В последний день спринта ветка замораживается. Новые задачи не принимаются; не успевшие и не принятые — в следующий релиз = следующий спринт.</text>
+<rect x="20" y="820" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="835" font-size="11" fill="#1B1B3A" text-anchor="start">Параллельные ветки</text>
+<rect x="240" y="820" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="835" font-size="11" fill="#1B1B3A" text-anchor="start">Допускается несколько релизных веток одновременно: ветка следующего релиза создаётся на старте следующего спринта, пока предыдущая проходит стабилизацию и выкат.</text>
+<rect x="20" y="844" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="859" font-size="11" fill="#1B1B3A" text-anchor="start">Исправления в ветке</text>
+<rect x="240" y="844" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="859" font-size="11" fill="#1B1B3A" text-anchor="start">После фриза вливаются только исправления багов и уязвимостей этапа «Устранение багов и уязвимостей». Этап заканчивается код-фризом.</text>
+<rect x="20" y="868" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="883" font-size="11" fill="#1B1B3A" text-anchor="start">Hotfix</text>
+<rect x="240" y="868" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="883" font-size="11" fill="#1B1B3A" text-anchor="start">Критические дефекты после PreProd включаются в hotfix: ветка hotfix/* от ветки Прода, тот же процесс.</text>
+<rect x="20" y="892" width="220" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="907" font-size="11" fill="#1B1B3A" text-anchor="start">После выката</text>
+<rect x="240" y="892" width="1700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="245" y="907" font-size="11" fill="#1B1B3A" text-anchor="start">Релизная ветка закрывается; слияние в master — техническая операция команды разработки вне этапов процесса.</text>
+<polyline points="170,140 2100,140" fill="none" stroke="#140093" stroke-width="4"/>
+<polyline points="180,140 210,250 770,250" fill="none" stroke="#140093" stroke-width="3.5"/>
+<polyline points="770,250 1600,250" fill="none" stroke="#140093" stroke-width="4" stroke-dasharray="6 3"/>
+<polyline points="780,140 810,400 1370,400" fill="none" stroke="#019390" stroke-width="3.5"/>
+<polyline points="1370,400 2050,400" fill="none" stroke="#019390" stroke-width="4" stroke-dasharray="6 3"/>
+<polyline points="1380,140 1410,550 1970,550" fill="none" stroke="#4895EB" stroke-width="3.5"/>
+<polyline points="1970,550 2150,550" fill="none" stroke="#4895EB" stroke-width="4" stroke-dasharray="6 3"/>
+<polyline points="770,258 800,380" fill="none" stroke="#FF7500" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#m4)"/>
+<polyline points="1370,408 1400,530" fill="none" stroke="#FF7500" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#m4)"/>
+<polyline points="1606,266 1640,600 1900,600" fill="none" stroke="#D64545" stroke-width="2.5" marker-end="url(#m3)"/>
 </svg>

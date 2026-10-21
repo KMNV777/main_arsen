@@ -15,7 +15,7 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 
-import build_release_process as B
+import process_data as D
 import trz_model as T
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,10 +56,10 @@ def main() -> None:
     ws = wb.active
     ws.title = "Параметры"
     hdr(ws, 1, ["Параметр", "Значение", "Комментарий"], [38, 14, 90])
-    names = {"N": "N_SVC", "R": "REL_YEAR", "HF": "HF_YEAR", "HF_F": "HF_F", "P_PSI": "P_PSI", "P_PTZ": "P_PTZ",
+    names = {"N": "N_SVC", "R": "REL_YEAR", "HF": "HF_YEAR", "HF_F": "HF_F", "P_PSI": "P_PSI", 
              "H_DAY": "H_DAY", "D_YEAR": "D_YEAR", "LOAD": "LOAD"}
     labels = {"N": "Число сервисов в релизе (N)", "R": "Плановых релизов в год", "HF": "Hotfix в год",
-              "HF_F": "Доля фиксированной части для hotfix", "P_PSI": "Доля релизов с ПСИ", "P_PTZ": "Доля релизов с ПТЗ",
+              "HF_F": "Доля фиксированной части для hotfix", "P_PSI": "Доля релизов с ПСИ", 
               "H_DAY": "Рабочих часов в день", "D_YEAR": "Рабочих дней в году", "LOAD": "Плановая загрузка роли"}
     r = 2
     for k, (v, note) in T.PARAMS.items():
@@ -82,10 +82,10 @@ def main() -> None:
 
     # ---- ТРЗ по шагам --------------------------------------------------------
     st = wb.create_sheet("ТРЗ по шагам")
-    hdr(st, 1, ["ID шага", "Шаг", "Роль (код)", "Роль", "F: часов на релиз (фикс.)", "S: часов на 1 сервис", "Условие (1 / psi / ptz)",
+    hdr(st, 1, ["ID шага", "Шаг", "Роль (код)", "Роль", "F: часов на релиз (фикс.)", "S: часов на 1 сервис", "Условие (1 / psi)",
                 "k (вероятность)", "Часов на релиз", "Часов на hotfix", "Часов в год"],
         [9, 46, 10, 34, 14, 14, 12, 11, 12, 12, 12])
-    name = {s[0]: s[3] for s in B.STEPS}
+    name = D.STEP_NAME
     row = 2
     for sid, role, f, s, code in T.HOURS:
         st.cell(row, 1, sid)
@@ -94,7 +94,7 @@ def main() -> None:
         st.cell(row, 4, T.ROLE_NAME[role])
         for col, val in ((5, f), (6, s), (7, code)):
             st.cell(row, col, val).fill = INP
-        st.cell(row, 8, f'=IF(G{row}="psi",P_PSI,IF(G{row}="ptz",P_PTZ,1))')
+        st.cell(row, 8, f'=IF(G{row}="psi",P_PSI,1)')
         st.cell(row, 9, f"=(E{row}+F{row}*N_SVC)*H{row}")
         st.cell(row, 10, f"=(E{row}*HF_F+F{row})*H{row}")
         st.cell(row, 11, f"=I{row}*REL_YEAR+J{row}*HF_YEAR")
@@ -180,7 +180,7 @@ def main() -> None:
         "Методика расчёта ТРЗ и FTE по ролям релизного цикла",
         "",
         "1. Единица учёта — шаг релизного цикла (см. реестр шагов процесса). Каждый шаг — задача Jira с оценкой и списанием времени; сумма ТРЗ задач шагов по роли = ТРЗ роли в релизе.",
-        "2. Часы на шаг: H = (F + S × N) × k, где F — фиксированная часть на релиз, S — часть на каждый сервис, N — число сервисов, k — вероятность шага (ПСИ, ПТЗ — не в каждом релизе).",
+        "2. Часы на шаг: H = (F + S × N) × k, где F — фиксированная часть на релиз, S — часть на каждый сервис, N — число сервисов, k — вероятность шага (ПСИ ИБ — не в каждом релизе).",
         "3. Hotfix идёт тем же процессом: H_hotfix = (F × доля_фикс + S × 1) × k; в год — HF_YEAR штук.",
         "4. FTE роли = ТРЗ роли за год / (рабочие часы года × плановая загрузка). Плановая загрузка 80 % — норма из «Менеджмента команд».",
         "5. Сейчас каждая роль списывается на проект на 1 FTE. Разница «сейчас − по ТРЗ» показывает, сколько ёмкости роли можно вернуть в продукт (или, если < 0, где ТРЗ не покрыто списанием).",
