@@ -440,11 +440,13 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     if extra:
         sections = sections + list(extra)
     nav = "".join(f'<a href="#{i}">{e(t)}</a>' for i, t, _ in sections)
+    navjs = "(function(){var l=document.querySelectorAll('nav a'),s=[].slice.call(document.querySelectorAll('main>section'));function f(){var y=window.scrollY+120,c=0;s.forEach(function(x,i){if(x.offsetTop<=y)c=i});l.forEach(function(a,i){a.classList.toggle('on',i===c)})}window.addEventListener('scroll',f);f()})();"
+
     cm = lambda i: (f'<div class="cm"><label for="cm-{i}">Ваши правки к разделу</label><textarea id="cm-{i}" data-k="{i}" rows="3" placeholder="Что изменить, добавить, убрать…"></textarea></div>' if comments else "")
-    body = "".join(f'<section id="{i}"><h2>{e(t)}</h2>{c}{cm(i)}</section>' for i, t, c in sections)
+    body = "".join(f'<section id="{i}"><span class="kicker">Раздел {n}</span><h2>{e(t)}</h2>{c}{cm(i)}</section>' for n, (i, t, c) in enumerate(sections, 1))
     fb = ('<div class="fb"><span>Правок в разделах: <b id="fb-n">0</b></span><button id="fb-dl">Скачать правки (.txt)</button>'
           '<button id="fb-cp">Копировать правки</button><span class="muted">Правки сохраняются в браузере; перед отправкой нажмите «Скачать» или «Копировать».</span></div>') if comments else ""
-    js = TH.JS_FIG + (TH.JS_FEEDBACK if comments else "")
+    js = TH.JS_FIG + navjs + (TH.JS_FEEDBACK if comments else "")
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{e(title)}</title><style>{TH.CSS}</style></head><body>'
             f'<header class="top"><h1>{e(title)}</h1><div class="muted">Схема, этапы, роли, SLA, метрики, ТРЗ и FTE · сгенерировано <code>scripts/build_release_process.py</code></div></header>'

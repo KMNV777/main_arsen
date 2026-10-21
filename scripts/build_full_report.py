@@ -80,20 +80,6 @@ var s=window.getSelection();s.removeAllRanges();s.addRange(r);var ok=false;try{o
 btn.textContent=ok?'Скопировано ✓ — вставьте в Confluence (Ctrl+V)':'Выделено — нажмите Ctrl+C';
 setTimeout(function(){s.removeAllRanges();btn.textContent='Копировать блок для Confluence'},3000)}
 """
-EXTRA_CSS = """
-.calc-p{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:8px 0}
-.calc-p label{font-size:12px;color:var(--mut);display:flex;flex-direction:column;gap:2px}
-#calc input,.tools+div input{font:inherit}
-#calc input[type=number],#calc input.rate{background:#FFE4CC;color:#1B1B3A;border:1px solid var(--orgd);border-radius:3px;padding:3px 6px;width:100%}
-#calc input.rate{width:80px}
-@media (prefers-color-scheme:dark){#calc input[type=number],#calc input.rate{background:#5C3A18;color:#fff}}
-tr.tot td{background:var(--lo)}
-details{margin:10px 0}summary{cursor:pointer;color:var(--ind);font-weight:600}
-.tools{margin:6px 0 10px}.tools button{background:var(--ind);color:var(--lime);border:0;border-radius:3px;padding:6px 12px;cursor:pointer;font-weight:600}
-.tools button:hover{background:var(--orgd);color:#fff}
-"""
-
-
 def main() -> None:
     pages = [B.page_process(), B.page_branches(), B.page_roadmap(), B.page_jira()]
     extra = []
@@ -109,7 +95,6 @@ def main() -> None:
     html = B.build_html(pages, extra=extra, trz=C.page_trz() + calc_html(),
                         title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True)
     html = html.replace("<main>", "<main>" + intro, 1)
-    html = html.replace("</style>", EXTRA_CSS + "</style>", 1)
     html = html.replace("</body>", f"<script>{COPY_JS}</script></body>", 1)
     OUT.write_text(html, encoding="utf-8")
     print("OK:", OUT, f"{len(html) // 1024} KB")
