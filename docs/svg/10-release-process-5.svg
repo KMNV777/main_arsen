@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="748" viewBox="0 0 2100 748" font-family="Helvetica, Arial, sans-serif">
-<rect width="2100" height="748" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="798" viewBox="0 0 2100 798" font-family="Helvetica, Arial, sans-serif">
+<rect width="2100" height="798" fill="#FFFFFF"/>
 <defs>
 </defs>
 <rect x="10" y="6" width="2080" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
@@ -30,8 +30,8 @@
 <rect x="1020" y="124" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1025" y="151.5" font-size="10" fill="#222222" text-anchor="start">Потеря фиксов при переносе, ветки расходятся, hotfix не попадает в следующий релиз.</text>
 <rect x="1500" y="124" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="145" font-size="10" fill="#222222" text-anchor="start">master = состояние Прода; cut от master; 12.4: merge release → master и перенос в открытые release;</text>
-<text x="1505" y="158" font-size="10" fill="#222222" text-anchor="start">hotfix — от ветки Прода (= master после 12.4).</text>
+<text x="1505" y="145" font-size="10" fill="#222222" text-anchor="start">✔ Решено: ветка режется от master. master = состояние Прода; 12.5: merge release → master и перенос в</text>
+<text x="1505" y="158" font-size="10" fill="#222222" text-anchor="start">открытые release; hotfix — от ветки Прода (= master после 12.5).</text>
 <rect x="20" y="174" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="194.5" font-size="10" fill="#222222" text-anchor="start">F2</text>
 <rect x="60" y="174" width="70" height="36" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
@@ -119,7 +119,8 @@
 <text x="1025" y="382" font-size="10" fill="#222222" text-anchor="start">Разный критический путь; можно ждать согласование, которое не нужно (или пропустить</text>
 <text x="1025" y="395" font-size="10" fill="#222222" text-anchor="start">обязательное).</text>
 <rect x="1500" y="368" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="388.5" font-size="10" fill="#222222" text-anchor="start">На схеме ПТЗ обязателен (по эталону). Нужно подтвердить у ИБ.</text>
+<text x="1505" y="382" font-size="10" fill="#222222" text-anchor="start">✔ Решено: ПТЗ «при необходимости». Шаг 6.1 опциональный; флаг «Требуется ПТЗ» ставится на 0.3 (кто</text>
+<text x="1505" y="395" font-size="10" fill="#222222" text-anchor="start">ставит флаг — подтвердить). Эталон §4 нужно поправить.</text>
 <rect x="20" y="404" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="424.5" font-size="10" fill="#222222" text-anchor="start">F8</text>
 <rect x="60" y="404" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
@@ -172,8 +173,8 @@
 <rect x="1020" y="500" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1025" y="527.5" font-size="10" fill="#222222" text-anchor="start">Часть реальных шагов и ЗО невидима → нет данных по ним.</text>
 <rect x="1500" y="500" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="521" font-size="10" fill="#222222" text-anchor="start">Все шаги эталона добавлены; «БД и брокеры» оставлены (mark «sch»); ЗО Юрченко Д. и БД/брокеров нужно</text>
-<text x="1505" y="534" font-size="10" fill="#222222" text-anchor="start">подтвердить.</text>
+<text x="1505" y="521" font-size="10" fill="#222222" text-anchor="start">✔ Решено: Юрченко Д. — релиз-инженер НЕДРА; БД — администратор БД; брокеры — администратор брокеров</text>
+<text x="1505" y="534" font-size="10" fill="#222222" text-anchor="start">(шаги 9.2/9.3, 12.2/12.3 разделены). Все шаги эталона добавлены; в эталон и ДК нужно внести роли.</text>
 <rect x="20" y="550" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="570.5" font-size="10" fill="#222222" text-anchor="start">F12</text>
 <rect x="60" y="550" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
@@ -200,7 +201,8 @@
 <rect x="1020" y="586" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1025" y="606.5" font-size="10" fill="#222222" text-anchor="start">Либо обход ИБ-gates, либо недокументированное исключение.</text>
 <rect x="1500" y="586" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="606.5" font-size="10" fill="#222222" text-anchor="start">На схеме hotfix возвращается на 9.1 → G2; нужно решение ИБ: какие gates обязательны для hotfix.</text>
+<text x="1505" y="600" font-size="10" fill="#222222" text-anchor="start">✔ Решено: hotfix идёт тем же процессом (этапы 0–12, все ИБ-gates). На схеме — цикл по hotfix/* с</text>
+<text x="1505" y="613" font-size="10" fill="#222222" text-anchor="start">входом в параллельный блок. Эталон §10 («короткий паспорт») нужно поправить.</text>
 <rect x="20" y="622" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="642.5" font-size="10" fill="#222222" text-anchor="start">F14</text>
 <rect x="60" y="622" width="70" height="36" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
@@ -228,17 +230,34 @@
 <rect x="1020" y="658" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1025" y="678.5" font-size="10" fill="#222222" text-anchor="start">Расхождение веток и потеря знаний между релизами.</text>
 <rect x="1500" y="658" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="678.5" font-size="10" fill="#222222" text-anchor="start">Добавлены 4.4, 12.4, 12.5 (mark «new»).</text>
-<rect x="20" y="694" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="708.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
-<rect x="60" y="694" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="708.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
-<rect x="130" y="694" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="708.5" font-size="10" fill="#222222" text-anchor="start">Эталон §18, §17</text>
-<rect x="320" y="694" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="708.5" font-size="10" fill="#222222" text-anchor="start">Блокеры по доступам уже сопоставлены с этапами, но в метриках не учитываются.</text>
-<rect x="1020" y="694" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="708.5" font-size="10" fill="#222222" text-anchor="start">«Ждём доступ» растворяется в общем ожидании.</text>
-<rect x="1500" y="694" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="708.5" font-size="10" fill="#222222" text-anchor="start">«Нет доступа» — подкод E5/E6 с привязкой к этапу (из §18).</text>
+<text x="1505" y="678.5" font-size="10" fill="#222222" text-anchor="start">Добавлены 4.4, 12.5, 12.6 (mark «new»).</text>
+<rect x="20" y="694" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="721.5" font-size="10" fill="#222222" text-anchor="start">F17</text>
+<rect x="60" y="694" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="721.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="694" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="715" font-size="10" fill="#222222" text-anchor="start">SLA 1–5 дн (решение владельца)</text>
+<text x="135" y="728" font-size="10" fill="#222222" text-anchor="start">vs Эталон §13 (таблица B)</text>
+<rect x="320" y="694" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="708.5" font-size="10" fill="#222222" text-anchor="start">Если каждый шаг использует свой потолок SLA (1–5 дн), путь от rc до закрытия — 35–38 рабочих дней (≈ 7–7,6 нед.), тогда</text>
+<text x="325" y="721.5" font-size="10" fill="#222222" text-anchor="start">как календарь эталона закладывает ≈ 15 рабочих дней (T−3 нед → T). Цепочка ИБ-gates 5.1–8.1 по SLA — 10–13 дней, в</text>
+<text x="325" y="734.5" font-size="10" fill="#222222" text-anchor="start">календаре — 7 (T−10…T−3 дн).</text>
+<rect x="1020" y="694" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="715" font-size="10" fill="#222222" text-anchor="start">Релиз либо систематически «сдвигается», либо SLA — только потолок, а не норма: без</text>
+<text x="1025" y="728" font-size="10" fill="#222222" text-anchor="start">этого M9 и светофор календаря будут расходиться.</text>
+<rect x="1500" y="694" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="715" font-size="10" fill="#222222" text-anchor="start">SLA в схеме — потолок на шаг; нужно утвердить целевые значения (медианы) и пересобрать календарь по</text>
+<text x="1505" y="728" font-size="10" fill="#222222" text-anchor="start">критическому пути (стр. 4, блок E).</text>
+<rect x="20" y="744" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="758.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
+<rect x="60" y="744" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="758.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="744" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="758.5" font-size="10" fill="#222222" text-anchor="start">Эталон §18, §17</text>
+<rect x="320" y="744" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="758.5" font-size="10" fill="#222222" text-anchor="start">Блокеры по доступам уже сопоставлены с этапами, но в метриках не учитываются.</text>
+<rect x="1020" y="744" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="758.5" font-size="10" fill="#222222" text-anchor="start">«Ждём доступ» растворяется в общем ожидании.</text>
+<rect x="1500" y="744" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="758.5" font-size="10" fill="#222222" text-anchor="start">«Нет доступа» — подкод E5/E6 с привязкой к этапу (из §18).</text>
 </svg>

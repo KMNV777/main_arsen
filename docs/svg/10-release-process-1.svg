@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="5030" height="1676" viewBox="0 0 5030 1676" font-family="Helvetica, Arial, sans-serif">
-<rect width="5030" height="1676" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="5030" height="1766" viewBox="0 0 5030 1766" font-family="Helvetica, Arial, sans-serif">
+<rect width="5030" height="1766" fill="#FFFFFF"/>
 <defs>
 <marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#222222"/></marker>
 <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7F7F7F"/></marker>
@@ -19,9 +19,11 @@
 <text x="75" y="372" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">QA / приёмка</text>
 <rect x="0" y="466" width="5030" height="330" fill="#F2F7FD" stroke="#A0A0A0" stroke-width="1"/>
 <rect x="0" y="466" width="150" height="330" fill="#D6E5F8" stroke="#A0A0A0" stroke-width="1"/>
-<text x="75" y="619.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">НЕДРА</text>
-<text x="75" y="634.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Разработка:</text>
-<text x="75" y="649.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">мейнтейнеры, DevOps</text>
+<text x="75" y="604.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">НЕДРА</text>
+<text x="75" y="619.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Разработка:</text>
+<text x="75" y="634.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">мейнтейнеры,</text>
+<text x="75" y="649.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">релиз-инженер,</text>
+<text x="75" y="664.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">DevOps</text>
 <rect x="0" y="796" width="5030" height="180" fill="#F4F4F4" stroke="#A0A0A0" stroke-width="1"/>
 <rect x="0" y="796" width="150" height="180" fill="#D9D9D9" stroke="#A0A0A0" stroke-width="1"/>
 <text x="75" y="882" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">GIT</text>
@@ -30,12 +32,13 @@
 <rect x="0" y="976" width="150" height="270" fill="#DCC8E6" stroke="#A0A0A0" stroke-width="1"/>
 <text x="75" y="1107" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">ИБ ГПН-ЦР</text>
 <text x="75" y="1122" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">AppSec · Compliance</text>
-<rect x="0" y="1246" width="5030" height="200" fill="#E8F3E4" stroke="#A0A0A0" stroke-width="1"/>
-<rect x="0" y="1246" width="150" height="200" fill="#C3DFBB" stroke="#A0A0A0" stroke-width="1"/>
-<text x="75" y="1327" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">ГПН-ЦР</text>
-<text x="75" y="1342" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Сервис ·</text>
-<text x="75" y="1357" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Релиз-инженер</text>
-<text x="75" y="1372" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">БД и брокеры</text>
+<rect x="0" y="1246" width="5030" height="290" fill="#E8F3E4" stroke="#A0A0A0" stroke-width="1"/>
+<rect x="0" y="1246" width="150" height="290" fill="#C3DFBB" stroke="#A0A0A0" stroke-width="1"/>
+<text x="75" y="1364.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">ГПН-ЦР</text>
+<text x="75" y="1379.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Сервис ·</text>
+<text x="75" y="1394.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Релиз-инженер</text>
+<text x="75" y="1409.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Админ БД · Админ</text>
+<text x="75" y="1424.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">брокеров</text>
 <rect x="150" y="46" width="587" height="40" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
 <text x="443.5" y="69.5" font-size="12" fill="#222222" text-anchor="middle" font-weight="bold">Ф0 · Инициация и ветка</text>
 <rect x="737" y="46" width="553" height="40" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
@@ -57,13 +60,14 @@
 <text x="287.5" y="140.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">Version</text>
 <text x="287.5" y="154" font-size="8.5" fill="#666666" text-anchor="middle">RO · эт. 0</text>
 <polygon points="467.5,89 527.5,131 467.5,173 407.5,131" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
-<text x="467.5" y="127" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">0.3 ПСИ</text>
-<text x="467.5" y="140" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">нужен?</text>
+<text x="467.5" y="120.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">0.3 ПСИ /</text>
+<text x="467.5" y="133.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">ПТЗ</text>
+<text x="467.5" y="146.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">нужны?</text>
 <rect x="575" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="2.2"/>
 <text x="647.5" y="503.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">0.2  Релизная ветка</text>
 <text x="647.5" y="517" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">сервиса (начало</text>
 <text x="647.5" y="530.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">спринта, от master)</text>
-<text x="647.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">DEV · эт. 1 · ★</text>
+<text x="647.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · эт. 1 · ★</text>
 <rect x="755" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2"/>
 <text x="827.5" y="510.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">1.1  Слияние PR по</text>
 <text x="827.5" y="523.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">задачам Fix Version</text>
@@ -75,7 +79,7 @@
 <text x="1187.5" y="503.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">1.3  Финализация и</text>
 <text x="1187.5" y="517" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">freeze ветки, сборка</text>
 <text x="1187.5" y="530.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">rc на UAT</text>
-<text x="1187.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">DEV · эт. 1</text>
+<text x="1187.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · эт. 1</text>
 <rect x="1300" y="296" width="8" height="350" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="1335" y="280" width="145" height="62" rx="8" fill="#FFF2CC" stroke="#6C8EBF" stroke-width="1.2"/>
 <text x="1407.5" y="307" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">4.1  Регресс UAT</text>
@@ -108,7 +112,7 @@
 <text x="1407.5" y="1127.25" font-size="8.5" fill="#666666" text-anchor="middle">ИБ · B · эт. 2</text>
 <rect x="1515" y="710" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2" stroke-dasharray="6 3"/>
 <text x="1587.5" y="737" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">3.1  ПМТ</text>
-<text x="1587.5" y="750.5" font-size="8.5" fill="#666666" text-anchor="middle">DEV · C · эт. 3a</text>
+<text x="1587.5" y="750.5" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · C · эт. 3a</text>
 <rect x="1515" y="1170" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2" stroke-dasharray="6 3"/>
 <text x="1587.5" y="1197" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">3.2  Согласование ПМТ</text>
 <text x="1587.5" y="1210.5" font-size="8.5" fill="#666666" text-anchor="middle">ИБ · C · эт. 3b</text>
@@ -127,17 +131,19 @@
 <text x="2487.5" y="1010.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">5.2  Аудит кода</text>
 <text x="2487.5" y="1023.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">(портал ББ)</text>
 <text x="2487.5" y="1037.25" font-size="8.5" fill="#666666" text-anchor="middle">ИБ · эт. 5</text>
-<rect x="2595" y="990" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2"/>
-<text x="2667.5" y="1017" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">6.1  Согласование ПТЗ</text>
-<text x="2667.5" y="1030.5" font-size="8.5" fill="#666666" text-anchor="middle">ИБ · эт. 6</text>
+<rect x="2595" y="990" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2" stroke-dasharray="6 3"/>
+<text x="2667.5" y="1010.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">6.1  Согласование ПТЗ</text>
+<text x="2667.5" y="1023.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">(при необходимости)</text>
+<text x="2667.5" y="1037.25" font-size="8.5" fill="#666666" text-anchor="middle">ИБ · эт. 6</text>
 <rect x="2235" y="175" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="2.2"/>
 <text x="2307.5" y="195.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">7.1  Подготовка и</text>
 <text x="2307.5" y="208.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">ревью TOML</text>
 <text x="2307.5" y="222.25" font-size="8.5" fill="#666666" text-anchor="middle">RO + ARCH · D · эт. 7 · ★</text>
 <rect x="2775" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2"/>
-<text x="2847.5" y="510.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">7.2  Запуск трансфера</text>
-<text x="2847.5" y="523.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">в ПРОД-сегмент</text>
-<text x="2847.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">DEVOPS · эт. 7</text>
+<text x="2847.5" y="503.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">7.2  Релиз-борд:</text>
+<text x="2847.5" y="517" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">загрузка и запуск</text>
+<text x="2847.5" y="530.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">трансфера</text>
+<text x="2847.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEVOPS · эт. 7</text>
 <rect x="2955" y="990" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.2"/>
 <text x="3027.5" y="1003.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">8.1  Согласование</text>
 <text x="3027.5" y="1017" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">трансфера в</text>
@@ -148,9 +154,13 @@
 <text x="3207.5" y="523.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">PreProd</text>
 <text x="3207.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">DEV · эт. 9</text>
 <rect x="3135" y="1360" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.2" stroke-dasharray="6 3"/>
-<text x="3207.5" y="1380.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">9.2  БД и брокеры</text>
-<text x="3207.5" y="1393.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">PreProd</text>
-<text x="3207.5" y="1407.25" font-size="8.5" fill="#666666" text-anchor="middle">DBA · нет в эталоне</text>
+<text x="3207.5" y="1380.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">9.2  БД PreProd:</text>
+<text x="3207.5" y="1393.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">миграции</text>
+<text x="3207.5" y="1407.25" font-size="8.5" fill="#666666" text-anchor="middle">АБД · нет в эталоне</text>
+<rect x="3135" y="1450" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.2" stroke-dasharray="6 3"/>
+<text x="3207.5" y="1470.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">9.3  Брокеры PreProd:</text>
+<text x="3207.5" y="1483.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">топики и настройки</text>
+<text x="3207.5" y="1497.25" font-size="8.5" fill="#666666" text-anchor="middle">АБР · нет в эталоне</text>
 <rect x="3315" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2"/>
 <text x="3387.5" y="127" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">10.1  Регресс PreProd</text>
 <text x="3387.5" y="140.5" font-size="8.5" fill="#666666" text-anchor="middle">RO + SVC · эт. 10</text>
@@ -161,10 +171,10 @@
 <text x="3747.5" y="127" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">G2 Go /</text>
 <text x="3747.5" y="140" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">No-Go</text>
 <rect x="3675" y="710" width="145" height="62" rx="8" fill="#FFE6CC" stroke="#D79B00" stroke-width="1.5"/>
-<text x="3747.5" y="723.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">HF  Hotfix-цикл</text>
-<text x="3747.5" y="737" font-size="8.5" fill="#666666" text-anchor="middle">Bug «Высокий» → ВНП → РП</text>
-<text x="3747.5" y="750.5" font-size="8.5" fill="#666666" text-anchor="middle">(внеплановая) · сервисная</text>
-<text x="3747.5" y="764" font-size="8.5" fill="#666666" text-anchor="middle">сделка</text>
+<text x="3747.5" y="723.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">HF  Hotfix: тот же</text>
+<text x="3747.5" y="737" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">процесс</text>
+<text x="3747.5" y="750.5" font-size="8.5" fill="#666666" text-anchor="middle">этапы 0–12 по hotfix/* ·</text>
+<text x="3747.5" y="764" font-size="8.5" fill="#666666" text-anchor="middle">Bug «Высокий» → ВНП → РП</text>
 <rect x="3855" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.2"/>
 <text x="3927.5" y="120.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">11.1  Уведомление</text>
 <text x="3927.5" y="133.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">пользователей</text>
@@ -174,20 +184,25 @@
 <text x="4107.5" y="1303.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">на ПРОД</text>
 <text x="4107.5" y="1317.25" font-size="8.5" fill="#666666" text-anchor="middle">REL + RO · эт. 12</text>
 <rect x="4215" y="1360" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.2" stroke-dasharray="6 3"/>
-<text x="4287.5" y="1380.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.2  БД и брокеры</text>
-<text x="4287.5" y="1393.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">после выкатки</text>
-<text x="4287.5" y="1407.25" font-size="8.5" fill="#666666" text-anchor="middle">DBA · нет в эталоне</text>
+<text x="4287.5" y="1380.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.2  БД после</text>
+<text x="4287.5" y="1393.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">выкатки</text>
+<text x="4287.5" y="1407.25" font-size="8.5" fill="#666666" text-anchor="middle">АБД · нет в эталоне</text>
+<rect x="4215" y="1450" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.2" stroke-dasharray="6 3"/>
+<text x="4287.5" y="1470.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.3  Брокеры после</text>
+<text x="4287.5" y="1483.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">выкатки</text>
+<text x="4287.5" y="1497.25" font-size="8.5" fill="#666666" text-anchor="middle">АБР · нет в эталоне</text>
 <rect x="4395" y="1270" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#82B366" stroke-width="1.2"/>
-<text x="4467.5" y="1290.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.3  Post-release</text>
+<text x="4467.5" y="1290.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.4  Post-release</text>
 <text x="4467.5" y="1303.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">check / smoke</text>
 <text x="4467.5" y="1317.25" font-size="8.5" fill="#666666" text-anchor="middle">SVC · эт. 12</text>
 <rect x="4575" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="2.2"/>
-<text x="4647.5" y="503.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.4  Тег, merge</text>
-<text x="4647.5" y="517" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">release → master,</text>
-<text x="4647.5" y="530.5" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">перенос в ветки</text>
-<text x="4647.5" y="544" font-size="8.5" fill="#666666" text-anchor="middle">DEV · нет в эталоне · ★</text>
+<text x="4647.5" y="496.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.5  Тег, merge в</text>
+<text x="4647.5" y="510.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">master, перенос в</text>
+<text x="4647.5" y="523.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">ветки</text>
+<text x="4647.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · нет в эталоне ·</text>
+<text x="4647.5" y="550.75" font-size="8.5" fill="#666666" text-anchor="middle">★</text>
 <rect x="4755" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="2.2"/>
-<text x="4827.5" y="120.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.5  Закрытие релиза</text>
+<text x="4827.5" y="120.25" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">12.6  Закрытие релиза</text>
 <text x="4827.5" y="133.75" font-size="10.5" fill="#222222" text-anchor="middle" font-weight="bold">и ретро</text>
 <text x="4827.5" y="147.25" font-size="8.5" fill="#666666" text-anchor="middle">RO · нет в эталоне · ★</text>
 <ellipse cx="4954" cy="131" rx="14" ry="14" fill="#000000" stroke="#000000" stroke-width="1"/>
@@ -206,39 +221,39 @@
 <text x="1699" y="958" font-size="9" fill="#C0392B" text-anchor="start">фикс-коммиты (Bug) · повторный скан</text>
 <rect x="2164.5" y="915" width="6" height="28" fill="#C0392B" stroke="#C0392B" stroke-width="1"/>
 <text x="2180.5" y="958" font-size="9" fill="#C0392B" text-anchor="start">🔒 код-фриз: hash/образ для 5.x–12.x</text>
-<text x="4640.75" y="888" font-size="9" fill="#555555" text-anchor="start">12.4: tag v⟨версия⟩ · merge release → master · перенос в</text>
+<text x="4640.75" y="888" font-size="9" fill="#555555" text-anchor="start">12.5: tag v⟨версия⟩ · merge release → master · перенос в</text>
 <text x="4640.75" y="900" font-size="9" fill="#555555" text-anchor="start">открытые release</text>
 <text x="3722.5" y="826" font-size="9" fill="#C0392B" text-anchor="end" font-weight="bold">hotfix/* ← ветка Прода (предыд. release =</text>
 <text x="3722.5" y="838" font-size="9" fill="#C0392B" text-anchor="end" font-weight="bold">master)</text>
 <text x="3764.5" y="842" font-size="9" fill="#C0392B" text-anchor="start">после выката → в текущую release</text>
-<rect x="0" y="1452" width="5030" height="190" fill="#FFFFFF" stroke="#A0A0A0" stroke-width="1"/>
-<text x="15" y="1478.5" font-size="12" fill="#222222" text-anchor="start" font-weight="bold">Легенда</text>
-<rect x="10" y="1486" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.5"/>
-<text x="57" y="1499.5" font-size="10" fill="#222222" text-anchor="start">последовательный шаг (= задача Jira с ID шага)</text>
-<rect x="10" y="1516" width="34" height="20" rx="8" fill="#FFF2CC" stroke="#6C8EBF" stroke-width="1.5"/>
-<text x="57" y="1529.5" font-size="10" fill="#222222" text-anchor="start">шаг параллельного блока P</text>
-<rect x="10" y="1546" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="1.5"/>
-<text x="57" y="1559.5" font-size="10" fill="#222222" text-anchor="start">★ предложено ревью (нет в эталоне)</text>
-<rect x="570" y="1486" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="617" y="1499.5" font-size="10" fill="#222222" text-anchor="start">опциональный шаг (трек C: ПСИ)</text>
-<rect x="570" y="1516" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="617" y="1529.5" font-size="10" fill="#222222" text-anchor="start">есть на прежней схеме, нет в эталоне — уточнить</text>
-<polygon points="587,1546 604,1556 587,1566 570,1556" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
-<text x="617" y="1559.5" font-size="10" fill="#222222" text-anchor="start">gate / решение / AND-join</text>
-<text x="1223" y="1497.5" font-size="10" fill="#222222" text-anchor="start">возврат / отклонение: новая задача того же шага + код E1–E7 + этап внесения</text>
-<text x="1223" y="1527.5" font-size="10" fill="#222222" text-anchor="start">зависимость / готовность (не основной поток)</text>
-<text x="1223" y="1557.5" font-size="10" fill="#222222" text-anchor="start">привязка шага к состоянию git-ветки</text>
-<text x="1905" y="1521" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Как схема связана с эталоном ЕАРМ, Jira и метриками</text>
-<text x="1905" y="1534" font-size="10" fill="#222222" text-anchor="start">• Нумерация шагов повторяет этапы эталона (0–12): «эт. N» в каждом блоке. ЗО и ФИО — из §14.1/§15 эталона; Gate ИБ — этапы 2, 3b, 5, 6, 8.</text>
-<text x="1905" y="1547" font-size="10" fill="#222222" text-anchor="start">• Один шаг = одна задача Jira с ID шага, оценкой и полем «Сервис»; шаги по сервисам — под-задачи. Старт = «В работе», финиш = «Готово».</text>
-<text x="1905" y="1560" font-size="10" fill="#222222" text-anchor="start">• Время работы = Готово − Старт; ожидание = Старт − Готово последнего предшественника (для P — от fork); AND-join G1 ждёт самый медленный трек.</text>
-<text x="1905" y="1573" font-size="10" fill="#222222" text-anchor="start">• Возврат (красная стрелка) = новая задача того же шага + ссылка «Возврат из» + код ошибки E1–E7 + этап внесения (где ошибка допущена) и этап обнаружения.</text>
-<text x="1905" y="1586" font-size="10" fill="#222222" text-anchor="start">• Календарь и паспорт в Confluence — витрина для менеджмента; источник метрик — Jira. Расхождения источников и пробелы — стр. 5 и docs/release-process-review.md.</text>
-<polyline points="737,86 737,1446" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
-<polyline points="1290,86 1290,1446" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
-<polyline points="2217,86 2217,1446" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
-<polyline points="3117,86 3117,1446" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
-<polyline points="3837,86 3837,1446" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
+<rect x="0" y="1542" width="5030" height="190" fill="#FFFFFF" stroke="#A0A0A0" stroke-width="1"/>
+<text x="15" y="1568.5" font-size="12" fill="#222222" text-anchor="start" font-weight="bold">Легенда</text>
+<rect x="10" y="1576" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#6C8EBF" stroke-width="1.5"/>
+<text x="57" y="1589.5" font-size="10" fill="#222222" text-anchor="start">последовательный шаг (= задача Jira с ID шага)</text>
+<rect x="10" y="1606" width="34" height="20" rx="8" fill="#FFF2CC" stroke="#6C8EBF" stroke-width="1.5"/>
+<text x="57" y="1619.5" font-size="10" fill="#222222" text-anchor="start">шаг параллельного блока P</text>
+<rect x="10" y="1636" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#E36C0A" stroke-width="1.5"/>
+<text x="57" y="1649.5" font-size="10" fill="#222222" text-anchor="start">★ предложено ревью (нет в эталоне)</text>
+<rect x="570" y="1576" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#9673A6" stroke-width="1.5" stroke-dasharray="6 3"/>
+<text x="617" y="1589.5" font-size="10" fill="#222222" text-anchor="start">опциональный шаг (трек C: ПСИ)</text>
+<rect x="570" y="1606" width="34" height="20" rx="8" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="1.5" stroke-dasharray="6 3"/>
+<text x="617" y="1619.5" font-size="10" fill="#222222" text-anchor="start">есть на прежней схеме, нет в эталоне — уточнить</text>
+<polygon points="587,1636 604,1646 587,1656 570,1646" fill="#D5E8D4" stroke="#82B366" stroke-width="1.5"/>
+<text x="617" y="1649.5" font-size="10" fill="#222222" text-anchor="start">gate / решение / AND-join</text>
+<text x="1223" y="1587.5" font-size="10" fill="#222222" text-anchor="start">возврат / отклонение: новая задача того же шага + код E1–E7 + этап внесения</text>
+<text x="1223" y="1617.5" font-size="10" fill="#222222" text-anchor="start">зависимость / готовность (не основной поток)</text>
+<text x="1223" y="1647.5" font-size="10" fill="#222222" text-anchor="start">привязка шага к состоянию git-ветки</text>
+<text x="1905" y="1611" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Как схема связана с эталоном ЕАРМ, Jira и метриками</text>
+<text x="1905" y="1624" font-size="10" fill="#222222" text-anchor="start">• Нумерация шагов повторяет этапы эталона (0–12): «эт. N» в каждом блоке. ЗО и ФИО — из §14.1/§15 эталона; Gate ИБ — этапы 2, 3b, 5, 6, 8.</text>
+<text x="1905" y="1637" font-size="10" fill="#222222" text-anchor="start">• Один шаг = одна задача Jira с ID шага, оценкой и полем «Сервис»; шаги по сервисам — под-задачи. Старт = «В работе», финиш = «Готово».</text>
+<text x="1905" y="1650" font-size="10" fill="#222222" text-anchor="start">• Время работы = Готово − Старт; ожидание = Старт − Готово последнего предшественника (для P — от fork); AND-join G1 ждёт самый медленный трек.</text>
+<text x="1905" y="1663" font-size="10" fill="#222222" text-anchor="start">• Возврат (красная стрелка) = новая задача того же шага + ссылка «Возврат из» + код ошибки E1–E7 + этап внесения (где ошибка допущена) и этап обнаружения.</text>
+<text x="1905" y="1676" font-size="10" fill="#222222" text-anchor="start">• Календарь и паспорт в Confluence — витрина для менеджмента; источник метрик — Jira. Расхождения источников и пробелы — стр. 5 и docs/release-process-review.md.</text>
+<polyline points="737,86 737,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
+<polyline points="1290,86 1290,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
+<polyline points="2217,86 2217,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
+<polyline points="3117,86 3117,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
+<polyline points="3837,86 3837,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
 <polyline points="199,131 215,131" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="360,131 407.5,131" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="527.5,131 647.5,131 647.5,490" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
@@ -276,15 +291,22 @@
 <polyline points="2487.5,990 2487.5,631 1767.5,631 1767.5,552" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
 <rect x="2080.74" y="623" width="95.6" height="16" fill="#FFFFFF"/>
 <text x="2128.54" y="635" font-size="10" fill="#C0392B" text-anchor="middle">замечания аудита</text>
+<polyline points="2487.5,1052 2487.5,1111 2891,1111 2891,552" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
+<rect x="2854.4" y="1054.75" width="73.2" height="16" fill="#FFFFFF"/>
+<text x="2891" y="1066.75" font-size="10" fill="#7F7F7F" text-anchor="middle">ПТЗ не нужен</text>
 <polyline points="2740,1021 2847.5,1021 2847.5,552" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="2380,206 2847.5,206 2847.5,490" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="2920,521 3027.5,521 3027.5,990" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3100,1021 3207.5,1021 3207.5,552" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3027.5,1052 3027.5,1391 3135,1391" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="3027.5,1052 3027.5,1481 3135,1481" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3280,521 3365.75,521 3365.75,162" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3280,1391 3416.5,1391 3416.5,162" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
 <rect x="3377.1" y="427.1" width="78.8" height="16" fill="#FFFFFF"/>
 <text x="3416.5" y="439.1" font-size="10" fill="#7F7F7F" text-anchor="middle">готовность БД</text>
+<polyline points="3280,1481 3445.5,1481 3445.5,162" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
+<rect x="3389.3" y="450.9" width="112.4" height="16" fill="#FFFFFF"/>
+<text x="3445.5" y="462.9" font-size="10" fill="#7F7F7F" text-anchor="middle">готовность брокеров</text>
 <polyline points="1947.5,175 1947.5,94 3387.5,94 3387.5,100" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
 <rect x="2554.2" y="86" width="151.6" height="16" fill="#FFFFFF"/>
 <text x="2630" y="98" font-size="10" fill="#7F7F7F" text-anchor="middle">тест-план в ТестОпс ГПН-ЦР</text>
@@ -296,12 +318,14 @@
 <polyline points="3747.5,173 3747.5,710" fill="none" stroke="#C0392B" stroke-width="1.5" marker-end="url(#m3)"/>
 <rect x="3730.5" y="272.4" width="34" height="16" fill="#FFFFFF"/>
 <text x="3747.5" y="284.4" font-size="10" fill="#C0392B" text-anchor="middle">No-Go</text>
-<polyline points="3675,741 3207.5,741 3207.5,552" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
-<rect x="3249.33" y="733" width="129.2" height="16" fill="#FFFFFF"/>
-<text x="3313.93" y="745" font-size="10" fill="#C0392B" text-anchor="middle">после фикса → 9.1 → G2</text>
+<polyline points="3675,741 3650,741 3650,787 1304,787 1304,646" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
+<rect x="2452.1" y="779" width="235.6" height="16" fill="#FFFFFF"/>
+<text x="2569.9" y="791" font-size="10" fill="#C0392B" text-anchor="middle">полный цикл на hotfix/*: 4.x · 2.x · 5–12</text>
 <polyline points="4000,131 4107.5,131 4107.5,1270" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4180,1301 4287.5,1301 4287.5,1360" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
-<polyline points="4360,1391 4467.5,1391 4467.5,1332" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="4107.5,1332 4107.5,1481 4215,1481" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="4360,1391 4438.5,1391 4438.5,1332" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="4360,1481 4496.5,1481 4496.5,1332" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4540,1301 4647.5,1301 4647.5,552" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4720,521 4827.5,521 4827.5,162" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4900,131 4940,131" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
@@ -314,7 +338,7 @@
 <polyline points="4625.75,552 4625.75,871" fill="none" stroke="#7F7F7F" stroke-width="1.2" stroke-dasharray="2 3"/>
 <polyline points="3717.5,871 3747.5,823 4007.5,823 4037.5,871" fill="none" stroke="#C0392B" stroke-width="3" marker-end="url(#m3)"/>
 <polyline points="3747.5,772 3747.5,823" fill="none" stroke="#7F7F7F" stroke-width="1.2" stroke-dasharray="2 3"/>
-<polyline points="1150,1494 1210,1494" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
-<polyline points="1150,1524 1210,1524" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
-<polyline points="1150,1554 1210,1554" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="2 3"/>
+<polyline points="1150,1584 1210,1584" fill="none" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
+<polyline points="1150,1614 1210,1614" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m1)"/>
+<polyline points="1150,1644 1210,1644" fill="none" stroke="#7F7F7F" stroke-width="1.5" stroke-dasharray="2 3"/>
 </svg>

@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1180" viewBox="0 0 2100 1180" font-family="Helvetica, Arial, sans-serif">
-<rect width="2100" height="1180" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1226" viewBox="0 0 2100 1226" font-family="Helvetica, Arial, sans-serif">
+<rect width="2100" height="1226" fill="#FFFFFF"/>
 <defs>
 <marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#222222"/></marker>
 <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
@@ -17,7 +17,7 @@
 <text x="445" y="127" font-size="11" fill="#222222" text-anchor="start">календаря. Паспорт REL-XXX и календарь в Confluence — витрина.</text>
 <rect x="900" y="84" width="540" height="130" rx="8" fill="#FFE6CC" stroke="#E36C0A" stroke-width="2"/>
 <text x="905" y="99" font-size="11" fill="#222222" text-anchor="start" font-weight="bold">Задача шага (Enabler/Task) в Релизном Epic с fixVersion — НОВОЕ</text>
-<text x="905" y="113" font-size="11" fill="#222222" text-anchor="start">Одна на каждый шаг реестра (ID 0.1…12.5, G1, G2). Поля: ID шага*, Роль/ЗО, Оценка*,</text>
+<text x="905" y="113" font-size="11" fill="#222222" text-anchor="start">Одна на каждый шаг реестра (ID 0.1…12.6, G1, G2). Поля: ID шага*, Роль/ЗО, Оценка*,</text>
 <text x="905" y="127" font-size="11" fill="#222222" text-anchor="start">Исполнитель, Результат (✓/↩/✗), код E, этап внесения, «Возврат из».</text>
 <rect x="1500" y="84" width="540" height="130" rx="8" fill="#FFE6CC" stroke="#E36C0A" stroke-width="2"/>
 <text x="1505" y="99" font-size="11" fill="#222222" text-anchor="start" font-weight="bold">Под-задача сервиса — НОВОЕ</text>
@@ -103,13 +103,21 @@
 <rect x="780" y="686" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="785" y="700.5" font-size="10" fill="#222222" text-anchor="start">шаг · сервис · исполнитель</text>
 <rect x="20" y="710" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="724.5" font-size="10" fill="#222222" text-anchor="start">M8</text>
+<text x="25" y="724.5" font-size="10" fill="#222222" text-anchor="start">M9</text>
 <rect x="70" y="710" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="75" y="724.5" font-size="10" fill="#222222" text-anchor="start">Churn скоупа</text>
+<text x="75" y="724.5" font-size="10" fill="#222222" text-anchor="start">Соблюдение SLA</text>
 <rect x="300" y="710" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="305" y="724.5" font-size="10" fill="#222222" text-anchor="start">доля задач, добавленных после freeze / исключённых из релиза</text>
+<text x="305" y="724.5" font-size="10" fill="#222222" text-anchor="start">доля шагов, где (работа + ожидание) ≤ SLA (1–5 раб. дн); превышение → код E6 / E7</text>
 <rect x="780" y="710" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="785" y="724.5" font-size="10" fill="#222222" text-anchor="start">сервис · релиз</text>
+<text x="785" y="724.5" font-size="10" fill="#222222" text-anchor="start">шаг · ЗО · сервис</text>
+<rect x="20" y="734" width="50" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="748.5" font-size="10" fill="#222222" text-anchor="start">M8</text>
+<rect x="70" y="734" width="230" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="75" y="748.5" font-size="10" fill="#222222" text-anchor="start">Churn скоупа</text>
+<rect x="300" y="734" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="305" y="748.5" font-size="10" fill="#222222" text-anchor="start">доля задач, добавленных после freeze / исключённых из релиза</text>
+<rect x="780" y="734" width="250" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="785" y="748.5" font-size="10" fill="#222222" text-anchor="start">сервис · релиз</text>
 <text x="1105" y="505.5" font-size="14" fill="#222222" text-anchor="start" font-weight="bold">C. Таксономия ошибок (код причины в задаче шага)</text>
 <rect x="1100" y="518" width="50" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
 <text x="1105" y="532.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Код</text>
@@ -159,49 +167,90 @@
 <text x="1155" y="700.5" font-size="10" fill="#222222" text-anchor="start">Внешняя зависимость</text>
 <rect x="1350" y="686" width="740" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1355" y="700.5" font-size="10" fill="#222222" text-anchor="start">Время и возвраты на стороне ИБ ГПН / ГПН-ЦР — фиксируем фактами</text>
-<text x="25" y="779.5" font-size="14" fill="#222222" text-anchor="start" font-weight="bold">D. Вопросы, на которые схема должна отвечать данными Jira</text>
-<rect x="20" y="792" width="420" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
-<text x="25" y="806.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Вопрос</text>
-<rect x="440" y="792" width="160" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
-<text x="445" y="806.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Метрики</text>
-<rect x="600" y="792" width="1100" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
-<text x="605" y="806.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Как смотреть</text>
-<rect x="20" y="816" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="830.5" font-size="10" fill="#222222" text-anchor="start">На каком шаге и кем допущены ошибки?</text>
-<rect x="440" y="816" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="830.5" font-size="10" fill="#222222" text-anchor="start">M5, M6, M7</text>
-<rect x="600" y="816" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="830.5" font-size="10" fill="#222222" text-anchor="start">возвраты и E3 в разрезе шаг × исполнитель × сервис; этап внесения ≠ этап обнаружения</text>
+<text x="25" y="803.5" font-size="14" fill="#222222" text-anchor="start" font-weight="bold">D. Вопросы, на которые схема должна отвечать данными Jira</text>
+<rect x="20" y="816" width="420" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="25" y="830.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Вопрос</text>
+<rect x="440" y="816" width="160" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="445" y="830.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Метрики</text>
+<rect x="600" y="816" width="1100" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="605" y="830.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Как смотреть</text>
 <rect x="20" y="840" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="854.5" font-size="10" fill="#222222" text-anchor="start">Где систематически ошибаемся в оценке?</text>
+<text x="25" y="854.5" font-size="10" fill="#222222" text-anchor="start">На каком шаге и кем допущены ошибки?</text>
 <rect x="440" y="840" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="854.5" font-size="10" fill="#222222" text-anchor="start">M4</text>
+<text x="445" y="854.5" font-size="10" fill="#222222" text-anchor="start">M5, M6, M7</text>
 <rect x="600" y="840" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="854.5" font-size="10" fill="#222222" text-anchor="start">медиана смещения по роли и шагу; E2</text>
+<text x="605" y="854.5" font-size="10" fill="#222222" text-anchor="start">возвраты и E3 в разрезе шаг × исполнитель × сервис; этап внесения ≠ этап обнаружения</text>
 <rect x="20" y="864" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="878.5" font-size="10" fill="#222222" text-anchor="start">Где нарушаются требования?</text>
+<text x="25" y="878.5" font-size="10" fill="#222222" text-anchor="start">Где систематически ошибаемся в оценке?</text>
 <rect x="440" y="864" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="878.5" font-size="10" fill="#222222" text-anchor="start">M7</text>
+<text x="445" y="878.5" font-size="10" fill="#222222" text-anchor="start">M4</text>
 <rect x="600" y="864" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="878.5" font-size="10" fill="#222222" text-anchor="start">невыполненные критерии входа/выхода; правила §2 эталона</text>
+<text x="605" y="878.5" font-size="10" fill="#222222" text-anchor="start">медиана смещения по роли и шагу; E2</text>
 <rect x="20" y="888" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="902.5" font-size="10" fill="#222222" text-anchor="start">Правда ли, что тормозит ИБ?</text>
+<text x="25" y="902.5" font-size="10" fill="#222222" text-anchor="start">Где нарушаются требования?</text>
 <rect x="440" y="888" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="902.5" font-size="10" fill="#222222" text-anchor="start">M2, M3, E7</text>
+<text x="445" y="902.5" font-size="10" fill="#222222" text-anchor="start">M7</text>
 <rect x="600" y="888" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="902.5" font-size="10" fill="#222222" text-anchor="start">доля ЗО на критическом пути; ожидание перед шагами ИБ (2.2, 3.2, 5.2, 6.1, 8.1) против шагов НЕДРА</text>
+<text x="605" y="902.5" font-size="10" fill="#222222" text-anchor="start">невыполненные критерии входа/выхода; правила §2 эталона</text>
 <rect x="20" y="912" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="926.5" font-size="10" fill="#222222" text-anchor="start">Какие сервисы проблемные?</text>
+<text x="25" y="926.5" font-size="10" fill="#222222" text-anchor="start">Правда ли, что тормозит ИБ?</text>
 <rect x="440" y="912" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="926.5" font-size="10" fill="#222222" text-anchor="start">все</text>
+<text x="445" y="926.5" font-size="10" fill="#222222" text-anchor="start">M2, M3, E7</text>
 <rect x="600" y="912" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="926.5" font-size="10" fill="#222222" text-anchor="start">строки матрицы (стр. 3): шаги с ↩ / ✗ по сервису</text>
+<text x="605" y="926.5" font-size="10" fill="#222222" text-anchor="start">доля ЗО на критическом пути; ожидание перед шагами ИБ (2.2, 3.2, 5.2, 6.1, 8.1) против шагов НЕДРА</text>
 <rect x="20" y="936" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="950.5" font-size="10" fill="#222222" text-anchor="start">Хорошо ли держим скоуп?</text>
+<text x="25" y="950.5" font-size="10" fill="#222222" text-anchor="start">Какие сервисы проблемные?</text>
 <rect x="440" y="936" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="445" y="950.5" font-size="10" fill="#222222" text-anchor="start">M8, E1</text>
+<text x="445" y="950.5" font-size="10" fill="#222222" text-anchor="start">все</text>
 <rect x="600" y="936" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="605" y="950.5" font-size="10" fill="#222222" text-anchor="start">добавлено после Scope freeze, расхождение Fix Version ↔ ветка</text>
+<text x="605" y="950.5" font-size="10" fill="#222222" text-anchor="start">строки матрицы (стр. 3): шаги с ↩ / ✗ по сервису</text>
+<rect x="20" y="960" width="420" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="974.5" font-size="10" fill="#222222" text-anchor="start">Хорошо ли держим скоуп?</text>
+<rect x="440" y="960" width="160" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="445" y="974.5" font-size="10" fill="#222222" text-anchor="start">M8, E1</text>
+<rect x="600" y="960" width="1100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="605" y="974.5" font-size="10" fill="#222222" text-anchor="start">добавлено после Scope freeze, расхождение Fix Version ↔ ветка</text>
+<text x="25" y="1029.5" font-size="14" fill="#222222" text-anchor="start" font-weight="bold">E. Критический путь по SLA (от rc до закрытия, рабочие дни; приём PR 1.1 идёт спринт и не входит)</text>
+<rect x="20" y="1042" width="200" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="25" y="1056.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Сценарий</text>
+<rect x="220" y="1042" width="100" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="225" y="1056.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Раб. дней</text>
+<rect x="320" y="1042" width="100" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="325" y="1056.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Недель</text>
+<rect x="420" y="1042" width="1480" height="24" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="425" y="1056.5" font-size="10" fill="#222222" text-anchor="start" font-weight="bold">Критический путь</text>
+<rect x="20" y="1066" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="1080.5" font-size="10" fill="#222222" text-anchor="start">ПСИ + ПТЗ</text>
+<rect x="220" y="1066" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="225" y="1080.5" font-size="10" fill="#222222" text-anchor="start">38</text>
+<rect x="320" y="1066" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="1080.5" font-size="10" fill="#222222" text-anchor="start">7.6</text>
+<rect x="420" y="1066" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="425" y="1080.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<rect x="20" y="1090" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="1104.5" font-size="10" fill="#222222" text-anchor="start">только ПСИ</text>
+<rect x="220" y="1090" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="225" y="1104.5" font-size="10" fill="#222222" text-anchor="start">35</text>
+<rect x="320" y="1090" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="1104.5" font-size="10" fill="#222222" text-anchor="start">7.0</text>
+<rect x="420" y="1090" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="425" y="1104.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<rect x="20" y="1114" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="1128.5" font-size="10" fill="#222222" text-anchor="start">только ПТЗ</text>
+<rect x="220" y="1114" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="225" y="1128.5" font-size="10" fill="#222222" text-anchor="start">38</text>
+<rect x="320" y="1114" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="1128.5" font-size="10" fill="#222222" text-anchor="start">7.6</text>
+<rect x="420" y="1114" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="425" y="1128.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 6.1 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
+<rect x="20" y="1138" width="200" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="1152.5" font-size="10" fill="#222222" text-anchor="start">без ПСИ и ПТЗ</text>
+<rect x="220" y="1138" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="225" y="1152.5" font-size="10" fill="#222222" text-anchor="start">35</text>
+<rect x="320" y="1138" width="100" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="1152.5" font-size="10" fill="#222222" text-anchor="start">7.0</text>
+<rect x="420" y="1138" width="1480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="425" y="1152.5" font-size="10" fill="#222222" text-anchor="start">1.3 → 4.1 → 4.2 → 4.3 → 4.4 → G1 → 5.1 → 5.2 → 7.2 → 8.1 → 9.1 → 10.1 → 10.2 → G2 → 11.1 → 12.1 → 12.2 → 12.4 → 12.5 → 12.6</text>
 <polyline points="380,149 440,149" fill="none" stroke="#222222" stroke-width="1.5" marker-end="url(#m0)"/>
 <rect x="379" y="141" width="62" height="16" fill="#FFFFFF"/>
 <text x="410" y="153" font-size="10" fill="#222222" text-anchor="middle">по релизам</text>
