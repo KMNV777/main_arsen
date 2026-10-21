@@ -1,0 +1,579 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1874" height="572" viewBox="0 0 1874 572" font-family="Helvetica, Arial, sans-serif">
+<rect width="1874" height="572" fill="#FFFFFF"/>
+<defs>
+</defs>
+<rect x="10" y="6" width="1854" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<text x="15" y="28" font-size="15" fill="#222222" text-anchor="start" font-weight="bold">Релиз-процесс · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨НАПРАВЛЕНИЕ⟩ · Релиз: ⟨ВЕРСИЯ⟩ · Jira: REL-⟨СЕРВИС⟩-⟨ВЕРСИЯ⟩   |   матрица «сервис × этап»: ответственный · план · факт · результат</text>
+<text x="25" y="72.5" font-size="10" fill="#222222" text-anchor="start">Одна строка-блок на сервис. Значения берутся из подзадач Jira «Этап релиза» (план/факт, исполнитель, результат). Результат: ✓ без возврата · ↩ был возврат (код E1–E7) · ✗ нарушено требование · — не применимо. Список сервисов — SERVICES в scripts/build_release_process.py.</text>
+<rect x="20" y="100" width="210" height="28" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="125" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Сервис / показатель</text>
+<rect x="230" y="100" width="348" height="28" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
+<text x="404" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф0</text>
+<rect x="578" y="100" width="232" height="28" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
+<text x="694" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф1</text>
+<rect x="810" y="100" width="464" height="28" fill="#FFE6CC" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1042" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф2 (параллельно)</text>
+<rect x="1274" y="100" width="58" height="28" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1303" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф3</text>
+<rect x="1332" y="100" width="232" height="28" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1448" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф4</text>
+<rect x="1564" y="100" width="290" height="28" fill="#E1E1E1" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1709" y="116.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Ф5</text>
+<rect x="20" y="128" width="210" height="74" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="125" y="167.5" font-size="10" fill="#222222" text-anchor="middle" font-weight="bold">Шаг (ID)</text>
+<rect x="230" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="259" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.1</text>
+<text x="259" y="161" font-size="7" fill="#666666" text-anchor="middle">Сбор</text>
+<text x="259" y="173" font-size="7" fill="#666666" text-anchor="middle">релизного</text>
+<text x="259" y="185" font-size="7" fill="#666666" text-anchor="middle">тикета</text>
+<rect x="288" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="317" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.2</text>
+<text x="317" y="167" font-size="7" fill="#666666" text-anchor="middle">Отбор</text>
+<text x="317" y="179" font-size="7" fill="#666666" text-anchor="middle">скоупа</text>
+<rect x="346" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="375" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.3</text>
+<text x="375" y="173" font-size="7" fill="#666666" text-anchor="middle">ПСИ нужен?</text>
+<rect x="404" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="433" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.4</text>
+<text x="433" y="173" font-size="7" fill="#666666" text-anchor="middle">ПМТ</text>
+<rect x="462" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="491" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.5</text>
+<text x="491" y="167" font-size="7" fill="#666666" text-anchor="middle">Согласование</text>
+<text x="491" y="179" font-size="7" fill="#666666" text-anchor="middle">ПМТ</text>
+<rect x="520" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="549" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">0.6</text>
+<text x="549" y="173" font-size="7" fill="#666666" text-anchor="middle">ПСИ</text>
+<rect x="578" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="607" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">1.1</text>
+<text x="607" y="161" font-size="7" fill="#666666" text-anchor="middle">Создание</text>
+<text x="607" y="173" font-size="7" fill="#666666" text-anchor="middle">релизной</text>
+<text x="607" y="185" font-size="7" fill="#666666" text-anchor="middle">ветки</text>
+<rect x="636" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="665" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">1.2</text>
+<text x="665" y="161" font-size="7" fill="#666666" text-anchor="middle">Слив задач</text>
+<text x="665" y="173" font-size="7" fill="#666666" text-anchor="middle">скоупа в</text>
+<text x="665" y="185" font-size="7" fill="#666666" text-anchor="middle">ветку</text>
+<rect x="694" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="723" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">1.3</text>
+<text x="723" y="161" font-size="7" fill="#666666" text-anchor="middle">Сборка и</text>
+<text x="723" y="173" font-size="7" fill="#666666" text-anchor="middle">выкладка на</text>
+<text x="723" y="185" font-size="7" fill="#666666" text-anchor="middle">UAT</text>
+<rect x="752" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="781" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">1.4</text>
+<text x="781" y="173" font-size="7" fill="#666666" text-anchor="middle">Фича-фриз</text>
+<rect x="810" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="839" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.1</text>
+<text x="839" y="167" font-size="7" fill="#666666" text-anchor="middle">Регресс на</text>
+<text x="839" y="179" font-size="7" fill="#666666" text-anchor="middle">UAT</text>
+<rect x="868" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="897" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.2</text>
+<text x="897" y="167" font-size="7" fill="#666666" text-anchor="middle">Отчёт по</text>
+<text x="897" y="179" font-size="7" fill="#666666" text-anchor="middle">регрессу</text>
+<rect x="926" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="955" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.3</text>
+<text x="955" y="161" font-size="7" fill="#666666" text-anchor="middle">Устранение</text>
+<text x="955" y="173" font-size="7" fill="#666666" text-anchor="middle">критов и</text>
+<text x="955" y="185" font-size="7" fill="#666666" text-anchor="middle">код-фриз</text>
+<rect x="984" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1013" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.4</text>
+<text x="1013" y="173" font-size="7" fill="#666666" text-anchor="middle">Smoke UAT</text>
+<rect x="1042" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1071" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.5</text>
+<text x="1071" y="167" font-size="7" fill="#666666" text-anchor="middle">Скан</text>
+<text x="1071" y="179" font-size="7" fill="#666666" text-anchor="middle">уязвимостей</text>
+<rect x="1100" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1129" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.6</text>
+<text x="1129" y="167" font-size="7" fill="#666666" text-anchor="middle">Заявка на</text>
+<text x="1129" y="179" font-size="7" fill="#666666" text-anchor="middle">аудит</text>
+<rect x="1158" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1187" y="161" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">2.7</text>
+<text x="1187" y="173" font-size="7" fill="#666666" text-anchor="middle">Аудит кода</text>
+<rect x="1216" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1245" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">G1</text>
+<text x="1245" y="161" font-size="7" fill="#666666" text-anchor="middle">Согласование</text>
+<text x="1245" y="173" font-size="7" fill="#666666" text-anchor="middle">ИБ</text>
+<text x="1245" y="185" font-size="7" fill="#666666" text-anchor="middle">(AND-join)</text>
+<rect x="1274" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1303" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">3.1</text>
+<text x="1303" y="167" font-size="7" fill="#666666" text-anchor="middle">Загрузка в</text>
+<text x="1303" y="179" font-size="7" fill="#666666" text-anchor="middle">релиз-борд</text>
+<rect x="1332" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1361" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">4.1</text>
+<text x="1361" y="161" font-size="7" fill="#666666" text-anchor="middle">БД и</text>
+<text x="1361" y="173" font-size="7" fill="#666666" text-anchor="middle">брокеры</text>
+<text x="1361" y="185" font-size="7" fill="#666666" text-anchor="middle">PreProd</text>
+<rect x="1390" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1419" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">4.2</text>
+<text x="1419" y="167" font-size="7" fill="#666666" text-anchor="middle">Регресс</text>
+<text x="1419" y="179" font-size="7" fill="#666666" text-anchor="middle">PreProd</text>
+<rect x="1448" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1477" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">4.3</text>
+<text x="1477" y="167" font-size="7" fill="#666666" text-anchor="middle">Отчёт</text>
+<text x="1477" y="179" font-size="7" fill="#666666" text-anchor="middle">PreProd</text>
+<rect x="1506" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1535" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">G2</text>
+<text x="1535" y="167" font-size="7" fill="#666666" text-anchor="middle">Go / No-Go</text>
+<text x="1535" y="179" font-size="7" fill="#666666" text-anchor="middle">в Прод</text>
+<rect x="1564" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1593" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">5.1</text>
+<text x="1593" y="167" font-size="7" fill="#666666" text-anchor="middle">Деплой в</text>
+<text x="1593" y="179" font-size="7" fill="#666666" text-anchor="middle">Прод</text>
+<rect x="1622" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1651" y="143" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">5.2</text>
+<text x="1651" y="155" font-size="7" fill="#666666" text-anchor="middle">БД и</text>
+<text x="1651" y="167" font-size="7" fill="#666666" text-anchor="middle">брокеры</text>
+<text x="1651" y="179" font-size="7" fill="#666666" text-anchor="middle">после</text>
+<text x="1651" y="191" font-size="7" fill="#666666" text-anchor="middle">выкатки</text>
+<rect x="1680" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1709" y="155" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">5.3</text>
+<text x="1709" y="167" font-size="7" fill="#666666" text-anchor="middle">Post-deploy</text>
+<text x="1709" y="179" font-size="7" fill="#666666" text-anchor="middle">smoke</text>
+<rect x="1738" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1767" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">5.4</text>
+<text x="1767" y="161" font-size="7" fill="#666666" text-anchor="middle">Тег, merge</text>
+<text x="1767" y="173" font-size="7" fill="#666666" text-anchor="middle">в master,</text>
+<text x="1767" y="185" font-size="7" fill="#666666" text-anchor="middle">back-merge</text>
+<rect x="1796" y="128" width="58" height="74" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1825" y="149" font-size="9" fill="#222222" text-anchor="middle" font-weight="bold">5.5</text>
+<text x="1825" y="161" font-size="7" fill="#666666" text-anchor="middle">Закрытие</text>
+<text x="1825" y="173" font-size="7" fill="#666666" text-anchor="middle">тикета и</text>
+<text x="1825" y="185" font-size="7" fill="#666666" text-anchor="middle">ретро</text>
+<rect x="20" y="202" width="210" height="104" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="125" y="257" font-size="11" fill="#222222" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 1⟩</text>
+<rect x="230" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="259" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="288" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="317" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="346" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="375" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="404" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="433" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="462" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="491" y="217" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="520" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="549" y="217" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="578" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="607" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="636" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="665" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="694" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="723" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="752" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="781" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="810" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="839" y="217" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="868" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="897" y="217" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="926" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="955" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="984" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1013" y="217" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1042" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1071" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1100" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1129" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1158" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1187" y="217" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1216" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1245" y="217" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1274" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1303" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1332" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1361" y="217" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1390" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1419" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1448" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1477" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1506" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1535" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1564" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1593" y="217" font-size="9" fill="#222222" text-anchor="middle">OPS</text>
+<rect x="1622" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1651" y="217" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1680" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1709" y="217" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1738" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1767" y="217" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1796" y="202" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1825" y="217" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="230" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="228" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="254" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="280" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<text x="221" y="217.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
+<text x="221" y="243.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
+<text x="221" y="269.5" font-size="8" fill="#666666" text-anchor="end">Факт, ч</text>
+<text x="221" y="295.5" font-size="8" fill="#666666" text-anchor="end">Результат</text>
+<rect x="20" y="306" width="210" height="104" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="125" y="361" font-size="11" fill="#222222" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 2⟩</text>
+<rect x="230" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="259" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="288" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="317" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="346" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="375" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="404" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="433" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="462" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="491" y="321" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="520" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="549" y="321" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="578" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="607" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="636" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="665" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="694" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="723" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="752" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="781" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="810" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="839" y="321" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="868" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="897" y="321" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="926" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="955" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="984" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1013" y="321" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1042" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1071" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1100" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1129" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1158" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1187" y="321" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1216" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1245" y="321" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1274" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1303" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1332" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1361" y="321" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1390" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1419" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1448" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1477" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1506" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1535" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1564" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1593" y="321" font-size="9" fill="#222222" text-anchor="middle">OPS</text>
+<rect x="1622" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1651" y="321" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1680" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1709" y="321" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1738" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1767" y="321" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1796" y="306" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1825" y="321" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="230" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="332" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="358" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="384" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<text x="221" y="321.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
+<text x="221" y="347.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
+<text x="221" y="373.5" font-size="8" fill="#666666" text-anchor="end">Факт, ч</text>
+<text x="221" y="399.5" font-size="8" fill="#666666" text-anchor="end">Результат</text>
+<rect x="20" y="410" width="210" height="104" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1"/>
+<text x="125" y="465" font-size="11" fill="#222222" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 3⟩</text>
+<rect x="230" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="259" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="288" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="317" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="346" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="375" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="404" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="433" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="462" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="491" y="425" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="520" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="549" y="425" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="578" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="607" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="636" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="665" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="694" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="723" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="752" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="781" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="810" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="839" y="425" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="868" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="897" y="425" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="926" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="955" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="984" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1013" y="425" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1042" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1071" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1100" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1129" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1158" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1187" y="425" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1216" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1245" y="425" font-size="9" fill="#222222" text-anchor="middle">ИБ</text>
+<rect x="1274" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1303" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1332" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1361" y="425" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1390" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1419" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1448" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1477" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1506" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1535" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="1564" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1593" y="425" font-size="9" fill="#222222" text-anchor="middle">OPS</text>
+<rect x="1622" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1651" y="425" font-size="9" fill="#222222" text-anchor="middle">DBA</text>
+<rect x="1680" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1709" y="425" font-size="9" fill="#222222" text-anchor="middle">QA</text>
+<rect x="1738" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1767" y="425" font-size="9" fill="#222222" text-anchor="middle">DEV</text>
+<rect x="1796" y="410" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1825" y="425" font-size="9" fill="#222222" text-anchor="middle">RM</text>
+<rect x="230" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="436" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="462" width="58" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="230" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="288" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="346" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="404" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="462" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="520" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="578" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="636" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="694" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="752" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="810" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="868" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="926" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="984" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1042" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1100" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1158" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1216" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1274" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1332" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1390" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1448" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1506" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1564" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1622" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1680" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1738" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="1796" y="488" width="58" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<text x="221" y="425.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
+<text x="221" y="451.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
+<text x="221" y="477.5" font-size="8" fill="#666666" text-anchor="end">Факт, ч</text>
+<text x="221" y="503.5" font-size="8" fill="#666666" text-anchor="end">Результат</text>
+</svg>
