@@ -71,7 +71,7 @@ class Cell:
     fs: float = 11
     align: str = "center"          # left | center | right
     valign: str = "middle"         # top | middle | bottom
-    fc: str = "#222222"
+    fc: str = "#1B1B3A"
     opacity: Optional[int] = None  # 0..100 для заливки
     attrs: Dict[str, str] = field(default_factory=dict)  # <object> properties
     tooltip: str = ""
@@ -102,7 +102,7 @@ class Edge:
     dst: Optional[Cell] = None
     src_a: Optional[Tuple[str, float]] = None
     dst_a: Optional[Tuple[str, float]] = None
-    color: str = "#222222"
+    color: str = "#1B1B3A"
     sw: float = 1.5
     dash: bool = False
     dot: bool = False
@@ -369,7 +369,7 @@ def page_svg(p: Page) -> str:
 # Таблицы из прямоугольников
 # ---------------------------------------------------------------------------
 def table(p: Page, x: float, y: float, cols: Sequence[float], rows: Sequence[Sequence[str]],
-          header: bool = True, fs: float = 11, hfill: str = "#DAE8FC", hstroke: str = "#6C8EBF",
+          header: bool = True, fs: float = 11, hfill: str = "#140093", hstroke: str = "#140093", hfc: str = "#FFFFFF",
           fills: Optional[Dict[Tuple[int, int], str]] = None, min_h: float = 24,
           bold_first_col: bool = False, align: str = "left") -> float:
     """Рисует таблицу; возвращает нижнюю границу (y)."""
@@ -383,7 +383,8 @@ def table(p: Page, x: float, y: float, cols: Sequence[float], rows: Sequence[Seq
             fmt = "b" if head or (bold_first_col and i == 0) else "n"
             p.add("rect", cx, cy, cols[i], h, [(t, fmt)] if t else [],
                   fill=fills.get((r, i), hfill if head else "#FFFFFF"),
-                  stroke=hstroke if head else "#B0B0B0", fs=fs, align=align, valign="middle")
+                  stroke=hstroke if head else "#B0B0B0", fs=fs, align=align, valign="middle",
+                  fc=hfc if (head and (r, i) not in fills) else "#1B1B3A")
             cx += cols[i]
         cy += h
     return cy

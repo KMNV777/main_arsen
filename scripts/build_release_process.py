@@ -336,10 +336,12 @@ REVIEW = [
      "Таблицу ЗО Политики заменить на сводную из реестра шагов (пакет правок «Политика»)."),
 ]
 
-C_LANE = {"RO": "#E6F0FB", "QA": "#ECF3FC", "DEV": "#F2F7FD", "GIT": "#F4F4F4", "ИБ": "#F3EAF7", "SVC": "#E8F3E4"}
-C_LBL = {"RO": "#BAD3F3", "QA": "#C9DCF5", "DEV": "#D6E5F8", "GIT": "#D9D9D9", "ИБ": "#DCC8E6", "SVC": "#C3DFBB"}
-C_STROKE = {"RO": "#6C8EBF", "QA": "#6C8EBF", "DEV": "#6C8EBF", "ИБ": "#9673A6", "SVC": "#82B366"}
-RED, GRAY, ORANGE, GREEN, BROWN = "#C0392B", "#7F7F7F", "#E36C0A", "#82B366", "#C07000"
+C_LANE = {"RO": "#ECEAF9", "QA": "#F1F0FB", "DEV": "#F6F5FD", "GIT": "#F3F3F5", "ИБ": "#E4F3F2", "SVC": "#E6F0FB"}
+C_LBL = {"RO": "#C9C4F0", "QA": "#D8D4F4", "DEV": "#E5E2F8", "GIT": "#D9D9DE", "ИБ": "#89C9C7", "SVC": "#AAC3E3"}
+C_STROKE = {"RO": "#140093", "QA": "#140093", "DEV": "#140093", "ИБ": "#019390", "SVC": "#4895EB"}
+# палитра Nedra: индиго #140093, лайм #CFF85E, голубой #AAC3E3, бирюзовый #89C9C7, оранжевый #FF7500 / #FDAB64
+INDIGO, LIME = "#140093", "#CFF85E"
+RED, GRAY, ORANGE, GREEN, BROWN = "#D64545", "#7F7F8F", "#FF7500", "#6E9400", "#C25A00"
 LANE_OF = {"RO": "RO", "QA": "QA", "DEV": "DEV", "РИ": "DEV", "DEVOPS": "DEV", "ARCH": "RO", "ВНП": "RO", "РП": "RO", "PMM": "RO",
            "ИБ": "ИБ", "REL": "SVC", "SVC": "SVC", "АБД": "SVC", "АБР": "SVC"}
 
@@ -349,7 +351,7 @@ def header(p: Page, subtitle: str) -> None:
     p.add("text", 10, 6, p.width - 20, 34,
           [(f"Релиз-процесс ЕАРМ · Сервис: %service% · Направление: %direction% · Релиз: %version% · "
             f"Fix Version %version%   |   {subtitle}", "b")],
-          fs=15, attrs=dict(META), id="title", align="left")
+          fs=15, attrs=dict(META), id="title", align="left", fc=INDIGO)
 
 
 # ===========================================================================
@@ -383,7 +385,7 @@ def page_process() -> Page:
     p.height = int(BOT + 230)
     for k, lbl, h in lanes:
         p.add("rect", 0, top[k], W, h, [], fill=C_LANE[k], stroke="#A0A0A0")
-        p.add("rect", 0, top[k], LBL, h, [(lbl, "b")], fill=C_LBL[k], stroke="#A0A0A0", fs=12)
+        p.add("rect", 0, top[k], LBL, h, [(lbl, "b")], fill=C_LBL[k], stroke="#A0A0A0", fs=12, fc=INDIGO)
 
     # фазы
     phases = [(LBL, X(3) - 18, "Ф0 · Инициация и ветка"), (X(3) - 18, X(6) - 45, "Ф1 · Финализация ветки"),
@@ -391,18 +393,18 @@ def page_process() -> Page:
               (X(11) - 18, X(16) - 18, "Ф3 · Аудит · ПТЗ · трансфер (gates ИБ)"),
               (X(16) - 18, X(20) - 18, "Ф4 · PreProd"), (X(20) - 18, W, "Ф5 · Прод и закрытие")]
     for i, (a, b, t) in enumerate(phases):
-        p.add("rect", a, PH_Y, b - a, PH_H, [(t, "b")], fill="#FFE6CC" if i == 2 else "#E1E1E1",
-              stroke="#A0A0A0", fs=12)
+        p.add("rect", a, PH_Y, b - a, PH_H, [(t, "b")], fill="#FDAB64" if i == 2 else INDIGO,
+              stroke="#FFFFFF", fs=12, fc=INDIGO if i == 2 else "#FFFFFF")
         if i:
             p.free([(a, PH_Y + PH_H), (a, BOT)], color="#9A9A9A", sw=1, dot=True, arrow=False)
 
     # зона параллельного блока P
     zt, zb = top["QA"], top["ИБ"] + 270
-    p.add("rect", X(6) - 40, zt, X(11) - 24 - (X(6) - 40), zb - zt, [], fill="#FFF2CC", stroke=ORANGE, dash=True,
+    p.add("rect", X(6) - 40, zt, X(11) - 24 - (X(6) - 40), zb - zt, [], fill="#FFE9D2", stroke=ORANGE, dash=True,
           sw=1.5, opacity=28)
     p.text(X(6) - 34, zt + 1, 520, 18,
            [("P · ПАРАЛЛЕЛЬНО: A (QA) ‖ B (уязвимости) ‖ C (ПСИ) → G1", "b")],
-           fs=10, fc=ORANGE)
+           fs=10, fc="#B85500")
 
     cy = {
         "RO": top["RO"] + 45, "ROb": top["RO"] + 120,
@@ -420,7 +422,7 @@ def page_process() -> Page:
         if mark == "new":
             sub += " · ★"
         stroke = ORANGE if mark == "new" else ("#8A8A8A" if mark == "sch" else C_STROKE[LANE_OF[role.split(" ")[0]]])
-        fill = "#FFF2CC" if kind == "par" else "#FFFFFF"
+        fill = "#FFE9D2" if kind == "par" else "#FFFFFF"
         c = p.add("round", X(col), cy[row] - NH / 2, NW, NH, [(f"{sid}  {name}", "b"), (sub, "s")],
                   id=f"s{sid}", fill=fill, stroke=stroke, sw=2.2 if mark == "new" else 1.2,
                   dash=(kind == "opt" or mark == "sch"), fs=10.5,
@@ -431,7 +433,7 @@ def page_process() -> Page:
     def gate(sid: str, cxx: float, cyy: float, w: float, h: float, label: str) -> Cell:
         mark = SID[sid][10]
         c = p.add("diamond", cxx - w / 2, cyy - h / 2, w, h, [(label, "b")], id=f"s{sid}",
-                  fill="#D5E8D4", stroke=ORANGE if mark == "new" else GREEN, sw=2.2 if mark == "new" else 1.5, fs=10,
+                  fill=LIME, stroke=ORANGE if mark == "new" else INDIGO, sw=2.2 if mark == "new" else 1.5, fs=10,
                   tooltip=f"SLA: {sla_text(sid)}\nВход: {SID[sid][6]}\nВыход: {SID[sid][7]}")
         nodes[sid] = c
         return c
@@ -476,7 +478,7 @@ def page_process() -> Page:
     g2 = gate("G2", X(19) + NW / 2, cy["RO"], 130, 84, "G2 Go / No-Go")
     hf = p.add("round", X(19), cy["DEVc"] - NH / 2, NW, NH,
                [("HF  Hotfix: тот же процесс", "b"), ("этапы 0–12 по hotfix/* · Bug «Высокий» → ВНП → РП", "s")],
-               id="sHF", fill="#FFE6CC", stroke="#D79B00", sw=1.5, fs=10.5)
+               id="sHF", fill="#FFD2A6", stroke="#FF7500", sw=1.5, fs=10.5)
     # Ф5
     n111 = step("11.1", 20, "RO")
     n121 = step("12.1", 21, "SVCa")
@@ -592,11 +594,11 @@ def page_process() -> Page:
     p.text(10, ly, 300, 18, [("Легенда", "b")], fs=12)
     items = [
         ("round", "#FFFFFF", C_STROKE["RO"], False, "последовательный шаг (= задача Jira с ID шага)"),
-        ("round", "#FFF2CC", C_STROKE["RO"], False, "шаг параллельного блока P"),
+        ("round", "#FFE9D2", C_STROKE["RO"], False, "шаг параллельного блока P"),
         ("round", "#FFFFFF", ORANGE, False, "★ предложено ревью (нет в эталоне)"),
         ("round", "#FFFFFF", C_STROKE["ИБ"], True, "опциональный шаг (трек C: ПСИ)"),
         ("round", "#FFFFFF", "#8A8A8A", True, "есть на прежней схеме, нет в эталоне — уточнить"),
-        ("diamond", "#D5E8D4", GREEN, False, "gate / решение / AND-join"),
+        ("diamond", "#CFF85E", GREEN, False, "gate / решение / AND-join"),
     ]
     for i, (k, fl, st, ds, txt) in enumerate(items):
         yy = ly + 28 + (i % 3) * 30
@@ -632,10 +634,10 @@ def page_branches() -> Page:
     hy, my, ry, f1, f2 = 120, 190, 290, 370, 420
     p.free([(60, my), (1840, my)], sw=3.5, arrow=False)
     p.text(60, my - 24, 800, 18, [("master — состояние Прода (в эталоне не описан, предлагается ревью F1). Прямые коммиты запрещены", "b")], fs=11)
-    p.free([(60, f1), (500, f1), (560, ry)], sw=2, color="#6C8EBF")
+    p.free([(60, f1), (500, f1), (560, ry)], sw=2, color="#4895EB")
     p.free([(60, f2), (480, f2)], sw=2, color=GRAY, dash=True, arrow=False)
     p.add("ellipse", 484, f2 - 8, 16, 16, [("✗", "b")], fill="#FFFFFF", stroke=GRAY, fs=9)
-    p.text(60, f1 - 20, 440, 16, [("feature/* → PR: Story/Bug из Fix Version, есть тест-кейсы, CI ✓, код-ревью ✓", "n")], fs=10, fc="#6C8EBF")
+    p.text(60, f1 - 20, 440, 16, [("feature/* → PR: Story/Bug из Fix Version, есть тест-кейсы, CI ✓, код-ревью ✓", "n")], fs=10, fc="#4895EB")
     p.text(60, f2 - 20, 440, 16, [("feature/* вне Fix Version или без тест-кейсов → следующий релиз", "n")], fs=10, fc=GRAY)
     p.free([(380, my), (410, ry), (1560, ry), (1590, my)], sw=3.5, color=BROWN)
     p.text(600, ry + 8, 700, 18, [("release/<сервис>/<версия> — создаётся в начале спринта, живёт до выката", "b")], fs=11, fc=BROWN)
@@ -677,8 +679,8 @@ def page_branches() -> Page:
            "• зависит от задачи вне Fix Version;\n"
            "• приём после Scope freeze без change control;\n"
            "• нужен ПСИ, но нет ПМТ.")
-    p.add("rect", 1200, 498, 320, 220, [(inc, "n")], fill="#E8F3E4", stroke=GREEN, fs=10, align="left", valign="top")
-    p.add("rect", 1540, 498, 320, 220, [(exc, "n")], fill="#FBE5E1", stroke=RED, fs=10, align="left", valign="top")
+    p.add("rect", 1200, 498, 320, 220, [(inc, "n")], fill="#F0FBD0", stroke=GREEN, fs=10, align="left", valign="top")
+    p.add("rect", 1540, 498, 320, 220, [(exc, "n")], fill="#FBE0E0", stroke=RED, fs=10, align="left", valign="top")
     rows2 = [["Вопрос", "Решение"],
              ["Кто собирает состав релиза", "Release owner (Акманов А.) с РП команд"],
              ["Кто подтверждает техготовность", "Мейнтейнеры сервисов (по таблице «Статус развёртывания инфраструктуры ЕАРМ»)"],
@@ -711,21 +713,21 @@ def page_matrix() -> Page:
     y = 100
     ph_name = {0: "Ф0", 1: "Ф1", 2: "Ф2 (параллельно)", 3: "Ф3 (gates ИБ)", 4: "Ф4", 5: "Ф5"}
     x = 20 + LW
-    p.add("rect", 20, y, LW, 28, [("Сервис / показатель", "b")], fill="#DAE8FC", stroke="#6C8EBF", fs=10)
+    p.add("rect", 20, y, LW, 28, [("Сервис / показатель", "b")], fill="#E4E1F7", stroke="#140093", fs=10)
     ph, start = 0, 0
     for i, s in enumerate(STEPS + [("", "", -1, "", "", "", "", "", "", "", "")]):
         if s[2] != ph:
             if i > start:
                 p.add("rect", x + start * CW, y, CW * (i - start), 28, [(ph_name[ph], "b")],
-                      fill="#FFE6CC" if ph == 2 else "#E1E1E1", stroke="#A0A0A0", fs=10)
+                      fill="#FDAB64" if ph == 2 else "#E4E1F7", stroke="#A0A0A0", fs=10, fc=INDIGO)
             ph, start = s[2], i
     y += 28
-    p.add("rect", 20, y, LW, 92, [("Шаг (ID)", "b")], fill="#DAE8FC", stroke="#6C8EBF", fs=10)
+    p.add("rect", 20, y, LW, 92, [("Шаг (ID)", "b")], fill="#E4E1F7", stroke="#140093", fs=10)
     for i, s in enumerate(STEPS):
         p.add("rect", x + i * CW, y, CW, 92, [(s[0], "b"), (s[3], "s")], fill="#F5F5F5", stroke="#B0B0B0", fs=8)
     y += 92
     for svc in SERVICES:
-        p.add("rect", 20, y, LW, 5 * 26, [(f"Сервис: {svc}", "b")], fill="#DAE8FC", stroke="#6C8EBF", fs=11)
+        p.add("rect", 20, y, LW, 5 * 26, [(f"Сервис: {svc}", "b")], fill="#E4E1F7", stroke="#140093", fs=11)
         for r in range(5):
             for i, s in enumerate(STEPS):
                 val = s[4].split(" ")[0] if r == 0 else ("—" if r == 1 and SLA[s[0]] == 0 else (str(SLA[s[0]]) if r == 1 else ""))
@@ -773,30 +775,30 @@ def page_jira() -> Page:
     b1 = p.add("round", 20, 84, 360, 130, [
         ("Релизный Epic (квартал)", "b"),
         ("Обязательный объём спринтов; уже есть в эталоне. Не содержит Task BE/FE/QA фич.", "n")],
-        fill="#DAE8FC", stroke="#6C8EBF", fs=11, align="left", valign="top")
+        fill="#E4E1F7", stroke="#140093", fs=11, align="left", valign="top")
     b2 = p.add("round", 440, 84, 400, 130, [
         ("Fix Version (релиз)", "b"),
         ("Состав = Story/Bug с версией; источник changelog и строки календаря. Паспорт REL-XXX и календарь в Confluence — витрина.", "n")],
-        fill="#FFF2CC", stroke="#D6B656", fs=11, align="left", valign="top")
+        fill="#FFE9D2", stroke="#FDAB64", fs=11, align="left", valign="top")
     b3 = p.add("round", 900, 84, 540, 130, [
         ("Задача шага (Enabler/Task) в Релизном Epic с fixVersion — НОВОЕ", "b"),
         ("Одна на каждый шаг реестра (ID 0.1…12.6, G1, G2). Поля: ID шага*, Роль/ЗО, Оценка*, Исполнитель, Результат (✓/↩/✗), "
          "код E, этап внесения, «Возврат из».", "n")],
-        fill="#FFE6CC", stroke=ORANGE, fs=11, align="left", valign="top", sw=2)
+        fill="#FFD2A6", stroke=ORANGE, fs=11, align="left", valign="top", sw=2)
     b4 = p.add("round", 1500, 84, 540, 130, [
         ("Под-задача сервиса — НОВОЕ", "b"),
         ("Для шагов по сервису (0.2, 1.1, 1.3, 2.1, 4.3, 9.1, 12.x). Поле «Сервис»* (мейнтейнеры из таблицы ЕАРМ), оценка, исполнитель.", "n")],
-        fill="#FFE6CC", stroke=ORANGE, fs=11, align="left", valign="top", sw=2)
+        fill="#FFD2A6", stroke=ORANGE, fs=11, align="left", valign="top", sw=2)
     p.link(b1, "R", b2, "L", label="по релизам")
     p.link(b2, "R", b3, "L", label="фильтр")
     p.link(b3, "R", b4, "L", label="по сервисам")
     st = [p.add("round", 20 + i * 230, 290, 150, 56, [(t, "b")], fill=f, stroke=s, fs=11)
-          for i, (t, f, s) in enumerate([("Ожидает", "#F5F5F5", "#999999"), ("В работе", "#FFF2CC", "#D6B656"),
-                                         ("Готово", "#D5E8D4", GREEN)])]
+          for i, (t, f, s) in enumerate([("Ожидает", "#F5F5F5", "#999999"), ("В работе", "#FFE9D2", "#FDAB64"),
+                                         ("Готово", "#CFF85E", GREEN)])]
     p.text(20, 262, 700, 20, [("Workflow задачи шага (старт/финиш = источник метрик M1, M2)", "b")], fs=12)
     p.link(st[0], "R", st[1], "L", label="Старт")
     p.link(st[1], "R", st[2], "L", label="Финиш")
-    ret = p.add("round", 250, 400, 150, 56, [("Возврат", "b"), ("новая задача того же шага", "s")], fill="#FBE5E1", stroke=RED, fs=11)
+    ret = p.add("round", 250, 400, 150, 56, [("Возврат", "b"), ("новая задача того же шага", "s")], fill="#FBE0E0", stroke=RED, fs=11)
     p.link(st[2], "B", ret, "R", "vh", color=RED, dash=True, label="дефект / отказ", lt=0.3)
     p.link(ret, "L", st[0], "B", "hv", color=RED, dash=True, label="+ код E, этап внесения", lt=0.5)
     p.text(760, 262, 1300, 20, [("Что НЕ используем как источник метрик", "b")], fs=12)
@@ -848,7 +850,7 @@ def page_review() -> Page:
     fills = {}
     for i, (fid, sev, where, find, impact, fix) in enumerate(REVIEW, 1):
         rows.append([fid, sev, where, find, impact, fix])
-        fills[(i, 1)] = {"Высокая": "#F8CECC", "Средняя": "#FFF2CC", "Низкая": "#E8F3E4"}[sev]
+        fills[(i, 1)] = {"Высокая": "#FADBD8", "Средняя": "#FFE9D2", "Низкая": "#F0FBD0"}[sev]
     yb = table(p, 20, 100, [40, 70, 190, 700, 480, 580], rows, fs=10, fills=fills)
     p.height = int(yb + 30)
     return p
@@ -1052,35 +1054,39 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     branches = tbl(["№", "Шаг", "Отв.", "Правило"], branch_rows)
 
     css = """
-:root{--bg:#f6f7f9;--fg:#1d2733;--mut:#5d6b7a;--card:#fff;--line:#d9dee5;--acc:#1f5fbf;--hi:#f8cecc;--mid:#fff2cc;--lo:#e2f1dc;--new:#fde3cc;}
-@media (prefers-color-scheme:dark){:root{--bg:#12161b;--fg:#e4e8ee;--mut:#9aa6b4;--card:#1a2027;--line:#2c3540;--acc:#7fb0ff;--hi:#5a2a27;--mid:#554a1e;--lo:#24421f;--new:#573a1c;}}
+:root{--bg:#F4F6FB;--fg:#1B1B3A;--mut:#5A5A7A;--card:#FFFFFF;--line:#D5DDEE;--ind:#140093;--lime:#CFF85E;--sky:#AAC3E3;--teal:#89C9C7;--org:#FDAB64;--orgd:#FF7500;--acc:#140093;
+--hi:#FADBD8;--mid:#FFE4CC;--lo:#EAFAB8;--new:#FFE4CC;--th:#140093;--thfg:#FFFFFF;--ph:#E4E1F7;--head:#140093;--note:#FFF4E8}
+@media (prefers-color-scheme:dark){:root{--bg:#0C0A3A;--fg:#E9ECFA;--mut:#A9B4D6;--card:#15125C;--line:#2B2A78;--ind:#CFF85E;--acc:#CFF85E;
+--hi:#5A2A33;--mid:#5C3A18;--lo:#2E4A12;--new:#5C3A18;--th:#2B2A78;--ph:#2B2A78;--head:#0A0870;--note:#3A2A1C}}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-header.top{padding:28px 16px 18px;max-width:1240px;margin:0 auto}
-h1{font-size:26px;margin:0 0 6px}h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:18px 0 8px}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header.top{background:var(--head);color:#fff;padding:26px max(16px,calc((100vw - 1240px)/2 + 16px)) 20px;border-bottom:6px solid var(--lime)}
+header.top h1{color:#fff}header.top .muted{color:var(--sky)}header.top code{background:rgba(255,255,255,.12);border-color:transparent;color:var(--lime)}
+h1{font-size:26px;margin:0 0 6px}h2{font-size:21px;margin:0 0 12px;color:var(--ind)}h3{font-size:16px;margin:18px 0 8px;color:var(--ind)}
+h2::before{content:"";display:inline-block;width:12px;height:22px;background:var(--lime);border-left:4px solid var(--head);margin-right:10px;vertical-align:-4px}
 .muted{color:var(--mut);font-size:13px}
-nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:2px solid var(--ind);overflow-x:auto;white-space:nowrap}
 nav .in{max-width:1240px;margin:0 auto;padding:0 12px}
-nav a{display:inline-block;padding:10px 10px;color:var(--fg);text-decoration:none;font-size:13px}
-nav a:hover{color:var(--acc)}
+nav a{display:inline-block;padding:10px 10px;color:var(--ind);text-decoration:none;font-size:13px;font-weight:500}
+nav a:hover{background:var(--lime);color:#140093}
 main{max-width:1240px;margin:0 auto;padding:0 16px 60px}
-section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 8px;margin:18px 0}
+section{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--ind);border-radius:4px;padding:18px 18px 8px;margin:18px 0}
 .tw{overflow-x:auto;margin:8px 0 14px}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-th{background:rgba(31,95,191,.12);position:sticky;top:0}
-td.phase{background:rgba(227,108,10,.14);font-weight:600}
+th{background:var(--th);color:var(--thfg);position:sticky;top:0}
+td.phase{background:var(--ph);color:var(--ind);font-weight:600;border-left:4px solid var(--orgd)}
 .b{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;white-space:nowrap}
-.b.hi{background:var(--hi)}.b.mid{background:var(--mid)}.b.lo{background:var(--lo)}.b.new{background:var(--new)}.b.sch{background:var(--line)}
+.b.hi{background:var(--hi)}.b.mid{background:var(--mid)}.b.lo{background:var(--lo)}.b.new{background:var(--new);color:#B85500}.b.sch{background:var(--line)}
 figure{margin:10px 0 20px}
 .zoom{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
-.zoom button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px;padding:3px 9px;cursor:pointer}
-.zoom button:hover{border-color:var(--acc)}
-.canvas{overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff;max-height:78vh}
+.zoom button{border:1px solid var(--ind);background:var(--card);color:var(--ind);border-radius:3px;padding:3px 9px;cursor:pointer}
+.zoom button:hover{background:var(--lime);color:#140093}
+.canvas{overflow:auto;border:1px solid var(--line);border-radius:4px;background:#fff;max-height:78vh}
 .canvas svg{display:block}
 ul,ol{padding-left:22px}li{margin:3px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
-.card{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
+.card{border:1px solid var(--line);border-left:4px solid var(--ind);border-radius:4px;padding:10px 12px;background:var(--bg)}
 code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:12px}
 @media (max-width:600px){h1{font-size:21px}}
 """
@@ -1138,11 +1144,13 @@ document.querySelectorAll('figure').forEach(function(f){
     cm = lambda i: (f'<div class="cm"><label for="cm-{i}">Ваши правки к разделу</label><textarea id="cm-{i}" data-k="{i}" rows="3" placeholder="Что изменить, добавить, убрать…"></textarea></div>' if comments else "")
     body = "".join(f'<section id="{i}"><h2>{e(t)}</h2>{c}{cm(i)}</section>' for i, t, c in sections)
     css += """
-.cm{margin:14px 0 14px;padding:10px;border:1px dashed var(--acc);border-radius:8px;background:var(--bg)}
+.cm{margin:14px 0 14px;padding:10px;border:1px dashed var(--orgd);border-radius:4px;background:var(--note)}
 .cm label{display:block;font-size:12px;color:var(--mut);margin-bottom:4px}
 .cm textarea{width:100%;font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px}
-.fb{position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;z-index:6}
-.fb button{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:6px;padding:5px 12px;cursor:pointer}
+.fb{position:sticky;bottom:0;background:var(--head);color:#fff;border-top:4px solid var(--lime);padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;z-index:6}
+.fb .muted{color:var(--sky)}
+.fb button{border:0;background:var(--lime);color:#140093;font-weight:600;border-radius:3px;padding:6px 12px;cursor:pointer}
+.fb button:hover{background:var(--orgd);color:#fff}
 .confluenceTable{margin:8px 0 16px}
 """
     js += """

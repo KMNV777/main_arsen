@@ -446,12 +446,14 @@ PAGES = [
 ]
 
 CSS = """
-body{font:14px/1.5 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#172b4d;max-width:1280px;margin:0 auto;padding:16px;background:#f4f5f7}
-.bar{position:sticky;top:0;background:#fff;border:1px solid #dfe1e6;border-radius:4px;padding:8px 12px;margin-bottom:12px;z-index:5}
-.bar a,.bar button{margin-right:8px}.page{background:#fff;border:1px solid #dfe1e6;border-radius:4px;padding:8px 24px 24px;margin:16px 0}
-.tools{margin:10px 0}button{background:#0052cc;color:#fff;border:0;border-radius:3px;padding:6px 12px;cursor:pointer}
-table{border-collapse:collapse;margin:8px 0 16px}th,td{border:1px solid #c1c7d0;padding:4px 8px;vertical-align:top;text-align:left}
-th{background:#f4f5f7}code{background:#f4f5f7;padding:0 3px}h1{font-size:26px}h2{font-size:20px;margin-top:26px}h3{font-size:16px}
+body{font:14px/1.5 Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1B1B3A;max-width:1280px;margin:0 auto;padding:16px;background:#F4F6FB}
+.bar{position:sticky;top:0;background:#140093;color:#fff;border-bottom:5px solid #CFF85E;padding:10px 14px;margin-bottom:12px;z-index:5}
+.bar a{color:#CFF85E;margin-right:10px}.bar span{color:#AAC3E3}
+.page{background:#fff;border:1px solid #D5DDEE;border-top:3px solid #140093;border-radius:3px;padding:8px 24px 24px;margin:16px 0}
+.tools{margin:10px 0}button{background:#140093;color:#CFF85E;border:0;border-radius:3px;padding:6px 12px;cursor:pointer;font-weight:600}
+button:hover{background:#FF7500;color:#fff}
+table{border-collapse:collapse;margin:8px 0 16px}th,td{border:1px solid #C9D2E6;padding:4px 8px;vertical-align:top;text-align:left}
+th{background:#140093;color:#fff}code{background:#F4F6FB;padding:0 3px}h1{font-size:26px;color:#140093}h2{font-size:20px;margin-top:26px;color:#140093;border-left:12px solid #CFF85E;padding-left:8px}h3{font-size:16px;color:#140093}
 """
 JS = """
 function cp(id,btn){var el=document.getElementById(id+'-body');var r=document.createRange();r.selectNodeContents(el);

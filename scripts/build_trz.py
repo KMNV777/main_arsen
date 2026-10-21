@@ -23,11 +23,11 @@ OUT = ROOT / "docs" / "release-trz-fte.xlsx"
 
 THIN = Side(style="thin", color="BBBBBB")
 BOR = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
-HFILL = PatternFill("solid", fgColor="1F4E79")
+HFILL = PatternFill("solid", fgColor="140093")
 HFONT = Font(bold=True, color="FFFFFF")
-INP = PatternFill("solid", fgColor="FFF2CC")
-SUB = PatternFill("solid", fgColor="D9E2F3")
-TOT = PatternFill("solid", fgColor="E2EFDA")
+INP = PatternFill("solid", fgColor="FFE4CC")
+SUB = PatternFill("solid", fgColor="E4E1F7")
+TOT = PatternFill("solid", fgColor="EAFAB8")
 
 
 def hdr(ws, row, titles, widths=None):
