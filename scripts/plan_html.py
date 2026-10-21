@@ -95,6 +95,9 @@ CSS_PLAN = r"""
 svg.chart text{font-family:Arial,sans-serif}
 """
 
+import fact_html as _F
+CSS_PLAN += _F.CSS_FACT
+
 JS_TABS = r"""
 document.querySelectorAll('.tabs:not(.own)').forEach(function(t){var g=t.dataset.g;t.querySelectorAll('button').forEach(function(b){b.onclick=function(){
  t.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});

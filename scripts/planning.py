@@ -70,11 +70,13 @@ def releases() -> List[dict]:
             cols = [add_wd(day0, c) for c in range(int(max(v[1] for v in sch.values())) + 1)]
             steps = []
             for n, (a, b) in sch.items():
-                c0 = int(a)
-                c1 = int(b) - 1 if b > a else int(a) - 1
-                c1 = max(c1, 0)
+                if b > a:
+                    c0, c1 = int(a), int(b) - 1
+                else:                       # этап без длительности — один день, последний день предыдущего этапа
+                    c0 = c1 = max(int(a) - 1, 0)
                 c0 = min(c0, len(cols) - 1)
-                steps.append({"n": n, "c0": c0, "c1": max(c0, c1) if b > a else max(c1, 0), "s": cols[c0].isoformat(), "e": cols[min(max(c1, 0), len(cols) - 1)].isoformat(), "a": a, "b": b})
+                c1 = min(max(c1, c0), len(cols) - 1)
+                steps.append({"n": n, "c0": c0, "c1": c1, "s": cols[c0].isoformat(), "e": cols[c1].isoformat(), "a": a, "b": b})
             phases = {}
             for p, ns in PHASE_STEPS.items():
                 st = [x for x in steps if x["n"] in ns and not (x["n"] == 18 and not psi)]
