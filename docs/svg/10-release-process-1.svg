@@ -178,9 +178,10 @@
 <text x="3747.5" y="750.5" font-size="8.5" fill="#666666" text-anchor="middle">этапы 0–12 по hotfix/* ·</text>
 <text x="3747.5" y="764" font-size="8.5" fill="#666666" text-anchor="middle">Bug «Высокий» → ВНП → РП</text>
 <rect x="3855" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#140093" stroke-width="1.2"/>
-<text x="3927.5" y="120.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1  Уведомление</text>
-<text x="3927.5" y="133.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">пользователей</text>
-<text x="3927.5" y="147.25" font-size="8.5" fill="#666666" text-anchor="middle">PMM · эт. 11</text>
+<text x="3927.5" y="113.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1  Уведомление</text>
+<text x="3927.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">пользователей,</text>
+<text x="3927.5" y="140.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">release notes</text>
+<text x="3927.5" y="154" font-size="8.5" fill="#666666" text-anchor="middle">ТПИ + PMM · эт. 11</text>
 <rect x="4035" y="1270" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#4895EB" stroke-width="1.2"/>
 <text x="4107.5" y="1290.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.1  Развёртывание</text>
 <text x="4107.5" y="1303.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">на ПРОД</text>
@@ -204,9 +205,10 @@
 <text x="4647.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">РИ + DEV · нет в эталоне ·</text>
 <text x="4647.5" y="550.75" font-size="8.5" fill="#666666" text-anchor="middle">★</text>
 <rect x="4755" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
-<text x="4827.5" y="120.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.6  Закрытие релиза</text>
-<text x="4827.5" y="133.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">и ретро</text>
-<text x="4827.5" y="147.25" font-size="8.5" fill="#666666" text-anchor="middle">RO · нет в эталоне · ★</text>
+<text x="4827.5" y="113.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.6  Закрытие релиза</text>
+<text x="4827.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">и ретро</text>
+<text x="4827.5" y="140.5" font-size="8.5" fill="#666666" text-anchor="middle">RO + СМ + АП · нет в</text>
+<text x="4827.5" y="154" font-size="8.5" fill="#666666" text-anchor="middle">эталоне · ★</text>
 <ellipse cx="4954" cy="131" rx="14" ry="14" fill="#000000" stroke="#000000" stroke-width="1"/>
 <text x="163" y="861" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">master  (= состояние Прода; в эталоне не описан — предложено ревью F1)</text>
 <text x="690.5" y="962.5" font-size="10" fill="#C25A00" text-anchor="start" font-weight="bold">release/&lt;сервис&gt;/&lt;версия&gt; — ветка спринта, от master@SHA</text>

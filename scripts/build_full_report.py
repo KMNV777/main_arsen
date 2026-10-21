@@ -97,7 +97,7 @@ def main() -> None:
     pages = [B.page_process(), B.page_branches(), B.page_matrix(), B.page_jira(), B.page_review()]
     extra = []
     for i, t, fn in C.PAGES:
-        if i in ("trz", "review"):
+        if i in ("trz", "review", "roles"):
             continue
         extra.append((f"cf-{i}", f"Confluence · {t}",
                       f'<div class="tools"><button onclick="cpBlock(\'cf-{i}\',this)">Копировать блок для Confluence</button></div>'

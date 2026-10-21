@@ -161,9 +161,11 @@
 <text x="1769" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Go / No-Go в</text>
 <text x="1769" y="186.5" font-size="6" fill="#666666" text-anchor="middle">Прод</text>
 <rect x="1796" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1</text>
-<text x="1823" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Уведомление</text>
-<text x="1823" y="186.5" font-size="6" fill="#666666" text-anchor="middle">пользователей</text>
+<text x="1823" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1</text>
+<text x="1823" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Уведомление</text>
+<text x="1823" y="175.5" font-size="6" fill="#666666" text-anchor="middle">пользователей,</text>
+<text x="1823" y="186.5" font-size="6" fill="#666666" text-anchor="middle">release</text>
+<text x="1823" y="197.5" font-size="6" fill="#666666" text-anchor="middle">notes</text>
 <rect x="1850" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.1</text>
 <text x="1877" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Развёртывание</text>
@@ -254,7 +256,7 @@
 <rect x="1742" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">PMM</text>
+<text x="1823" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="1850" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="1904" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -513,7 +515,7 @@
 <rect x="1742" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">PMM</text>
+<text x="1823" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="1850" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="1904" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -772,7 +774,7 @@
 <rect x="1742" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">PMM</text>
+<text x="1823" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="1850" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="1904" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
