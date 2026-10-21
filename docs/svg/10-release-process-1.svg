@@ -12,8 +12,9 @@
 <text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Релиз-процесс ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩ · Fix Version ⟨27.x.y⟩   |   сквозной процесс по эталону ЕАРМ: ЗО, параллельные и последовательные шаги</text>
 <rect x="0" y="86" width="5030" height="170" fill="#ECEAF9" stroke="#A0A0A0" stroke-width="1"/>
 <rect x="0" y="86" width="150" height="170" fill="#C9C4F0" stroke="#A0A0A0" stroke-width="1"/>
-<text x="75" y="167" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">НЕДРА</text>
-<text x="75" y="182" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">Release owner / РП</text>
+<text x="75" y="159.5" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">НЕДРА</text>
+<text x="75" y="174.5" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">Release owner · РП</text>
+<text x="75" y="189.5" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">· ВНП</text>
 <rect x="0" y="256" width="5030" height="210" fill="#F1F0FB" stroke="#A0A0A0" stroke-width="1"/>
 <rect x="0" y="256" width="150" height="210" fill="#D8D4F4" stroke="#A0A0A0" stroke-width="1"/>
 <text x="75" y="357" font-size="12" fill="#140093" text-anchor="middle" font-weight="bold">НЕДРА</text>
@@ -55,6 +56,10 @@
 <rect x="1295" y="256" width="916" height="990" fill="#FFE9D2" fill-opacity="0.28" stroke="#FF7500" stroke-width="1.5" stroke-dasharray="6 3"/>
 <text x="1306" y="268.5" font-size="10" fill="#B85500" text-anchor="start" font-weight="bold">P · ПАРАЛЛЕЛЬНО: A (QA) ‖ B (уязвимости) ‖ C (ПСИ) → G1</text>
 <ellipse cx="185" cy="131" rx="14" ry="14" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="215" y="175" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
+<text x="287.5" y="195.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.0  Подтверждение</text>
+<text x="287.5" y="208.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">состава релиза ВНП</text>
+<text x="287.5" y="222.25" font-size="8.5" fill="#666666" text-anchor="middle">ВНП · эт. 0 · ★</text>
 <rect x="215" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#140093" stroke-width="1.2"/>
 <text x="287.5" y="113.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.1  Сбор релизного</text>
 <text x="287.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">тикета: состав Fix</text>
@@ -73,6 +78,11 @@
 <text x="827.5" y="510.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.1  Слияние PR по</text>
 <text x="827.5" y="523.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">задачам Fix Version</text>
 <text x="827.5" y="537.25" font-size="8.5" fill="#666666" text-anchor="middle">DEV · эт. 1</text>
+<rect x="755" y="175" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
+<text x="827.5" y="188.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.1b  Демо и приёмка</text>
+<text x="827.5" y="202" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">задач ВНП (по ходу</text>
+<text x="827.5" y="215.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">закрытия)</text>
+<text x="827.5" y="229" font-size="8.5" fill="#666666" text-anchor="middle">ВНП · эт. 1 · ★</text>
 <rect x="935" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#140093" stroke-width="1.2"/>
 <text x="1007.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.2  Scope freeze</text>
 <text x="1007.5" y="140.5" font-size="8.5" fill="#666666" text-anchor="middle">RO · эт. 0</text>
@@ -166,6 +176,11 @@
 <rect x="3315" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#140093" stroke-width="1.2"/>
 <text x="3387.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.1  Регресс PreProd</text>
 <text x="3387.5" y="140.5" font-size="8.5" fill="#666666" text-anchor="middle">RO + SVC · эт. 10</text>
+<rect x="3495" y="175" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
+<text x="3567.5" y="188.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.1b  Проверка</text>
+<text x="3567.5" y="202" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">функционала на</text>
+<text x="3567.5" y="215.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">PreProd ВНП</text>
+<text x="3567.5" y="229" font-size="8.5" fill="#666666" text-anchor="middle">ВНП · эт. 10 · ★</text>
 <rect x="3495" y="100" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#140093" stroke-width="1.2"/>
 <text x="3567.5" y="127" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.2  Отчёт PreProd</text>
 <text x="3567.5" y="140.5" font-size="8.5" fill="#666666" text-anchor="middle">RO · эт. 10</text>
@@ -198,6 +213,11 @@
 <text x="4467.5" y="1290.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.4  Post-release</text>
 <text x="4467.5" y="1303.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">check / smoke</text>
 <text x="4467.5" y="1317.25" font-size="8.5" fill="#666666" text-anchor="middle">SVC · эт. 12</text>
+<rect x="4395" y="175" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
+<text x="4467.5" y="188.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.4b  Коммуникация</text>
+<text x="4467.5" y="202" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">ВНП с пользователями</text>
+<text x="4467.5" y="215.5" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">после релиза</text>
+<text x="4467.5" y="229" font-size="8.5" fill="#666666" text-anchor="middle">ВНП · эт. 11 · ★</text>
 <rect x="4575" y="490" width="145" height="62" rx="8" fill="#FFFFFF" stroke="#FF7500" stroke-width="2.2"/>
 <text x="4647.5" y="496.75" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.5  Тег, merge в</text>
 <text x="4647.5" y="510.25" font-size="10.5" fill="#1B1B3A" text-anchor="middle" font-weight="bold">master, перенос в</text>
@@ -258,7 +278,8 @@
 <polyline points="2217,86 2217,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
 <polyline points="3117,86 3117,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
 <polyline points="3837,86 3837,1536" fill="none" stroke="#9A9A9A" stroke-width="1" stroke-dasharray="2 3"/>
-<polyline points="199,131 215,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="185,145 185,206 215,206" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="287.5,175 287.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="360,131 407.5,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="527.5,131 647.5,131 647.5,490" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <rect x="605.3" y="242.5" width="84.4" height="16" fill="#FFFFFF"/>
@@ -268,6 +289,10 @@
 <text x="467.5" y="580.875" font-size="10" fill="#1B1B3A" text-anchor="middle">Да → трек C</text>
 <polyline points="720,521 755,521" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="900,521 1007.5,521 1007.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="827.5,490 827.5,237" fill="none" stroke="#7F7F8F" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m2)"/>
+<rect x="765.7" y="393.45" width="123.6" height="16" fill="#FFFFFF"/>
+<text x="827.5" y="405.45" font-size="10" fill="#7F7F8F" text-anchor="middle">задача закрыта → демо</text>
+<polyline points="900,206 978.5,206 978.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="1080,131 1187.5,131 1187.5,490" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="1260,521 1300,521" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="1308,311 1335,311" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
@@ -317,6 +342,8 @@
 <rect x="2591.7" y="123" width="151.6" height="16" fill="#FFFFFF"/>
 <text x="2667.5" y="135" font-size="10" fill="#7F7F8F" text-anchor="middle">тест-план в ТестОпс ГПН-ЦР</text>
 <polyline points="3460,131 3495,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="3460,152.7 3477.5,152.7 3477.5,206 3495,206" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="3567.5,175 3567.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3640,131 3682.5,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="3812.5,131 3855,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <rect x="3825.15" y="123" width="17.2" height="16" fill="#FFFFFF"/>
@@ -333,6 +360,10 @@
 <polyline points="4360,1391 4438.5,1391 4438.5,1332" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4360,1481 4496.5,1481 4496.5,1332" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4540,1301 4647.5,1301 4647.5,552" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<polyline points="4467.5,1270 4467.5,237" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
+<rect x="4430.9" y="1055.4" width="73.2" height="16" fill="#FFFFFF"/>
+<text x="4467.5" y="1067.4" font-size="10" fill="#1B1B3A" text-anchor="middle">после релиза</text>
+<polyline points="4540,206 4798.5,206 4798.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4720,521 4827.5,521 4827.5,162" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="4900,131 4940,131" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="170,871 4990,871" fill="none" stroke="#222222" stroke-width="3"/>

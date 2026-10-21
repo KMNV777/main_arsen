@@ -1,290 +1,321 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2194" height="682" viewBox="0 0 2194 682" font-family="Helvetica, Arial, sans-serif">
-<rect width="2194" height="682" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="2410" height="682" viewBox="0 0 2410 682" font-family="Helvetica, Arial, sans-serif">
+<rect width="2410" height="682" fill="#FFFFFF"/>
 <defs>
 </defs>
-<rect x="10" y="6" width="2174" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<rect x="10" y="6" width="2390" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
 <text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Релиз-процесс ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩ · Fix Version ⟨27.x.y⟩   |   матрица «сервис × этап»: ответственный · план · факт · результат</text>
-<text x="25" y="66" font-size="10" fill="#1B1B3A" text-anchor="start">Блок строк на сервис. Значения — из задач Jira с ID шага (план — оценка, факт — переходы статусов / списание). SLA — нормативы 1–5 раб. дней (предложение, подтвердить; приём PR 1.1 — по спринту). Результат: ✓ без возврата · ↩ был возврат (код E1–E7) · ✗ нарушено требование · — не применимо. Сервисы — SERVICES в scripts/build_release_process.py (источник: таблица «Статус</text>
-<text x="25" y="79" font-size="10" fill="#1B1B3A" text-anchor="start">развёртывания инфраструктуры ЕАРМ»).</text>
+<text x="25" y="72.5" font-size="10" fill="#1B1B3A" text-anchor="start">Блок строк на сервис. Значения — из задач Jira с ID шага (план — оценка, факт — переходы статусов / списание). SLA — нормативы 1–5 раб. дней (предложение, подтвердить; приём PR 1.1 — по спринту). Результат: ✓ без возврата · ↩ был возврат (код E1–E7) · ✗ нарушено требование · — не применимо. Сервисы — SERVICES в scripts/build_release_process.py (источник: таблица «Статус развёртывания инфраструктуры ЕАРМ»).</text>
 <rect x="20" y="100" width="210" height="28" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="125" y="116.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Сервис / показатель</text>
-<rect x="230" y="100" width="162" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
-<text x="311" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф0</text>
-<rect x="392" y="100" width="162" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
-<text x="473" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф1</text>
-<rect x="554" y="100" width="648" height="28" fill="#FDAB64" stroke="#A0A0A0" stroke-width="1"/>
-<text x="878" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф2 (параллельно)</text>
-<rect x="1202" y="100" width="270" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
-<text x="1337" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф3 (gates ИБ)</text>
-<rect x="1472" y="100" width="324" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
-<text x="1634" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф4</text>
-<rect x="1796" y="100" width="378" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
-<text x="1985" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф5</text>
+<rect x="230" y="100" width="216" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
+<text x="338" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф0</text>
+<rect x="446" y="100" width="216" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
+<text x="554" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф1</text>
+<rect x="662" y="100" width="648" height="28" fill="#FDAB64" stroke="#A0A0A0" stroke-width="1"/>
+<text x="986" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф2 (параллельно)</text>
+<rect x="1310" y="100" width="270" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1445" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф3 (gates ИБ)</text>
+<rect x="1580" y="100" width="378" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
+<text x="1769" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф4</text>
+<rect x="1958" y="100" width="432" height="28" fill="#E4E1F7" stroke="#A0A0A0" stroke-width="1"/>
+<text x="2174" y="116.5" font-size="10" fill="#140093" text-anchor="middle" font-weight="bold">Ф5</text>
 <rect x="20" y="128" width="210" height="92" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="125" y="176.5" font-size="10" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Шаг (ID)</text>
 <rect x="230" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="257" y="148" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.1</text>
-<text x="257" y="159" font-size="6" fill="#666666" text-anchor="middle">Сбор</text>
-<text x="257" y="170" font-size="6" fill="#666666" text-anchor="middle">релизного</text>
-<text x="257" y="181" font-size="6" fill="#666666" text-anchor="middle">тикета:</text>
-<text x="257" y="192" font-size="6" fill="#666666" text-anchor="middle">состав Fix</text>
-<text x="257" y="203" font-size="6" fill="#666666" text-anchor="middle">Version</text>
+<text x="257" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.0</text>
+<text x="257" y="170" font-size="6" fill="#666666" text-anchor="middle">Подтверждение</text>
+<text x="257" y="181" font-size="6" fill="#666666" text-anchor="middle">состава</text>
+<text x="257" y="192" font-size="6" fill="#666666" text-anchor="middle">релиза ВНП</text>
 <rect x="284" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="142.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.2</text>
-<text x="311" y="153.5" font-size="6" fill="#666666" text-anchor="middle">Релизная</text>
-<text x="311" y="164.5" font-size="6" fill="#666666" text-anchor="middle">ветка</text>
-<text x="311" y="175.5" font-size="6" fill="#666666" text-anchor="middle">сервиса</text>
-<text x="311" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(начало</text>
-<text x="311" y="197.5" font-size="6" fill="#666666" text-anchor="middle">спринта, от</text>
-<text x="311" y="208.5" font-size="6" fill="#666666" text-anchor="middle">master)</text>
+<text x="311" y="148" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.1</text>
+<text x="311" y="159" font-size="6" fill="#666666" text-anchor="middle">Сбор</text>
+<text x="311" y="170" font-size="6" fill="#666666" text-anchor="middle">релизного</text>
+<text x="311" y="181" font-size="6" fill="#666666" text-anchor="middle">тикета:</text>
+<text x="311" y="192" font-size="6" fill="#666666" text-anchor="middle">состав Fix</text>
+<text x="311" y="203" font-size="6" fill="#666666" text-anchor="middle">Version</text>
 <rect x="338" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="365" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.3</text>
-<text x="365" y="175.5" font-size="6" fill="#666666" text-anchor="middle">ПСИ / ПТЗ</text>
-<text x="365" y="186.5" font-size="6" fill="#666666" text-anchor="middle">нужны?</text>
+<text x="365" y="142.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.2</text>
+<text x="365" y="153.5" font-size="6" fill="#666666" text-anchor="middle">Релизная</text>
+<text x="365" y="164.5" font-size="6" fill="#666666" text-anchor="middle">ветка</text>
+<text x="365" y="175.5" font-size="6" fill="#666666" text-anchor="middle">сервиса</text>
+<text x="365" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(начало</text>
+<text x="365" y="197.5" font-size="6" fill="#666666" text-anchor="middle">спринта, от</text>
+<text x="365" y="208.5" font-size="6" fill="#666666" text-anchor="middle">master)</text>
 <rect x="392" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.1</text>
-<text x="419" y="170" font-size="6" fill="#666666" text-anchor="middle">Слияние PR</text>
-<text x="419" y="181" font-size="6" fill="#666666" text-anchor="middle">по задачам</text>
-<text x="419" y="192" font-size="6" fill="#666666" text-anchor="middle">Fix Version</text>
+<text x="419" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">0.3</text>
+<text x="419" y="175.5" font-size="6" fill="#666666" text-anchor="middle">ПСИ / ПТЗ</text>
+<text x="419" y="186.5" font-size="6" fill="#666666" text-anchor="middle">нужны?</text>
 <rect x="446" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.2</text>
-<text x="473" y="181" font-size="6" fill="#666666" text-anchor="middle">Scope freeze</text>
+<text x="473" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.1</text>
+<text x="473" y="170" font-size="6" fill="#666666" text-anchor="middle">Слияние PR</text>
+<text x="473" y="181" font-size="6" fill="#666666" text-anchor="middle">по задачам</text>
+<text x="473" y="192" font-size="6" fill="#666666" text-anchor="middle">Fix Version</text>
 <rect x="500" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.3</text>
-<text x="527" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Фича-фриз:</text>
-<text x="527" y="175.5" font-size="6" fill="#666666" text-anchor="middle">финализация</text>
-<text x="527" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ветки, rc на</text>
-<text x="527" y="197.5" font-size="6" fill="#666666" text-anchor="middle">UAT</text>
+<text x="527" y="148" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.1b</text>
+<text x="527" y="159" font-size="6" fill="#666666" text-anchor="middle">Демо и</text>
+<text x="527" y="170" font-size="6" fill="#666666" text-anchor="middle">приёмка</text>
+<text x="527" y="181" font-size="6" fill="#666666" text-anchor="middle">задач ВНП</text>
+<text x="527" y="192" font-size="6" fill="#666666" text-anchor="middle">(по ходу</text>
+<text x="527" y="203" font-size="6" fill="#666666" text-anchor="middle">закрытия)</text>
 <rect x="554" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="148" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">2.1</text>
-<text x="581" y="159" font-size="6" fill="#666666" text-anchor="middle">Устранение</text>
-<text x="581" y="170" font-size="6" fill="#666666" text-anchor="middle">уязвимостей:</text>
-<text x="581" y="181" font-size="6" fill="#666666" text-anchor="middle">SAST, SCA,</text>
-<text x="581" y="192" font-size="6" fill="#666666" text-anchor="middle">Luntry,</text>
-<text x="581" y="203" font-size="6" fill="#666666" text-anchor="middle">секреты</text>
+<text x="581" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.2</text>
+<text x="581" y="181" font-size="6" fill="#666666" text-anchor="middle">Scope freeze</text>
 <rect x="608" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">2.2</text>
-<text x="635" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Gate ИБ:</text>
-<text x="635" y="186.5" font-size="6" fill="#666666" text-anchor="middle">уязвимости</text>
+<text x="635" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">1.3</text>
+<text x="635" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Фича-фриз:</text>
+<text x="635" y="175.5" font-size="6" fill="#666666" text-anchor="middle">финализация</text>
+<text x="635" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ветки, rc на</text>
+<text x="635" y="197.5" font-size="6" fill="#666666" text-anchor="middle">UAT</text>
 <rect x="662" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="689" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.1</text>
-<text x="689" y="181" font-size="6" fill="#666666" text-anchor="middle">ПМТ</text>
+<text x="689" y="148" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">2.1</text>
+<text x="689" y="159" font-size="6" fill="#666666" text-anchor="middle">Устранение</text>
+<text x="689" y="170" font-size="6" fill="#666666" text-anchor="middle">уязвимостей:</text>
+<text x="689" y="181" font-size="6" fill="#666666" text-anchor="middle">SAST, SCA,</text>
+<text x="689" y="192" font-size="6" fill="#666666" text-anchor="middle">Luntry,</text>
+<text x="689" y="203" font-size="6" fill="#666666" text-anchor="middle">секреты</text>
 <rect x="716" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="743" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.2</text>
-<text x="743" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Согласование</text>
-<text x="743" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ПМТ</text>
+<text x="743" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">2.2</text>
+<text x="743" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Gate ИБ:</text>
+<text x="743" y="186.5" font-size="6" fill="#666666" text-anchor="middle">уязвимости</text>
 <rect x="770" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="797" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.3</text>
-<text x="797" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Проведение</text>
-<text x="797" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ПСИ</text>
+<text x="797" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.1</text>
+<text x="797" y="181" font-size="6" fill="#666666" text-anchor="middle">ПМТ</text>
 <rect x="824" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="851" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.1</text>
-<text x="851" y="181" font-size="6" fill="#666666" text-anchor="middle">Регресс UAT</text>
+<text x="851" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.2</text>
+<text x="851" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Согласование</text>
+<text x="851" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ПМТ</text>
 <rect x="878" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="905" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.2</text>
-<text x="905" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Отчёт по</text>
-<text x="905" y="186.5" font-size="6" fill="#666666" text-anchor="middle">регрессу UAT</text>
+<text x="905" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">3.3</text>
+<text x="905" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Проведение</text>
+<text x="905" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ПСИ</text>
 <rect x="932" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.3</text>
-<text x="959" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Исправление</text>
-<text x="959" y="175.5" font-size="6" fill="#666666" text-anchor="middle">ошибок UAT,</text>
-<text x="959" y="186.5" font-size="6" fill="#666666" text-anchor="middle">фиксы в</text>
-<text x="959" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ветку</text>
+<text x="959" y="170" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.1</text>
+<text x="959" y="181" font-size="6" fill="#666666" text-anchor="middle">Регресс UAT</text>
 <rect x="986" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1013" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.4</text>
-<text x="1013" y="170" font-size="6" fill="#666666" text-anchor="middle">Повторная</text>
-<text x="1013" y="181" font-size="6" fill="#666666" text-anchor="middle">проверка /</text>
-<text x="1013" y="192" font-size="6" fill="#666666" text-anchor="middle">smoke UAT</text>
+<text x="1013" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.2</text>
+<text x="1013" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Отчёт по</text>
+<text x="1013" y="186.5" font-size="6" fill="#666666" text-anchor="middle">регрессу UAT</text>
 <rect x="1040" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.5</text>
-<text x="1067" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Импорт</text>
-<text x="1067" y="175.5" font-size="6" fill="#666666" text-anchor="middle">тест-плана в</text>
-<text x="1067" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ТестОпс</text>
-<text x="1067" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ГПН-ЦР</text>
+<text x="1067" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.3</text>
+<text x="1067" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Исправление</text>
+<text x="1067" y="175.5" font-size="6" fill="#666666" text-anchor="middle">ошибок UAT,</text>
+<text x="1067" y="186.5" font-size="6" fill="#666666" text-anchor="middle">фиксы в</text>
+<text x="1067" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ветку</text>
 <rect x="1094" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1121" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">G1</text>
-<text x="1121" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Код-фриз</text>
-<text x="1121" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(AND-join)</text>
+<text x="1121" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.4</text>
+<text x="1121" y="170" font-size="6" fill="#666666" text-anchor="middle">Повторная</text>
+<text x="1121" y="181" font-size="6" fill="#666666" text-anchor="middle">проверка /</text>
+<text x="1121" y="192" font-size="6" fill="#666666" text-anchor="middle">smoke UAT</text>
 <rect x="1148" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1175" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">7.1</text>
-<text x="1175" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Подготовка и</text>
-<text x="1175" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ревью TOML</text>
+<text x="1175" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">4.5</text>
+<text x="1175" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Импорт</text>
+<text x="1175" y="175.5" font-size="6" fill="#666666" text-anchor="middle">тест-плана в</text>
+<text x="1175" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ТестОпс</text>
+<text x="1175" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ГПН-ЦР</text>
 <rect x="1202" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1229" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">5.1</text>
-<text x="1229" y="170" font-size="6" fill="#666666" text-anchor="middle">Запуск</text>
-<text x="1229" y="181" font-size="6" fill="#666666" text-anchor="middle">аудита через</text>
-<text x="1229" y="192" font-size="6" fill="#666666" text-anchor="middle">Релиз-борд</text>
+<text x="1229" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">G1</text>
+<text x="1229" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Код-фриз</text>
+<text x="1229" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(AND-join)</text>
 <rect x="1256" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">5.2</text>
-<text x="1283" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Аудит кода</text>
-<text x="1283" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(портал ББ)</text>
+<text x="1283" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">7.1</text>
+<text x="1283" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Подготовка и</text>
+<text x="1283" y="186.5" font-size="6" fill="#666666" text-anchor="middle">ревью TOML</text>
 <rect x="1310" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">6.1</text>
-<text x="1337" y="170" font-size="6" fill="#666666" text-anchor="middle">Согласование</text>
-<text x="1337" y="181" font-size="6" fill="#666666" text-anchor="middle">ПТЗ (при</text>
-<text x="1337" y="192" font-size="6" fill="#666666" text-anchor="middle">необходимости)</text>
+<text x="1337" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">5.1</text>
+<text x="1337" y="170" font-size="6" fill="#666666" text-anchor="middle">Запуск</text>
+<text x="1337" y="181" font-size="6" fill="#666666" text-anchor="middle">аудита через</text>
+<text x="1337" y="192" font-size="6" fill="#666666" text-anchor="middle">Релиз-борд</text>
 <rect x="1364" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">7.2</text>
-<text x="1391" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Релиз-борд:</text>
-<text x="1391" y="175.5" font-size="6" fill="#666666" text-anchor="middle">загрузка и</text>
-<text x="1391" y="186.5" font-size="6" fill="#666666" text-anchor="middle">запуск</text>
-<text x="1391" y="197.5" font-size="6" fill="#666666" text-anchor="middle">трансфера</text>
+<text x="1391" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">5.2</text>
+<text x="1391" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Аудит кода</text>
+<text x="1391" y="186.5" font-size="6" fill="#666666" text-anchor="middle">(портал ББ)</text>
 <rect x="1418" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1445" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">8.1</text>
+<text x="1445" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">6.1</text>
 <text x="1445" y="170" font-size="6" fill="#666666" text-anchor="middle">Согласование</text>
-<text x="1445" y="181" font-size="6" fill="#666666" text-anchor="middle">трансфера в</text>
-<text x="1445" y="192" font-size="6" fill="#666666" text-anchor="middle">ПРОД-сегмент</text>
+<text x="1445" y="181" font-size="6" fill="#666666" text-anchor="middle">ПТЗ (при</text>
+<text x="1445" y="192" font-size="6" fill="#666666" text-anchor="middle">необходимости)</text>
 <rect x="1472" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1499" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.1</text>
-<text x="1499" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Развёртывание</text>
-<text x="1499" y="186.5" font-size="6" fill="#666666" text-anchor="middle">на PreProd</text>
+<text x="1499" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">7.2</text>
+<text x="1499" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Релиз-борд:</text>
+<text x="1499" y="175.5" font-size="6" fill="#666666" text-anchor="middle">загрузка и</text>
+<text x="1499" y="186.5" font-size="6" fill="#666666" text-anchor="middle">запуск</text>
+<text x="1499" y="197.5" font-size="6" fill="#666666" text-anchor="middle">трансфера</text>
 <rect x="1526" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.2</text>
-<text x="1553" y="175.5" font-size="6" fill="#666666" text-anchor="middle">БД PreProd:</text>
-<text x="1553" y="186.5" font-size="6" fill="#666666" text-anchor="middle">миграции</text>
+<text x="1553" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">8.1</text>
+<text x="1553" y="170" font-size="6" fill="#666666" text-anchor="middle">Согласование</text>
+<text x="1553" y="181" font-size="6" fill="#666666" text-anchor="middle">трансфера в</text>
+<text x="1553" y="192" font-size="6" fill="#666666" text-anchor="middle">ПРОД-сегмент</text>
 <rect x="1580" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1607" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.3</text>
-<text x="1607" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Брокеры</text>
-<text x="1607" y="175.5" font-size="6" fill="#666666" text-anchor="middle">PreProd:</text>
-<text x="1607" y="186.5" font-size="6" fill="#666666" text-anchor="middle">топики и</text>
-<text x="1607" y="197.5" font-size="6" fill="#666666" text-anchor="middle">настройки</text>
+<text x="1607" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.1</text>
+<text x="1607" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Развёртывание</text>
+<text x="1607" y="186.5" font-size="6" fill="#666666" text-anchor="middle">на PreProd</text>
 <rect x="1634" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.1</text>
-<text x="1661" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Регресс</text>
-<text x="1661" y="186.5" font-size="6" fill="#666666" text-anchor="middle">PreProd</text>
+<text x="1661" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.2</text>
+<text x="1661" y="175.5" font-size="6" fill="#666666" text-anchor="middle">БД PreProd:</text>
+<text x="1661" y="186.5" font-size="6" fill="#666666" text-anchor="middle">миграции</text>
 <rect x="1688" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1715" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.2</text>
-<text x="1715" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Отчёт</text>
-<text x="1715" y="186.5" font-size="6" fill="#666666" text-anchor="middle">PreProd</text>
+<text x="1715" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">9.3</text>
+<text x="1715" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Брокеры</text>
+<text x="1715" y="175.5" font-size="6" fill="#666666" text-anchor="middle">PreProd:</text>
+<text x="1715" y="186.5" font-size="6" fill="#666666" text-anchor="middle">топики и</text>
+<text x="1715" y="197.5" font-size="6" fill="#666666" text-anchor="middle">настройки</text>
 <rect x="1742" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1769" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">G2</text>
-<text x="1769" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Go / No-Go в</text>
-<text x="1769" y="186.5" font-size="6" fill="#666666" text-anchor="middle">Прод</text>
+<text x="1769" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.1</text>
+<text x="1769" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Регресс</text>
+<text x="1769" y="186.5" font-size="6" fill="#666666" text-anchor="middle">PreProd</text>
 <rect x="1796" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1</text>
-<text x="1823" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Уведомление</text>
-<text x="1823" y="175.5" font-size="6" fill="#666666" text-anchor="middle">пользователей,</text>
-<text x="1823" y="186.5" font-size="6" fill="#666666" text-anchor="middle">release</text>
-<text x="1823" y="197.5" font-size="6" fill="#666666" text-anchor="middle">notes</text>
+<text x="1823" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.1b</text>
+<text x="1823" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Проверка</text>
+<text x="1823" y="175.5" font-size="6" fill="#666666" text-anchor="middle">функционала</text>
+<text x="1823" y="186.5" font-size="6" fill="#666666" text-anchor="middle">на PreProd</text>
+<text x="1823" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ВНП</text>
 <rect x="1850" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1877" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.1</text>
-<text x="1877" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Развёртывание</text>
-<text x="1877" y="186.5" font-size="6" fill="#666666" text-anchor="middle">на ПРОД</text>
+<text x="1877" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">10.2</text>
+<text x="1877" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Отчёт</text>
+<text x="1877" y="186.5" font-size="6" fill="#666666" text-anchor="middle">PreProd</text>
 <rect x="1904" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1931" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.2</text>
-<text x="1931" y="175.5" font-size="6" fill="#666666" text-anchor="middle">БД после</text>
-<text x="1931" y="186.5" font-size="6" fill="#666666" text-anchor="middle">выкатки</text>
+<text x="1931" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">G2</text>
+<text x="1931" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Go / No-Go в</text>
+<text x="1931" y="186.5" font-size="6" fill="#666666" text-anchor="middle">Прод</text>
 <rect x="1958" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1985" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.3</text>
-<text x="1985" y="170" font-size="6" fill="#666666" text-anchor="middle">Брокеры</text>
-<text x="1985" y="181" font-size="6" fill="#666666" text-anchor="middle">после</text>
-<text x="1985" y="192" font-size="6" fill="#666666" text-anchor="middle">выкатки</text>
+<text x="1985" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">11.1</text>
+<text x="1985" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Уведомление</text>
+<text x="1985" y="175.5" font-size="6" fill="#666666" text-anchor="middle">пользователей,</text>
+<text x="1985" y="186.5" font-size="6" fill="#666666" text-anchor="middle">release</text>
+<text x="1985" y="197.5" font-size="6" fill="#666666" text-anchor="middle">notes</text>
 <rect x="2012" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2039" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.4</text>
-<text x="2039" y="170" font-size="6" fill="#666666" text-anchor="middle">Post-release</text>
-<text x="2039" y="181" font-size="6" fill="#666666" text-anchor="middle">check /</text>
-<text x="2039" y="192" font-size="6" fill="#666666" text-anchor="middle">smoke</text>
+<text x="2039" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.1</text>
+<text x="2039" y="175.5" font-size="6" fill="#666666" text-anchor="middle">Развёртывание</text>
+<text x="2039" y="186.5" font-size="6" fill="#666666" text-anchor="middle">на ПРОД</text>
 <rect x="2066" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2093" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.5</text>
-<text x="2093" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Тег, merge в</text>
-<text x="2093" y="175.5" font-size="6" fill="#666666" text-anchor="middle">master,</text>
-<text x="2093" y="186.5" font-size="6" fill="#666666" text-anchor="middle">перенос в</text>
-<text x="2093" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ветки</text>
+<text x="2093" y="164.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.2</text>
+<text x="2093" y="175.5" font-size="6" fill="#666666" text-anchor="middle">БД после</text>
+<text x="2093" y="186.5" font-size="6" fill="#666666" text-anchor="middle">выкатки</text>
 <rect x="2120" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2147" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.6</text>
-<text x="2147" y="170" font-size="6" fill="#666666" text-anchor="middle">Закрытие</text>
-<text x="2147" y="181" font-size="6" fill="#666666" text-anchor="middle">релиза и</text>
-<text x="2147" y="192" font-size="6" fill="#666666" text-anchor="middle">ретро</text>
+<text x="2147" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.3</text>
+<text x="2147" y="170" font-size="6" fill="#666666" text-anchor="middle">Брокеры</text>
+<text x="2147" y="181" font-size="6" fill="#666666" text-anchor="middle">после</text>
+<text x="2147" y="192" font-size="6" fill="#666666" text-anchor="middle">выкатки</text>
+<rect x="2174" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.4</text>
+<text x="2201" y="170" font-size="6" fill="#666666" text-anchor="middle">Post-release</text>
+<text x="2201" y="181" font-size="6" fill="#666666" text-anchor="middle">check /</text>
+<text x="2201" y="192" font-size="6" fill="#666666" text-anchor="middle">smoke</text>
+<rect x="2228" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.4b</text>
+<text x="2255" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Коммуникация</text>
+<text x="2255" y="175.5" font-size="6" fill="#666666" text-anchor="middle">ВНП с</text>
+<text x="2255" y="186.5" font-size="6" fill="#666666" text-anchor="middle">пользователями</text>
+<text x="2255" y="197.5" font-size="6" fill="#666666" text-anchor="middle">после релиза</text>
+<rect x="2282" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="153.5" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.5</text>
+<text x="2309" y="164.5" font-size="6" fill="#666666" text-anchor="middle">Тег, merge в</text>
+<text x="2309" y="175.5" font-size="6" fill="#666666" text-anchor="middle">master,</text>
+<text x="2309" y="186.5" font-size="6" fill="#666666" text-anchor="middle">перенос в</text>
+<text x="2309" y="197.5" font-size="6" fill="#666666" text-anchor="middle">ветки</text>
+<rect x="2336" y="128" width="54" height="92" fill="#F5F5F5" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="159" font-size="8" fill="#1B1B3A" text-anchor="middle" font-weight="bold">12.6</text>
+<text x="2363" y="170" font-size="6" fill="#666666" text-anchor="middle">Закрытие</text>
+<text x="2363" y="181" font-size="6" fill="#666666" text-anchor="middle">релиза и</text>
+<text x="2363" y="192" font-size="6" fill="#666666" text-anchor="middle">ретро</text>
 <rect x="20" y="220" width="210" height="130" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="125" y="288" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 1⟩</text>
 <rect x="230" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="257" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="257" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="284" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="311" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="338" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="365" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="365" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="392" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="419" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="446" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="473" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="500" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="527" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="554" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="581" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="608" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="635" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="662" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="716" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="743" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="770" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="797" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="797" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="824" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="851" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="851" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="878" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="905" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="932" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="959" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="986" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1040" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1067" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1094" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1121" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1121" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1148" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1175" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1202" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1256" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1283" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1310" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1337" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1364" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1391" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1418" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1472" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1499" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="1499" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1526" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1553" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1580" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1607" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1607" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1634" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1661" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="1688" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1715" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1715" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
 <rect x="1742" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
+<text x="1823" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="1850" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1877" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
+<text x="1877" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1904" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1931" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1931" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1958" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1985" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1985" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="2012" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2039" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<text x="2039" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="2066" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2093" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="2093" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="2120" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2147" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="2147" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<rect x="2174" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<rect x="2228" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
+<rect x="2282" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<rect x="2336" y="220" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="235" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="230" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="257" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="284" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="311" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="338" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="365" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="392" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
+<text x="419" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="446" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="473" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="500" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="527" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="554" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="581" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="608" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="635" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="662" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="716" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -294,41 +325,41 @@
 <rect x="824" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="851" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="878" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="905" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="905" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="932" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="959" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="986" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1040" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1067" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1094" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1121" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1148" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1175" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="1175" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1202" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1256" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1283" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="1310" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1337" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1364" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1391" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1418" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1472" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1499" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1526" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1553" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1580" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1607" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1634" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="1661" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1688" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1715" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1742" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1769" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1769" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1796" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1823" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1850" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1904" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -341,6 +372,14 @@
 <text x="2093" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="2120" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="2147" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2174" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2228" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<rect x="2282" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2336" y="246" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="261" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="230" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -377,6 +416,10 @@
 <rect x="2012" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="272" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -413,6 +456,10 @@
 <rect x="2012" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="298" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
@@ -449,6 +496,10 @@
 <rect x="2012" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="324" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <text x="221" y="235.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
 <text x="221" y="261.5" font-size="8" fill="#666666" text-anchor="end">SLA, раб. дн</text>
 <text x="221" y="287.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
@@ -457,93 +508,101 @@
 <rect x="20" y="350" width="210" height="130" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="125" y="418" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 2⟩</text>
 <rect x="230" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="257" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="257" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="284" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="311" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="338" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="365" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="365" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="392" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="419" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="446" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="473" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="500" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="527" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="554" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="581" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="608" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="635" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="662" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="716" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="743" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="770" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="797" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="797" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="824" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="851" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="851" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="878" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="905" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="932" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="959" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="986" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1040" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1067" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1094" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1121" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1121" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1148" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1175" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1202" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1256" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1283" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1310" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1337" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1364" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1391" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1418" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1472" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1499" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="1499" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1526" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1553" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1580" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1607" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1607" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1634" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1661" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="1688" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1715" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1715" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
 <rect x="1742" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
+<text x="1823" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="1850" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1877" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
+<text x="1877" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1904" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1931" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1931" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1958" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1985" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1985" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="2012" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2039" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<text x="2039" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="2066" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2093" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="2093" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="2120" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2147" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="2147" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<rect x="2174" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<rect x="2228" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
+<rect x="2282" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<rect x="2336" y="350" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="365" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="230" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="257" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="284" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="311" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="338" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="365" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="392" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
+<text x="419" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="446" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="473" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="500" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="527" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="554" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="581" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="608" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="635" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="662" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="716" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -553,41 +612,41 @@
 <rect x="824" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="851" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="878" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="905" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="905" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="932" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="959" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="986" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1040" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1067" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1094" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1121" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1148" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1175" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="1175" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1202" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1256" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1283" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="1310" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1337" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1364" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1391" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1418" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1472" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1499" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1526" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1553" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1580" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1607" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1634" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="1661" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1688" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1715" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1742" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1769" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1769" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1796" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1823" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1850" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1904" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -600,6 +659,14 @@
 <text x="2093" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="2120" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="2147" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2174" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2228" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<rect x="2282" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2336" y="376" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="391" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="230" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -636,6 +703,10 @@
 <rect x="2012" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="402" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -672,6 +743,10 @@
 <rect x="2012" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="428" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
@@ -708,6 +783,10 @@
 <rect x="2012" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="454" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <text x="221" y="365.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
 <text x="221" y="391.5" font-size="8" fill="#666666" text-anchor="end">SLA, раб. дн</text>
 <text x="221" y="417.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
@@ -716,93 +795,101 @@
 <rect x="20" y="480" width="210" height="130" fill="#E4E1F7" stroke="#140093" stroke-width="1"/>
 <text x="125" y="548" font-size="11" fill="#1B1B3A" text-anchor="middle" font-weight="bold">Сервис: ⟨Сервис 3⟩</text>
 <rect x="230" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="257" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="257" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="284" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="311" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="338" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="365" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="365" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="392" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="419" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="446" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="473" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="500" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="527" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="554" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="581" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="608" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="635" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="662" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="716" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="743" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="770" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="797" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="797" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="824" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="851" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
+<text x="851" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="878" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="905" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="932" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="959" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="986" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1040" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1067" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1094" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1121" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1121" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">QA</text>
 <rect x="1148" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1175" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1202" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1256" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1283" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1310" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
+<text x="1337" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1364" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="1391" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1418" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1472" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1499" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
+<text x="1499" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
 <rect x="1526" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1553" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ИБ</text>
 <rect x="1580" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1607" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1607" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">DEV</text>
 <rect x="1634" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1661" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="1688" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1715" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="1715" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
 <rect x="1742" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1769" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1796" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
+<text x="1823" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
 <rect x="1850" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1877" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
+<text x="1877" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1904" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1931" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
+<text x="1931" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="1958" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1985" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<text x="1985" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ТПИ</text>
 <rect x="2012" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2039" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<text x="2039" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">REL</text>
 <rect x="2066" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2093" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<text x="2093" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБД</text>
 <rect x="2120" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="2147" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
+<text x="2147" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">АБР</text>
+<rect x="2174" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">SVC</text>
+<rect x="2228" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">ВНП</text>
+<rect x="2282" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">РИ</text>
+<rect x="2336" y="480" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="495" font-size="9" fill="#1B1B3A" text-anchor="middle">RO</text>
 <rect x="230" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="257" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="284" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="311" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="311" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="338" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="365" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="392" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="419" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
+<text x="419" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="446" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="473" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="473" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="500" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="527" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="527" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">—</text>
 <rect x="554" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="581" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="581" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="608" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="635" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="635" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="662" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="689" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="716" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -812,41 +899,41 @@
 <rect x="824" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="851" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="878" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="905" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="905" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="932" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="959" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="959" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="986" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1013" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1040" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1067" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1067" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1094" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1121" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1148" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1175" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<text x="1175" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1202" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1229" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1256" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1283" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1283" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
 <rect x="1310" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1337" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
+<text x="1337" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1364" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1391" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1391" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1418" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1445" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1472" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1499" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1526" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1553" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1553" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">5</text>
 <rect x="1580" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1607" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1634" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1661" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
+<text x="1661" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1688" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1715" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1742" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1769" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1769" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1796" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1823" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<text x="1823" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">3</text>
 <rect x="1850" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1877" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="1904" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -859,6 +946,14 @@
 <text x="2093" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="2120" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="2147" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2174" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2201" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2228" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2255" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">2</text>
+<rect x="2282" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2309" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
+<rect x="2336" y="506" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="2363" y="521" font-size="9" fill="#1B1B3A" text-anchor="middle">1</text>
 <rect x="230" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -895,6 +990,10 @@
 <rect x="2012" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="532" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -931,6 +1030,10 @@
 <rect x="2012" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="558" width="54" height="26" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="230" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="284" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="338" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
@@ -967,6 +1070,10 @@
 <rect x="2012" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2066" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <rect x="2120" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2174" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2228" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2282" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
+<rect x="2336" y="584" width="54" height="26" fill="#FAFAFA" stroke="#B0B0B0" stroke-width="1"/>
 <text x="221" y="495.5" font-size="8" fill="#666666" text-anchor="end">Ответственный</text>
 <text x="221" y="521.5" font-size="8" fill="#666666" text-anchor="end">SLA, раб. дн</text>
 <text x="221" y="547.5" font-size="8" fill="#666666" text-anchor="end">План, ч</text>
