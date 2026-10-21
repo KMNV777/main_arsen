@@ -1,6 +1,6 @@
 # Процесс ведения релиза ЕАРМ: регламент и реестр шагов
 
-> Схема: [`drawio/10-release-process.drawio`](drawio/10-release-process.drawio) (5 страниц), превью — [`svg/10-release-process-1.svg`](svg/10-release-process-1.svg). Файлы генерирует `scripts/build_release_process.py` — правим данные в скрипте. Расхождения источников — [`release-process-review.md`](release-process-review.md).
+> Схема: [`drawio/10-release-process.drawio`](drawio/10-release-process.drawio) (5 страниц), превью — [`svg/10-release-process-1.svg`](svg/10-release-process-1.svg). HTML-версия — [`release-process.html`](release-process.html). Файлы генерирует `scripts/build_release_process.py` — правим данные в скрипте. Расхождения источников — [`release-process-review.md`](release-process-review.md).
 
 Основа: «Эталонный процесс выпуска релиза» (Confluence NEDRA) и «Менеджмент команд разработки» (Jira). Нумерация шагов повторяет этапы эталона (колонка «Эт.»); новое отмечено ★.
 

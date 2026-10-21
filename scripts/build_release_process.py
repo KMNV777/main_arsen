@@ -32,6 +32,7 @@ DRAWIO = ROOT / "docs" / "drawio" / "10-release-process.drawio"
 SVG_DIR = ROOT / "docs" / "svg"
 DOC = ROOT / "docs" / "release-process.md"
 DOC_REVIEW = ROOT / "docs" / "release-process-review.md"
+DOC_HTML = ROOT / "docs" / "release-process.html"
 
 META = {"service": "⟨СЕРВИС⟩", "direction": "⟨ЕАРМ1–6⟩", "version": "⟨27.x.y⟩"}
 # Мейнтейнеры/сервисы — по таблице «Статус развёртывания инфраструктуры ЕАРМ» (NEDRA); сюда вставить имена.
@@ -914,6 +915,166 @@ def build_review_doc() -> str:
     return "\n".join(o) + "\n"
 
 
+
+# ===========================================================================
+# HTML-отчёт (самодостаточный файл: текст + встроенные SVG схем)
+# ===========================================================================
+def build_html(pages: List[Page]) -> str:
+    from html import escape as e
+
+    ph = {0: "Ф0 Инициация и ветка", 1: "Ф1 Финализация ветки", 2: "Ф2 Стабилизация (параллельный блок P)",
+          3: "Ф3 Аудит · ПТЗ · трансфер (gates ИБ)", 4: "F4", 5: "Ф5 Прод и закрытие"}
+    ph[4] = "Ф4 PreProd"
+    kind = {"seq": "послед.", "par": "паралл. (P)", "opt": "опц.", "gate": "gate"}
+    titles = ["1. Процесс по ЗО", "2. Ветки и отбор задач", "3. Матрица «сервис × этап»", "4. Jira, метрики, SLA", "5. Ревью"]
+
+    def tbl(head, rows, cls=""):
+        h = "".join(f"<th>{e(x)}</th>" for x in head)
+        b = "".join("<tr>" + "".join(c if c.startswith("<td") else f"<td>{e(c)}</td>" for c in r) + "</tr>" for r in rows)
+        return f'<div class="tw"><table class="{cls}"><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table></div>'
+
+    def svg_of(i: int, pg: Page) -> str:
+        sv = page_svg(pg)
+        for k, v in META.items():
+            sv = sv.replace(f"%{k}%", v)
+        sv = sv.replace('id="m', f'id="f{i}m').replace("url(#m", f"url(#f{i}m")
+        return sv
+
+    figs = []
+    for i, pg in enumerate(pages, 1):
+        figs.append(
+            f'<figure id="fig{i}" data-w="{pg.width}"><div class="zoom">'
+            f'<button data-z="0.25">25%</button><button data-z="0.5">50%</button><button data-z="1">100%</button>'
+            f'<button data-z="fit">По ширине</button><span class="muted">{e(titles[i - 1])} · {pg.width}×{pg.height}</span></div>'
+            f'<div class="canvas">{svg_of(i, pg)}</div></figure>')
+
+    roles = tbl(["Код", "Роль", "Контур", "ФИО (по эталону / решениям)"], [[k, *v] for k, v in ROLES.items()])
+
+    steps_rows = []
+    last = -1
+    for sid, ref, phase, name, role, k, vin, vout, cal, errs, mark in STEPS:
+        if phase != last:
+            steps_rows.append([f'<td colspan="10" class="phase">{e(ph[phase])}</td>'])
+            last = phase
+        flag = {"new": ' <span class="b new">★ новый</span>', "sch": ' <span class="b sch">схема</span>'}.get(mark, "")
+        steps_rows.append([f"<td><b>{e(sid)}</b></td>", e(ref), f"<td>{e(name)}{flag}</td>", e(role), e(kind[k]),
+                           e(sla_text(sid)), e(vin), e(vout), e(cal), e(errs)])
+    steps = tbl(["ID", "Эт.", "Шаг", "Роль", "Тип", "SLA", "Вход", "Выход", "Календарь", "Ошибки"], steps_rows, "steps")
+
+    cp_rows = []
+    for name, psi, ptz in (("ПСИ + ПТЗ", True, True), ("только ПСИ", True, False), ("только ПТЗ", False, True), ("без ПСИ и ПТЗ", False, False)):
+        d, path = critical_path(psi, ptz)
+        cp_rows.append([name, str(d), f"{d / 5:.1f}", " → ".join(path)])
+    cp = tbl(["Сценарий", "Раб. дней", "Недель", "Критический путь"], cp_rows)
+
+    sev_cls = {"Высокая": "hi", "Средняя": "mid", "Низкая": "lo"}
+    rev_rows = [[f"<td><b>{e(f)}</b></td>", f'<td><span class="b {sev_cls[sv]}">{e(sv)}</span></td>', e(w), e(a), e(b), e(c)]
+                for f, sv, w, a, b, c in REVIEW]
+    review = tbl(["ID", "Важность", "Где", "Находка", "Влияние", "Решение / предложение"], rev_rows)
+    errors = tbl(["Код", "Тип", "Что фиксируем"], [list(x) for x in ERRORS])
+    metrics = tbl(["№", "Метрика", "Расчёт", "Срезы"], [list(x) for x in METRICS])
+
+    branch_rows = [
+        ["1", "0.2 Ветка", "Релиз-инженер НЕДРА + мейнтейнер", "Режется в начале спринта от master; SHA в паспорте; имя release/<сервис>/<версия>."],
+        ["2", "1.1 Слияние PR", "Мейнтейнер", "Только Story/Bug с fixVersion, тест-кейсами, оценкой и traceability PR → ключ Story. Без тест-кейсов не вливается (исключение: Release owner + QA)."],
+        ["3", "1.2 Scope freeze", "Release owner", "Fix Version блокируется; новый состав — только через change control с записью причины (код E1)."],
+        ["4", "1.3 Freeze ветки", "Релиз-инженер НЕДРА + мейнтейнер", "Ветка заморожена, rc на UAT; тест-планы UAT — в ТестОпс НЕДРА."],
+        ["5", "4.3 Фиксы UAT", "Фича-команды", "Только коммиты по Bug и замечаниям ИБ; после последнего фикса — повторный скан в CI."],
+        ["6", "G1 Код-фриз", "Release owner", "Фиксируется hash/образ; аудит, ПТЗ, трансфер, PreProd и Прод работают с ним; иначе возврат на 4.3 и повтор G1."],
+        ["7", "12.5 Тег и merge", "Релиз-инженер НЕДРА + мейнтейнер", "Тег v<версия>, release → master, перенос в открытые release/*."],
+        ["8", "HF Hotfix", "Релиз-инженер НЕДРА + сервис", "Fix на hotfix/* от ветки Прода; далее тот же процесс, что у планового релиза (все этапы и ИБ-gates); после выката — перенос в текущую release."],
+    ]
+    branches = tbl(["№", "Шаг", "Отв.", "Правило"], branch_rows)
+
+    css = """
+:root{--bg:#f6f7f9;--fg:#1d2733;--mut:#5d6b7a;--card:#fff;--line:#d9dee5;--acc:#1f5fbf;--hi:#f8cecc;--mid:#fff2cc;--lo:#e2f1dc;--new:#fde3cc;}
+@media (prefers-color-scheme:dark){:root{--bg:#12161b;--fg:#e4e8ee;--mut:#9aa6b4;--card:#1a2027;--line:#2c3540;--acc:#7fb0ff;--hi:#5a2a27;--mid:#554a1e;--lo:#24421f;--new:#573a1c;}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header.top{padding:28px 16px 18px;max-width:1240px;margin:0 auto}
+h1{font-size:26px;margin:0 0 6px}h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:18px 0 8px}
+.muted{color:var(--mut);font-size:13px}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav .in{max-width:1240px;margin:0 auto;padding:0 12px}
+nav a{display:inline-block;padding:10px 10px;color:var(--fg);text-decoration:none;font-size:13px}
+nav a:hover{color:var(--acc)}
+main{max-width:1240px;margin:0 auto;padding:0 16px 60px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 18px 8px;margin:18px 0}
+.tw{overflow-x:auto;margin:8px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:rgba(31,95,191,.12);position:sticky;top:0}
+td.phase{background:rgba(227,108,10,.14);font-weight:600}
+.b{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;white-space:nowrap}
+.b.hi{background:var(--hi)}.b.mid{background:var(--mid)}.b.lo{background:var(--lo)}.b.new{background:var(--new)}.b.sch{background:var(--line)}
+figure{margin:10px 0 20px}
+.zoom{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.zoom button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px;padding:3px 9px;cursor:pointer}
+.zoom button:hover{border-color:var(--acc)}
+.canvas{overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff;max-height:78vh}
+.canvas svg{display:block}
+ul,ol{padding-left:22px}li{margin:3px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
+code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:12px}
+@media (max-width:600px){h1{font-size:21px}}
+"""
+    js = """
+document.querySelectorAll('figure').forEach(function(f){
+  var svg=f.querySelector('svg'),w=+f.dataset.w,cv=f.querySelector('.canvas');
+  function set(z){ if(z==='fit'){z=Math.min(1,(cv.clientWidth-4)/w);} svg.style.width=(w*z)+'px'; svg.style.height='auto'; }
+  f.querySelectorAll('button').forEach(function(b){b.onclick=function(){set(b.dataset.z==='fit'?'fit':+b.dataset.z)}});
+  set(w>3000?0.4:'fit');
+});
+"""
+    sections = [
+        ("overview", "Обзор", f"""
+<p>Процесс выпуска релиза ЕАРМ построен по «Эталонному процессу выпуска релиза» (Confluence NEDRA, этапы 0–12) и «Менеджменту команд разработки» (Jira).
+Нумерация шагов повторяет этапы эталона; новое отмечено ★. Всего <b>{STEP_COUNT}</b> шагов, 3 контура (НЕДРА, ИБ ГПН-ЦР, ГПН-ЦР) и git-дорожка.</p>
+<div class="grid">
+<div class="card"><b>Цели</b><ol><li>Прозрачно показать параллельные и последовательные действия цикла.</li><li>Каждый шаг — задача Jira → время работы и ожидания по этапам.</li><li>Чётко разделить зоны ответственности.</li><li>Видеть, где, кем и на каком шаге допущены ошибки, где ошибаемся в оценке, где нарушаются требования.</li><li>Сервис — часть процесса: в заголовке каждой схемы, в задачах и в матрице «сервис × этап».</li></ol></div>
+<div class="card"><b>Решения владельца процесса</b><ul><li>Ветка режется от master.</li><li>ПТЗ — при необходимости (шаг 6.1 опциональный).</li><li>Hotfix идёт тем же процессом (все этапы и ИБ-gates).</li><li>Юрченко Д. — релиз-инженер НЕДРА.</li><li>БД — администратор БД; брокеры — администратор брокеров.</li><li>Список сервисов пока не трогаем (плейсхолдеры).</li><li>SLA шагов — от 1 до 5 рабочих дней.</li></ul></div>
+</div>"""),
+        ("diagrams", "Схемы (встроены, масштабируются)", "<p class='muted'>Исходник — <code>docs/drawio/10-release-process.drawio</code> (5 страниц, редактируется в draw.io); здесь — статичные копии. Наведите на блок в draw.io, чтобы увидеть вход, выход, SLA и типичные ошибки шага.</p>" + "".join(figs)),
+        ("roles", "Зоны ответственности", roles),
+        ("flow", "Последовательность и параллельность", """<ol>
+<li><b>Ф0–Ф1 (последовательно):</b> 0.1 → 0.3 → 0.2 → 1.1 → 1.2 (Scope freeze) → 1.3 (freeze ветки, rc на UAT). ПМТ (3.1) стартует сразу, если ПСИ = Да.</li>
+<li><b>Ф2 — параллельный блок P</b> после rc: A = 4.1 → 4.2 → 4.3 ⇄ 4.4 (+ 4.5), B = 2.1 → 2.2 (gate ИБ), C = 3.1 → 3.2 → 3.3 (опц.). Стык — <b>G1 «Код-фриз»</b> (AND-join), фиксируется hash.</li>
+<li><b>Ф3 — цепочка ИБ-gates:</b> 5.1 → 5.2 (аудит) → 6.1 (ПТЗ, если нужен) → 7.2 → 8.1 (трансфер). TOML (7.1) готовится параллельно аудиту и стыкуется на 7.2.</li>
+<li><b>Ф4:</b> 9.1 ‖ 9.2 (БД) ‖ 9.3 (брокеры) → 10.1 → 10.2 → <b>G2 Go/No-Go</b> (No-Go → hotfix-цикл по полному процессу).</li>
+<li><b>Ф5:</b> 11.1 → 12.1 → 12.2 (БД) ‖ 12.3 (брокеры) → 12.4 (post-check) → 12.5 (merge в master) → 12.6 (закрытие, ретро).</li></ol>"""),
+        ("steps", "Реестр шагов", "<p class='muted'>★ — предложено ревью (нет в эталоне); «схема» — есть на прежней схеме, нет в эталоне. SLA — потолок на шаг, предложение (диапазон 1–5 дн. утверждён).</p>" + steps),
+        ("sla", "SLA и критический путь", "<p>Норматив шага — от 1 до 5 рабочих дней; приём PR (1.1) идёт весь спринт и в SLA не входит. Расчёт — самая длинная цепочка от rc (1.3) до закрытия (12.6).</p>" + cp +
+         "<p><b>Вывод (F17):</b> если каждый шаг использует свой потолок, путь занимает 35–38 рабочих дней, а календарь эталона закладывает ≈ 15. Цепочка ИБ-gates по SLA — 10–13 дней против 7 в календаре. SLA — потолок, не норма: нужны целевые значения и пересборка календаря по критическому пути.</p>"),
+        ("branches", "Ветки и отбор задач", "<p><b>master</b> = состояние Прода; <b>release/&lt;сервис&gt;/&lt;версия&gt;</b> режется от master в начале спринта; hotfix — от ветки Прода.</p>" + branches + """
+<div class="grid"><div class="card"><b>Включаем, если выполнены ВСЕ условия</b><ul><li>Story/Bug с fixVersion (Task QA/BE/FE в состав не входят)</li><li>есть оценка</li><li>привязаны тест-кейсы (или исключение RO + QA)</li><li>есть кодовый инкремент: PR → ключ Story</li><li>приложены скрипты миграции</li><li>уязвимости по сервису закрыты по ходу спринта</li><li>при ПСИ — ПМТ покрывает изменение</li></ul></div>
+<div class="card"><b>Не включаем, если</b><ul><li>нет тест-кейсов без согласованного исключения</li><li>нет оценки или кодового инкремента</li><li>нет скриптов миграции там, где они нужны</li><li>зависит от задачи вне Fix Version</li><li>приём после Scope freeze без change control</li><li>нужен ПСИ, но нет ПМТ</li></ul></div></div>
+<p><b>Риск F1 — пересечение циклов.</b> Релиз выходит раз в ~4 недели, цикл длиннее: ветка следующего релиза режется, пока предыдущий ещё не в Проде. Правило: ветка N+1 режется от master; после 12.5 релиза N его изменения вливаются в release N+1 и в master.</p>"""),
+        ("jira", "Jira и Confluence", """<ul>
+<li><b>Релизный Epic (квартал)</b> — как в эталоне; <b>Fix Version</b> — состав релиза (Story/Bug); паспорт REL-XXX и календарь в Confluence — витрина.</li>
+<li><b>Задача шага</b> (Enabler/Task в Релизном Epic с fixVersion) на каждый шаг реестра: ID шага, роль/ЗО, оценка, исполнитель, результат (✓/↩/✗), код ошибки, этап внесения, «Возврат из».</li>
+<li><b>Под-задача сервиса</b> для шагов по сервису (0.2, 1.1, 1.3, 2.1, 4.3, 9.1, 12.x) с обязательным полем «Сервис».</li>
+<li>Workflow: Ожидает → В работе → Готово; старт/финиш — источник метрик. Возврат = новая задача того же шага + ссылка «Возврат из» + код E + этап внесения.</li>
+<li>Не источник метрик: календарь и паспорт (обновляются вручную). Факт времени до внедрения списания (I кв. 2027) — переходы статусов.</li></ul>"""),
+        ("metrics", "Метрики и таксономия ошибок", "<h3>Метрики</h3>" + metrics + "<h3>Коды ошибок</h3>" + errors),
+        ("review", "Ревью процессов: расхождения и пробелы", "<p>Сверены: «Эталонный процесс выпуска релиза» (Э), «Менеджмент команд разработки» (М), прежняя схема (С).</p>" + review),
+        ("open", "Нужно подтвердить", """<ul>
+<li>Кто и на каком шаге ставит флаг «Требуется ПТЗ» (предложено на 0.3).</li>
+<li>Значения SLA по шагам (предложены внутри диапазона 1–5 дней) и целевые значения (медианы).</li>
+<li>Распределение Избранакова и Степанова между администратором БД и администратором брокеров.</li>
+<li>Шаг 7.2 «Релиз-борд: загрузка и запуск трансфера» — релиз-инженер НЕДРА (по прежней схеме); запуск аудита 5.1 — релиз-инженер сервиса Приходько В. (по эталону).</li>
+<li>Правки эталона и ДК: роль релиз-инженера НЕДРА, администраторы БД и брокеров, hotfix по полному процессу, ПТЗ по необходимости, правило переноса между релизами, пересмотр календаря по критическому пути.</li>
+<li>Список сервисов — когда будете готовы (<code>SERVICES</code> в скрипте).</li></ul>"""),
+    ]
+    nav = "".join(f'<a href="#{i}">{e(t)}</a>' for i, t, _ in sections)
+    body = "".join(f'<section id="{i}"><h2>{e(t)}</h2>{c}</section>' for i, t, c in sections)
+    return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            f'<title>Процесс релиза ЕАРМ</title><style>{css}</style></head><body>'
+            f'<header class="top"><h1>Процесс ведения релиза ЕАРМ</h1><div class="muted">Схема, регламент, ревью, Jira-модель, метрики и SLA · '
+            f'сгенерировано <code>scripts/build_release_process.py</code></div></header>'
+            f'<nav><div class="in">{nav}</div></nav><main>{body}</main><script>{js}</script></body></html>')
+
+
 def main() -> None:
     pages = [page_process(), page_branches(), page_matrix(), page_jira(), page_review()]
     DRAWIO.parent.mkdir(parents=True, exist_ok=True)
@@ -926,6 +1087,7 @@ def main() -> None:
         (SVG_DIR / f"10-release-process-{i}.svg").write_text(svg, encoding="utf-8")
     DOC.write_text(build_doc(), encoding="utf-8")
     DOC_REVIEW.write_text(build_review_doc(), encoding="utf-8")
+    DOC_HTML.write_text(build_html(pages), encoding="utf-8")
     print("OK:", DRAWIO, f"steps={STEP_COUNT}")
 
 
