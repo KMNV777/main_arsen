@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1034" viewBox="0 0 2100 1034" font-family="Helvetica, Arial, sans-serif">
-<rect width="2100" height="1034" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1070" viewBox="0 0 2100 1070" font-family="Helvetica, Arial, sans-serif">
+<rect width="2100" height="1070" fill="#FFFFFF"/>
 <defs>
 </defs>
 <rect x="10" y="6" width="2080" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
@@ -268,80 +268,97 @@
 <text x="1505" y="758.5" font-size="10" fill="#222222" text-anchor="start">FTE роли считается из ТРЗ задач шагов: FTE = ТРЗ за период / (рабочие часы × 0,8); правило в</text>
 <text x="1505" y="771.5" font-size="10" fill="#222222" text-anchor="start">Политике, модель — docs/release-trz-fte.xlsx. По стартовым допущениям при 10 сервисах суммарно ≈ 5</text>
 <text x="1505" y="784.5" font-size="10" fill="#222222" text-anchor="start">FTE против 13 списываемых (допущения заменить фактом).</text>
-<rect x="20" y="794" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="808.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
-<rect x="60" y="794" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="808.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
-<rect x="130" y="794" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="808.5" font-size="10" fill="#222222" text-anchor="start">Эталон §18, §17</text>
-<rect x="320" y="794" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="808.5" font-size="10" fill="#222222" text-anchor="start">Блокеры по доступам уже сопоставлены с этапами, но в метриках не учитываются.</text>
-<rect x="1020" y="794" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="808.5" font-size="10" fill="#222222" text-anchor="start">«Ждём доступ» растворяется в общем ожидании.</text>
-<rect x="1500" y="794" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="808.5" font-size="10" fill="#222222" text-anchor="start">«Нет доступа» — подкод E5/E6 с привязкой к этапу (из §18).</text>
-<rect x="20" y="818" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="845.5" font-size="10" fill="#222222" text-anchor="start">F18</text>
-<rect x="60" y="818" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="845.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
-<rect x="130" y="818" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="839" font-size="10" fill="#222222" text-anchor="start">Релизная политика ЕАРМ vs</text>
-<text x="135" y="852" font-size="10" fill="#222222" text-anchor="start">Эталон (Confluence)</text>
-<rect x="320" y="818" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="832.5" font-size="10" fill="#222222" text-anchor="start">Политика (13 шагов) не содержит ПМТ/ПСИ, ПТЗ, развёртывания на PreProd и уведомления пользователей; TOML готовится сразу</text>
-<text x="325" y="845.5" font-size="10" fill="#222222" text-anchor="start">после финализации ветки и передаётся в запуск аудита. Эталон (этапы 0–12) добавляет перечисленное и ставит TOML после</text>
-<text x="325" y="858.5" font-size="10" fill="#222222" text-anchor="start">код-фриза.</text>
-<rect x="1020" y="818" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="839" font-size="10" fill="#222222" text-anchor="start">Два документа описывают разные процессы; непонятно, какой из них источник истины</text>
-<text x="1025" y="852" font-size="10" fill="#222222" text-anchor="start">для команд и ИБ.</text>
-<rect x="1500" y="818" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="839" font-size="10" fill="#222222" text-anchor="start">Схема строится по эталону, а из Политики взято: TOML — параллельно стабилизации и перед запуском</text>
-<text x="1505" y="852" font-size="10" fill="#222222" text-anchor="start">аудита (7.1 → 5.1). Политику нужно привести к схеме (пакет правок).</text>
-<rect x="20" y="868" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="895.5" font-size="10" fill="#222222" text-anchor="start">F19</text>
-<rect x="60" y="868" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="895.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
-<rect x="130" y="868" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="889" font-size="10" fill="#222222" text-anchor="start">Доступы для релизов (матрицы по</text>
-<text x="135" y="902" font-size="10" fill="#222222" text-anchor="start">людям)</text>
-<rect x="320" y="868" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="882.5" font-size="10" fill="#222222" text-anchor="start">Релиз-инженера НЕДРА Юрченко Д. (по ДК отвечает за фриз и уязвимости) нет ни в матрице доступов, ни среди ролей; у Грей А.</text>
-<text x="325" y="895.5" font-size="10" fill="#222222" text-anchor="start">(регресс UAT, отчёт, ТестОпс) в проектной матрице все доступы к сегментам и БД «−»; часть QA имеет UAT только по</text>
-<text x="325" y="908.5" font-size="10" fill="#222222" text-anchor="start">Оренбургу, у одного разработчика доступы ждут ВАРМ, одна заявка «на согласовании».</text>
-<rect x="1020" y="868" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="889" font-size="10" fill="#222222" text-anchor="start">Шаги 2.1, 4.1, 4.2, 9.x, 10.1 блокируются ожиданием доступов; в календаре это</text>
-<text x="1025" y="902" font-size="10" fill="#222222" text-anchor="start">растворяется в общем ожидании (E5).</text>
-<rect x="1500" y="868" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="882.5" font-size="10" fill="#222222" text-anchor="start">Проверка доступов по шагам до старта этапа (preflight, пакет правок «Доступы»); роли релиз-инженера</text>
-<text x="1505" y="895.5" font-size="10" fill="#222222" text-anchor="start">НЕДРА, администратора БД и администратора брокеров добавить в таблицу ролей; «нет доступа» — подкод</text>
-<text x="1505" y="908.5" font-size="10" fill="#222222" text-anchor="start">E5.</text>
-<rect x="20" y="918" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="945.5" font-size="10" fill="#222222" text-anchor="start">F20</text>
-<rect x="60" y="918" width="70" height="50" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="945.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
-<rect x="130" y="918" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="945.5" font-size="10" fill="#222222" text-anchor="start">ДК выпуска релизов</text>
-<rect x="320" y="918" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="932.5" font-size="10" fill="#222222" text-anchor="start">ДК — таблица ПЛАН/ФАКТ «релиз × этап» (Релизный тикет, Фриз: фича/код, Устранение уязвимостей: SAST, SCA, Luntry, секреты,</text>
-<text x="325" y="945.5" font-size="10" fill="#222222" text-anchor="start">Регресс: UAT/PProd, далее столбцы вне видимой части PDF) с ответственными Юрченко, Грей, Акманов. Нет сервиса, исполнителя</text>
-<text x="325" y="958.5" font-size="10" fill="#222222" text-anchor="start">шага, результата (✓/↩/✗), кода причины и этапов ПСИ, аудита, ПТЗ, трансфера (в читаемой части).</text>
-<rect x="1020" y="918" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="939" font-size="10" fill="#222222" text-anchor="start">ДК фиксирует даты, но не позволяет увидеть качество прохождения по сервису и</text>
-<text x="1025" y="952" font-size="10" fill="#222222" text-anchor="start">причину отклонения.</text>
-<rect x="1500" y="918" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="939" font-size="10" fill="#222222" text-anchor="start">ДК v2: строки «релиз × сервис», столбцы по шагам реестра, ПЛАН/ФАКТ + результат + код E; существующие</text>
-<text x="1505" y="952" font-size="10" fill="#222222" text-anchor="start">столбцы (фича-фриз, код-фриз, SAST/SCA/Luntry/секреты, UAT, PProd) сохранены.</text>
-<rect x="20" y="968" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="988.5" font-size="10" fill="#222222" text-anchor="start">F21</text>
-<rect x="60" y="968" width="70" height="36" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
-<text x="65" y="988.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
-<rect x="130" y="968" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="135" y="988.5" font-size="10" fill="#222222" text-anchor="start">Политика §Зоны ответственности</text>
-<rect x="320" y="968" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="982" font-size="10" fill="#222222" text-anchor="start">Таблица ЗО Политики расходится с решениями: запуск аудита через релиз-борд — Приходько В. (решено: релиз-инженер НЕДРА),</text>
-<text x="325" y="995" font-size="10" fill="#222222" text-anchor="start">нет администраторов БД и брокеров, нет ПМТ/ПСИ/ПТЗ, нет SLA и шагов после выката.</text>
-<rect x="1020" y="968" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1025" y="988.5" font-size="10" fill="#222222" text-anchor="start">ЗО в Политике и на схеме различаются.</text>
-<rect x="1500" y="968" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1505" y="988.5" font-size="10" fill="#222222" text-anchor="start">Таблицу ЗО Политики заменить на сводную из реестра шагов (пакет правок «Политика»).</text>
+<rect x="20" y="794" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="814.5" font-size="10" fill="#222222" text-anchor="start">F23</text>
+<rect x="60" y="794" width="70" height="36" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="814.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="794" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="801.5" font-size="10" fill="#222222" text-anchor="start">Релизная политика</text>
+<text x="135" y="814.5" font-size="10" fill="#222222" text-anchor="start">(распределение багов UAT) vs</text>
+<text x="135" y="827.5" font-size="10" fill="#222222" text-anchor="start">зоны ВНП/РП</text>
+<rect x="320" y="794" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="808" font-size="10" fill="#222222" text-anchor="start">Ответственные за распределение багов UAT: ЕАРМ1 и ЕАРМ4/6 — РП (Нежинская, Нестеров), ЕАРМ2, ЕАРМ3, ЕАРМ5 — ВНП (Шестаков,</text>
+<text x="325" y="821" font-size="10" fill="#222222" text-anchor="start">Овсепян, Занчаров), хотя у ЕАРМ2 есть РП (Ковальчук). У ЕАРМ3 и ЕАРМ5 РП не указан.</text>
+<rect x="1020" y="794" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="808" font-size="10" fill="#222222" text-anchor="start">Нет единого правила, кто распределяет баги; для ЕАРМ3 и ЕАРМ5 непонятно, кто</text>
+<text x="1025" y="821" font-size="10" fill="#222222" text-anchor="start">отвечает за срок и объём (роль РП в Релизном Epic).</text>
+<rect x="1500" y="794" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="808" font-size="10" fill="#222222" text-anchor="start">Закрепить: баги распределяет РП направления; для ЕАРМ3 и ЕАРМ5 назначить РП (или явно возложить на</text>
+<text x="1505" y="821" font-size="10" fill="#222222" text-anchor="start">ВНП). Зоны ВНП и РП внесены в таблицу ролей.</text>
+<rect x="20" y="830" width="40" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="844.5" font-size="10" fill="#222222" text-anchor="start">F16</text>
+<rect x="60" y="830" width="70" height="24" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="844.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="830" width="190" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="844.5" font-size="10" fill="#222222" text-anchor="start">Эталон §18, §17</text>
+<rect x="320" y="830" width="700" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="844.5" font-size="10" fill="#222222" text-anchor="start">Блокеры по доступам уже сопоставлены с этапами, но в метриках не учитываются.</text>
+<rect x="1020" y="830" width="480" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="844.5" font-size="10" fill="#222222" text-anchor="start">«Ждём доступ» растворяется в общем ожидании.</text>
+<rect x="1500" y="830" width="580" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="844.5" font-size="10" fill="#222222" text-anchor="start">«Нет доступа» — подкод E5/E6 с привязкой к этапу (из §18).</text>
+<rect x="20" y="854" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="881.5" font-size="10" fill="#222222" text-anchor="start">F18</text>
+<rect x="60" y="854" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="881.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="854" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="875" font-size="10" fill="#222222" text-anchor="start">Релизная политика ЕАРМ vs</text>
+<text x="135" y="888" font-size="10" fill="#222222" text-anchor="start">Эталон (Confluence)</text>
+<rect x="320" y="854" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="868.5" font-size="10" fill="#222222" text-anchor="start">Политика (13 шагов) не содержит ПМТ/ПСИ, ПТЗ, развёртывания на PreProd и уведомления пользователей; TOML готовится сразу</text>
+<text x="325" y="881.5" font-size="10" fill="#222222" text-anchor="start">после финализации ветки и передаётся в запуск аудита. Эталон (этапы 0–12) добавляет перечисленное и ставит TOML после</text>
+<text x="325" y="894.5" font-size="10" fill="#222222" text-anchor="start">код-фриза.</text>
+<rect x="1020" y="854" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="875" font-size="10" fill="#222222" text-anchor="start">Два документа описывают разные процессы; непонятно, какой из них источник истины</text>
+<text x="1025" y="888" font-size="10" fill="#222222" text-anchor="start">для команд и ИБ.</text>
+<rect x="1500" y="854" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="875" font-size="10" fill="#222222" text-anchor="start">Схема строится по эталону, а из Политики взято: TOML — параллельно стабилизации и перед запуском</text>
+<text x="1505" y="888" font-size="10" fill="#222222" text-anchor="start">аудита (7.1 → 5.1). Политику нужно привести к схеме (пакет правок).</text>
+<rect x="20" y="904" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="931.5" font-size="10" fill="#222222" text-anchor="start">F19</text>
+<rect x="60" y="904" width="70" height="50" fill="#F8CECC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="931.5" font-size="10" fill="#222222" text-anchor="start">Высокая</text>
+<rect x="130" y="904" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="925" font-size="10" fill="#222222" text-anchor="start">Доступы для релизов (матрицы по</text>
+<text x="135" y="938" font-size="10" fill="#222222" text-anchor="start">людям)</text>
+<rect x="320" y="904" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="918.5" font-size="10" fill="#222222" text-anchor="start">Релиз-инженера НЕДРА Юрченко Д. (по ДК отвечает за фриз и уязвимости) нет ни в матрице доступов, ни среди ролей; у Грей А.</text>
+<text x="325" y="931.5" font-size="10" fill="#222222" text-anchor="start">(регресс UAT, отчёт, ТестОпс) в проектной матрице все доступы к сегментам и БД «−»; часть QA имеет UAT только по</text>
+<text x="325" y="944.5" font-size="10" fill="#222222" text-anchor="start">Оренбургу, у одного разработчика доступы ждут ВАРМ, одна заявка «на согласовании».</text>
+<rect x="1020" y="904" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="925" font-size="10" fill="#222222" text-anchor="start">Шаги 2.1, 4.1, 4.2, 9.x, 10.1 блокируются ожиданием доступов; в календаре это</text>
+<text x="1025" y="938" font-size="10" fill="#222222" text-anchor="start">растворяется в общем ожидании (E5).</text>
+<rect x="1500" y="904" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="918.5" font-size="10" fill="#222222" text-anchor="start">Проверка доступов по шагам до старта этапа (preflight, пакет правок «Доступы»); роли релиз-инженера</text>
+<text x="1505" y="931.5" font-size="10" fill="#222222" text-anchor="start">НЕДРА, администратора БД и администратора брокеров добавить в таблицу ролей; «нет доступа» — подкод</text>
+<text x="1505" y="944.5" font-size="10" fill="#222222" text-anchor="start">E5.</text>
+<rect x="20" y="954" width="40" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="981.5" font-size="10" fill="#222222" text-anchor="start">F20</text>
+<rect x="60" y="954" width="70" height="50" fill="#FFF2CC" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="981.5" font-size="10" fill="#222222" text-anchor="start">Средняя</text>
+<rect x="130" y="954" width="190" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="981.5" font-size="10" fill="#222222" text-anchor="start">ДК выпуска релизов</text>
+<rect x="320" y="954" width="700" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="968.5" font-size="10" fill="#222222" text-anchor="start">ДК — таблица ПЛАН/ФАКТ «релиз × этап» (Релизный тикет, Фриз: фича/код, Устранение уязвимостей: SAST, SCA, Luntry, секреты,</text>
+<text x="325" y="981.5" font-size="10" fill="#222222" text-anchor="start">Регресс: UAT/PProd, далее столбцы вне видимой части PDF) с ответственными Юрченко, Грей, Акманов. Нет сервиса, исполнителя</text>
+<text x="325" y="994.5" font-size="10" fill="#222222" text-anchor="start">шага, результата (✓/↩/✗), кода причины и этапов ПСИ, аудита, ПТЗ, трансфера (в читаемой части).</text>
+<rect x="1020" y="954" width="480" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="975" font-size="10" fill="#222222" text-anchor="start">ДК фиксирует даты, но не позволяет увидеть качество прохождения по сервису и</text>
+<text x="1025" y="988" font-size="10" fill="#222222" text-anchor="start">причину отклонения.</text>
+<rect x="1500" y="954" width="580" height="50" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="975" font-size="10" fill="#222222" text-anchor="start">ДК v2: строки «релиз × сервис», столбцы по шагам реестра, ПЛАН/ФАКТ + результат + код E; существующие</text>
+<text x="1505" y="988" font-size="10" fill="#222222" text-anchor="start">столбцы (фича-фриз, код-фриз, SAST/SCA/Luntry/секреты, UAT, PProd) сохранены.</text>
+<rect x="20" y="1004" width="40" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="1024.5" font-size="10" fill="#222222" text-anchor="start">F21</text>
+<rect x="60" y="1004" width="70" height="36" fill="#E8F3E4" stroke="#B0B0B0" stroke-width="1"/>
+<text x="65" y="1024.5" font-size="10" fill="#222222" text-anchor="start">Низкая</text>
+<rect x="130" y="1004" width="190" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="135" y="1024.5" font-size="10" fill="#222222" text-anchor="start">Политика §Зоны ответственности</text>
+<rect x="320" y="1004" width="700" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="1018" font-size="10" fill="#222222" text-anchor="start">Таблица ЗО Политики расходится с решениями: запуск аудита через релиз-борд — Приходько В. (решено: релиз-инженер НЕДРА),</text>
+<text x="325" y="1031" font-size="10" fill="#222222" text-anchor="start">нет администраторов БД и брокеров, нет ПМТ/ПСИ/ПТЗ, нет SLA и шагов после выката.</text>
+<rect x="1020" y="1004" width="480" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1025" y="1024.5" font-size="10" fill="#222222" text-anchor="start">ЗО в Политике и на схеме различаются.</text>
+<rect x="1500" y="1004" width="580" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1505" y="1024.5" font-size="10" fill="#222222" text-anchor="start">Таблицу ЗО Политики заменить на сводную из реестра шагов (пакет правок «Политика»).</text>
 </svg>
