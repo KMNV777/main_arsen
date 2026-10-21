@@ -80,13 +80,17 @@ def releases() -> List[dict]:
                 st = [x for x in steps if x["n"] in ns and not (x["n"] == 18 and not psi)]
                 phases[p] = (date.fromisoformat(min(x["s"] for x in st)), date.fromisoformat(max(x["e"] for x in st)))
             end = max(v[1] for v in phases.values())
+            pdays = {}
+            for p_, ns_ in PHASE_STEPS.items():
+                ss = [sch[n_] for n_ in ns_ if not (n_ == 18 and not psi)]
+                pdays[p_] = int(round(max(b_ for a_, b_ in ss) - min(a_ for a_, b_ in ss)))
             out.append({"name": f"EARM{code}.{k}", "q": qname, "k": k, "psi": psi, "sprint": (add_wd(day0, 3), add_wd(day0, 12)), "day0": day0,
                         "freeze": add_wd(day0, 12), "code_freeze": date.fromisoformat(next(x for x in steps if x["n"] == 13)["e"]),
                         "audit": (date.fromisoformat(next(x for x in steps if x["n"] == 15)["s"]), date.fromisoformat(next(x for x in steps if x["n"] == 15)["e"])),
                         "transfer": date.fromisoformat(next(x for x in steps if x["n"] == 19)["e"]),
                         "preprod": date.fromisoformat(next(x for x in steps if x["n"] == 20)["s"]),
                         "prod": date.fromisoformat(next(x for x in steps if x["n"] == 27)["s"]),
-                        "close": end, "phases": phases, "steps": steps, "cols": [c.isoformat() for c in cols]})
+                        "close": end, "phases": phases, "pdays": pdays, "steps": steps, "cols": [c.isoformat() for c in cols]})
     for r in out:
         r["status"] = "ВЫПОЛНЕНО" if r["close"] < TODAY else ("В РАБОТЕ" if r["day0"] <= TODAY else "ПЛАН")
     return out
@@ -141,3 +145,37 @@ if __name__ == "__main__":
     w = weekly_load(rs)
     for role in ("РИ", "ИБ", "QA", "DEV"):
         print(role, round(max(w[role].values()), 1))
+
+
+def days_txt(n: int) -> str:
+    if n in (4, 5, 6):
+        return "10"
+    if n == 18:
+        return "0 / 5"
+    return f"{D.dur(n, False):g}"
+
+
+def stage_matrix(rels: List[dict] | None = None) -> List[List[str]]:
+    """Строки: № | этап | дней | ответственный | по релизам «с – по»."""
+    rels = rels or releases()
+    rows = []
+    for n in D.SN:
+        row = [str(n), D.STEP_NAME[n], days_txt(n), D.role_short(D.SN[n][3])]
+        for r in rels:
+            x = next(x for x in r["steps"] if x["n"] == n)
+            if n == 18 and not r["psi"]:
+                row.append("не нужен")
+                continue
+            a, b = date.fromisoformat(x["s"]), date.fromisoformat(x["e"])
+            row.append(fmt(a) if a == b else f"{fmt(a)} – {fmt(b)}")
+        rows.append(row)
+    return rows
+
+
+def weekly_split(rels: List[dict] | None = None):
+    """Недельные часы ролей: постоянная часть F и часть на один сервис S (часы = F + S×N)."""
+    rels = rels or releases()
+    f = weekly_load(rels, 0)
+    fs = weekly_load(rels, 1)
+    s = {role: {w: fs[role][w] - f[role].get(w, 0.0) for w in fs[role]} for role in fs}
+    return f, s

@@ -84,22 +84,14 @@ setTimeout(function(){s.removeAllRanges();btn.textContent='Копировать 
 """
 def main() -> None:
     pages = [B.page_process(), B.page_branches(), B.page_roadmap(), B.page_jira()]
-    extra = []
-    for i, t, fn in C.PAGES:
-        if i in ("trz",):
-            continue
-        extra.append((f"cf-{i}", f"Confluence · {t}",
-                      f'<div class="tools"><button onclick="cpBlock(\'cf-{i}\',this)">Копировать блок для Confluence</button></div>'
-                      f'<div id="cf-{i}-body">{fn()}</div>'))
-    extra.append(("files", "Файлы для скачивания", downloads_html()))
-    intro = ("<p class='muted'>Всё в одном файле: описание процесса, схемы, ТРЗ и FTE (с калькулятором), ревью, готовые тексты для Confluence "
-             "(у каждого блока кнопка копирования) и файлы для скачивания. В конце каждого раздела — поле «Ваши правки».</p>")
+    intro = ("<p class='muted'>Интерактивные материалы: схемы, дорожная карта релизов, стратегическое планирование, матрица ролей и калькулятор экономики. "
+             "Описательная часть для Confluence вынесена в отдельный файл <code>docs/confluence/confluence-pages.html</code>. "
+             "В конце каждого раздела — поле «Ваши правки».</p>")
     rels = PL.releases()
     mid = [("rmap", "Дорожная карта релизов", PH.roadmap_html(rels)), ("strategy", "Стратегическое планирование релизов", PH.strategy_html(rels))]
-    html = B.build_html(pages, extra=extra, mid=mid, trz=PH.econ_html(),
+    html = B.build_html(pages, mid=mid, trz=PH.econ_html(),
                         title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True)
     html = html.replace("<main>", "<main>" + intro, 1)
-    html = html.replace("</body>", f"<script>{COPY_JS}</script></body>", 1)
     OUT.write_text(html, encoding="utf-8")
     print("OK:", OUT, f"{len(html) // 1024} KB")
 

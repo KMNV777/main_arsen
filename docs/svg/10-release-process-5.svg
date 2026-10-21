@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1837" height="814" viewBox="0 0 1837 814" font-family="Helvetica, Arial, sans-serif">
-<rect width="1837" height="814" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1948" height="814" viewBox="0 0 1948 814" font-family="Helvetica, Arial, sans-serif">
+<rect width="1948" height="814" fill="#FFFFFF"/>
 <defs>
 <marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E5493A"/></marker>
 </defs>
-<rect x="10" y="6" width="1817" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
+<rect x="10" y="6" width="1928" height="34" fill="#FFFFFF" stroke="#666666" stroke-width="1"/>
 <text x="15" y="28" font-size="15" fill="#140093" text-anchor="start" font-weight="bold">Процесс выпуска релиза ЕАРМ · Сервис: ⟨СЕРВИС⟩ · Направление: ⟨ЕАРМ1–6⟩ · Релиз: ⟨27.x.y⟩   |   дорожная карта релизов: скользящий год, фазы каждого релиза</text>
 <rect x="20" y="56" width="270" height="44" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
 <text x="25" y="80.5" font-size="10" fill="#FFFFFF" text-anchor="start" font-weight="bold">РЕЛИЗ · СТАТУС</text>
@@ -35,164 +35,244 @@
 <text x="1697.85" y="80.5" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Окт 27</text>
 <rect x="1755.2" y="56" width="111" height="44" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
 <text x="1810.7" y="80.5" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Ноя 27</text>
-<rect x="20" y="100" width="1797" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
+<rect x="1866.2" y="56" width="114.7" height="44" fill="#2A1FA8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1923.55" y="80.5" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Дек 27</text>
+<rect x="20" y="100" width="1908" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
 <text x="25" y="114" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">IV КВ. 2026 · 3 РЕЛИЗА</text>
 <rect x="20" y="124" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="133" width="70" height="16" fill="#DEEBFF" stroke="none" stroke-width="1"/>
 <text x="61" y="142.5" font-size="8" fill="#0052CC" text-anchor="middle" font-weight="bold">В РАБОТЕ</text>
 <text x="107" y="136" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM26.4.1</text>
 <text x="107" y="150" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 19 окт – 30 окт</text>
-<rect x="290" y="124" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="124" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="338.1" y="132" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="343.65" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="356.6" y="132" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="378.8" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="408.4" y="132" width="40.7" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="428.75" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="449.1" y="132" width="66.6" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="482.4" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="515.7" y="132" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="528.65" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="541.6" y="132" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="556.4" y="142.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="582.2" y="143" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
 <rect x="20" y="158" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="167" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="176.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="170" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM26.4.2</text>
 <text x="107" y="184" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 16 ноя – 27 ноя · ПСИ ИБ</text>
-<rect x="290" y="158" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="158" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="441.7" y="166" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="447.25" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="460.2" y="166" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="482.4" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="512" y="166" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="530.5" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="549" y="166" width="125.8" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="611.9" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="611.9" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд · 17 дн.</text>
 <rect x="674.8" y="166" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="687.75" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="700.7" y="166" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="715.5" y="176.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="741.3" y="177" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
 <rect x="20" y="192" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="201" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="210.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="204" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM26.4.3</text>
 <text x="107" y="218" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 14 дек – 25 дек</text>
-<rect x="290" y="192" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="192" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="545.3" y="200" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="550.85" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="563.8" y="200" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="586" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="615.6" y="200" width="70.3" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="650.75" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="693.3" y="200" width="59.2" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="722.9" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="752.5" y="200" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="765.45" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="778.4" y="200" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
-<rect x="20" y="226" width="1797" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
+<text x="793.2" y="210.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="819" y="211" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
+<rect x="20" y="226" width="1908" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
 <text x="25" y="240" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">I КВ. 2027 · 3 РЕЛИЗА</text>
 <rect x="20" y="250" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="259" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="268.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="262" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.1.1</text>
 <text x="107" y="276" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 25 янв – 5 фев · ПСИ ИБ</text>
-<rect x="290" y="250" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="250" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="700.7" y="258" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="706.25" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="719.2" y="258" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="741.4" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="771" y="258" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="789.5" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="808" y="258" width="99.9" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="857.95" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="857.95" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">17</text>
 <rect x="907.9" y="258" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="920.85" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="933.8" y="258" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="948.6" y="268.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="974.4" y="269" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
 <rect x="20" y="284" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="293" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="302.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="296" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.1.2</text>
 <text x="107" y="310" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 22 фев – 9 мар</text>
-<rect x="290" y="284" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="284" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="804.3" y="292" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="809.85" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="822.8" y="292" width="59.2" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="852.4" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="882" y="292" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="900.5" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="926.4" y="292" width="59.2" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="956" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="985.6" y="292" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="998.55" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1011.5" y="292" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1026.3" y="302.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1052.1" y="303" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
 <rect x="20" y="318" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="327" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="336.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="330" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.1.3</text>
 <text x="107" y="344" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 22 мар – 2 апр · ПСИ ИБ</text>
-<rect x="290" y="318" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="318" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="907.9" y="326" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="913.45" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="926.4" y="326" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="948.6" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="978.2" y="326" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="996.7" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1015.2" y="326" width="99.9" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="1065.15" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="1065.15" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">17</text>
 <rect x="1115.1" y="326" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1128.05" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1141" y="326" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
-<rect x="20" y="352" width="1797" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
+<text x="1155.8" y="336.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1181.6" y="337" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
+<rect x="20" y="352" width="1908" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
 <text x="25" y="366" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">II КВ. 2027 · 3 РЕЛИЗА</text>
 <rect x="20" y="376" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="385" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="394.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="388" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.2.1</text>
 <text x="107" y="402" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 19 апр – 30 апр</text>
-<rect x="290" y="376" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="376" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1011.5" y="384" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1017.05" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1030" y="384" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1052.2" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1085.5" y="384" width="40.7" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1105.85" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1133.6" y="384" width="59.2" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1163.2" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="1192.8" y="384" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1205.75" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1218.7" y="384" width="33.3" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1235.35" y="394.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1263" y="395" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
 <rect x="20" y="410" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="419" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="428.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="422" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.2.2</text>
 <text x="107" y="436" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 17 мая – 28 мая · ПСИ ИБ</text>
-<rect x="290" y="410" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="410" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1115.1" y="418" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1120.65" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1133.6" y="418" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1155.8" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1185.4" y="418" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1203.9" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1222.4" y="418" width="96.2" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="1270.5" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="1270.5" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">17</text>
 <rect x="1318.6" y="418" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1331.55" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1344.5" y="418" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1359.3" y="428.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1385.1" y="429" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
 <rect x="20" y="444" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="453" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="462.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="456" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.2.3</text>
 <text x="107" y="470" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 15 июн – 28 июн</text>
-<rect x="290" y="444" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="444" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1218.7" y="452" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1224.25" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1240.9" y="452" width="51.8" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1266.8" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1292.7" y="452" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1311.2" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1329.7" y="452" width="66.6" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1363" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="1396.3" y="452" width="25.9" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1409.25" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1422.2" y="452" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
-<rect x="20" y="478" width="1797" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
+<text x="1437" y="462.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1462.8" y="463" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
+<rect x="20" y="478" width="1908" height="24" fill="#EEEDF8" stroke="#E4E8F2" stroke-width="1"/>
 <text x="25" y="492" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">III КВ. 2027 · 3 РЕЛИЗА</text>
 <rect x="20" y="502" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="511" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="520.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="514" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.3.1</text>
 <text x="107" y="528" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 12 июл – 23 июл · ПСИ ИБ</text>
-<rect x="290" y="502" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="502" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1322.3" y="510" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1327.85" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1340.8" y="510" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1363" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1392.6" y="510" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1411.1" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1429.6" y="510" width="85.1" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="1472.15" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="1472.15" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">17</text>
 <rect x="1522.1" y="510" width="18.5" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1531.35" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1548" y="510" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1562.8" y="520.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1588.6" y="521" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
 <rect x="20" y="536" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="545" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="554.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="548" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.3.2</text>
 <text x="107" y="562" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 9 авг – 20 авг</text>
-<rect x="290" y="536" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="536" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1425.9" y="544" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1431.45" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1444.4" y="544" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1466.6" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1496.2" y="544" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1514.7" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1533.2" y="544" width="59.2" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1562.8" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">12</text>
 <rect x="1599.8" y="544" width="18.5" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1609.05" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1625.7" y="544" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1640.5" y="554.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1666.3" y="555" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">44 дн.</text>
 <rect x="20" y="570" width="270" height="34" fill="#FFFFFF" stroke="#E4E8F2" stroke-width="1"/>
 <rect x="26" y="579" width="70" height="16" fill="#DFE1E6" stroke="none" stroke-width="1"/>
 <text x="61" y="588.5" font-size="8" fill="#42526E" text-anchor="middle" font-weight="bold">ПЛАН</text>
 <text x="107" y="582" font-size="11" fill="#140093" text-anchor="start" font-weight="bold">EARM27.3.3</text>
 <text x="107" y="596" font-size="8" fill="#5E5E5E" text-anchor="start">спринт 6 сен – 17 сен · ПСИ ИБ</text>
-<rect x="290" y="570" width="1527" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
+<rect x="290" y="570" width="1638" height="34" fill="#FFFFFF" stroke="#EEF1F6" stroke-width="0.5"/>
 <rect x="1529.5" y="578" width="11.1" height="18" fill="#8A9BB5" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1535.05" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">3</text>
 <rect x="1548" y="578" width="44.4" height="18" fill="#140093" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1570.2" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">10</text>
 <rect x="1599.8" y="578" width="37" height="18" fill="#4BADE8" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1618.3" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">8</text>
 <rect x="1636.8" y="578" width="85.1" height="18" fill="#904EE2" stroke="#FFFFFF" stroke-width="1"/>
-<text x="1679.35" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Релиз-борд</text>
+<text x="1679.35" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">17</text>
 <rect x="1729.3" y="578" width="18.5" height="18" fill="#FBAE40" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1738.55" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">5</text>
 <rect x="1755.2" y="578" width="29.6" height="18" fill="#63BA3C" stroke="#FFFFFF" stroke-width="1"/>
+<text x="1770" y="588.5" font-size="8" fill="#FFFFFF" text-anchor="middle" font-weight="bold">6</text>
+<text x="1795.8" y="589" font-size="9" fill="#140093" text-anchor="start" font-weight="bold">49 дн.</text>
 <text x="373" y="616" font-size="9" fill="#E5493A" text-anchor="start" font-weight="bold">сегодня (21 окт 2026)</text>
 <rect x="20" y="632" width="12" height="12" fill="#8A9BB5" stroke="none" stroke-width="1"/>
 <text x="41" y="640" font-size="9" fill="#1B1B3A" text-anchor="start">Подготовка</text>
@@ -207,6 +287,6 @@
 <rect x="1070" y="632" width="12" height="12" fill="#63BA3C" stroke="none" stroke-width="1"/>
 <text x="1091" y="640" font-size="9" fill="#1B1B3A" text-anchor="start">Прод и закрытие</text>
 <text x="25" y="670" font-size="10" fill="#1B1B3A" text-anchor="start">Каденс: квартал = 6 спринтов по 2 недели, релизов 3 (релизные спринты 2, 4, 6); одновременно в работе до 3 релизов. Даты считаются из SLA этапов и ориентировочного производственного календаря.</text>
-<text x="25" y="683" font-size="10" fill="#1B1B3A" text-anchor="start">Детализация релиза до этапа и рабочего дня — в общем HTML (раздел «Дорожная карта релизов»).</text>
+<text x="25" y="683" font-size="10" fill="#1B1B3A" text-anchor="start">Числа в блоках — рабочие дни фазы, справа — длительность всего цикла. Детализация до этапа и дня — в общем HTML (раздел «Дорожная карта релизов»).</text>
 <polyline points="364,100 364,604" fill="none" stroke="#E5493A" stroke-width="2"/>
 </svg>

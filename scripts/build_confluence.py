@@ -144,6 +144,8 @@ def page_strategy() -> str:
                     f"<p>Каденс: квартал = 6 спринтов, релизов 3 (релизные спринты 2, 4, 6). Цикл релиза {D.total_days(False):g}–{D.total_days(True):g} рабочих дней; одновременно в работе до {PL.max_parallel(rels)} релизов. Даты ориентировочные (производственный календарь уточнить).</p>",
                     "<h2>Календарь релизов на скользящий год</h2>",
                     S.tbl(["Релиз", "Старт (тикет)", "Спринт", "Фича-фриз", "Код-фриз", "Аудит кода", "Трансфер согласован", "PreProd", "Деплой Прод", "Закрытие", "ПСИ ИБ"], PL.calendar_rows(rels)),
+                    "<h2>Календарь по всем этапам цикла (дни)</h2><p>Даты «с – по»; колонка «Дн.» — длительность этапа в рабочих днях.</p>",
+                    S.tbl(["№", "Этап", "Дн.", "Ответственный"] + [r["name"] for r in rels], PL.stage_matrix(rels)),
                     "<h2>Правила</h2>", S.ol(rules)])
 
 
@@ -160,6 +162,17 @@ def page_econ() -> str:
                     S.tbl(["Роль", "Нужно по ТРЗ, FTE", "Списано, FTE", "Баланс, FTE", "Вывод"], rows)])
 
 
+def page_files() -> str:
+    import base64
+
+    def link(path: Path, label: str, mime: str, fname: str) -> str:
+        b64 = base64.b64encode(path.read_bytes()).decode()
+        return f'<li><a download="{fname}" href="data:{mime};base64,{b64}">{label}</a> <span class="muted">({path.stat().st_size // 1024} КБ)</span></li>'
+    items = [link(ROOT / "docs/drawio/10-release-process.drawio", "Схема процесса (draw.io, 7 страниц) — редактируемый источник", "application/xml", "10-release-process.drawio"),
+             link(ROOT / "docs/release-trz-fte.xlsx", "Модель ТРЗ и FTE по ролям (Excel, живые формулы)", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "release-trz-fte.xlsx")]
+    return "<h1>Файлы для скачивания</h1><ul>" + "".join(items) + "</ul><p>Схема в draw.io: File → Open from → Device. Экспорт PNG/SVG страниц вставляется картинкой в Confluence.</p>"
+
+
 PAGES = [
     ("etalon", "1. Эталонный процесс выпуска релиза", page_etalon),
     ("policy", "2. Релизная политика ЕАРМ", page_policy),
@@ -169,6 +182,7 @@ PAGES = [
     ("trz", "6. Приложение: калькулятор ТРЗ", page_trz),
     ("econ", "7. Экономика и баланс ресурсов", page_econ),
     ("changes", "8. Реестр правок", page_changes),
+    ("files", "9. Файлы", page_files),
 ]
 
 CSS = """

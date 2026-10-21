@@ -23,7 +23,7 @@ def kpi(p: Page, x: float, y: float, w: float, big: str, title: str, sub: str, c
 
 
 def page_release_roadmap(header, rels) -> Page:
-    t0, t1 = date(2026, 10, 1), date(2027, 11, 15)
+    t0, t1 = date(2026, 10, 1), date(2027, 12, 15)
     PXD = 3.7
     lw, x0 = 270, 20
     X = lambda d: x0 + lw + (d - t0).days * PXD
@@ -55,7 +55,10 @@ def page_release_roadmap(header, rels) -> Page:
         p.add("rect", x0 + lw, ry, W - 2 * x0 - lw, rowh, [], fill="#FFFFFF", stroke="#EEF1F6", sw=0.5)
         for ph, (a, b) in r["phases"].items():
             w = (b + timedelta(days=1) - a).days * PXD
-            p.add("rect", X(a), ry + 8, w, 18, [(D.PHASES[ph].split(" (")[0], "b")] if w > 85 else [], fill=PH_COL[ph], stroke="#FFFFFF", fs=8, fc="#FFFFFF")
+            nd = r["pdays"][ph]
+            lab = f"{D.PHASES[ph].split(' (')[0]} · {nd} дн." if w > 105 else (f"{nd}" if w > 11 else "")
+            p.add("rect", X(a), ry + 8, w, 18, [(lab, "b")] if lab else [], fill=PH_COL[ph], stroke="#FFFFFF", fs=8, fc="#FFFFFF")
+        p.text(X(r["close"] + timedelta(days=1)) + 6, ry + 8, 80, 18, [(f"{len(r['cols']) - 1} дн.", "b")], fs=9, fc=INDIGO, valign="middle")
         ry += rowh
     p.free([(X(P.TODAY), y + 44), (X(P.TODAY), ry)], color="#E5493A", sw=2, arrow=False)
     p.text(X(P.TODAY) + 4, ry + 2, 200, 16, [("сегодня (21 окт 2026)", "b")], fs=9, fc="#E5493A")
@@ -66,12 +69,12 @@ def page_release_roadmap(header, rels) -> Page:
         lx += 210
     p.text(x0, ry + 50, W - 2 * x0, 40, [
         ("Каденс: квартал = 6 спринтов по 2 недели, релизов 3 (релизные спринты 2, 4, 6); одновременно в работе до %d релизов. Даты считаются из SLA этапов и ориентировочного производственного календаря." % P.max_parallel(rels), "n"),
-        ("Детализация релиза до этапа и рабочего дня — в общем HTML (раздел «Дорожная карта релизов»).", "n")], fs=10, fc=DARK)
+        ("Числа в блоках — рабочие дни фазы, справа — длительность всего цикла. Детализация до этапа и дня — в общем HTML (раздел «Дорожная карта релизов»).", "n")], fs=10, fc=DARK)
     return p
 
 
 def page_strategy(header, rels) -> Page:
-    W = 2000
+    W = 2200
     wl = P.weekly_load(rels)
     wk0 = P.monday(min(r["day0"] for r in rels))
     wk1 = P.monday(max(r["close"] for r in rels))
@@ -80,7 +83,7 @@ def page_strategy(header, rels) -> Page:
     while d <= wk1:
         weeks.append(d)
         d += timedelta(days=7)
-    p = Page("6. Стратегическое планирование", W, 1500)
+    p = Page("6. Стратегическое планирование", W, 2400)
     header(p, "стратегическое планирование релизов: календарь, окна параллельности, нагрузка ролей")
     par = P.max_parallel(rels)
     kw = 300
@@ -92,11 +95,15 @@ def page_strategy(header, rels) -> Page:
     rows = [["Релиз", "Старт (тикет)", "Спринт", "Фича-фриз", "Код-фриз", "Аудит кода", "Трансфер согласован", "PreProd", "Деплой Прод", "Закрытие", "ПСИ ИБ"]] + P.calendar_rows(rels)
     y = table(p, 20, 184, [130, 120, 170, 120, 120, 170, 160, 120, 130, 120, 90], rows, fs=10, min_h=22)
     y += 24
-    p.text(20, y, 900, 22, [("Загрузка ролей по неделям (доля от 1 FTE; 32 ч в неделю)", "b")], fs=14, fc=INDIGO)
+    p.text(20, y, 900, 22, [("Календарь по всем этапам цикла: даты и длительность, раб. дн.", "b")], fs=14, fc=INDIGO)
+    mrows = [["№", "Этап", "Дн.", "Ответственный"] + [r["name"] for r in rels]] + P.stage_matrix(rels)
+    y = table(p, 20, y + 28, [34, 250, 50, 120] + [105] * len(rels), mrows, fs=8, min_h=18, fills={(i, 0): "#EEEDF8" for i in range(1, len(mrows))})
+    y += 24
+    p.text(20, y, 900, 22, [("Загрузка ролей по неделям: ТРЗ в часах в ячейке, цвет — доля от 1 FTE (32 ч в неделю)", "b")], fs=14, fc=INDIGO)
     y += 30
     cap = 40 * T.PARAMS["LOAD"][0]
     order = ["РИ", "ИБ", "QA", "RO", "DEV", "ВНП", "DEVOPS", "SVC", "АБД", "АБР"]
-    cw, ch, lw = 24, 22, 230
+    cw, ch, lw = 26, 22, 230
     for i, w in enumerate(weeks):
         if w.day <= 7:
             p.text(20 + lw + i * cw, y, 60, 14, [(P.MONTHS[w.month - 1], "b")], fs=8, fc="#6B778C")
@@ -106,7 +113,9 @@ def page_strategy(header, rels) -> Page:
         for i, w in enumerate(weeks):
             u = wl[role].get(w, 0) / cap
             col = "#EEF1F6" if u < .05 else "#D7F3B0" if u < .5 else "#8ED15A" if u < 1 else "#FBAE40" if u < 1.5 else "#F26B43"
-            p.add("rect", 20 + lw + i * cw, y, cw - 2, ch - 2, [], fill=col, stroke=None)
+            hh = wl[role].get(w, 0)
+            p.add("rect", 20 + lw + i * cw, y, cw - 2, ch - 2, [(f"{hh:.0f}", "n")] if hh >= 0.5 else [], fill=col, stroke=None, fs=6, fc=DARK)
+        p.text(20 + lw + len(weeks) * cw + 6, y, 230, ch, [(f"ТРЗ {sum(wl[role].values()):.0f} ч · пик {max(wl[role].values()):.0f} ч/нед", "b")], fs=8, fc=INDIGO, valign="middle")
         y += ch
     y += 12
     lx = 20 + lw

@@ -424,19 +424,14 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
                     f'<div class="canvas">{sv}</div></figure>')
     sections = [
         ("overview", "Обзор", S.overview_html()),
-        ("diagrams", "Схемы", "<p class='muted'>Исходник — <code>docs/drawio/10-release-process.drawio</code>; здесь статичные копии с масштабированием.</p>" + "".join(figs)),
+        ("diagrams", "Схемы", "<p class='muted'>Исходник — <code>docs/drawio/10-release-process.drawio</code> (7 страниц); здесь статичные копии с масштабированием. Ведение релизных веток — схема 2.</p>" + "".join(figs)),
         ("steps", "Этапы: ответственные и SLA", S.registry_html()),
         ("roadmap", "Дорожная карта этапов (SLA)", "<p>Этапы, ответственные и SLA (схема 3):</p>" + S.roadmap_html()),
         *(mid or []),
-        ("text", "Описание этапов и критический путь", S.sla_html()),
-        ("branches", "Ведение релизных веток", S.branches_html()),
-        ("roles", "Роли: кто за что отвечает", S.roles_text_html()),
+        ("roles", "Роли и зоны ответственности: матрица", S.roles_matrix_html()),
         ("decisions", "Кто принимает решения", S.decisions_html()),
-        ("jira", "Jira и Confluence", S.jira_html()),
         ("metrics", "Метрики", S.metrics_html()),
-        ("resolved", "Расхождения и как они устранены", S.resolved_html()),
         ("trz", "Экономика и баланс ресурсов", trz or "<p>См. калькулятор.</p>"),
-        ("open", "Нужно подтвердить", S.confirm_html()),
     ]
     if extra:
         sections = sections + list(extra)
