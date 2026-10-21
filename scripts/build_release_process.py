@@ -978,7 +978,7 @@ def trz_html() -> str:
             "<p>Экономика: стоимость ТРЗ = часы × ставка роли; стоимость текущего списания = 1 FTE × часы года × ставка; разница показывает ёмкость, которую можно вернуть в продукт. Ставки вводятся в Excel (в этом документе не приводятся).</p>")
 
 
-def build_html(pages: List[Page]) -> str:
+def build_html(pages: List[Page], extra=None, trz=None, title: str = "Процесс релиза ЕАРМ", comments: bool = False) -> str:
     from html import escape as e
 
     ph = {0: "Ф0 Инициация и ветка", 1: "Ф1 Финализация ветки", 2: "Ф2 Стабилизация (параллельный блок P)",
@@ -1124,13 +1124,44 @@ document.querySelectorAll('figure').forEach(function(f){
 <li>Список сервисов — когда будете готовы (<code>SERVICES</code> в скрипте).</li>
 <li>Расшифровка «РКР» в определении готовности задачи (ДК) и видимые только частично столбцы ДК правее «Регресс».</li></ul>"""),
     ]
+    if trz is not None:
+        sections = [(i, t, trz if i == "trz" else c) for i, t, c in sections]
+    if extra:
+        sections = sections + list(extra)
     nav = "".join(f'<a href="#{i}">{e(t)}</a>' for i, t, _ in sections)
-    body = "".join(f'<section id="{i}"><h2>{e(t)}</h2>{c}</section>' for i, t, c in sections)
+    cm = lambda i: (f'<div class="cm"><label for="cm-{i}">Ваши правки к разделу</label><textarea id="cm-{i}" data-k="{i}" rows="3" placeholder="Что изменить, добавить, убрать…"></textarea></div>' if comments else "")
+    body = "".join(f'<section id="{i}"><h2>{e(t)}</h2>{c}{cm(i)}</section>' for i, t, c in sections)
+    css += """
+.cm{margin:14px 0 14px;padding:10px;border:1px dashed var(--acc);border-radius:8px;background:var(--bg)}
+.cm label{display:block;font-size:12px;color:var(--mut);margin-bottom:4px}
+.cm textarea{width:100%;font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px}
+.fb{position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;z-index:6}
+.fb button{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:6px;padding:5px 12px;cursor:pointer}
+.confluenceTable{margin:8px 0 16px}
+"""
+    js += """
+(function(){
+  var tas=document.querySelectorAll('.cm textarea'); if(!tas.length) return;
+  function get(k){try{return localStorage.getItem('rp-'+k)||''}catch(e){return ''}}
+  function put(k,v){try{localStorage.setItem('rp-'+k,v)}catch(e){}}
+  tas.forEach(function(t){t.value=get(t.dataset.k);t.addEventListener('input',function(){put(t.dataset.k,t.value);upd()})});
+  function collect(){var out=[];document.querySelectorAll('section').forEach(function(s){var t=s.querySelector('textarea');
+    if(t&&t.value.trim())out.push('## '+s.querySelector('h2').textContent+'\\n'+t.value.trim())});return out.join('\\n\\n')}
+  function upd(){var n=collect().split('## ').length-1;var c=document.getElementById('fb-n');if(c)c.textContent=n}
+  upd();
+  document.getElementById('fb-dl').onclick=function(){var b=new Blob([collect()||'(правок нет)'],{type:'text/plain;charset=utf-8'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='правки-к-процессу-релиза.txt';a.click()};
+  document.getElementById('fb-cp').onclick=function(){var t=collect()||'(правок нет)';var b=this;
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){b.textContent='Скопировано ✓';setTimeout(function(){b.textContent='Копировать правки'},2000)})}};
+})();
+"""
+    fb = ('<div class="fb"><span>Правок в разделах: <b id="fb-n">0</b></span><button id="fb-dl">Скачать правки (.txt)</button>'
+          '<button id="fb-cp">Копировать правки</button><span class="muted">Правки сохраняются в браузере; перед отправкой нажмите «Скачать» или «Копировать».</span></div>') if comments else ""
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>Процесс релиза ЕАРМ</title><style>{css}</style></head><body>'
-            f'<header class="top"><h1>Процесс ведения релиза ЕАРМ</h1><div class="muted">Схема, регламент, ревью, Jira-модель, метрики и SLA · '
+            f'<title>{e(title)}</title><style>{css}</style></head><body>'
+            f'<header class="top"><h1>{e(title)}</h1><div class="muted">Схема, регламент, ревью, Jira-модель, метрики, SLA, ТРЗ и FTE · '
             f'сгенерировано <code>scripts/build_release_process.py</code></div></header>'
-            f'<nav><div class="in">{nav}</div></nav><main>{body}</main><script>{js}</script></body></html>')
+            f'<nav><div class="in">{nav}</div></nav><main>{body}</main>{fb}<script>{js}</script></body></html>')
 
 
 def main() -> None:
