@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Календарь релизов (стратегическое планирование) и нагрузка ролей по неделям.
+
+Каденс — как в «Менеджменте команд»: квартал = 6 спринтов по 2 недели, релизов 3 (релизные спринты 2, 4, 6).
+Ветка релиза собирается в первый день релизного спринта (этап 3), поэтому этапы 1–2 стартуют за 3 рабочих дня до него.
+Длительности этапов — из process_data.schedule(); часы ролей — из trz_model.HOURS.
+Производственный календарь ориентировочный (уточнить).
+"""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from datetime import date, timedelta
+from typing import Dict, List
+
+import process_data as D
+import trz_model as T
+
+TODAY = date(2026, 10, 21)
+SPRINT0 = date(2026, 10, 5)                      # начало спринта 1 квартала IV 2026
+SPRINT_DAYS = 14
+QUARTERS = [("IV кв. 2026", "26.4", 0), ("I кв. 2027", "27.1", 7), ("II кв. 2027", "27.2", 13), ("III кв. 2027", "27.3", 19)]  # (подпись, код, индекс первого спринта)
+RELEASE_SPRINTS = (2, 4, 6)                      # номера релизных спринтов квартала
+PSI_EVERY = 2                                    # ПСИ ИБ закладывается в каждый второй релиз (допущение)
+HOLIDAYS = {date(2026, 11, 4), date(2026, 12, 31), date(2027, 2, 23), date(2027, 3, 8), date(2027, 5, 3), date(2027, 5, 10), date(2027, 6, 14)} | \
+    {date(2027, 1, d) for d in range(1, 9)}
+MONTHS = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
+MONTHS_FULL = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+
+
+def is_wd(d: date) -> bool:
+    return d.weekday() < 5 and d not in HOLIDAYS
+
+
+def add_wd(d: date, n: int) -> date:
+    step = 1 if n >= 0 else -1
+    while n:
+        d += timedelta(days=step)
+        if is_wd(d):
+            n -= step
+    return d
+
+
+def fmt(d: date) -> str:
+    return f"{d.day} {MONTHS[d.month - 1]}"
+
+
+def sprint_start(idx: int) -> date:
+    return SPRINT0 + timedelta(days=SPRINT_DAYS * idx)
+
+
+PHASE_STEPS = {p: [s[0] for s in D.STEPS if s[1] == p] for p in D.PHASES}
+
+
+def releases() -> List[dict]:
+    out: List[dict] = []
+    k_all = 0
+    for qi, (qname, code, n0) in enumerate(QUARTERS):
+        for k, spr in enumerate(RELEASE_SPRINTS, 1):
+            k_all += 1
+            idx = n0 + spr - 1
+            s0 = sprint_start(idx)
+            day0 = s0
+            while not is_wd(day0):
+                day0 += timedelta(days=1)
+            day0 = add_wd(day0, -3)
+            psi = k_all % PSI_EVERY == 0
+            sch = D.schedule(psi)
+            cols = [add_wd(day0, c) for c in range(int(max(v[1] for v in sch.values())) + 1)]
+            steps = []
+            for n, (a, b) in sch.items():
+                c0 = int(a)
+                c1 = int(b) - 1 if b > a else int(a) - 1
+                c1 = max(c1, 0)
+                c0 = min(c0, len(cols) - 1)
+                steps.append({"n": n, "c0": c0, "c1": max(c0, c1) if b > a else max(c1, 0), "s": cols[c0].isoformat(), "e": cols[min(max(c1, 0), len(cols) - 1)].isoformat(), "a": a, "b": b})
+            phases = {}
+            for p, ns in PHASE_STEPS.items():
+                st = [x for x in steps if x["n"] in ns and not (x["n"] == 18 and not psi)]
+                phases[p] = (date.fromisoformat(min(x["s"] for x in st)), date.fromisoformat(max(x["e"] for x in st)))
+            end = max(v[1] for v in phases.values())
+            out.append({"name": f"EARM{code}.{k}", "q": qname, "k": k, "psi": psi, "sprint": (add_wd(day0, 3), add_wd(day0, 12)), "day0": day0,
+                        "freeze": add_wd(day0, 12), "code_freeze": date.fromisoformat(next(x for x in steps if x["n"] == 13)["e"]),
+                        "audit": (date.fromisoformat(next(x for x in steps if x["n"] == 15)["s"]), date.fromisoformat(next(x for x in steps if x["n"] == 15)["e"])),
+                        "transfer": date.fromisoformat(next(x for x in steps if x["n"] == 19)["e"]),
+                        "preprod": date.fromisoformat(next(x for x in steps if x["n"] == 20)["s"]),
+                        "prod": date.fromisoformat(next(x for x in steps if x["n"] == 27)["s"]),
+                        "close": end, "phases": phases, "steps": steps, "cols": [c.isoformat() for c in cols]})
+    for r in out:
+        r["status"] = "ВЫПОЛНЕНО" if r["close"] < TODAY else ("В РАБОТЕ" if r["day0"] <= TODAY else "ПЛАН")
+    return out
+
+
+def monday(d: date) -> date:
+    return d - timedelta(days=d.weekday())
+
+
+def weekly_load(rels: List[dict] | None = None, n_services: int | None = None) -> Dict[str, Dict[date, float]]:
+    """Часы по ролям и неделям: часы шага (F + S×N) × k равномерно по рабочим дням шага."""
+    rels = rels or releases()
+    n = n_services if n_services is not None else T.PARAMS["N"][0]
+    out: Dict[str, Dict[date, float]] = defaultdict(lambda: defaultdict(float))
+    for r in rels:
+        cols = [date.fromisoformat(c) for c in r["cols"]]
+        by = {x["n"]: x for x in r["steps"]}
+        for sid, role, f, s, code in T.HOURS:
+            if code == "psi" and not r["psi"]:
+                continue
+            x = by[sid]
+            hours = f + s * n
+            span = cols[x["c0"]: max(x["c0"], x["c1"]) + 1]
+            for d in span:
+                out[role][monday(d)] += hours / len(span)
+    return out
+
+
+def calendar_rows(rels: List[dict] | None = None) -> List[List[str]]:
+    rels = rels or releases()
+    return [[r["name"], fmt(r["day0"]), f"{fmt(r['sprint'][0])} – {fmt(r['sprint'][1])}", fmt(r["freeze"]), fmt(r["code_freeze"]),
+             f"{fmt(r['audit'][0])} – {fmt(r['audit'][1])}", fmt(r["transfer"]), fmt(r["preprod"]), fmt(r["prod"]), fmt(r["close"]),
+             "да" if r["psi"] else "нет"] for r in rels]
+
+
+def max_parallel(rels: List[dict] | None = None) -> int:
+    rels = rels or releases()
+    best = 0
+    d = min(r["day0"] for r in rels)
+    end = max(r["close"] for r in rels)
+    while d <= end:
+        best = max(best, sum(1 for r in rels if r["day0"] <= d <= r["close"]))
+        d += timedelta(days=1)
+    return best
+
+
+if __name__ == "__main__":
+    rs = releases()
+    for row in calendar_rows(rs):
+        print(row)
+    print("parallel", max_parallel(rs))
+    w = weekly_load(rs)
+    for role in ("РИ", "ИБ", "QA", "DEV"):
+        print(role, round(max(w[role].values()), 1))

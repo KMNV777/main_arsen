@@ -15,6 +15,8 @@ import build_confluence as C
 import build_release_process as B
 import process_data as D
 import sections as S
+import plan_html as PH
+import planning as PL
 import trz_model as T
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -92,7 +94,9 @@ def main() -> None:
     extra.append(("files", "Файлы для скачивания", downloads_html()))
     intro = ("<p class='muted'>Всё в одном файле: описание процесса, схемы, ТРЗ и FTE (с калькулятором), ревью, готовые тексты для Confluence "
              "(у каждого блока кнопка копирования) и файлы для скачивания. В конце каждого раздела — поле «Ваши правки».</p>")
-    html = B.build_html(pages, extra=extra, trz=C.page_trz() + calc_html(),
+    rels = PL.releases()
+    mid = [("rmap", "Дорожная карта релизов", PH.roadmap_html(rels)), ("strategy", "Стратегическое планирование релизов", PH.strategy_html(rels))]
+    html = B.build_html(pages, extra=extra, mid=mid, trz=PH.econ_html(),
                         title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True)
     html = html.replace("<main>", "<main>" + intro, 1)
     html = html.replace("</body>", f"<script>{COPY_JS}</script></body>", 1)

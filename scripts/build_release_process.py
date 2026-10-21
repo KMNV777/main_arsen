@@ -407,7 +407,7 @@ def build_resolved_doc() -> str:
 # ===========================================================================
 # HTML-отчёт
 # ===========================================================================
-def build_html(pages: List[Page], extra=None, trz=None, title: str = "Процесс выпуска релиза ЕАРМ", comments: bool = False) -> str:
+def build_html(pages: List[Page], extra=None, trz=None, title: str = "Процесс выпуска релиза ЕАРМ", comments: bool = False, mid=None) -> str:
     import html_theme as TH
     import sections as S
     from html import escape as e
@@ -426,7 +426,8 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
         ("overview", "Обзор", S.overview_html()),
         ("diagrams", "Схемы", "<p class='muted'>Исходник — <code>docs/drawio/10-release-process.drawio</code>; здесь статичные копии с масштабированием.</p>" + "".join(figs)),
         ("steps", "Этапы: ответственные и SLA", S.registry_html()),
-        ("roadmap", "Дорожная карта", "<p>Этапы, ответственные и SLA (схема 3):</p>" + S.roadmap_html()),
+        ("roadmap", "Дорожная карта этапов (SLA)", "<p>Этапы, ответственные и SLA (схема 3):</p>" + S.roadmap_html()),
+        *(mid or []),
         ("text", "Описание этапов и критический путь", S.sla_html()),
         ("branches", "Ведение релизных веток", S.branches_html()),
         ("roles", "Роли: кто за что отвечает", S.roles_text_html()),
@@ -434,7 +435,7 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
         ("jira", "Jira и Confluence", S.jira_html()),
         ("metrics", "Метрики", S.metrics_html()),
         ("resolved", "Расхождения и как они устранены", S.resolved_html()),
-        ("trz", "ТРЗ и FTE по ролям", trz or "<p>См. калькулятор.</p>"),
+        ("trz", "Экономика и баланс ресурсов", trz or "<p>См. калькулятор.</p>"),
         ("open", "Нужно подтвердить", S.confirm_html()),
     ]
     if extra:
@@ -446,9 +447,10 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     body = "".join(f'<section id="{i}"><span class="kicker">Раздел {n}</span><h2>{e(t)}</h2>{c}{cm(i)}</section>' for n, (i, t, c) in enumerate(sections, 1))
     fb = ('<div class="fb"><span>Правок в разделах: <b id="fb-n">0</b></span><button id="fb-dl">Скачать правки (.txt)</button>'
           '<button id="fb-cp">Копировать правки</button><span class="muted">Правки сохраняются в браузере; перед отправкой нажмите «Скачать» или «Копировать».</span></div>') if comments else ""
-    js = TH.JS_FIG + navjs + (TH.JS_FEEDBACK if comments else "")
+    import plan_html as PH
+    js = TH.JS_FIG + PH.JS_TABS + navjs + (TH.JS_FEEDBACK if comments else "")
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>{e(title)}</title><style>{TH.CSS}</style></head><body>'
+            f'<title>{e(title)}</title><style>{TH.CSS}{PH.CSS_PLAN}</style></head><body>'
             f'<header class="top"><h1>{e(title)}</h1><div class="muted">Схема, этапы, роли, SLA, метрики, ТРЗ и FTE · сгенерировано <code>scripts/build_release_process.py</code></div></header>'
             f'<nav><div class="in">{nav}</div></nav><main>{body}</main>{fb}<script>{js}</script></body></html>')
 
