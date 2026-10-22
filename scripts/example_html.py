@@ -28,6 +28,15 @@ def wdb(a: date, b: date) -> int:
     return n * sg
 
 
+def dur(a: date, b: date) -> int:
+    """Длительность периода в рабочих днях, включая первый и последний день."""
+    return wdb(a, b) + 1
+
+
+def dd(a: date, b: date) -> str:
+    return f"{P.fmt(a)}" if a == b else f"{P.fmt(a)} – {P.fmt(b)}"
+
+
 def model():
     """План по SLA от старта 03.08 (ПСИ нужен): {шаг: (с, по)}."""
     day0 = P.add_wd(START, -2)                      # этап 3 (ветка) = 03.08
@@ -66,21 +75,39 @@ def build():
         ("Аудит кода · Секреты", None, [(Dt(7, 9), Dt(8, 10), "")], [(Dt(7, 9), "sent", "ушли 07.09"), (Dt(9, 9), "no", "не согласовали 09.09"), (Dt(8, 10), "ok", "согласовали 08.10")]),
         ("ПСИ ИБ", span(m, (18,)), [], [(Dt(3, 9), "ok", "ПСИ пройдено 03.09")]),
         ("Согласование трансфера", span(m, (19,)), [], []),
-        ("PreProd: выкатка, регресс, проверка", span(m, (20, 21, 22, 23, 24, 25)), [], []),
+        ("PreProd: выкатка и регресс", span(m, (20, 21, 22, 23, 24, 25)), [], []),
         ("Деплой в Прод", (plan_prod, plan_prod), [], [(Dt(25, 8), "plan", "план в таблице 25.08"), (Dt(9, 9), "old", "прогноз 09.09"), (Dt(12, 10), "old", "прогноз 12.10"), (Dt(14, 10), "old", "прогноз 14.10"),
                                                         (Dt(26, 10), "fc", "текущий прогноз 26.10"), (opt, "sc", f"по SLA от аудита 15.10: {P.fmt(opt)}"), (cons, "sc", f"по SLA от конца багфикса 22.10: {P.fmt(cons)}")]),
     ]
     return m, rows, plan_prod, sla_total, opt, cons
 
 
+def col_texts(name, plan, bars, marks):
+    """Тексты колонок «план» и «факт» для строки диаграммы."""
+    pt = [f"{dd(*plan)} · {dur(*plan)} дн."] if plan else ["—"]
+    if name == "Деплой в Прод":
+        pt = [f"{P.fmt(plan[0])} (по SLA)", "в таблице: 25 авг"]
+        return pt, ["прогноз 26 окт", f"{wdb(START, Dt(26, 10))} раб. дн. от старта"]
+    if bars:
+        if len(bars) > 1:
+            ft = [f"{dd(a, b)} · {dur(a, b)} дн." for a, b, _ in bars]
+        else:
+            a, b, _ = bars[0]
+            ft = [f"{dd(a, b)} · {dur(a, b)} дн."]
+        return pt, ft
+    pts = [mk for mk in marks if mk[1] in ("ok", "warn")]
+    return pt, [f"{P.fmt(mk[0])} · {mk[2].split(' (')[0]}"[:34] for mk in pts][:2] or ["—"]
+
+
 def svg(rows, m) -> str:
     d0, d1 = date(2026, 7, 30), date(2026, 11, 26)
-    L, W, rh = 290, 1250, 30
+    L, W, rh = 600, 1450, 38
     days = (d1 - d0).days
     k = (W - L - 20) / days
     X = lambda d: L + (d - d0).days * k
-    H = 40 + len(rows) * rh + 40
+    H = 44 + len(rows) * rh + 40
     out = [f'<svg class="chart" viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="Диаграмма Ганта EARM 26.2">']
+    out.append('<text x="206" y="32" font-size="10" font-weight="700" fill="#140093" letter-spacing=".06em">ПЛАН ПО SLA</text><text x="388" y="32" font-size="10" font-weight="700" fill="#140093" letter-spacing=".06em">ФАКТ</text>')
     d = date(2026, 8, 1)
     while d < d1:
         nm = date(d.year + (d.month == 12), d.month % 12 + 1, 1)
@@ -91,19 +118,28 @@ def svg(rows, m) -> str:
         out.append(f'<line x1="{X(w):.1f}" x2="{X(w):.1f}" y1="20" y2="{H - 30}" stroke="#F0F2F6"/><text x="{X(w) + 1:.1f}" y="30" font-size="8" fill="#8A9BB5">{w.day}</text>')
         w += timedelta(days=7)
     for i, (name, plan, bars, marks) in enumerate(rows):
-        y = 40 + i * rh
+        y = 44 + i * rh
         if i % 2 == 0:
             out.append(f'<rect x="0" y="{y}" width="{W}" height="{rh}" fill="#F8F9FC"/>')
-        out.append(f'<text x="{L - 8}" y="{y + 18}" font-size="11.5" text-anchor="end" fill="#1B1B3A">{e(name)}</text>')
+        out.append(f'<text x="198" y="{y + 22}" font-size="12" text-anchor="end" fill="#1B1B3A" font-weight="700">{e(name)}</text>')
+        pt, ft = col_texts(name, plan, bars, marks)
+        for j, t in enumerate(pt):
+            out.append(f'<text x="206" y="{y + 16 + j * 13}" font-size="10.5" fill="#42526E">{e(t)}</text>')
+        for j, t in enumerate(ft):
+            out.append(f'<text x="388" y="{y + 16 + j * 13}" font-size="10.5" fill="#140093" font-weight="700">{e(t)}</text>')
         if plan:
             a, b = plan
-            out.append(f'<rect x="{X(a):.1f}" y="{y + 4}" width="{max((b - a).days * k + k, 4):.1f}" height="6" rx="1" fill="#C7D4DE"><title>план по SLA {P.fmt(a)} – {P.fmt(b)}</title></rect>')
+            out.append(f'<rect x="{X(a):.1f}" y="{y + 6}" width="{max((b - a).days * k + k, 4):.1f}" height="8" rx="1" fill="#C7D4DE"><title>план по SLA {P.fmt(a)} – {P.fmt(b)} · {dur(a, b)} раб. дн.</title></rect>')
         for a, b, lab in bars:
-            out.append(f'<rect x="{X(a):.1f}" y="{y + 12}" width="{max((b - a).days * k + k, 4):.1f}" height="11" rx="2" fill="#140093" opacity=".88"><title>факт {P.fmt(a)} – {P.fmt(b)} · {wdb(a, b)} раб. дн.</title></rect>')
-            if lab:
-                out.append(f'<text x="{X(a) + 5:.1f}" y="{y + 21}" font-size="9" font-weight="700" fill="#fff">{e(lab)}</text>')
+            out.append(f'<rect x="{X(a):.1f}" y="{y + 20}" width="{max((b - a).days * k + k, 4):.1f}" height="12" rx="2" fill="#140093" opacity=".88"><title>факт {P.fmt(a)} – {P.fmt(b)} · {wdb(a, b)} раб. дн.</title></rect>')
+            lab2 = (lab + " · " if lab else "") + f"{dur(a, b)} дн."
+            bw = max((b - a).days * k + k, 4)
+            if bw < len(lab2) * 5.6 + 30 or marks:
+                out.append(f'<text x="{X(a) + bw + 12:.1f}" y="{y + 30}" font-size="10" font-weight="700" fill="#140093">{e(lab2)}</text>')
+            else:
+                out.append(f'<text x="{X(a) + 16:.1f}" y="{y + 30}" font-size="10" font-weight="700" fill="#fff">{e(lab2)}</text>')
         for dt, kind, lab in marks:
-            x, cy = X(dt) + k / 2, y + 17.5
+            x, cy = X(dt) + k / 2, y + 26
             tip = f"<title>{e(lab)}</title>"
             if kind == "ok":
                 out.append(f'<circle cx="{x:.1f}" cy="{cy}" r="6" fill="#63BA3C" stroke="#fff" stroke-width="1.5">{tip}</circle>')
@@ -119,18 +155,18 @@ def svg(rows, m) -> str:
                 out.append(f'<g>{tip}<path d="M{x:.1f} {cy - 6} l6 6 l-6 6 l-6 -6 z" fill="#C7D4DE"/><line x1="{x - 7:.1f}" x2="{x + 7:.1f}" y1="{cy}" y2="{cy}" stroke="#E5493A" stroke-width="1.6"/></g>')
             elif kind == "fc":
                 out.append(f'<path d="M{x:.1f} {cy - 8} l8 8 l-8 8 l-8 -8 z" fill="#F26B43" stroke="#fff" stroke-width="1.5">{tip}</path>')
-            if kind in ("plan", "fc", "sc", "old"):
-                out.append(f'<text x="{x:.1f}" y="{y + 6}" font-size="9" font-weight="700" text-anchor="middle" fill="{"#F26B43" if kind == "fc" else "#904EE2" if kind == "sc" else "#140093" if kind == "plan" else "#8A9BB5"}">{P.fmt(dt)}</text>')
+            if kind in ("plan", "fc", "sc", "old") and dt != Dt(14, 10):
+                out.append(f'<text x="{x:.1f}" y="{y + 9}" font-size="9" font-weight="700" text-anchor="middle" fill="{"#F26B43" if kind == "fc" else "#904EE2" if kind == "sc" else "#140093" if kind == "plan" else "#8A9BB5"}">{P.fmt(dt)}</text>')
             if kind == "sc":
                 out.append(f'<path d="M{x:.1f} {cy - 7} l7 7 l-7 7 l-7 -7 z" fill="#904EE2" stroke="#fff" stroke-width="1.2">{tip}</path>')
     tx = X(TODAY) + k / 2
     out.append(f'<line x1="{tx:.1f}" x2="{tx:.1f}" y1="14" y2="{H - 30}" stroke="#E5493A" stroke-width="2"/><text x="{tx + 4:.1f}" y="{H - 34}" font-size="10" font-weight="700" fill="#E5493A">сегодня 22 окт</text>')
     lg = [("#C7D4DE", "план по SLA от 03.08", "r"), ("#140093", "факт (полоса)", "r"), ("#4BADE8", "отправили на аудит", "c"), ("#63BA3C", "согласовали / пройдено", "c"),
           ("#E5493A", "не согласовали", "c"), ("#FBAE40", "причина сдвига", "d"), ("#F26B43", "текущий прогноз Прод", "d"), ("#904EE2", "прогноз по SLA", "d")]
-    lx = L
+    lx = 206
     for col, t, sh in lg:
         out.append(f'<rect x="{lx}" y="{H - 22}" width="11" height="11" fill="{col}" rx="{5 if sh == "c" else 1}"/><text x="{lx + 16}" y="{H - 13}" font-size="10" fill="#333">{t}</text>')
-        lx += 135
+        lx += 152
     return "".join(out) + "</svg>"
 
 
@@ -158,11 +194,13 @@ def example_html() -> str:
     ]
     tr = []
     for name, sla, a, b, note in stages:
-        v = wdb(a, b)
+        v = dur(a, b) if name not in ('Пауза между итерациями регресса', 'Старт аудита после фича-фриза', 'Выход в Прод: план → текущий прогноз') else wdb(a, b)
+        if name == 'Пауза между итерациями регресса':
+            v = dur(P.add_wd(a, 1), P.add_wd(b, -1))
         tr.append([name, sla, f"{P.fmt(a)} – {P.fmt(b)}", f"<td><b>{v}</b></td>", note])
     tbl = S.tbl(["Этап", "SLA, раб. дн.", "Факт: период", "Факт, раб. дн.", "Что произошло"], tr)
     shifts = S.ul([
-        "03.08 — одна ветка develop/26.2 на старте релиза: два релиза (26.2.1 и 26.2.2) шли одним потоком, спринт сжат до 6 рабочих дней.",
+        "03.08 — одна ветка develop/26.2 на старте релиза: два релиза (26.2.1 и 26.2.2) шли одним потоком, спринт сжат до 7 рабочих дней.",
         "13.08 — финализация релизного тикета уже после старта (должна быть до сбора ветки).",
         "11.08 – 15.10 — «2 месяца на уязвимости»: устранение уязвимостей шло весь период вместо 3 дней по SLA.",
         "21.09 — нет брони ИБ: окно на аудит не было заранее заложено в календарь.",
@@ -174,7 +212,7 @@ def example_html() -> str:
            f"Если после завершения багфикса 22.10 понадобятся повторные Smoke UAT и аудит, цикл по SLA даст <b>{P.fmt(cons)}</b>. Прогноз 26.10 при текущем состоянии не достижим.</div>")
     insights = S.ol([
         f"План выхода в Прод 25.08 заложен на {plan_wd} раб. дней; цикл по SLA — {sla_total[0]:g}–{sla_total[1]:g}. Даты релиза надо считать от SLA этапов, а не задавать произвольно.",
-        "Потери по этапам: багфикс и уязвимости растянулись на 43–47 раб. дней вместо 3, пауза регресса — 30 дней, аудит — 27 дней вместо 5.",
+        "Потери по этапам: багфикс и уязвимости растянулись на 44–48 раб. дней вместо 3, пауза регресса — 29 дней, аудит — 28 дней вместо 5.",
         "Аудит ИБ стартовал на 4 недели позже фича-фриза: нужна бронь окон ИБ в годовом календаре (раздел «Стратегическое планирование»).",
         "SAST и Секреты не согласованы с первого раза: уязвимости нужно закрывать до отправки на аудит, этап 13 завершается код-фризом.",
         "Два релиза одной веткой (26.2.1 + 26.2.2) нарушили правило «один релиз — одна ветка и один набор дат»: сдвиг одного тянет второй.",
@@ -185,4 +223,4 @@ def example_html() -> str:
             "План по SLA построен от старта 03.08 с учётом ПСИ ИБ (график — серые полосы).</p>")
     return ("<p>Пример применения модели к реальным релизам: на диаграмме Ганта — план по нашим SLA от 03.08 и факт из календаря релизов по этапам, "
             "вехи аудита, причины сдвига и прогнозы выхода в Прод.</p>" + note + kp + '<div class="card" style="overflow:auto">' + svg(rows, m) + "</div>"
-            + "<h3>Сроки по этапам: SLA и факт</h3>" + tbl + "<h3>Причины сдвига</h3>" + shifts + wnd + "<h3>Выводы</h3>" + insights)
+            + "<h3>Сроки по этапам: SLA и факт</h3>" + tbl + "<p class='muted'>Длительность — рабочие дни периода, включая первый и последний день; для паузы — дни простоя между итерациями, для «старта аудита» и «выхода в Прод» — рабочих дней между датами.</p>" + "<h3>Причины сдвига</h3>" + shifts + wnd + "<h3>Выводы</h3>" + insights)
