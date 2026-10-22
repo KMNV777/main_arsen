@@ -15,6 +15,7 @@ import build_confluence as C
 import build_release_process as B
 import process_data as D
 import sections as S
+import example_html as EX
 import fact_html as FH
 import plan_html as PH
 import planning as PL
@@ -90,7 +91,8 @@ def main() -> None:
              "В конце каждого раздела — поле «Ваши правки».</p>")
     rels = PL.releases()
     mid = [("rmap", "Дорожная карта релизов", PH.roadmap_html(rels)), ("strategy", "Стратегическое планирование релизов", PH.strategy_html(rels)),
-           ("fact", "Фактический календарь релизов", FH.fact_html(rels))]
+           ("fact", "Фактический календарь релизов", FH.fact_html(rels)),
+           ("example", "Пример: анализ сроков EARM 26.2.1 / 26.2.2", EX.example_html())]
     html = B.build_html(pages, mid=mid, trz=PH.econ_html(),
                         title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True)
     html = html.replace("<main>", "<main>" + intro, 1)
