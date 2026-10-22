@@ -31,7 +31,7 @@ CSS_FACT = r"""
 
 JS = r"""
 (function(){
-var DATA=__DATA__,KEY='rp-fact-v1',MO=__MO__,HOL={};DATA.hol.forEach(function(h){HOL[h]=1});
+var DATA=__DATA__,ID=DATA.ids,KEY='rp-fact-v1',MO=__MO__,HOL={};DATA.hol.forEach(function(h){HOL[h]=1});
 var ST={};try{ST=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){ST={}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
 var cur=0,today=new Date().toISOString().slice(0,10);
@@ -45,18 +45,18 @@ function rst(i){var b=DATA.rels[i],o=ST[b.name]||(ST[b.name]={});if(!o.steps)o.s
 function plan(i){var b=DATA.rels[i],o=rst(i),day0=o.start||b.day0,psi=(o.psi===undefined)?b.psi:o.psi,cols=[],c;
  for(c=0;c<=50;c++)cols.push(addWd(day0,c));var out={};
  DATA.steps.forEach(function(s){var a=psi?s.a1:s.a0,b2=psi?s.b1:s.b0,c0,c1;if(b2>a){c0=Math.floor(a);c1=Math.floor(b2)-1}else{c0=c1=Math.max(Math.floor(a)-1,0)}
-  out[s.n]={s:cols[c0],e:cols[Math.max(c1,c0)],skip:(s.n===18&&!psi),days:(s.n===18&&!psi)?0:s.d}});
+  out[s.n]={s:cols[c0],e:cols[Math.max(c1,c0)],skip:(s.n===ID.psi&&!psi),days:(s.n===ID.psi&&!psi)?0:s.d}});
  return {day0:day0,psi:psi,p:out}}
 function status(pl,f){if(pl.skip)return ['sk','пропуск'];if(f&&f.fe)return ['dn','готово'];if(f&&f.fs)return [(today>pl.e?'ov':'wk'),(today>pl.e?'просрочен':'в работе')];return [(today>pl.e?'ov':'nd'),(today>pl.e?'просрочен':'не начат')]}
 function dev(pl,f){if(pl.skip)return null;if(f&&f.fe)return wdDiff(pl.e,f.fe);if(today>pl.e)return wdDiff(pl.e,today);return null}
 function summary(i){var o=rst(i),P0=plan(i),done=0,tot=0,last=null,lastDev=null;
  DATA.steps.forEach(function(s){var pl=P0.p[s.n];if(pl.skip)return;tot++;var f=o.steps[s.n];if(f&&f.fe){done++;last=s.n;lastDev=wdDiff(pl.e,f.fe)}});
- var prodF=(o.steps[27]||{}).fe,closeF=(o.steps[32]||{}).fe,dv=P0.p[27]?wdDiff(P0.p[27].e,prodF):null;
+ var prodF=(o.steps[ID.prod]||{}).fe,closeF=(o.steps[ID.close]||{}).fe,dv=P0.p[ID.prod]?wdDiff(P0.p[ID.prod].e,prodF):null;
  var st=closeF?'закрыт':(done?'в работе':(today>P0.p[1].e?'не начат (просрочка)':'план'));
- return {P:P0,done:done,tot:tot,lastDev:lastDev,prodPlan:P0.p[27].e,prodFact:prodF,devProd:dv,closePlan:P0.p[32].e,closeFact:closeF,st:st}}
+ return {P:P0,done:done,tot:tot,lastDev:lastDev,prodPlan:P0.p[ID.prod].e,prodFact:prodF,devProd:dv,closePlan:P0.p[ID.close].e,closeFact:closeF,st:st}}
 function devCell(v){if(v===null||v===undefined)return '<td class="dv">—</td>';return '<td class="dv '+(v>0?'late':(v<0?'early':''))+'">'+(v>0?'+':'')+v+'</td>'}
 function chart(i){var o=rst(i),P0=plan(i),rows=DATA.steps.filter(function(s){return !P0.p[s.n].skip}),
- mn=P0.p[1].s,mx=P0.p[32].e;rows.forEach(function(s){var f=o.steps[s.n]||{};[f.fs,f.fe].forEach(function(x){if(x){if(x<mn)mn=x;if(x>mx)mx=x}})});if(today>mx&&Object.keys(o.steps).length)mx=today;
+ mn=P0.p[1].s,mx=P0.p[ID.close].e;rows.forEach(function(s){var f=o.steps[s.n]||{};[f.fs,f.fe].forEach(function(x){if(x){if(x<mn)mn=x;if(x>mx)mx=x}})});if(today>mx&&Object.keys(o.steps).length)mx=today;
  var d0=D0(mn),days=Math.round((D0(mx)-d0)/864e5)+4,W=1000,L=250,rh=17,H=rows.length*rh+44,k=(W-L-20)/days;
  var X=function(s){return L+(Math.round((D0(s)-d0)/864e5))*k},sv='<svg class="chart" viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="План и факт по этапам">';
  var m=new Date(d0.getTime());m.setUTCDate(1);m=new Date(Date.UTC(m.getUTCFullYear(),m.getUTCMonth()+1,1));
@@ -126,7 +126,7 @@ def fact_html(rels) -> str:
                       "a0": s0[n][0], "b0": s0[n][1], "a1": s1[n][0], "b1": s1[n][1]})
     data = {"steps": steps, "ph": {str(k): v for k, v in D.PHASES.items()},
             "rels": [{"name": r["name"], "day0": r["day0"].isoformat(), "psi": r["psi"]} for r in rels],
-            "hol": sorted(d.isoformat() for d in P.HOLIDAYS)}
+            "ids": D.ID, "hol": sorted(d.isoformat() for d in P.HOLIDAYS)}
     js = JS.replace("__DATA__", json.dumps(data, ensure_ascii=False)).replace("__MO__", json.dumps(P.MONTHS, ensure_ascii=False))
     return ("<p>Фактический календарь: план по каждому этапу считается из SLA и стартовой даты релиза; рядом — поля для <b>фактических дат начала и окончания</b>. "
             "По ним считаются отклонение в рабочих днях, статус этапа, сводка по релизам, прогноз закрытия и график «план / факт». "

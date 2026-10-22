@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="712" viewBox="0 0 1500 712" font-family="Helvetica, Arial, sans-serif">
-<rect width="1500" height="712" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="736" viewBox="0 0 1500 736" font-family="Helvetica, Arial, sans-serif">
+<rect width="1500" height="736" fill="#FFFFFF"/>
 <defs>
 <marker id="m0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1B1B3A"/></marker>
 </defs>
@@ -11,12 +11,12 @@
 <text x="25" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">обязательный объём спринтов; в нём — релизные</text>
 <text x="25" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">работы</text>
 <rect x="400" y="84" width="320" height="120" rx="8" fill="#FFE9D2" stroke="#FDAB64" stroke-width="1"/>
-<text x="405" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Fix Version (релиз)</text>
-<text x="405" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">состав релиза: только Story и Bug; источник строки</text>
-<text x="405" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">календаря</text>
+<text x="405" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Fix Version (релиз = тег)</text>
+<text x="405" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">состав релиза: только Story и Bug; ID релиза —</text>
+<text x="405" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">git-тег в репозитории каждого сервиса</text>
 <rect x="780" y="84" width="340" height="120" rx="8" fill="#F0FBD0" stroke="#8AB800" stroke-width="1"/>
 <text x="785" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Задача этапа</text>
-<text x="785" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">по одной на каждый этап (1–32): оценка, исполнитель,</text>
+<text x="785" y="113" font-size="11" fill="#1B1B3A" text-anchor="start">по одной на каждый этап (1–36): оценка, исполнитель,</text>
 <text x="785" y="127" font-size="11" fill="#1B1B3A" text-anchor="start">результат; возврат — новая задача</text>
 <rect x="1180" y="84" width="300" height="120" rx="8" fill="#E6F0FB" stroke="#4895EB" stroke-width="1"/>
 <text x="1185" y="99" font-size="11" fill="#1B1B3A" text-anchor="start" font-weight="bold">Подзадача сервиса</text>
@@ -58,7 +58,7 @@
 <rect x="320" y="432" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="325" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Соблюдение срока выпуска</text>
 <rect x="700" y="432" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Дата деплоя в Прод − дата старта сбора тикета; сравнение с суммой SLA</text>
+<text x="705" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Дата деплоя в Прод − дата старта приоритетов; сравнение с суммой SLA</text>
 <rect x="1220" y="432" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1225" y="447" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
 <rect x="20" y="456" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -86,7 +86,7 @@
 <rect x="1220" y="504" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1225" y="519" font-size="11" fill="#1B1B3A" text-anchor="start">Ответственный за этап</text>
 <rect x="20" y="528" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Задачи, перенесённые в следующий релиз</text>
+<text x="25" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Задачи, выведенные из релиза после демо</text>
 <rect x="320" y="528" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="325" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">Точность планирования спринта и приёмки</text>
 <rect x="700" y="528" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
@@ -94,45 +94,53 @@
 <rect x="1220" y="528" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="1225" y="543" font-size="11" fill="#1B1B3A" text-anchor="start">ВНП и РП направления</text>
 <rect x="20" y="552" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Критические дефекты после PreProd (hotfix)</text>
+<text x="25" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Загрузка QA в релизных спринтах</text>
 <rect x="320" y="552" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Качество релиза</text>
+<text x="325" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Риск «снежного кома» тестирования</text>
 <rect x="700" y="552" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Число hotfix на релиз</text>
+<text x="705" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Дни QA на регресс и Smoke / дни QA в спринте</text>
 <rect x="1220" y="552" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1225" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<text x="1225" y="567" font-size="11" fill="#1B1B3A" text-anchor="start">РП направления</text>
 <rect x="20" y="576" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Доля релизов со сбоями</text>
+<text x="25" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Критические дефекты после PreProd (hotfix)</text>
 <rect x="320" y="576" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Надёжность выкатки</text>
+<text x="325" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Качество релиза</text>
 <rect x="700" y="576" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Релизы с инцидентом или откатом / все релизы</text>
+<text x="705" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Число hotfix на релиз</text>
 <rect x="1220" y="576" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1225" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">DevOps и сервис ГПН-ЦР</text>
+<text x="1225" y="591" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
 <rect x="20" y="600" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Частота релизов</text>
+<text x="25" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Доля релизов со сбоями</text>
 <rect x="320" y="600" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Ритм поставки</text>
+<text x="325" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Надёжность выкатки</text>
 <rect x="700" y="600" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Число релизов за период</text>
+<text x="705" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Релизы с инцидентом или откатом / все релизы</text>
 <rect x="1220" y="600" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1225" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
+<text x="1225" y="615" font-size="11" fill="#1B1B3A" text-anchor="start">DevOps и тестировщик ГПН-ЦР</text>
 <rect x="20" y="624" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Время деплоя</text>
+<text x="25" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Частота релизов</text>
 <rect x="320" y="624" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Скорость выкатки</text>
+<text x="325" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Ритм поставки</text>
 <rect x="700" y="624" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Готово деплоя − Старт деплоя</text>
+<text x="705" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Число релизов за период</text>
 <rect x="1220" y="624" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1225" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Релиз-инженер сервиса</text>
+<text x="1225" y="639" font-size="11" fill="#1B1B3A" text-anchor="start">Release owner</text>
 <rect x="20" y="648" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">FTE ролей релизного цикла</text>
+<text x="25" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Время деплоя</text>
 <rect x="320" y="648" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="325" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Загрузка ролей и экономика релиза</text>
+<text x="325" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Скорость выкатки</text>
 <rect x="700" y="648" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="705" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">ТРЗ роли за период / (рабочие часы × 0,8)</text>
+<text x="705" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Готово деплоя − Старт деплоя</text>
 <rect x="1220" y="648" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="1225" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Администратор проекта</text>
+<text x="1225" y="663" font-size="11" fill="#1B1B3A" text-anchor="start">Релиз-инженер ГПН</text>
+<rect x="20" y="672" width="300" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="687" font-size="11" fill="#1B1B3A" text-anchor="start">FTE ролей релизного цикла</text>
+<rect x="320" y="672" width="380" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="325" y="687" font-size="11" fill="#1B1B3A" text-anchor="start">Загрузка ролей и экономика релиза</text>
+<rect x="700" y="672" width="520" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="705" y="687" font-size="11" fill="#1B1B3A" text-anchor="start">ТРЗ роли за период / (рабочие часы × 0,8)</text>
+<rect x="1220" y="672" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="1225" y="687" font-size="11" fill="#1B1B3A" text-anchor="start">Администратор проекта</text>
 <polyline points="340,144 400,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="720,144 780,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>
 <polyline points="1120,144 1180,144" fill="none" stroke="#1B1B3A" stroke-width="1.5" marker-end="url(#m0)"/>

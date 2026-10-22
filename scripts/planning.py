@@ -50,6 +50,9 @@ def sprint_start(idx: int) -> date:
     return SPRINT0 + timedelta(days=SPRINT_DAYS * idx)
 
 
+PREP = int(D.schedule(False)[D.ID["dev"]][0])          # рабочих дней планирования до старта спринта
+SPRINT_WD = 10
+PSI = D.ID["psi"]
 PHASE_STEPS = {p: [s[0] for s in D.STEPS if s[1] == p] for p in D.PHASES}
 
 
@@ -64,7 +67,7 @@ def releases() -> List[dict]:
             day0 = s0
             while not is_wd(day0):
                 day0 += timedelta(days=1)
-            day0 = add_wd(day0, -3)
+            day0 = add_wd(day0, -PREP)
             psi = k_all % PSI_EVERY == 0
             sch = D.schedule(psi)
             cols = [add_wd(day0, c) for c in range(int(max(v[1] for v in sch.values())) + 1)]
@@ -79,19 +82,19 @@ def releases() -> List[dict]:
                 steps.append({"n": n, "c0": c0, "c1": c1, "s": cols[c0].isoformat(), "e": cols[c1].isoformat(), "a": a, "b": b})
             phases = {}
             for p, ns in PHASE_STEPS.items():
-                st = [x for x in steps if x["n"] in ns and not (x["n"] == 18 and not psi)]
+                st = [x for x in steps if x["n"] in ns and not (x["n"] == PSI and not psi)]
                 phases[p] = (date.fromisoformat(min(x["s"] for x in st)), date.fromisoformat(max(x["e"] for x in st)))
             end = max(v[1] for v in phases.values())
             pdays = {}
             for p_, ns_ in PHASE_STEPS.items():
-                ss = [sch[n_] for n_ in ns_ if not (n_ == 18 and not psi)]
+                ss = [sch[n_] for n_ in ns_ if not (n_ == PSI and not psi)]
                 pdays[p_] = int(round(max(b_ for a_, b_ in ss) - min(a_ for a_, b_ in ss)))
-            out.append({"name": f"EARM{code}.{k}", "q": qname, "k": k, "psi": psi, "sprint": (add_wd(day0, 3), add_wd(day0, 12)), "day0": day0,
-                        "freeze": add_wd(day0, 12), "code_freeze": date.fromisoformat(next(x for x in steps if x["n"] == 13)["e"]),
-                        "audit": (date.fromisoformat(next(x for x in steps if x["n"] == 15)["s"]), date.fromisoformat(next(x for x in steps if x["n"] == 15)["e"])),
-                        "transfer": date.fromisoformat(next(x for x in steps if x["n"] == 19)["e"]),
-                        "preprod": date.fromisoformat(next(x for x in steps if x["n"] == 20)["s"]),
-                        "prod": date.fromisoformat(next(x for x in steps if x["n"] == 27)["s"]),
+            out.append({"name": f"EARM{code}.{k}", "q": qname, "k": k, "psi": psi, "sprint": (add_wd(day0, PREP), add_wd(day0, PREP + SPRINT_WD - 1)), "day0": day0,
+                        "freeze": add_wd(day0, PREP + SPRINT_WD - 1), "code_freeze": date.fromisoformat(next(x for x in steps if x["n"] == D.ID["fix"])["e"]),
+                        "audit": (date.fromisoformat(next(x for x in steps if x["n"] == D.ID["audit"])["s"]), date.fromisoformat(next(x for x in steps if x["n"] == D.ID["audit"])["e"])),
+                        "transfer": date.fromisoformat(next(x for x in steps if x["n"] == D.ID["transfer"])["e"]),
+                        "preprod": date.fromisoformat(next(x for x in steps if x["n"] == D.ID["preprod"])["s"]),
+                        "prod": date.fromisoformat(next(x for x in steps if x["n"] == D.ID["prod"])["s"]),
                         "close": end, "phases": phases, "pdays": pdays, "steps": steps, "cols": [c.isoformat() for c in cols]})
     for r in out:
         r["status"] = "ВЫПОЛНЕНО" if r["close"] < TODAY else ("В РАБОТЕ" if r["day0"] <= TODAY else "ПЛАН")
@@ -150,9 +153,9 @@ if __name__ == "__main__":
 
 
 def days_txt(n: int) -> str:
-    if n in (4, 5, 6):
+    if n in D.IN_SPRINT:
         return "10"
-    if n == 18:
+    if n == PSI:
         return "0 / 5"
     return f"{D.dur(n, False):g}"
 
@@ -165,7 +168,7 @@ def stage_matrix(rels: List[dict] | None = None) -> List[List[str]]:
         row = [str(n), D.STEP_NAME[n], days_txt(n), D.role_short(D.SN[n][3])]
         for r in rels:
             x = next(x for x in r["steps"] if x["n"] == n)
-            if n == 18 and not r["psi"]:
+            if n == PSI and not r["psi"]:
                 row.append("не нужен")
                 continue
             a, b = date.fromisoformat(x["s"]), date.fromisoformat(x["e"])
