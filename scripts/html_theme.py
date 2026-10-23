@@ -5,7 +5,7 @@ CSS = r"""
 :root{--blue:#140093;--blue-2:#250DBA;--lime:#CFF85E;--orange:#F26B43;--amber:#FBAE40;--grey-l:#C7D4DE;--ink:#333333;--bg:#F5F6F8;--white:#fff;--ink-2:#5E5E5E;--ink-3:#8A8A8A;--line:#E3E8EE;--blue-wash:#EEEDF8;
 --bg2:#F5F6F8;--fg:#333333;--mut:#5E5E5E;--card:#fff;--ind:#140093;--sky:#AAC3E3;--orgd:#F26B43;--org:#FBAE40;--hi:#FADBD8;--mid:#FFE9CC;--lo:#EAFAB8;--new:#FFE9CC;--th:#140093;--thfg:#fff;--ph:#EEEDF8;--note:#FFF6E8;--r:3px;--r2:6px;
 --sh-1:0 1px 2px rgba(23,43,77,.08);--sh-2:0 4px 14px rgba(23,43,77,.12)}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px;zoom:1.25}@media (max-width:900px){html{zoom:1}}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Arial,"Helvetica Neue",Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.015em;line-height:1.1}p{margin:0 0 10px}
 header.top{background:linear-gradient(120deg,#1B08A6,#140093 55%,#10007A);color:#fff;padding:34px 56px;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(20,0,147,.16)}
