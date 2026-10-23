@@ -71,7 +71,7 @@ def build():
         ("Фича-фриз", span(m, "freeze"), [], [(Dt(11, 8), "ok", "фича-фриз 11.08")]),
         ("Регресс UAT", span(m, "regress"), [(Dt(12, 8), Dt(24, 8), "итерация 1"), (Dt(5, 10), Dt(12, 10), "итерация 2")], []),
         ("Устранение багов UAT", span(m, "fix"), [(Dt(24, 8), Dt(22, 10), "закончили по 2 итерациям")], []),
-        ("Уязвимости (в модели — в спринте)", span(m, "scan"), [(Dt(11, 8), Dt(15, 10), "«2 месяца на уязвимости»")], []),
+        ("Уязвимости (в спринте)", span(m, "scan"), [(Dt(11, 8), Dt(15, 10), "«2 месяца на уязвимости»")], []),
         ("Техсессия и очное демо", None, [(Dt(9, 9), Dt(2, 10), "вне процесса")], []),
         ("Ожидание ИБ", None, [], [(Dt(21, 9), "warn", "нет брони ИБ 21.09")]),
         ("Аудит кода · SAST", span(m, "audit"), [(Dt(8, 9), Dt(15, 10), "")], [(Dt(8, 9), "sent", "ушли 08.09"), (Dt(15, 9), "no", "не согласовали 15.09"), (Dt(15, 10), "ok", "согласовали 15.10")]),
@@ -106,52 +106,52 @@ def col_texts(name, plan, bars, marks):
 
 def svg(rows, m) -> str:
     d0, d1 = date(2026, 7, 30), date(2026, 11, 26)
-    L, W, rh = 600, 1450, 38
+    L, W, rh = 590, 1260, 54
     days = (d1 - d0).days
     k = (W - L - 20) / days
     X = lambda d: L + (d - d0).days * k
-    H = 44 + len(rows) * rh + 40
-    out = [f'<svg class="chart" viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="Диаграмма Ганта EARM 26.2">']
-    out.append('<text x="206" y="32" font-size="10" font-weight="700" fill="#140093" letter-spacing=".06em">ПЛАН ПО SLA</text><text x="388" y="32" font-size="10" font-weight="700" fill="#140093" letter-spacing=".06em">ФАКТ</text>')
+    H = 48 + len(rows) * rh + 48
+    out = [f'<svg class="chart" viewBox="0 0 {W} {H}" style="width:100%" role="img" aria-label="Диаграмма Ганта EARM 26.2">']
+    out.append('<text x="228" y="34" font-size="14" font-weight="700" fill="#140093" letter-spacing=".06em">ПЛАН ПО SLA</text><text x="412" y="34" font-size="14" font-weight="700" fill="#140093" letter-spacing=".06em">ФАКТ</text>')
     d = date(2026, 8, 1)
     while d < d1:
         nm = date(d.year + (d.month == 12), d.month % 12 + 1, 1)
-        out.append(f'<line x1="{X(d):.1f}" x2="{X(d):.1f}" y1="14" y2="{H - 30}" stroke="#DDE3EE"/><text x="{X(d) + 4:.1f}" y="12" font-size="11" font-weight="700" fill="#140093">{P.MONTHS_FULL[d.month - 1]}</text>')
+        out.append(f'<line x1="{X(d):.1f}" x2="{X(d):.1f}" y1="14" y2="{H - 30}" stroke="#DDE3EE"/><text x="{X(d) + 4:.1f}" y="14" font-size="14" font-weight="700" fill="#140093">{P.MONTHS_FULL[d.month - 1]}</text>')
         d = nm
     w = d0 + timedelta(days=(7 - d0.weekday()) % 7)
     while w < d1:
-        out.append(f'<line x1="{X(w):.1f}" x2="{X(w):.1f}" y1="20" y2="{H - 30}" stroke="#F0F2F6"/><text x="{X(w) + 1:.1f}" y="30" font-size="8" fill="#8A9BB5">{w.day}</text>')
+        out.append(f'<line x1="{X(w):.1f}" x2="{X(w):.1f}" y1="20" y2="{H - 30}" stroke="#F0F2F6"/><text x="{X(w) + 1:.1f}" y="32" font-size="11" fill="#8A9BB5">{w.day}</text>')
         w += timedelta(days=7)
     for i, (name, plan, bars, marks) in enumerate(rows):
-        y = 44 + i * rh
+        y = 48 + i * rh
         if i % 2 == 0:
             out.append(f'<rect x="0" y="{y}" width="{W}" height="{rh}" fill="#F8F9FC"/>')
-        out.append(f'<text x="198" y="{y + 22}" font-size="12" text-anchor="end" fill="#1B1B3A" font-weight="700">{e(name)}</text>')
+        out.append(f'<text x="215" y="{y + 31}" font-size="14" text-anchor="end" fill="#1B1B3A" font-weight="700">{e(name)}</text>')
         pt, ft = col_texts(name, plan, bars, marks)
         for j, t in enumerate(pt):
-            out.append(f'<text x="206" y="{y + 16 + j * 13}" font-size="10.5" fill="#42526E">{e(t)}</text>')
+            out.append(f'<text x="228" y="{y + 22 + j * 17}" font-size="14" fill="#42526E">{e(t)}</text>')
         for j, t in enumerate(ft):
-            out.append(f'<text x="388" y="{y + 16 + j * 13}" font-size="10.5" fill="#140093" font-weight="700">{e(t)}</text>')
+            out.append(f'<text x="412" y="{y + 22 + j * 17}" font-size="14" fill="#140093" font-weight="700">{e(t)}</text>')
         if plan:
             a, b = plan
-            out.append(f'<rect x="{X(a):.1f}" y="{y + 6}" width="{max((b - a).days * k + k, 4):.1f}" height="8" rx="1" fill="#C7D4DE"><title>план по SLA {P.fmt(a)} – {P.fmt(b)} · {dur(a, b)} раб. дн.</title></rect>')
+            out.append(f'<rect x="{X(a):.1f}" y="{y + 8}" width="{max((b - a).days * k + k, 4):.1f}" height="10" rx="1" fill="#C7D4DE"><title>план по SLA {P.fmt(a)} – {P.fmt(b)} · {dur(a, b)} раб. дн.</title></rect>')
         for a, b, lab in bars:
-            out.append(f'<rect x="{X(a):.1f}" y="{y + 20}" width="{max((b - a).days * k + k, 4):.1f}" height="12" rx="2" fill="#140093" opacity=".88"><title>факт {P.fmt(a)} – {P.fmt(b)} · {wdb(a, b)} раб. дн.</title></rect>')
+            out.append(f'<rect x="{X(a):.1f}" y="{y + 28}" width="{max((b - a).days * k + k, 4):.1f}" height="20" rx="2" fill="#140093" opacity=".88"><title>факт {P.fmt(a)} – {P.fmt(b)} · {wdb(a, b)} раб. дн.</title></rect>')
             lab2 = (lab + " · " if lab else "") + f"{dur(a, b)} дн."
             bw = max((b - a).days * k + k, 4)
-            if bw < len(lab2) * 5.6 + 30 or marks:
-                out.append(f'<text x="{X(a) + bw + 12:.1f}" y="{y + 30}" font-size="10" font-weight="700" fill="#140093">{e(lab2)}</text>')
+            if bw < len(lab2) * 7.6 + 30 or marks:
+                out.append(f'<text x="{X(a) + bw + 12:.1f}" y="{y + 43}" font-size="14" font-weight="700" fill="#140093">{e(lab2)}</text>')
             else:
-                out.append(f'<text x="{X(a) + 16:.1f}" y="{y + 30}" font-size="10" font-weight="700" fill="#fff">{e(lab2)}</text>')
+                out.append(f'<text x="{X(a) + 16:.1f}" y="{y + 43}" font-size="14" font-weight="700" fill="#fff">{e(lab2)}</text>')
         for dt, kind, lab in marks:
-            x, cy = X(dt) + k / 2, y + 26
+            x, cy = X(dt) + k / 2, y + 38
             tip = f"<title>{e(lab)}</title>"
             if kind == "ok":
-                out.append(f'<circle cx="{x:.1f}" cy="{cy}" r="6" fill="#63BA3C" stroke="#fff" stroke-width="1.5">{tip}</circle>')
+                out.append(f'<circle cx="{x:.1f}" cy="{cy}" r="8" fill="#63BA3C" stroke="#fff" stroke-width="1.5">{tip}</circle>')
             elif kind == "sent":
-                out.append(f'<circle cx="{x:.1f}" cy="{cy}" r="5" fill="#4BADE8" stroke="#fff" stroke-width="1.5">{tip}</circle>')
+                out.append(f'<circle cx="{x:.1f}" cy="{cy}" r="7" fill="#4BADE8" stroke="#fff" stroke-width="1.5">{tip}</circle>')
             elif kind == "no":
-                out.append(f'<g>{tip}<circle cx="{x:.1f}" cy="{cy}" r="6" fill="#E5493A" stroke="#fff" stroke-width="1.5"/><path d="M{x - 3:.1f} {cy - 3} l6 6 M{x + 3:.1f} {cy - 3} l-6 6" stroke="#fff" stroke-width="1.6"/></g>')
+                out.append(f'<g>{tip}<circle cx="{x:.1f}" cy="{cy}" r="8" fill="#E5493A" stroke="#fff" stroke-width="1.5"/><path d="M{x - 3:.1f} {cy - 3} l6 6 M{x + 3:.1f} {cy - 3} l-6 6" stroke="#fff" stroke-width="1.6"/></g>')
             elif kind == "warn":
                 out.append(f'<path d="M{x:.1f} {cy - 7} l7 7 l-7 7 l-7 -7 z" fill="#FBAE40" stroke="#fff" stroke-width="1.2">{tip}</path>')
             elif kind == "plan":
@@ -161,17 +161,17 @@ def svg(rows, m) -> str:
             elif kind == "fc":
                 out.append(f'<path d="M{x:.1f} {cy - 8} l8 8 l-8 8 l-8 -8 z" fill="#F26B43" stroke="#fff" stroke-width="1.5">{tip}</path>')
             if kind in ("plan", "fc", "sc", "old") and dt != Dt(14, 10):
-                out.append(f'<text x="{x:.1f}" y="{y + 9}" font-size="9" font-weight="700" text-anchor="middle" fill="{"#F26B43" if kind == "fc" else "#904EE2" if kind == "sc" else "#140093" if kind == "plan" else "#8A9BB5"}">{P.fmt(dt)}</text>')
+                out.append(f'<text x="{x:.1f}" y="{y + 15}" font-size="13" font-weight="700" text-anchor="middle" fill="{"#F26B43" if kind == "fc" else "#904EE2" if kind == "sc" else "#140093" if kind == "plan" else "#8A9BB5"}">{P.fmt(dt)}</text>')
             if kind == "sc":
                 out.append(f'<path d="M{x:.1f} {cy - 7} l7 7 l-7 7 l-7 -7 z" fill="#904EE2" stroke="#fff" stroke-width="1.2">{tip}</path>')
     tx = X(TODAY) + k / 2
-    out.append(f'<line x1="{tx:.1f}" x2="{tx:.1f}" y1="14" y2="{H - 30}" stroke="#E5493A" stroke-width="2"/><text x="{tx + 4:.1f}" y="{H - 34}" font-size="10" font-weight="700" fill="#E5493A">сегодня 22 окт</text>')
-    lg = [("#C7D4DE", "план по SLA от 03.08", "r"), ("#140093", "факт (полоса)", "r"), ("#4BADE8", "отправили на аудит", "c"), ("#63BA3C", "согласовали / пройдено", "c"),
-          ("#E5493A", "не согласовали", "c"), ("#FBAE40", "причина сдвига", "d"), ("#F26B43", "текущий прогноз Прод", "d"), ("#904EE2", "прогноз по SLA", "d")]
-    lx = 206
+    out.append(f'<line x1="{tx:.1f}" x2="{tx:.1f}" y1="14" y2="{H - 30}" stroke="#E5493A" stroke-width="2"/><text x="{tx + 4:.1f}" y="{H - 36}" font-size="14" font-weight="700" fill="#E5493A">сегодня 22 окт</text>')
+    lg = [("#C7D4DE", "план SLA", "r"), ("#140093", "факт", "r"), ("#4BADE8", "ушли на аудит", "c"), ("#63BA3C", "согласовали", "c"),
+          ("#E5493A", "не согласовали", "c"), ("#FBAE40", "причина сдвига", "d"), ("#F26B43", "прогноз Прода", "d"), ("#904EE2", "прогноз по SLA", "d")]
+    lx = 228
     for col, t, sh in lg:
-        out.append(f'<rect x="{lx}" y="{H - 22}" width="11" height="11" fill="{col}" rx="{5 if sh == "c" else 1}"/><text x="{lx + 16}" y="{H - 13}" font-size="10" fill="#333">{t}</text>')
-        lx += 152
+        out.append(f'<rect x="{lx}" y="{H - 22}" width="13" height="13" fill="{col}" rx="{5 if sh == "c" else 1}"/><text x="{lx + 18}" y="{H - 12}" font-size="14" fill="#333">{t}</text>')
+        lx += 128
     return "".join(out) + "</svg>"
 
 
@@ -202,7 +202,7 @@ def example_html() -> str:
         v = dur(a, b) if name not in ('Пауза между итерациями регресса', 'Старт аудита после фича-фриза', 'Выход в Прод: план → текущий прогноз') else wdb(a, b)
         if name == 'Пауза между итерациями регресса':
             v = dur(P.add_wd(a, 1), P.add_wd(b, -1))
-        tr.append([name, sla, f"{P.fmt(a)} – {P.fmt(b)}", f"<td><b>{v}</b></td>", note])
+        tr.append([name, sla, f"<td style='white-space:nowrap'>{P.fmt(a)} – {P.fmt(b)}</td>", f"<td><b>{v}</b></td>", note])
     tbl = S.tbl(["Этап", "SLA, раб. дн.", "Факт: период", "Факт, раб. дн.", "Что произошло"], tr)
     shifts = S.ul([
         "03.08 — одна ветка develop/26.2 на старте релиза: два релиза (26.2.1 и 26.2.2) шли одним потоком, спринт сжат до 7 рабочих дней.",
