@@ -54,7 +54,7 @@
 <rect x="771" y="136" width="8" height="48" fill="#D64545" stroke="#D64545" stroke-width="1"/>
 <text x="780" y="107" font-size="9" fill="#D64545" text-anchor="middle" font-weight="bold">тег EARM-N</text>
 <text x="780" y="119" font-size="9" fill="#D64545" text-anchor="middle" font-weight="bold">фича-фриз (релиз-кандидат)</text>
-<text x="795" y="323" font-size="9" fill="#1B1B3A" text-anchor="start">стабилизация N: регресс UAT → фиксы в master → итоговый тег (код-фриз) → релиз-борд → PreProd → Прод</text>
+<text x="795" y="323" font-size="9" fill="#1B1B3A" text-anchor="start">стабилизация N: регресс UAT → фиксы (в master или в ветку от тега) → итоговый тег (код-фриз) → релиз-борд → PreProd → Прод</text>
 <rect x="1176" y="136" width="8" height="48" fill="#019390" stroke="#019390" stroke-width="1"/>
 <text x="1185" y="107" font-size="9" fill="#019390" text-anchor="middle" font-weight="bold">тег EARM-N (код-фриз)</text>
 <text x="1185" y="119" font-size="9" fill="#019390" text-anchor="middle" font-weight="bold">берёт релиз-борд</text>
@@ -78,7 +78,8 @@
 <text x="1051" y="471" font-size="9" fill="#904EE2" text-anchor="start">merge в master после приёмки;</text>
 <text x="1051" y="483" font-size="9" fill="#904EE2" text-anchor="start">не принято → ветка не вливается</text>
 <ellipse cx="1601" cy="600" rx="6" ry="6" fill="#D64545" stroke="#D64545" stroke-width="1"/>
-<text x="1310" y="629" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">hotfix: исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от тега Прода и новый тег</text>
+<text x="1310" y="623" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">hotfix (ускоренная полоса): исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от</text>
+<text x="1310" y="635" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">тега Прода и новый тег</text>
 <text x="185" y="672.5" font-size="10" fill="#140093" text-anchor="start" font-weight="bold">Сервисы живут в отдельных репозиториях: один и тот же ID релиза (Fix Version) ставится тегом в репозиториях всех сервисов релиза. Отдельных release-веток нет — нет и backport между ними.</text>
 <text x="185" y="696.5" font-size="10" fill="#1B1B3A" text-anchor="start">Соответствие этапам схемы 1: 5 — разработка и влитие в master · 9 — демо · 10 — вывод не принятых задач · 11 — фича-фриз и тег · 12–17 — стабилизация, фиксы в master · 31 — деплой в Прод.</text>
 <rect x="20" y="730" width="260" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
@@ -105,18 +106,23 @@
 <text x="25" y="865" font-size="11" fill="#1B1B3A" text-anchor="start">Фича-фриз и тег</text>
 <rect x="280" y="850" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="285" y="865" font-size="11" fill="#1B1B3A" text-anchor="start">В последний день спринта на коммит master ставится тег с ID релиза (релиз-кандидат). Новые фичи следующего спринта вливаются за флагом.</text>
-<rect x="20" y="874" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="889" font-size="11" fill="#1B1B3A" text-anchor="start">Исправления стабилизации</text>
-<rect x="280" y="874" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="285" y="889" font-size="11" fill="#1B1B3A" text-anchor="start">Баги регресса и блокирующие уязвимости правятся в master и фиксируются новым тегом; итоговый тег — код-фриз, его берёт релиз-борд.</text>
-<rect x="20" y="898" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="913" font-size="11" fill="#1B1B3A" text-anchor="start">Hotfix</text>
-<rect x="280" y="898" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="285" y="913" font-size="11" fill="#1B1B3A" text-anchor="start">Критический дефект после PreProd: исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от тега Прода и новый тег. Процесс тот же.</text>
-<rect x="20" y="922" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="25" y="937" font-size="11" fill="#1B1B3A" text-anchor="start">Параллельные релизы</text>
-<rect x="280" y="922" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="285" y="937" font-size="11" fill="#1B1B3A" text-anchor="start">Релизы различаются тегами, а не ветками: следующий релиз стартует, пока предыдущий в стабилизации, без отдельных release-веток и backport.</text>
+<rect x="20" y="874" width="260" height="38" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="896" font-size="11" fill="#1B1B3A" text-anchor="start">Исправления стабилизации</text>
+<rect x="280" y="874" width="1660" height="38" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="285" y="889" font-size="11" fill="#1B1B3A" text-anchor="start">Баги регресса и блокирующие уязвимости правятся в master и фиксируются новым тегом; если в master уже есть изменения следующего спринта (миграции, зависимости, конфиги), фикс идёт в короткоживущую ветку от тега релиза, которая живёт до деплоя. Итоговый тег —</text>
+<text x="285" y="903" font-size="11" fill="#1B1B3A" text-anchor="start">код-фриз, его берёт релиз-борд.</text>
+<rect x="20" y="912" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="927" font-size="11" fill="#1B1B3A" text-anchor="start">Защита тегов и образов</text>
+<rect x="280" y="912" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="285" y="927" font-size="11" fill="#1B1B3A" text-anchor="start">Теги релизов — protected (переставить нельзя); digest образа фиксируется в TOML и проверяется при согласовании трансфера. Миграции БД — обратно совместимые (expand/contract), чтобы код следующего спринта в master не ломал релиз.</text>
+<rect x="20" y="936" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="951" font-size="11" fill="#1B1B3A" text-anchor="start">Hotfix</text>
+<rect x="280" y="936" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="285" y="951" font-size="11" fill="#1B1B3A" text-anchor="start">Критический дефект: исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от тега Прода и новый тег. Идёт по ускоренной полосе hotfix (см. «Контроль релиза и риски»).</text>
+<rect x="20" y="960" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="25" y="975" font-size="11" fill="#1B1B3A" text-anchor="start">Параллельные релизы</text>
+<rect x="280" y="960" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+<text x="285" y="975" font-size="11" fill="#1B1B3A" text-anchor="start">Релизы различаются тегами, а не ветками: следующий релиз стартует, пока предыдущий в стабилизации, без отдельных release-веток и backport.</text>
 <polyline points="170,160 2100,160" fill="none" stroke="#140093" stroke-width="5"/>
 <polyline points="700,250 700,166" fill="none" stroke="#FF7500" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#m3)"/>
 <polyline points="775,186 775,300 1100,300" fill="none" stroke="#FF7500" stroke-width="2" stroke-dasharray="6 3"/>

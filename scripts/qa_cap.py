@@ -3,10 +3,10 @@
 
 JS = r"""
 (function(){
-var P={qa:1,days:10,regress:3,smoke:2,retest:1,k:2,qdpt:1.25,tasks:8,auto:0},lab={qa:'QA в команде, чел.',days:'Рабочих дней в спринте',regress:'Регресс UAT, дн.',smoke:'Smoke UAT, дн.',retest:'Перепроверка исправлений, дн.',k:'Релизный каждый N-й спринт',qdpt:'QA-дней на задачу',tasks:'Задач в спринте (план без резерва)',auto:'Автоматизация регресса, %'};
+var P={qa:1,days:10,regress:3,smoke:2,retest:1,k:2,qdpt:1.25,tasks:8,auto:0,risk:100},lab={qa:'QA в команде, чел.',days:'Рабочих дней в спринте',regress:'Регресс UAT, дн.',smoke:'Smoke UAT, дн.',retest:'Перепроверка исправлений, дн.',k:'Релизный каждый N-й спринт',qdpt:'QA-дней на задачу',tasks:'Задач в спринте (план без резерва)',auto:'Автоматизация регресса, %',risk:'Доля регресса, выполняемая по риску, %'};
 function nf(x,d){return x.toLocaleString('ru-RU',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
 function calc(){var S=12,rows=[],backlog=0,sumRes=0,cap=P.qa*P.days;
- for(var s=1;s<=S;s++){var res=(s>1&&(s-1)%P.k===0)?(P.regress*(1-P.auto/100)+P.smoke+P.retest):0;res=Math.min(res,cap);sumRes+=res;
+ for(var s=1;s<=S;s++){var res=(s>1&&(s-1)%P.k===0)?(P.regress*(1-P.auto/100)*(P.risk/100)+P.smoke+P.retest):0;res=Math.min(res,cap);sumRes+=res;
   var net=cap-res,demand=P.tasks*P.qdpt,tested=Math.min(P.tasks,net/P.qdpt),miss=Math.max(0,P.tasks-tested);backlog+=miss;
   rows.push({s:s,cap:cap,res:res,net:net,demand:demand,tested:tested,miss:miss,backlog:backlog,rel:(s%P.k===0)})}
  var avgNet=(cap*S-sumRes)/S,smooth=Math.floor(avgNet/P.qdpt);rows.forEach(function(r){r.plan=Math.floor(r.net/P.qdpt)});
@@ -23,7 +23,7 @@ function chart(c){var W=760,H=300,L=44,B=40,n=c.rows.length,bw=(W-L-20)/n,mx=Mat
  s+='<path d="'+d+'" fill="none" stroke="#E5493A" stroke-width="2.5"/><text x="'+(W-12)+'" y="14" font-size="10" fill="#E5493A" text-anchor="end" font-weight="700">красная линия — непротестированный остаток нарастающим итогом, QA-дней</text>';
  return s+'<text x="'+L+'" y="'+(H-6)+'" font-size="10" fill="#6B778C">серый — ёмкость QA, оранжевый — резерв на регресс и Smoke, синий — задачи спринта; ⚑ — релизный спринт</text></svg>'}
 function render(){var c=calc(),last=c.rows[c.rows.length-1],first=c.rows.filter(function(r){return r.res>0})[0];
- var kp='<div class="kpis"><div class="kpi"><b>'+nf(first?first.res:0,1)+'</b><span>QA-дней резерв в спринте после релизного</span><small>регресс'+(P.auto?' с автотестами':'')+' + Smoke + перепроверка</small></div>'
+ var kp='<div class="kpis"><div class="kpi"><b>'+nf(first?first.res:0,1)+'</b><span>QA-дней резерв в спринте после релизного</span><small>регресс'+((P.auto||P.risk<100)?' с автотестами и выбором по риску':'')+' + Smoke + перепроверка</small></div>'
   +'<div class="kpi '+(last.backlog>0?'bad':'ok')+'"><b>'+nf(last.backlog,1)+'</b><span>задач не протестировано за 12 спринтов</span><small>если планировать на полный состав QA (снежный ком)</small></div>'
   +'<div class="kpi ok"><b>'+c.smooth+'</b><span>задач в спринте при планировании от нетто-ёмкости</span><small>средняя ёмкость '+nf(c.avgNet,1)+' QA-дн. за вычетом резерва</small></div>'
   +'<div class="kpi"><b>'+nf(c.sumRes/(c.cap*c.rows.length)*100,0)+'%</b><span>ёмкости QA уходит на регресс и Smoke</span><small>в среднем по спринтам</small></div></div>';

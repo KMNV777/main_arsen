@@ -184,3 +184,22 @@ def weekly_split(rels: List[dict] | None = None):
     fs = weekly_load(rels, 1)
     s = {role: {w: fs[role][w] - f[role].get(w, 0.0) for w in fs[role]} for role in fs}
     return f, s
+
+
+def ib_overlaps(rels: List[dict] | None = None) -> int:
+    """Число пар релизов, у которых окна ИБ (аудит → согласование трансфера) пересекаются."""
+    rels = rels or releases()
+    n = 0
+    for i in range(len(rels)):
+        for j in range(i + 1, len(rels)):
+            a = (rels[i]["audit"][0], rels[i]["transfer"])
+            b = (rels[j]["audit"][0], rels[j]["transfer"])
+            if a[0] <= b[1] and b[0] <= a[1]:
+                n += 1
+    return n
+
+
+def sprint_overlaps(rels: List[dict] | None = None) -> int:
+    rels = rels or releases()
+    return sum(1 for i in range(len(rels)) for j in range(i + 1, len(rels))
+               if rels[i]["sprint"][0] <= rels[j]["sprint"][1] and rels[j]["sprint"][0] <= rels[i]["sprint"][1])

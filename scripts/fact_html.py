@@ -47,7 +47,8 @@ function plan(i){var b=DATA.rels[i],o=rst(i),day0=o.start||b.day0,psi=(o.psi===u
  DATA.steps.forEach(function(s){var a=psi?s.a1:s.a0,b2=psi?s.b1:s.b0,c0,c1;if(b2>a){c0=Math.floor(a);c1=Math.floor(b2)-1}else{c0=c1=Math.max(Math.floor(a)-1,0)}
   out[s.n]={s:cols[c0],e:cols[Math.max(c1,c0)],skip:(s.n===ID.psi&&!psi),days:(s.n===ID.psi&&!psi)?0:s.d}});
  return {day0:day0,psi:psi,p:out}}
-function status(pl,f){if(pl.skip)return ['sk','пропуск'];if(f&&f.fe)return ['dn','готово'];if(f&&f.fs)return [(today>pl.e?'ov':'wk'),(today>pl.e?'просрочен':'в работе')];return [(today>pl.e?'ov':'nd'),(today>pl.e?'просрочен':'не начат')]}
+function esc(pl){var od=wdDiff(pl.e,today);return od>5?'эскалация: руководство':od>3?'эскалация: ВНП, РП, руководитель':od>1?'эскалация: Release owner':'просрочен'}
+function status(pl,f){if(pl.skip)return ['sk','пропуск'];if(f&&f.fe)return ['dn','готово'];if(f&&f.fs)return [(today>pl.e?'ov':'wk'),(today>pl.e?esc(pl):'в работе')];return [(today>pl.e?'ov':'nd'),(today>pl.e?esc(pl):'не начат')]}
 function dev(pl,f){if(pl.skip)return null;if(f&&f.fe)return wdDiff(pl.e,f.fe);if(today>pl.e)return wdDiff(pl.e,today);return null}
 function summary(i){var o=rst(i),P0=plan(i),done=0,tot=0,last=null,lastDev=null;
  DATA.steps.forEach(function(s){var pl=P0.p[s.n];if(pl.skip)return;tot++;var f=o.steps[s.n];if(f&&f.fe){done++;last=s.n;lastDev=wdDiff(pl.e,f.fe)}});

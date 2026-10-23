@@ -201,10 +201,13 @@ def strategy_html(rels) -> str:
     principles = ('<div class="grid">'
                   '<div class="card"><b>Каденс</b>' + S.ul(["Квартал = 6 спринтов по 2 недели + буфер; релизов 3.", "Релизный спринт — 2-й, 4-й и 6-й: в его последний день на master ставится тег релиза.",
                                                           "Перед спринтом 4 рабочих дня планирования: приоритеты (ВНП), оценка (РП с командой), релизный тикет (Release owner), подтверждение состава (ВНП).", "Не успели или не приняли на демо — в следующий релиз, объём не растягивается."]) + "</div>"
-                  '<div class="card"><b>Окно параллельности</b>' + S.ul([f"В стабилизации и релиз-борде одновременно до {par} релизов — это потолок для РИ и ИБ.", "Новый релиз не стартует, пока предыдущий не прошёл аудит кода: ИБ не получает два аудита сразу.",
-                                                                       "Следующий релиз можно начинать на этапе выкатки в Прод предыдущего."]) + "</div>"
+                  '<div class="card"><b>Окно параллельности</b>' + S.ul([f"В работе одновременно до {par} релизов — потолок для релиз-инженера и ИБ.", "Окна ИБ (аудит, ПСИ, трансфер) разных релизов не пересекаются и бронируются заранее в годовом календаре.", "Старт нового релиза не ждёт аудита предыдущего — ограничением служат окна ИБ и потолок параллельных релизов (проверка — ниже).", "Сдвиг окна ИБ сдвигает следующий релиз на спринт."]) + "</div>"
                   '<div class="card"><b>Что фиксируется на год</b>' + S.ul(["Даты релизных спринтов, фича-фриза и деплоя в Прод.", "Квартальный Релизный Epic: обязательный объём и бизнес-требования.", "Окна ИБ: аудит и ПСИ, согласование трансфера.",
                                                                           "Окна простоя и праздников: релизные работы в них не планируются."]) + "</div></div>")
+    chk = [("Окна ИБ (аудит → трансфер) разных релизов не пересекаются", f"{P.ib_overlaps(rels)} пересечений", P.ib_overlaps(rels) == 0),
+           ("В работе одновременно не более 3 релизов", f"максимум {par}", par <= 3),
+           ("Спринты релизов не пересекаются", f"{P.sprint_overlaps(rels)} пересечений", P.sprint_overlaps(rels) == 0)]
+    check = S.tbl(["Правило календаря", "Результат проверки по календарю", "Итог"], [[a, b, "✓ выполняется" if ok else "✗ нарушено"] for a, b, ok in chk])
     cal = S.tbl(["Релиз", "Старт (тикет)", "Спринт", "Фича-фриз", "Код-фриз", "Аудит кода", "Трансфер согласован", "PreProd", "Деплой Прод", "Закрытие", "ПСИ ИБ"], P.calendar_rows(rels))
 
     # матрица этапов × релизов
@@ -265,14 +268,16 @@ document.getElementById('hn').oninput=function(){N=parseFloat(this.value)||0;dra
         "Старт релиза допускается, только если у РИ, ИБ и QA в окне этапов запас по загрузке (по тепловой карте); иначе релиз сдвигается на спринт.",
         "Ёмкость QA в спринте после релизного планируется за вычетом резерва на регресс, Smoke и перепроверку исправлений.",
         "Объём релиза (число сервисов N) планируется от ёмкости: нужные часы по ролям при N не должны превышать 100 % FTE роли в пиковую неделю.",
-        "ПСИ ИБ закладывается в окно до старта релиза (5 рабочих дней); релиз с ПСИ не стартует параллельно другому релизу с ПСИ.",
+        "Окна ИБ (аудит, ПСИ, трансфер) разных релизов не пересекаются; ПСИ ИБ закладывается в окно (5 рабочих дней), релиз с ПСИ не стартует параллельно другому релизу с ПСИ.",
+        "В работе одновременно не более 3 релизов; при превышении следующий релиз сдвигается на спринт.",
         "Окна без релизных работ: новогодние праздники, длительные майские праздники; релизные спринты в них не назначаются.",
         "Сдвиг релиза — решение Release owner по согласованию с ВНП; причина фиксируется в календаре и попадает в метрику «Выполнение релизов по плану».",
-        "Hotfix не входит в календарь: идёт по тому же процессу вне плана и учитывается в нагрузке как резерв (по модели ТРЗ — HF в год).",
+        "Hotfix не входит в календарь: идёт по ускоренной полосе (раздел «Контроль релиза и риски») и учитывается в нагрузке как резерв (по модели ТРЗ — HF в год).",
+        "Нарушение SLA этапа эскалируется по соглашению с ГПН (>1, >3, >5 рабочих дней); сдвиг Прода более 5 дней пересматривает календарь следующих релизов.",
     ])
     return ("<p>Стратегическое планирование задаёт годовой календарь релизов, окна параллельных релизов и проверку ёмкости ролей до старта каждого релиза. "
             "Исходные данные — SLA этапов, зоны ответственности и часы модели ТРЗ.</p>" + kpis + principles +
-            "<h3>Ключевые даты релизов</h3>" + cal + "<h3>Календарь по всем этапам цикла (дни)</h3>" + stage_cal +
+            "<h3>Проверка календаря по правилам</h3>" + check + "<h3>Ключевые даты релизов</h3>" + cal + "<h3>Календарь по всем этапам цикла (дни)</h3>" + stage_cal +
             "<h3>Загрузка ролей по неделям</h3>" + heat +
             "<h3>Ёмкость QA и «снежный ком»</h3>" + qa_html() + "<h3>Правила стратегического планирования</h3>" + rules)
 
@@ -304,14 +309,14 @@ function calc(){var o=fs(),A=avail(),full=P.H_DAY*P.D_YEAR,rows=[],T={req:0,allo
   T.req+=req;T.alloc+=al;T.hours+=hrs;if(bal>0)T.sur+=bal;else T.def+=-bal;if(has){T.has=true;T.cost+=cAl;T.costReq+=cReq;if(cB>0)T.costSur+=cB;else T.costDef+=-cB}
   rows.push({c:r[0],n:r[1],req:req,al:al,bal:bal,st:st,cAl:cAl,cReq:cReq,cB:cB,hrs:hrs})});
  return {rows:rows,T:T,full:full,A:A,o:o}}
-var stT={ok:['okk','норма'],sur:['sur','избыток'],def:['def','нехватка']};
+var stT={ok:['okk','норма'],sur:['sur','резерв ёмкости'],def:['def','нехватка']};
 function bars(items,fmt,colr,W){W=W||640;var rowH=24,pad=190,h=items.length*rowH+20,mx=0;items.forEach(function(r){mx=Math.max(mx,r.v)});mx=mx||1;var sc=(W-pad-80)/mx;
  var s='<svg class="chart" viewBox="0 0 '+W+' '+h+'" width="100%">';
  items.forEach(function(r,i){var y=8+i*rowH;s+='<text x="'+(pad-8)+'" y="'+(y+14)+'" font-size="11" text-anchor="end" fill="#333">'+r.l.slice(0,30)+'</text><rect x="'+pad+'" y="'+(y+2)+'" width="'+Math.max(r.v*sc,1)+'" height="16" rx="2" fill="'+(colr?colr(r):'#140093')+'"/><text x="'+(pad+r.v*sc+5)+'" y="'+(y+14)+'" font-size="10" font-weight="700" fill="#333">'+fmt(r.v)+'</text>'});
  return s+'</svg>'}
 function chart(rows){var W=640,rowH=26,pad=170,h=rows.length*rowH+40,mx=0;rows.forEach(function(r){mx=Math.max(mx,Math.abs(r.bal))});mx=Math.max(mx,0.5);var sc=(W-pad-110)/(2*mx),mid=pad+50+mx*sc;
  var s='<svg class="chart" viewBox="0 0 '+W+' '+h+'" width="100%" role="img" aria-label="Баланс FTE по ролям"><line x1="'+mid+'" x2="'+mid+'" y1="16" y2="'+(h-14)+'" stroke="#C7D4DE"/>';
- s+='<text x="'+(mid+4)+'" y="11" font-size="10" fill="#006644" font-weight="700">избыток (списано больше, чем нужно)</text><text x="'+(mid-4)+'" y="11" font-size="10" fill="#B3260E" font-weight="700" text-anchor="end">нехватка</text>';
+ s+='<text x="'+(mid+4)+'" y="11" font-size="10" fill="#006644" font-weight="700">резерв ёмкости (списано больше, чем занято релизом)</text><text x="'+(mid-4)+'" y="11" font-size="10" fill="#B3260E" font-weight="700" text-anchor="end">нехватка</text>';
  rows.forEach(function(r,i){var y=22+i*rowH,w=Math.abs(r.bal)*sc,col=r.st==='ok'?'#4BADE8':(r.bal>0?'#63BA3C':'#F26B43');
   s+='<text x="'+(pad-8)+'" y="'+(y+14)+'" font-size="11" text-anchor="end" fill="#333">'+sh(r.c).slice(0,26)+'</text><rect x="'+(r.bal>=0?mid:mid-w)+'" y="'+(y+2)+'" width="'+w+'" height="16" rx="2" fill="'+col+'"/>';
   s+='<text x="'+(r.bal>=0?mid+w+5:mid-w-5)+'" y="'+(y+14)+'" font-size="10" font-weight="700" fill="#333" text-anchor="'+(r.bal>=0?'start':'end')+'">'+(r.bal>0?'+':'')+nf(r.bal,2)+'</text>'});
@@ -337,17 +342,17 @@ function costDash(c){if(!c.T.has)return '<div class="verdict">Введите с�
  return '<div class="kpis"><div class="kpi"><b>'+nf(c.T.cost/1e6,1)+'</b><span>млн ₽/год — текущее списание</span></div><div class="kpi"><b>'+nf(c.T.costReq/1e6,1)+'</b><span>млн ₽/год — по ТРЗ</span></div><div class="kpi ok"><b>+'+nf(c.T.costSur/1e6,1)+'</b><span>млн ₽/год — стоимость избытка</span></div><div class="kpi bad"><b>−'+nf(c.T.costDef/1e6,1)+'</b><span>млн ₽/год — стоимость нехватки</span></div></div>'+s+'</svg>'}
 function render(){var c=calc(),T=c.T,deficit=c.rows.filter(function(r){return r.st==='def'}),sur=c.rows.filter(function(r){return r.st==='sur'});
  var kp='<div class="kpis"><div class="kpi"><b>'+nf(T.alloc,1)+'</b><span>FTE списывается сейчас</span><small>по полям «Списано» ниже</small></div>'
- +'<div class="kpi"><b>'+nf(T.req,1)+'</b><span>FTE нужно по ТРЗ</span><small>'+nf(T.hours)+' ч в год при N = '+P.N+', '+P.R+' релизах</small></div>'
- +'<div class="kpi ok"><b>+'+nf(T.sur,1)+'</b><span>FTE избыток</span><small>'+sur.length+' ролей списано больше потребности</small></div>'
- +'<div class="kpi '+(T.def>0.05?'bad':'ok')+'"><b>'+(T.def>0.05?'−':'')+nf(T.def,1)+'</b><span>FTE нехватка</span><small>'+deficit.length+' ролей, где ТРЗ не покрыто списанием</small></div>'
+ +'<div class="kpi"><b>'+nf(T.req,1)+'</b><span>FTE занято релизным циклом</span><small>'+nf(T.hours)+' ч в год при N = '+P.N+', '+P.R+' релизах</small></div>'
+ +'<div class="kpi ok"><b>+'+nf(T.sur,1)+'</b><span>FTE свободной ёмкости</span><small>'+sur.length+' ролей: списано больше, чем занято релизом</small></div>'
+ +'<div class="kpi '+(T.def>0.05?'bad':'ok')+'"><b>'+(T.def>0.05?'−':'')+nf(T.def,1)+'</b><span>FTE нехватка</span><small>'+deficit.length+' ролей: релизный цикл занимает больше списанного</small></div>'
  +'<div class="kpi"><b>'+nf(T.hours/P.R,0)+'</b><span>часов на один релиз</span><small>'+nf(T.hours/(P.R*Math.max(P.N,1)),1)+' ч на сервис в релизе</small></div></div>';
- var verdict='<div class="verdict"><b>Вывод.</b> Списывается '+nf(T.alloc,1)+' FTE при потребности '+nf(T.req,1)+' FTE: суммарный избыток '+nf(T.sur,1)+' FTE.'
+ var verdict='<div class="verdict"><b>Вывод.</b> Списывается '+nf(T.alloc,1)+' FTE, релизный цикл занимает '+nf(T.req,1)+' FTE: свободная ёмкость '+nf(T.sur,1)+' FTE. <b>Это не штатная потребность</b>: роли заняты и вне релизов (ИБ, DevOps, администраторы и др.), решение о составе — после замера фактической и полной загрузки.'
  +(deficit.length?' Нехватка у ролей: '+deficit.map(function(r){return sh(r.c)+' (−'+nf(-r.bal,2)+')'}).join('; ')+' — ТРЗ превышает списание: усилить роль или сократить объём (N, число релизов).':' Нехватки нет.')
- +(sur.length?' Избыток у '+sur.length+' ролей: их ёмкость (суммарно '+nf(T.sur,1)+' FTE) можно вернуть в продукт.':'')+(T.has?' Стоимость избытка — '+nf(T.costSur)+' ₽ в год, стоимость нехватки — '+nf(T.costDef)+' ₽ в год.':' Введите ставки ролей, чтобы увидеть стоимость.')+'</div>';
+ +(sur.length?' У '+sur.length+' ролей есть ёмкость под другие задачи (суммарно '+nf(T.sur,1)+' FTE); можно перенаправить, если подтвердится полной загрузкой.':'')+(T.has?' Стоимость свободной ёмкости — '+nf(T.costSur)+' ₽ в год, стоимость нехватки — '+nf(T.costDef)+' ₽ в год.':' Введите ставки ролей, чтобы увидеть стоимость.')+'</div>';
  var tr=c.rows.map(function(r){return '<tr><td>'+r.n+'</td><td><b>'+nf(r.req,2)+'</b></td><td><input class="al" type="number" step="0.1" min="0" data-r="'+r.c+'" value="'+r.al+'"></td><td><b>'+(r.bal>0?'+':'')+nf(r.bal,2)+'</b></td><td><span class="st '+stT[r.st][0]+'">'+stT[r.st][1]+'</span></td>'
   +'<td><input class="rate" type="number" step="any" min="0" data-r="'+r.c+'" placeholder="₽/ч" value="'+(RATE[r.c]||'')+'"></td><td>'+(r.cAl===null?'—':nf(r.cAl))+'</td><td>'+(r.cReq===null?'—':nf(r.cReq))+'</td><td>'+(r.cB===null?'—':(r.cB>0?'+':'')+nf(r.cB))+'</td></tr>'}).join('')
   +'<tr class="tot"><td><b>Итого</b></td><td><b>'+nf(T.req,2)+'</b></td><td><b>'+nf(T.alloc,1)+'</b></td><td><b>'+(T.alloc-T.req>0?'+':'')+nf(T.alloc-T.req,2)+'</b></td><td></td><td></td><td>'+(T.has?nf(T.cost):'—')+'</td><td>'+(T.has?nf(T.costReq):'—')+'</td><td>'+(T.has?nf(T.cost-T.costReq):'—')+'</td></tr>';
- var tbl='<div class="tw"><table><thead><tr><th>Роль</th><th>Нужно по ТРЗ, FTE</th><th>Списано, FTE</th><th>Баланс, FTE</th><th>Вывод</th><th>Ставка, ₽/ч</th><th>Стоимость списания, ₽/год</th><th>Стоимость по ТРЗ, ₽/год</th><th>Баланс, ₽/год</th></tr></thead><tbody>'+tr+'</tbody></table></div>'
+ var tbl='<div class="tw"><table><thead><tr><th>Роль</th><th>Занято релизом, FTE</th><th>Списано, FTE</th><th>Баланс, FTE</th><th>Вывод</th><th>Ставка, ₽/ч</th><th>Стоимость списания, ₽/год</th><th>Стоимость по ТРЗ, ₽/год</th><th>Баланс, ₽/год</th></tr></thead><tbody>'+tr+'</tbody></table></div>'
   +'<p class="muted">Поля «Списано» и «Ставка» редактируются. Стоимость = FTE × рабочие часы года × ставка роли. «Норма» — отклонение в пределах допуска.</p>';
  var be='<div class="tw"><table><thead><tr><th>Роль</th><th>Часов на релиз, ч</th><th>Из них на каждый сервис, ч</th><th>Баланс при N</th></tr></thead><tbody>'+c.rows.map(function(r){var o=c.o[r.c],S=o.S*P.R+o.S*P.HF,Fx=o.F*P.R+o.F*P.HF_F*P.HF,al=ALLOC[r.c];var n=S>0?(al*c.A-Fx)/S:null;
   return '<tr><td>'+r.n+'</td><td>'+nf(o.F+o.S*P.N,1)+'</td><td>'+nf(o.S,1)+'</td><td>'+(n===null?'не зависит от N':(n<=0?'нехватка при любом N':'до '+nf(n,0)+' сервисов хватает'))+'</td></tr>'}).join('')+'</tbody></table></div>';
@@ -383,8 +388,8 @@ bindHours();render();
 })();
 """
     js = js.replace("__DATA__", json.dumps(data, ensure_ascii=False))
-    intro = ("<p>Чтобы обосновать избыток или нехватку ресурсов, потребность ролей по ТРЗ релизного цикла сопоставляется с тем, сколько роль списывается на проект сейчас (1 FTE). "
-             "Потребность: <code>FTE = ТРЗ за год / (рабочие часы × 80 %)</code>; ТРЗ этапа <code>(F + S × N) × k</code>. "
+    intro = ("<p>Показывает, какую часть ёмкости каждой роли занимает релизный цикл по ТРЗ, и сопоставляет её с тем, сколько роль списывается на проект сейчас (1 FTE). Это <b>не штатная потребность роли</b>: ИБ, DevOps, администраторы заняты и вне релизов, поэтому вывод о составе возможен только после замера полной загрузки. "
+             "Занятость релизом: <code>FTE = ТРЗ за год / (рабочие часы × 80 %)</code>; ТРЗ этапа <code>(F + S × N) × k</code>. "
              "<b>Все поля редактируются:</b> параметры, списание и ставки по ролям, часы по этапам (строки можно добавлять и удалять); показатели, графики и вывод пересчитываются сразу.</p>"
              '<p class="muted">Часы по этапам — стартовые допущения: после 1–2 релизов их заменяют фактом списаний по задачам этапов в Jira. Введённые значения нигде не сохраняются.</p>')
     return intro + '<div id="calc"></div><script>' + js + "</script>"
