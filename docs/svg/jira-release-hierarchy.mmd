@@ -1,0 +1,51 @@
+flowchart TB
+    subgraph RELEASE["🎫 Релизный тикет (Release)"]
+        R["REL-100 · v2.4.0<br/>Создаёт: РП"]
+    end
+
+    subgraph STORIES["📖 Истории — единственный прямой линк к релизу"]
+        S1["STORY-201<br/>Создаёт: РП<br/>Описание: Аналитик"]
+        S2["STORY-202<br/>Создаёт: РП<br/>Описание: Аналитик"]
+        S3["STORY-203<br/>Создаёт: РП<br/>Описание: Аналитик"]
+    end
+
+    subgraph TASKS["📋 Задачи — линк только к Story"]
+        T1["TASK-301"]
+        T2["TASK-302"]
+        T3["TASK-303"]
+        T4["TASK-304"]
+    end
+
+    subgraph BUGS["🐛 Баги — линк только к Story"]
+        B1["BUG-401"]
+        B2["BUG-402"]
+    end
+
+    subgraph IB["🔒 Changelog для ИБ"]
+        CH["Автосборка из Story релиза<br/>Название · Описание · Влияние на ИБ"]
+    end
+
+    R -->|"is child of<br/>✅ разрешено"| S1
+    R -->|"is child of<br/>✅ разрешено"| S2
+    R -->|"is child of<br/>✅ разрешено"| S3
+
+    S1 -->|"is child of"| T1
+    S1 -->|"is child of"| T2
+    S2 -->|"is child of"| T3
+    S3 -->|"is child of"| T4
+
+    S1 -->|"is caused by"| B1
+    S2 -->|"is caused by"| B2
+
+    R -.->|"❌ запрещено"| T1
+    R -.->|"❌ запрещено"| B1
+
+    S1 --> CH
+    S2 --> CH
+    S3 --> CH
+
+    style RELEASE fill:#dae8fc,stroke:#6c8ebf
+    style STORIES fill:#d5e8d4,stroke:#82b366
+    style TASKS fill:#fff2cc,stroke:#d6b656
+    style BUGS fill:#f8cecc,stroke:#b85450
+    style IB fill:#e1d5e7,stroke:#9673a6

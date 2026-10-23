@@ -1,0 +1,32 @@
+sequenceDiagram
+    autonumber
+    participant РП as РП
+    participant Аналитик as Аналитик
+    participant Jira as Jira
+    participant Разработчик as Разработчик
+    participant Тестировщик as Тестировщик
+    participant ИБ as Специалисты ИБ
+
+    РП->>Jira: Создать релизный тикет REL-100
+    РП->>Jira: Создать STORY-201, линк → REL-100
+    РП->>Аналитик: Запрос на описание Story
+    Аналитик->>Jira: Заполнить описание, влияние на ИБ, критерии
+  Note over Jira: К релизу прилинкована только Story
+
+    РП->>Jira: Создать TASK-301, линк → STORY-201
+    Разработчик->>Jira: Взять TASK-301 в работу
+    Разработчик->>Jira: Закрыть TASK-301
+
+    Тестировщик->>Jira: Тестировать STORY-201
+    Тестировщик->>Jira: Создать BUG-401, линк → STORY-201
+  Note over Jira: Bug НЕ линкуется к релизу
+
+    Разработчик->>Jira: Исправить BUG-401
+    Тестировщик->>Jira: Закрыть BUG-401
+    РП->>Jira: STORY-201 → «Готово к релизу»
+
+    РП->>Jira: JQL: Story релиза REL-100
+    Jira-->>РП: Список Story + поля для ИБ
+    РП->>ИБ: Передать changelog
+    ИБ-->>РП: Согласование
+    РП->>Jira: REL-100 → «Выкатан» → «Закрыт»
