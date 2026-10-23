@@ -78,8 +78,8 @@
 <text x="1051" y="471" font-size="9" fill="#904EE2" text-anchor="start">merge в master после приёмки;</text>
 <text x="1051" y="483" font-size="9" fill="#904EE2" text-anchor="start">не принято → ветка не вливается</text>
 <ellipse cx="1601" cy="600" rx="6" ry="6" fill="#D64545" stroke="#D64545" stroke-width="1"/>
-<text x="1310" y="623" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">hotfix (ускоренная полоса): исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от</text>
-<text x="1310" y="635" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">тега Прода и новый тег</text>
+<text x="1310" y="623" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">hotfix (тот же процесс, меньше объём сборки): исправление в master; если master ушёл вперёд — cherry-pick в</text>
+<text x="1310" y="635" font-size="9" fill="#D64545" text-anchor="start" font-weight="bold">короткоживущую ветку от тега Прода и новый тег</text>
 <text x="185" y="672.5" font-size="10" fill="#140093" text-anchor="start" font-weight="bold">Сервисы живут в отдельных репозиториях: один и тот же ID релиза (Fix Version) ставится тегом в репозиториях всех сервисов релиза. Отдельных release-веток нет — нет и backport между ними.</text>
 <text x="185" y="696.5" font-size="10" fill="#1B1B3A" text-anchor="start">Соответствие этапам схемы 1: 5 — разработка и влитие в master · 9 — демо · 10 — вывод не принятых задач · 11 — фича-фриз и тег · 12–17 — стабилизация, фиксы в master · 31 — деплой в Прод.</text>
 <rect x="20" y="730" width="260" height="24" fill="#140093" stroke="#140093" stroke-width="1"/>
@@ -118,7 +118,7 @@
 <rect x="20" y="936" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="951" font-size="11" fill="#1B1B3A" text-anchor="start">Hotfix</text>
 <rect x="280" y="936" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-<text x="285" y="951" font-size="11" fill="#1B1B3A" text-anchor="start">Критический дефект: исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от тега Прода и новый тег. Идёт по ускоренной полосе hotfix (см. «Контроль релиза и риски»).</text>
+<text x="285" y="951" font-size="11" fill="#1B1B3A" text-anchor="start">Критический дефект: исправление в master; если master ушёл вперёд — cherry-pick в короткоживущую ветку от тега Прода и новый тег. Идёт тем же процессом; объём сборки меньше (один-два сервиса), поэтому этапы короче.</text>
 <rect x="20" y="960" width="260" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
 <text x="25" y="975" font-size="11" fill="#1B1B3A" text-anchor="start">Параллельные релизы</text>
 <rect x="280" y="960" width="1660" height="24" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
