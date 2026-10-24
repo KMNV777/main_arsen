@@ -96,5 +96,5 @@ JS_EDIT = r"""
 FB_EXTRA = ('<span class="sep"></span><label class="tgl"><input type="checkbox" id="rp-edit-on" checked> Режим правки</label>'
             '<button id="rp-save" title="Скачать копию страницы со всеми правками и данными — её можно открыть и продолжать вести">Сохранить HTML</button>'
             '<button id="rp-exp" class="sec" title="Скачать данные (тексты, калькуляторы, календари) в JSON">Экспорт данных</button>'
-            '<button id="rp-imp" class="sec">Импорт данных</button><input type="file" id="rp-file" accept=".json" style="display:none">'
+            '<button id="rp-imp" class="sec">Импорт данных</button><input type="file" id="rp-file" aria-label="Файл данных JSON" accept=".json" style="display:none">'
             '<button id="rp-reset" class="sec">Сбросить</button><span class="stat" id="rp-status">сохраняется в браузере</span>')

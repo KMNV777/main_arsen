@@ -296,8 +296,8 @@ def econ_html() -> str:
 (function(){
 var D=__DATA__,P=Object.assign({TOL:20},D.params),H=D.hours.map(function(x){return x.slice()}),RATE={},ALLOC={};
 D.roles.forEach(function(r){ALLOC[r[0]]=D.cur});
-var ES=window.RP&&RP.get('econ');if(ES){Object.assign(P,ES.P||{});RATE=ES.RATE||{};Object.assign(ALLOC,ES.ALLOC||{});if(ES.H&&ES.H.length===H.length)H=ES.H}
-function sv(){if(window.RP)RP.set('econ',{P:P,RATE:RATE,ALLOC:ALLOC,H:H})}
+var ES=window.RP&&RP.get('econ');if(ES){Object.assign(P,ES.P||{});window.RATEALL=ES.RA||'';RATE=ES.RATE||{};Object.assign(ALLOC,ES.ALLOC||{});if(ES.H&&ES.H.length===H.length)H=ES.H}
+function sv(){if(window.RP)RP.set('econ',{P:P,RATE:RATE,ALLOC:ALLOC,H:H,RA:window.RATEALL||''})}
 var lab={N:'Число сервисов в релизе (N)',R:'Релизов в год',HF:'Hotfix в год',HF_F:'Доля фикс. части для hotfix',P_PSI:'Доля релизов с ПСИ ИБ',H_DAY:'Часов в день',D_YEAR:'Рабочих дней в году',LOAD:'Плановая загрузка',TOL:'Допуск «нормы», ±%'};
 function rn(c){var r=D.roles.filter(function(x){return x[0]===c})[0];return r?r[1]:c}
 function sh(c){return rn(c).split(' (')[0].split(' /')[0]}
@@ -385,6 +385,7 @@ var el=document.getElementById('calc');
 el.innerHTML='<div class="ctl-panel"><b>Параметры расчёта</b><div class="calc-p">'+pf+'</div><p class="muted">Единая ставка для всех ролей: <input id="rate-all" type="number" step="any" min="0" placeholder="₽/ч" style="width:90px"> <button id="rate-fill" type="button">Применить ко всем</button> <button id="calc-reset" type="button">Сбросить всё</button></p></div><div id="econ-out"></div>'
  +'<details><summary>Часы по этапам (F — на релиз, S — на сервис): таблица редактируется, строки можно добавлять и удалять</summary><div class="tw"><table><thead><tr><th>№</th><th>Название этапа</th><th>Роль</th><th>F, ч</th><th>S, ч</th><th>Условие</th><th></th></tr></thead><tbody id="hrs"></tbody></table></div><p><button id="add-row" type="button">+ Добавить строку</button></p></details>';
 el.querySelectorAll('.calc-p input[data-k]').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;sv();render()}});
+(function(){var ra=document.getElementById('rate-all');ra.value=window.RATEALL||'';ra.oninput=ra.onchange=function(){window.RATEALL=ra.value;sv()}})();
 document.getElementById('rate-fill').onclick=function(){var v=document.getElementById('rate-all').value;D.roles.forEach(function(r){RATE[r[0]]=v});sv();render()};
 document.getElementById('add-row').onclick=function(){H.push([0,'Новый этап','РИ',1,0,'1']);bindHours();render()};
 document.getElementById('calc-reset').onclick=function(){if(window.RP)RP.set('econ',null);location.reload()};

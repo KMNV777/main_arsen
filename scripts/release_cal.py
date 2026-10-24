@@ -59,6 +59,7 @@ function D0(s){var p=s.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]))
 
 function ruFmt(s){var m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');return m?m[3]+'.'+m[2]+'.'+m[1]:''}
 function ruParse(s){var m=/^\s*(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})\s*$/.exec(s||'');if(!m)return '';var d=+m[1],mo=+m[2],y=+m[3];var t=new Date(Date.UTC(y,mo-1,d));if(t.getUTCMonth()!==mo-1||t.getUTCDate()!==d)return '';return y+'-'+('0'+mo).slice(-2)+'-'+('0'+d).slice(-2)}
+function ruBad(i){var s=i.getAttribute&&i.getAttribute('data-txt');if(s&&!ruParse(s)){var st=document.getElementById('rp-status');if(st)st.textContent='неверная дата: '+s+' (нужно дд.мм.гггг)';return true}return false}
 function ruDates(root){root.querySelectorAll('input[type=date]').forEach(function(o){var n=document.createElement('input');n.type='text';n.className=(o.className?o.className+' ':'')+'dt';
  [].slice.call(o.attributes).forEach(function(a){if(a.name!=='type'&&a.name!=='class'&&a.name!=='value')n.setAttribute(a.name,a.value)});
  n.placeholder='дд.мм.гггг';n.maxLength=10;n.inputMode='numeric';n.value=ruFmt(o.getAttribute('value'));var iso=o.getAttribute('value')||'';
@@ -66,9 +67,8 @@ function ruDates(root){root.querySelectorAll('input[type=date]').forEach(functio
  n.setAttribute('data-txt',ruFmt(iso));var txt=n;
  function show(){var d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(txt,txt.getAttribute('data-txt'))}
  show();n.addEventListener('rutxt',show);
- n.addEventListener('input',function(){var v=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').get.call(n).replace(/[^0-9.]/g,'');
-  var digits=v.replace(/\./g,'');if(/^\d+$/.test(digits)&&v.indexOf('.')<0){if(digits.length>4)digits=digits.slice(0,2)+'.'+digits.slice(2,4)+'.'+digits.slice(4,8);else if(digits.length>2)digits=digits.slice(0,2)+'.'+digits.slice(2)}else digits=v;
-  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(n,digits);n.setAttribute('data-txt',digits);n.classList.toggle('bad',!!digits&&!ruParse(digits)&&digits.length>=10)});
+ n.addEventListener('input',function(){var g=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');var dg=g.get.call(n).replace(/\D/g,'').slice(0,8);var f=dg.length>4?dg.slice(0,2)+'.'+dg.slice(2,4)+'.'+dg.slice(4):dg.length>2?dg.slice(0,2)+'.'+dg.slice(2):dg;
+  g.set.call(n,f);n.setAttribute('data-txt',f);n.classList.toggle('bad',f.length===10&&!ruParse(f))});
  n.addEventListener('blur',function(){var t=n.getAttribute('data-txt');n.classList.toggle('bad',!!t&&!ruParse(t))});
  o.replaceWith(n)})}
 function iso(d){return d.toISOString().slice(0,10)}
@@ -157,15 +157,15 @@ function renderPage(){var rp=document.getElementById('relpages');if(!rp)return;v
  ruDates(rp);bindPage()}
 function bindPage(){var rp=document.getElementById('relpages'),o=rst(cur);
  rp.querySelectorAll('.tabs.own button').forEach(function(b){b.onclick=function(){tab=b.dataset.p;renderPage()}});
- rp.querySelectorAll('input[data-n]').forEach(function(i){i.onchange=function(){var n=i.dataset.n,f=o.steps[n]||(o.steps[n]={}),k=i.dataset.f,v=i.value;
+ rp.querySelectorAll('input[data-n]').forEach(function(i){i.onchange=function(){if(ruBad(i)){renderPage();return}var n=i.dataset.n,f=o.steps[n]||(o.steps[n]={}),k=i.dataset.f,v=i.value;
   if(k==='ps'||k==='pe'){var P0=plan(cur);f[k]=v||undefined;if(!v)delete f[k]}else if(k==='w'){f.w=v}else{f[k]=v}
   if(!f.fs&&!f.fe&&!f.note&&!f.ps&&!f.pe&&(f.w===undefined))delete o.steps[n];saveF();renderPage()}});
- rp.querySelectorAll('input[data-x]').forEach(function(i){i.onchange=function(){o.extra[+i.dataset.x][i.dataset.f]=i.value;saveF();renderPage()}});
+ rp.querySelectorAll('input[data-x]').forEach(function(i){i.onchange=function(){if(ruBad(i)){renderPage();return}o.extra[+i.dataset.x][i.dataset.f]=i.value;saveF();renderPage()}});
  rp.querySelectorAll('button.rs[data-n]').forEach(function(b){b.onclick=function(){var f=o.steps[b.dataset.n];if(f){delete f.ps;delete f.pe}saveF();renderPage()}});
  rp.querySelectorAll('button.rs[data-xd]').forEach(function(b){b.onclick=function(){o.extra.splice(+b.dataset.xd,1);saveF();renderPage()}});
  function $(id){return document.getElementById(id)}
  $('p-fid').onchange=function(){o.fid=this.value;saveF()};$('p-owner').onchange=function(){o.owner=this.value;saveF()};$('p-svcs').onchange=function(){o.svcs=this.value;saveF()};
- $('p-start').onchange=function(){if(this.value){o.start=this.value;saveF();renderPage()}};
+ $('p-start').onchange=function(){if(ruBad(this)){renderPage();return}if(this.value){o.start=this.value;saveF();renderPage()}};
  $('p-psi').onchange=function(){o.psi=this.value==='1';saveF();renderPage()};
  $('p-today').onchange=function(){today=this.value||today;RP.set('today',today);renderPage()};
  $('p-add').onclick=function(){o.extra.push({name:'',w:'',ps:'',pe:'',fs:'',fe:'',note:''});saveF();renderPage()};

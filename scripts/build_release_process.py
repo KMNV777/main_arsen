@@ -447,7 +447,7 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     if extra:
         sections = sections + list(extra)
     nav = "".join(f'<a href="#{i}">{e(t)}</a>' for i, t, _ in sections)
-    navjs = "(function(){var l=document.querySelectorAll('nav a'),s=[].slice.call(document.querySelectorAll('main>section'));function f(){var y=window.scrollY+120,c=0;s.forEach(function(x,i){if(x.offsetTop<=y)c=i});l.forEach(function(a,i){var on=i===c;if(on&&!a.classList.contains('on')){var nv=a.parentNode.parentNode,x=a.offsetLeft-nv.clientWidth/2+a.offsetWidth/2;nv.scrollLeft=Math.max(0,x)}a.classList.toggle('on',on)})}window.addEventListener('scroll',f);f()})();"
+    navjs = "document.querySelectorAll('main table').forEach(function(t){var p=t.parentNode;if(!p.matches('.tw,.fx-table,.heat')&&!t.closest('.tw,.fx-table,.heat')){var w=document.createElement('div');w.className='tw';p.insertBefore(w,t);w.appendChild(t)}});(function(){var l=document.querySelectorAll('nav a'),s=[].slice.call(document.querySelectorAll('main>section'));function f(){var y=window.scrollY+120,c=0;s.forEach(function(x,i){if(x.offsetTop<=y)c=i});l.forEach(function(a,i){var on=i===c;if(on&&!a.classList.contains('on')){var nv=a.parentNode.parentNode,x=a.offsetLeft-nv.clientWidth/2+a.offsetWidth/2;nv.scrollLeft=Math.max(0,x)}a.classList.toggle('on',on)})}window.addEventListener('scroll',f);f()})();"
 
     cm = lambda i: (f'<div class="cm"><label for="cm-{i}">Ваши правки к разделу</label><textarea id="cm-{i}" data-k="{i}" rows="3" placeholder="Что изменить, добавить, убрать…"></textarea></div>' if comments else "")
     body = "".join(f'<section id="{i}"><span class="kicker">Раздел {n}</span><h2>{e(t)}</h2>{c}{cm(i)}</section>' for n, (i, t, c) in enumerate(sections, 1))
