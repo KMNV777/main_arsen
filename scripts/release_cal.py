@@ -28,7 +28,7 @@ body.relmode .relpage{display:block}
 @media(max-width:900px){.rp-head,.rp-body{padding-left:16px;padding-right:16px}}
 .fx-top{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin:10px 0 12px}
 .fx-top label{font-size:12px;color:var(--ink-2);display:flex;flex-direction:column;gap:3px}
-.fx-top input[type=date],.fx-top input[type=text],.fx-top select{font:inherit;border:1px solid #FBAE40;background:#FFE9CC;border-radius:3px;padding:4px 6px}
+.fx-top input.dt,.fx-top input[type=text],.fx-top select{font:inherit;border:1px solid #FBAE40;background:#FFE9CC;border-radius:3px;padding:4px 6px}
 .fx-top button,.fx-btn{border:1px solid var(--line);background:#fff;color:#140093;border-radius:6px;padding:6px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
 .fx-top button:hover,.fx-btn:hover{background:var(--lime)}
 .fx-table{overflow:auto;max-height:78vh;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:var(--sh-1)}
@@ -36,8 +36,8 @@ body.relmode .relpage{display:block}
 .fx-table th{position:sticky;top:0;z-index:2;background:#140093;color:#fff;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:7px 8px;white-space:nowrap}
 .fx-table td{padding:3px 8px;border-bottom:1px solid #F0F2F6;white-space:nowrap}
 .fx-table tr.ph td{background:#EEEDF8;color:#140093;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-.fx-table input[type=date]{font:inherit;font-size:11px;border:1px solid #FBAE40;background:#FFE9CC;border-radius:3px;padding:2px 3px;width:128px}
-.fx-table input[type=date].ovr{border-color:#904EE2;background:#EEE6FB}
+.fx-table input.dt{font:inherit;font-size:11px;border:1px solid #FBAE40;background:#FFE9CC;border-radius:3px;padding:2px 3px;width:128px}
+.fx-table input.dt.ovr{border-color:#904EE2;background:#EEE6FB}
 .fx-table input.nt,.fx-table input.nm,.fx-table input.rl{font:inherit;font-size:11px;border:1px solid #FBAE40;background:#FFE9CC;border-radius:3px;padding:2px 5px}
 .fx-table input.nt{width:230px}.fx-table input.nm{width:220px}.fx-table input.rl{width:130px}
 .fx-table td.dv{text-align:center;font-weight:700}.dv.late{color:#B3260E}.dv.early{color:#006644}
@@ -56,6 +56,21 @@ var DATA=__DATA__,ID=DATA.ids,MO=__MO__,HOL={};DATA.hol.forEach(function(h){HOL[
 var FS=RP.get('fact')||{};function saveF(){RP.set('fact',FS)}
 var cur=0,today=RP.get('today')||new Date().toISOString().slice(0,10);
 function D0(s){var p=s.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]))}
+
+function ruFmt(s){var m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');return m?m[3]+'.'+m[2]+'.'+m[1]:''}
+function ruParse(s){var m=/^\s*(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})\s*$/.exec(s||'');if(!m)return '';var d=+m[1],mo=+m[2],y=+m[3];var t=new Date(Date.UTC(y,mo-1,d));if(t.getUTCMonth()!==mo-1||t.getUTCDate()!==d)return '';return y+'-'+('0'+mo).slice(-2)+'-'+('0'+d).slice(-2)}
+function ruDates(root){root.querySelectorAll('input[type=date]').forEach(function(o){var n=document.createElement('input');n.type='text';n.className=(o.className?o.className+' ':'')+'dt';
+ [].slice.call(o.attributes).forEach(function(a){if(a.name!=='type'&&a.name!=='class'&&a.name!=='value')n.setAttribute(a.name,a.value)});
+ n.placeholder='дд.мм.гггг';n.maxLength=10;n.inputMode='numeric';n.value=ruFmt(o.getAttribute('value'));var iso=o.getAttribute('value')||'';
+ Object.defineProperty(n,'value',{get:function(){return ruParse(n.getAttribute('data-txt')||'')},set:function(v){n.setAttribute('data-txt',ruFmt(v));n.dispatchEvent(new Event('rutxt'))},configurable:true});
+ n.setAttribute('data-txt',ruFmt(iso));var txt=n;
+ function show(){var d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(txt,txt.getAttribute('data-txt'))}
+ show();n.addEventListener('rutxt',show);
+ n.addEventListener('input',function(){var v=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').get.call(n).replace(/[^0-9.]/g,'');
+  var digits=v.replace(/\./g,'');if(/^\d+$/.test(digits)&&v.indexOf('.')<0){if(digits.length>4)digits=digits.slice(0,2)+'.'+digits.slice(2,4)+'.'+digits.slice(4,8);else if(digits.length>2)digits=digits.slice(0,2)+'.'+digits.slice(2)}else digits=v;
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(n,digits);n.setAttribute('data-txt',digits);n.classList.toggle('bad',!!digits&&!ruParse(digits)&&digits.length>=10)});
+ n.addEventListener('blur',function(){var t=n.getAttribute('data-txt');n.classList.toggle('bad',!!t&&!ruParse(t))});
+ o.replaceWith(n)})}
 function iso(d){return d.toISOString().slice(0,10)}
 function isWd(d){var w=d.getUTCDay();return w>=1&&w<=5&&!HOL[iso(d)]}
 function addWd(s,n){var d=D0(s),st=n>=0?1:-1;while(n){d=new Date(d.getTime()+st*864e5);if(isWd(d))n-=st}return iso(d)}
@@ -89,7 +104,7 @@ function renderOverview(){var box=document.getElementById('fx');if(!box)return;
   +'<div class="kpi '+(fin&&ontime<fin?'warn':'ok')+'"><b>'+(fin?Math.round(ontime/fin*100)+'%':'—')+'</b><span>в срок</span><small>Прод не позже плана — метрика «Выполнение релизов по плану»</small></div></div>';
  box.innerHTML='<div class="fx-top"><label>Дата отчёта (для статусов) <input type="date" id="fx-today" value="'+today+'"></label></div>'+kp+ov;
  box.querySelectorAll('.fx-ov tbody tr').forEach(function(tr){tr.onclick=function(ev){if(ev.target.tagName!=='A')location.hash='#rel='+encodeURIComponent(DATA.rels[+tr.dataset.i].name)}});
- document.getElementById('fx-today').onchange=function(){today=this.value||today;RP.set('today',today);renderOverview()}}
+ ruDates(box);document.getElementById('fx-today').onchange=function(){today=this.value||today;RP.set('today',today);renderOverview()}}
 
 /* ---------- страница релиза ---------- */
 function chart(i){var o=rst(i),P0=plan(i),rows=DATA.steps.filter(function(s){return !P0.p[s.n].skip}),
@@ -139,7 +154,7 @@ function renderPage(){var rp=document.getElementById('relpages');if(!rp)return;v
  rp.innerHTML=head+'<div class="rp-body">'+kp+top
   +'<div class="tabs own" data-g="rc"><button class="'+(tab==='t'?'on':'')+'" data-p="t">Таблица этапов</button><button class="'+(tab==='c'?'on':'')+'" data-p="c">График план / факт</button><button class="'+(tab==='n'?'on':'')+'" data-p="n">Заметки</button></div>'
   +'<div class="pane '+(tab==='t'?'on':'')+'" data-p="t">'+table+'</div><div class="pane '+(tab==='c'?'on':'')+'" data-p="c"><div class="card">'+chart(cur)+'</div></div><div class="pane '+(tab==='n'?'on':'')+'" data-p="n">'+notes+'</div></div>';
- bindPage()}
+ ruDates(rp);bindPage()}
 function bindPage(){var rp=document.getElementById('relpages'),o=rst(cur);
  rp.querySelectorAll('.tabs.own button').forEach(function(b){b.onclick=function(){tab=b.dataset.p;renderPage()}});
  rp.querySelectorAll('input[data-n]').forEach(function(i){i.onchange=function(){var n=i.dataset.n,f=o.steps[n]||(o.steps[n]={}),k=i.dataset.f,v=i.value;

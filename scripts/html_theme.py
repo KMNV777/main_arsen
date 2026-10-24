@@ -57,6 +57,37 @@ tr.tot td{background:var(--lo)}
 details{margin:12px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r2);padding:10px 14px}summary{cursor:pointer;color:var(--blue);font-weight:700}
 .tools{margin:6px 0 12px}
 @media (max-width:700px){main,header.top,.fb{padding-left:16px;padding-right:16px}nav .in{padding:8px 12px}h2{font-size:24px}header.top h1{font-size:26px}}
+
+/* единый шрифт и UX-правки */
+:root{--font:Arial,"Helvetica Neue",Helvetica,sans-serif}
+html{font-family:var(--font)}body,button,input,select,textarea,table,svg text,svg tspan,code,pre,kbd{font-family:var(--font)!important}
+code,pre,kbd{font-size:.92em}
+input,select,textarea,button{font-size:inherit;color:inherit}
+button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid #904EE2;outline-offset:2px}
+header.top h1{font-size:clamp(24px,2.6vw,36px);line-height:1.15;max-width:1100px}
+main>p:first-child{margin:22px 0 0}
+main>section{scroll-margin-top:64px}
+main{padding-bottom:40px}
+nav{scrollbar-width:thin;scrollbar-color:#4A3BC0 transparent}nav::-webkit-scrollbar{display:block;height:6px}nav::-webkit-scrollbar-thumb{background:#4A3BC0;border-radius:3px}
+nav .in{padding:8px 40px 6px}
+nav a{padding:6px 10px;font-size:12px}
+td,th{vertical-align:top}td,th{overflow-wrap:anywhere}
+table td:first-child,table th:first-child{overflow-wrap:normal}
+.tw,.fx-table,.heat{overflow-x:auto;-webkit-overflow-scrolling:touch}
+th{white-space:nowrap}th .muted{color:var(--lime)!important;font-size:10px;letter-spacing:.06em}
+a.op,.fx-btn,button{white-space:nowrap}
+.fb{padding:6px 56px;gap:8px;border-top-width:3px;font-size:12px;box-shadow:0 -4px 14px rgba(20,0,147,.18)}
+.fb button{padding:4px 10px;font-size:12px;border-radius:6px}
+.fb>.muted{display:none}
+.fb .stat{margin-left:auto;white-space:nowrap}
+main button:not([class]):not([data-z]){border:1px solid var(--line);background:#fff;color:#140093;border-radius:6px;padding:5px 12px;font-weight:700;font-size:12px}main button:not([class]):hover{background:var(--lime)}
+.fb .sep{width:1px;height:18px;background:rgba(255,255,255,.3)}
+input.dt{width:112px;text-align:center}input.dt.bad{border-color:#E5493A!important;background:#FDE4DC!important}
+input[type=number]{text-align:right}
+@media (max-width:900px){main{padding-left:16px;padding-right:16px}.fb{padding:6px 16px}nav .in{padding:8px 12px}}
+body.relmode .fb{position:fixed;left:0;right:0;bottom:0}body.relmode .relpage{padding-bottom:64px}
+@media print{.fb,nav{display:none!important}body{zoom:1}}
+
 """
 
 JS_FIG = r"""

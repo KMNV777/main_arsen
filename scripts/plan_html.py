@@ -320,7 +320,7 @@ function bars(items,fmt,colr,W){W=W||640;var rowH=24,pad=190,h=items.length*rowH
  return s+'</svg>'}
 function chart(rows){var W=640,rowH=26,pad=170,h=rows.length*rowH+40,mx=0;rows.forEach(function(r){mx=Math.max(mx,Math.abs(r.bal))});mx=Math.max(mx,0.5);var sc=(W-pad-110)/(2*mx),mid=pad+50+mx*sc;
  var s='<svg class="chart" viewBox="0 0 '+W+' '+h+'" width="100%" role="img" aria-label="Баланс FTE по ролям"><line x1="'+mid+'" x2="'+mid+'" y1="16" y2="'+(h-14)+'" stroke="#C7D4DE"/>';
- s+='<text x="'+(mid+4)+'" y="11" font-size="10" fill="#006644" font-weight="700">резерв ёмкости (списано больше, чем занято релизом)</text><text x="'+(mid-4)+'" y="11" font-size="10" fill="#B3260E" font-weight="700" text-anchor="end">нехватка</text>';
+ s+='<text x="'+(mid+4)+'" y="11" font-size="10" fill="#006644" font-weight="700">резерв ёмкости</text><text x="'+(mid-4)+'" y="11" font-size="10" fill="#B3260E" font-weight="700" text-anchor="end">нехватка</text>';
  rows.forEach(function(r,i){var y=22+i*rowH,w=Math.abs(r.bal)*sc,col=r.st==='ok'?'#4BADE8':(r.bal>0?'#63BA3C':'#F26B43');
   s+='<text x="'+(pad-8)+'" y="'+(y+14)+'" font-size="11" text-anchor="end" fill="#333">'+sh(r.c).slice(0,26)+'</text><rect x="'+(r.bal>=0?mid:mid-w)+'" y="'+(y+2)+'" width="'+w+'" height="16" rx="2" fill="'+col+'"/>';
   s+='<text x="'+(r.bal>=0?mid+w+5:mid-w-5)+'" y="'+(y+14)+'" font-size="10" font-weight="700" fill="#333" text-anchor="'+(r.bal>=0?'start':'end')+'">'+(r.bal>0?'+':'')+nf(r.bal,2)+'</text>'});
@@ -395,5 +395,5 @@ bindHours();render();
     intro = ("<p>Показывает, какую часть ёмкости каждой роли занимает релизный цикл по ТРЗ, и сопоставляет её с тем, сколько роль списывается на проект сейчас (1 FTE). Это <b>не штатная потребность роли</b>: ИБ, DevOps, администраторы заняты и вне релизов, поэтому вывод о составе возможен только после замера полной загрузки. "
              "Занятость релизом: <code>FTE = ТРЗ за год / (рабочие часы × 80 %)</code>; ТРЗ этапа <code>(F + S × N) × k</code>. "
              "<b>Все поля редактируются:</b> параметры, списание и ставки по ролям, часы по этапам (строки можно добавлять и удалять); показатели, графики и вывод пересчитываются сразу.</p>"
-             '<p class="muted">Часы по этапам — стартовые допущения: после 1–2 релизов их заменяют фактом списаний по задачам этапов в Jira. Введённые значения нигде не сохраняются.</p>')
+             '<p class="muted">Часы по этапам — стартовые допущения: после 1–2 релизов их заменяют фактом списаний по задачам этапов в Jira. Введённые значения сохраняются в этом браузере и в файле при «Сохранить HTML».</p>')
     return intro + '<div id="calc"></div><script>' + js + "</script>"
