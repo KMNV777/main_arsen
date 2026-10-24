@@ -85,6 +85,9 @@ JS_EDIT = r"""
   var s=document.getElementById('rp-status');if(s)s.textContent='файл сохранён';
  }
  var q=function(id){return document.getElementById(id)};
+ (function(){var fb=document.querySelector('.fb');if(!fb)return;var sv=q('rp-save');var more=document.createElement('button');more.id='rp-more';more.className='sec more';more.textContent='⋯ Ещё';more.setAttribute('aria-expanded','false');
+  [].slice.call(fb.children).forEach(function(c){if(c!==sv)c.classList.add('m2')});sv.parentNode.insertBefore(more,sv.nextSibling);
+  more.onclick=function(){var o=fb.classList.toggle('open');more.textContent=o?'✕ Скрыть':'⋯ Ещё';more.setAttribute('aria-expanded',o)}})();
  if(q('rp-save'))q('rp-save').onclick=saveHtml;
  if(q('rp-exp'))q('rp-exp').onclick=function(){dl(RP.export(),'application/json','данные-релизов-'+stampName()+'.json')};
  if(q('rp-imp'))q('rp-imp').onclick=function(){q('rp-file').click()};

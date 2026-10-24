@@ -462,7 +462,7 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     css_extra = (EL.CSS_EDIT + RC.CSS) if editable else ""
     core = ('<script id="rp-embedded" type="application/json">{}</script><script>' + EL.JS_CORE + "</script>") if editable else ""
     tail = ("<script>" + EL.JS_EDIT + "</script>") if editable else ""
-    return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
             f'<title>{e(title)}</title><style>{TH.CSS}{PH.CSS_PLAN}{css_extra}</style></head><body>{core}'
             f'<header class="top"><h1>{e(title)}</h1><div class="muted">Схема, этапы, роли, SLA, метрики, ТРЗ и FTE · сгенерировано <code>scripts/build_release_process.py</code></div></header>'
             f'<nav><div class="in">{nav}</div></nav><main>{body}</main>{fb}{body_extra}<script>{js}</script>{tail}</body></html>')
