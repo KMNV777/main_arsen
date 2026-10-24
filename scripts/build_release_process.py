@@ -417,7 +417,7 @@ def build_resolved_doc() -> str:
 # ===========================================================================
 # HTML-отчёт
 # ===========================================================================
-def build_html(pages: List[Page], extra=None, trz=None, title: str = "Процесс выпуска релиза ЕАРМ", comments: bool = False, mid=None) -> str:
+def build_html(pages: List[Page], extra=None, trz=None, title: str = "Процесс выпуска релиза ЕАРМ", comments: bool = False, mid=None, editable: bool = False, body_extra: str = "") -> str:
     import html_theme as TH
     import sections as S
     from html import escape as e
@@ -454,11 +454,18 @@ def build_html(pages: List[Page], extra=None, trz=None, title: str = "Проце
     fb = ('<div class="fb"><span>Правок в разделах: <b id="fb-n">0</b></span><button id="fb-dl">Скачать правки (.txt)</button>'
           '<button id="fb-cp">Копировать правки</button><span class="muted">Правки сохраняются в браузере; перед отправкой нажмите «Скачать» или «Копировать».</span></div>') if comments else ""
     import plan_html as PH
+    import edit_layer as EL
+    import release_cal as RC
+    if editable:
+        fb = fb.replace("</div>", EL.FB_EXTRA + "</div>", 1) if fb else fb
     js = TH.JS_FIG + PH.JS_TABS + navjs + (TH.JS_FEEDBACK if comments else "")
+    css_extra = (EL.CSS_EDIT + RC.CSS) if editable else ""
+    core = ('<script id="rp-embedded" type="application/json">{}</script><script>' + EL.JS_CORE + "</script>") if editable else ""
+    tail = ("<script>" + EL.JS_EDIT + "</script>") if editable else ""
     return (f'<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>{e(title)}</title><style>{TH.CSS}{PH.CSS_PLAN}</style></head><body>'
+            f'<title>{e(title)}</title><style>{TH.CSS}{PH.CSS_PLAN}{css_extra}</style></head><body>{core}'
             f'<header class="top"><h1>{e(title)}</h1><div class="muted">Схема, этапы, роли, SLA, метрики, ТРЗ и FTE · сгенерировано <code>scripts/build_release_process.py</code></div></header>'
-            f'<nav><div class="in">{nav}</div></nav><main>{body}</main>{fb}<script>{js}</script></body></html>')
+            f'<nav><div class="in">{nav}</div></nav><main>{body}</main>{fb}{body_extra}<script>{js}</script>{tail}</body></html>')
 
 
 def main() -> None:

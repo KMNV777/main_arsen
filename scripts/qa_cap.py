@@ -31,9 +31,10 @@ function render(){var c=calc(),last=c.rows[c.rows.length-1],first=c.rows.filter(
  document.getElementById('qa-out').innerHTML=kp+'<div class="verdict"><b>Вывод.</b> Если в спринте после релизного планировать на полный состав QA, непротестированный остаток растёт каждый релиз (красная линия). '
   +'Планируйте ёмкость QA за вычетом резерва: стабильный план — '+c.smooth+' задач в спринт при '+P.tasks+' без резерва. Рычаги: автоматизация регресса, ещё один QA, тестирование внутри спринта (на фризе остаётся только регресс).</div>'
   +'<div class="card" style="max-width:820px">'+chart(c)+'</div><div class="tw"><table><thead><tr><th>Спринт</th><th>Ёмкость QA, дн.</th><th>Резерв, дн.</th><th>Нетто, дн.</th><th>Протестировано / план</th><th>Остаток, задач</th><th>План при резерве, задач</th></tr></thead><tbody>'+tr+'</tbody></table></div>'}
+if(window.RP){var QS=RP.get('qa');if(QS)Object.assign(P,QS)}
 var pf=Object.keys(lab).map(function(k){return '<label>'+lab[k]+'<input type="number" step="any" data-k="'+k+'" value="'+P[k]+'"></label>'}).join('');
 document.getElementById('qa').innerHTML='<div class="ctl-panel"><b>Параметры</b><div class="calc-p">'+pf+'</div></div><div id="qa-out"></div>';
-document.querySelectorAll('#qa input').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;render()}});render();
+document.querySelectorAll('#qa input').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;if(window.RP)RP.set('qa',P);render()}});render();
 })();
 """
 

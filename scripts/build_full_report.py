@@ -16,7 +16,7 @@ import build_release_process as B
 import process_data as D
 import sections as S
 import example_html as EX
-import fact_html as FH
+import release_cal as RC
 import plan_html as PH
 import planning as PL
 import trz_model as T
@@ -90,11 +90,12 @@ def main() -> None:
              "Описательная часть для Confluence вынесена в отдельный файл <code>docs/confluence/confluence-pages.html</code>. "
              "В конце каждого раздела — поле «Ваши правки».</p>")
     rels = PL.releases()
+    fx_sec, fx_body = RC.release_cal(rels)
     mid = [("rmap", "Дорожная карта релизов", PH.roadmap_html(rels)), ("strategy", "Стратегическое планирование релизов", PH.strategy_html(rels)),
-           ("fact", "Фактический календарь релизов", FH.fact_html(rels)),
+           ("fact", "Календарь релизов (план / факт)", fx_sec),
            ("example", "Пример: анализ сроков EARM 26.2.1 / 26.2.2", EX.example_html())]
     html = B.build_html(pages, mid=mid, trz=PH.econ_html(),
-                        title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True)
+                        title="Процесс выпуска релиза ЕАРМ — материалы для ревью", comments=True, editable=True, body_extra=fx_body)
     html = html.replace("<main>", "<main>" + intro, 1)
     OUT.write_text(html, encoding="utf-8")
     print("OK:", OUT, f"{len(html) // 1024} KB")

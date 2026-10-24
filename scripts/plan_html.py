@@ -242,6 +242,8 @@ def strategy_html(rels) -> str:
           "N": T.PARAMS["N"][0], "load": T.PARAMS["LOAD"][0]}
     hjs = r"""
 (function(){var H=__H__,N=H.N,FTE={},el=document.getElementById('heat');H.roles.forEach(function(r){FTE[r[0]]=1});
+var hs=(window.RP&&RP.get('heat'))||null;if(hs){if(hs.N!=null)N=hs.N;Object.assign(FTE,hs.FTE||{});document.getElementById('hn').value=N;if(hs.mode)document.getElementById('hmode').value=hs.mode}
+function hsv(){if(window.RP)RP.set('heat',{N:N,FTE:FTE,mode:document.getElementById('hmode').value})}
 function cap(){return 40*H.load}
 function cls(u){return u<.05?'h0':u<.5?'h1':u<1?'h2':u<1.5?'h3':'h4'}
 function draw(){var show=document.getElementById('hmode').value,t='<table><tr><th></th>';
@@ -251,8 +253,8 @@ function draw(){var show=document.getElementById('hmode').value,t='<table><tr><t
   var peak=pk/cap();if(pk/(cap()*FTE[r[0]])>1)over.push(r[1]+' — пик '+Math.round(pk/(cap()*FTE[r[0]])*100)+'% при '+FTE[r[0]]+' FTE');
   t+='<tr><td class="r">'+r[1]+'</td>'+row+'<td class="sum"><b>'+Math.round(tot)+'</b></td><td class="sum">'+Math.round(pk)+'</td><td class="sum"><input class="hf" data-r="'+r[0]+'" type="number" step="0.1" min="0.1" value="'+FTE[r[0]]+'"></td></tr>'});
  el.innerHTML='<div class="heat"><table>'+t+'</table></div><div class="verdict"><b>Вывод по пикам.</b> '+(over.length?'Выше ёмкости: '+over.join('; ')+'. Увеличьте FTE роли, уменьшите N или сдвиньте релизы.':'При текущих N и FTE пиков выше ёмкости нет.')+'</div>';
- el.querySelectorAll('input.hf').forEach(function(i){i.onchange=function(){FTE[i.dataset.r]=parseFloat(i.value)||1;draw()}})}
-document.getElementById('hn').oninput=function(){N=parseFloat(this.value)||0;draw()};document.getElementById('hmode').onchange=draw;draw()})();
+ el.querySelectorAll('input.hf').forEach(function(i){i.onchange=function(){FTE[i.dataset.r]=parseFloat(i.value)||1;hsv();draw()}})}
+document.getElementById('hn').oninput=function(){N=parseFloat(this.value)||0;hsv();draw()};document.getElementById('hmode').onchange=function(){hsv();draw()};draw()})();
 """
     hjs = hjs.replace("__H__", json.dumps(hd, ensure_ascii=False))
     legend = ('<div class="legend"><span><i style="background:#EEF1F6"></i>&lt; 5 %</span><span><i style="background:#D7F3B0"></i>до 50 %</span><span><i style="background:#8ED15A"></i>50–100 %</span>'
@@ -294,6 +296,8 @@ def econ_html() -> str:
 (function(){
 var D=__DATA__,P=Object.assign({TOL:20},D.params),H=D.hours.map(function(x){return x.slice()}),RATE={},ALLOC={};
 D.roles.forEach(function(r){ALLOC[r[0]]=D.cur});
+var ES=window.RP&&RP.get('econ');if(ES){Object.assign(P,ES.P||{});RATE=ES.RATE||{};Object.assign(ALLOC,ES.ALLOC||{});if(ES.H&&ES.H.length===H.length)H=ES.H}
+function sv(){if(window.RP)RP.set('econ',{P:P,RATE:RATE,ALLOC:ALLOC,H:H})}
 var lab={N:'Число сервисов в релизе (N)',R:'Релизов в год',HF:'Hotfix в год',HF_F:'Доля фикс. части для hotfix',P_PSI:'Доля релизов с ПСИ ИБ',H_DAY:'Часов в день',D_YEAR:'Рабочих дней в году',LOAD:'Плановая загрузка',TOL:'Допуск «нормы», ±%'};
 function rn(c){var r=D.roles.filter(function(x){return x[0]===c})[0];return r?r[1]:c}
 function sh(c){return rn(c).split(' (')[0].split(' /')[0]}
@@ -366,24 +370,24 @@ function render(){var c=calc(),T=c.T,deficit=c.rows.filter(function(r){return r.
   +'<div class="pane" data-g="ec" data-p="s"><div class="econ-g"><div class="card">'+sens(c.o)+'</div><div>'+be+'</div></div></div>'
   +'<div class="pane" data-g="ec" data-p="u">'+un+'</div>';
  restoreTab();bindTabs();
- document.querySelectorAll('#econ-out input.al').forEach(function(i){i.onchange=function(){ALLOC[i.dataset.r]=parseFloat(i.value)||0;render()}});
- document.querySelectorAll('#econ-out input.rate').forEach(function(i){i.onchange=function(){RATE[i.dataset.r]=i.value;render()}})}
+ document.querySelectorAll('#econ-out input.al').forEach(function(i){i.onchange=function(){ALLOC[i.dataset.r]=parseFloat(i.value)||0;sv();render()}});
+ document.querySelectorAll('#econ-out input.rate').forEach(function(i){i.onchange=function(){RATE[i.dataset.r]=i.value;sv();render()}})}
 var curTab='b';
 function restoreTab(){document.querySelectorAll('#econ-out .tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.p===curTab)});document.querySelectorAll('#econ-out .pane').forEach(function(p){p.classList.toggle('on',p.dataset.p===curTab)})}
 function bindTabs(){document.querySelectorAll('#econ-out .tabs button').forEach(function(b){b.onclick=function(){curTab=b.dataset.p;restoreTab()}})}
 function roleOpts(sel){return D.roles.map(function(r){return '<option value="'+r[0]+'"'+(r[0]===sel?' selected':'')+'>'+sh(r[0])+'</option>'}).join('')}
 function hoursTable(){return H.map(function(h,i){return '<tr><td><input class="tx" data-i="'+i+'" data-c="0" value="'+h[0]+'" size="3"></td><td><input class="tx" data-i="'+i+'" data-c="1" value="'+String(h[1]).replace(/"/g,'&quot;')+'" size="34"></td><td><select data-i="'+i+'" data-c="2">'+roleOpts(h[2])+'</select></td><td><input type="number" step="any" data-i="'+i+'" data-c="3" value="'+h[3]+'"></td><td><input type="number" step="any" data-i="'+i+'" data-c="4" value="'+h[4]+'"></td><td><select data-i="'+i+'" data-c="5"><option value="1"'+(h[5]==='1'?' selected':'')+'>всегда</option><option value="psi"'+(h[5]==='psi'?' selected':'')+'>если ПСИ ИБ</option></select></td><td><button type="button" class="del" data-i="'+i+'">✕</button></td></tr>'}).join('')}
 function bindHours(){var b=document.getElementById('hrs');b.innerHTML=hoursTable();
- b.querySelectorAll('input,select').forEach(function(i){i.oninput=i.onchange=function(){var c=+i.dataset.c,v=i.value;H[+i.dataset.i][c]=(c===3||c===4)?(parseFloat(v)||0):(c===0?(parseInt(v)||v):v);render()}});
+ b.querySelectorAll('input,select').forEach(function(i){i.oninput=i.onchange=function(){var c=+i.dataset.c,v=i.value;H[+i.dataset.i][c]=(c===3||c===4)?(parseFloat(v)||0):(c===0?(parseInt(v)||v):v);sv();render()}});
  b.querySelectorAll('.del').forEach(function(x){x.onclick=function(){H.splice(+x.dataset.i,1);bindHours();render()}})}
 var pf=Object.keys(lab).map(function(key){return '<label>'+lab[key]+'<input type="number" step="any" data-k="'+key+'" value="'+P[key]+'" title="'+(D.notes[key]||'').replace(/"/g,'')+'"></label>'}).join('');
 var el=document.getElementById('calc');
 el.innerHTML='<div class="ctl-panel"><b>Параметры расчёта</b><div class="calc-p">'+pf+'</div><p class="muted">Единая ставка для всех ролей: <input id="rate-all" type="number" step="any" min="0" placeholder="₽/ч" style="width:90px"> <button id="rate-fill" type="button">Применить ко всем</button> <button id="calc-reset" type="button">Сбросить всё</button></p></div><div id="econ-out"></div>'
  +'<details><summary>Часы по этапам (F — на релиз, S — на сервис): таблица редактируется, строки можно добавлять и удалять</summary><div class="tw"><table><thead><tr><th>№</th><th>Название этапа</th><th>Роль</th><th>F, ч</th><th>S, ч</th><th>Условие</th><th></th></tr></thead><tbody id="hrs"></tbody></table></div><p><button id="add-row" type="button">+ Добавить строку</button></p></details>';
-el.querySelectorAll('.calc-p input[data-k]').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;render()}});
-document.getElementById('rate-fill').onclick=function(){var v=document.getElementById('rate-all').value;D.roles.forEach(function(r){RATE[r[0]]=v});render()};
+el.querySelectorAll('.calc-p input[data-k]').forEach(function(i){i.oninput=function(){P[i.dataset.k]=parseFloat(i.value)||0;sv();render()}});
+document.getElementById('rate-fill').onclick=function(){var v=document.getElementById('rate-all').value;D.roles.forEach(function(r){RATE[r[0]]=v});sv();render()};
 document.getElementById('add-row').onclick=function(){H.push([0,'Новый этап','РИ',1,0,'1']);bindHours();render()};
-document.getElementById('calc-reset').onclick=function(){location.reload()};
+document.getElementById('calc-reset').onclick=function(){if(window.RP)RP.set('econ',null);location.reload()};
 bindHours();render();
 })();
 """
